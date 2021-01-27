@@ -1,0 +1,35 @@
+body, html {
+    width: 100%;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Oswald', sans-serif;
+    background-color:rgb(1, 27, 66);
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content{
+    flex-grow:1;
+}
+
+.mrpregame,
+.mrpregame:hover{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color:#C1E6FF;
+    font-size:25px;
+}
+
+.moneynav{
+    image-rendering: -moz-crisp-edges;         /* Firefox */
+    image-rendering:   -o-crisp-edges;         /* Opera */
+    image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+
+}

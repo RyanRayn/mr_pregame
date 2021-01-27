@@ -13,18 +13,16 @@
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-9ZfPnbegQSumzaE7mks2IYgHoayLtuto3AS6ieArECeaR8nCfliJVuLh/GaQ1gyM" crossorigin="anonymous" type="text/css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Oswald&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
 
     <title>Mr. Pregame {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
     <div class="wrapper">
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="../media/money_bag.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                MR. PREGAME
-            </a>
+        <nav class="navbar">
+            <a class="navbar-brand mrpregame my-3" href="{% url 'home' %}">
+                <img src="/media/money_bag2.png" width="40" height="40" class="d-inline-block align-top rounded-circle moneynav mx-3" alt=""><strong class="mt-5">MR. PREGAME</strong></a>
         </nav>
 
 
