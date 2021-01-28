@@ -4,7 +4,7 @@ body, html {
     margin: 0px;
     padding: 0px;
     font-family: 'Oswald', sans-serif;
-    background-color:rgb(1, 27, 66);
+    background-color:rgb(1, 27, 65);
 }
 
 .wrapper{
@@ -17,12 +17,49 @@ body, html {
     flex-grow:1;
 }
 
-.mrpregame,
-.mrpregame:hover{
+a {
+  text-decoration:none !important; 
+}
+
+/*---------- Colors ----------*/
+.blue{
+    color:#067EED;
+}
+
+.blue-background{
+    background-color:#067EED;
+}
+
+.light-blue{
+    color:#C1E6FF;
+}
+
+.light-blue-background{
+    background-color:#C1E6FF;
+}
+
+.orange{
+    color:#FF7C1F;
+}
+
+.blue-background{
+    background-color:#FF7C1F;
+}
+
+.white{
+    color:#FFFFFF
+}
+
+/*---------- Navigation ----------*/
+.mrpregame{
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     color:#C1E6FF;
     font-size:25px;
+}
+
+.mrpregame:hover{
+    color:#C1E6FF;
 }
 
 .moneynav{
@@ -32,4 +69,25 @@ body, html {
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 
+}
+
+.nav-login{
+    border-radius:20px;
+    font-size:20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.nav-login:hover{
+    color:#C1E6FF;
+    background-color:#ffffff;
+}
+
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+    font-size:25px;
 }
