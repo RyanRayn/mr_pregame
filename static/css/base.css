@@ -42,7 +42,7 @@ a {
     color:#FF7C1F;
 }
 
-.blue-background{
+.orange-background{
     background-color:#FF7C1F;
 }
 
@@ -90,4 +90,23 @@ a {
     outline: none;
     box-shadow: none;
     font-size:25px;
+}
+
+/*---------- Footer ----------*/
+.page-footer{
+    width:100%;
+    bottom:0;
+    left:0;
+}
+
+.list-inline li{
+    display:inline;
+}
+
+.list-inline li i{
+    font-size:30px;
+}
+
+.list-inline li i:hover{
+    color:white;
 }
