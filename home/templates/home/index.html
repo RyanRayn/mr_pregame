@@ -3,6 +3,55 @@
 
 {% block content %}
     <div id="content">
-        
+        <hr class="d-block d-md-none rounded orange-background mb-3">
+        <div class="container-fluid callout-container">
+            <div class="row callout-border mx-3">
+                <div class="d-none d-md-block col-md-6 my-auto">
+                {% if request.user.is_authenticated %}
+                    <h1 class="home-callout white d-flex justify-content-center">
+                        Welcome Back,<br>NAME HERE!
+                    </h1>
+                    <h4 class="mt-5 d-flex justify-content-center">
+                        <a class="register-link orange" href="">Click here to view your profile.</a>
+                    </h4>
+                {% else %}
+                    <h1 class="home-callout white d-flex justify-content-center">
+                        BET TRACKING,<br>CUSTOM STATS,<br>PREGAME PICKS.
+                    </h1>
+                    <h4 class="mt-5 d-flex justify-content-center">
+                        <a class="register-link orange" href="{% url 'account_signup' %}">Click here to get started!</a>
+                    </h4>
+                {% endif %}    
+                </div>
+                <div class="col-12 col-md-6">
+                    <img src="/media/money_bag2.png" class="img-fluid callout-img" alt="Responsive image">
+                </div>
+                <div class="col-12 d-md-none my-4 mobile-callout">
+                    {% if request.user.is_authenticated %}
+                        <h1 class="home-callout white text-center">
+                            Welcome Back,<br>NAME HERE!
+                        </h1>
+                        <h4 class="mt-2 d-flex justify-content-center">
+                            <a class="register-link orange" href="">Click here to view your profile.</a>
+                        </h4>
+                    {% else %}
+                        <h1 class="home-callout white d-flex justify-content-center">
+                            BET TRACKING,<br>CUSTOM STATS,<br>PREGAME PICKS.
+                        </h1>
+                        <h4 class="mt-2 d-flex justify-content-center">
+                            <a class="register-link orange" href="{% url 'account_signup' %}">Click here to get started!</a>
+                        </h4>
+                    {% endif %}    
+                </div>     
+            </div>
+        </div>
+        <div class="container-fluid info-container">
+            <div class="row">
+                <div class="col-12 col-md-6"></div>
+                <div class="col-12 col-md-6"></div>
+            </div>
+        </div>
+
+
     </div>
 {% endblock %}

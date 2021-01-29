@@ -15,12 +15,18 @@ body, html {
 
 #content{
     flex-grow:1;
+    height:100vh;
 }
 
 a {
-  text-decoration:none !important; 
+    text-decoration:none !important; 
 }
 
+.montserrat{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+    
 /*---------- Colors ----------*/
 .blue{
     color:#067EED;
@@ -49,6 +55,7 @@ a {
 .white{
     color:#FFFFFF
 }
+/*---------------------------------------- base.html ----------------------------------------*/
 
 /*---------- Navigation ----------*/
 .mrpregame{
@@ -63,12 +70,17 @@ a {
 }
 
 .moneynav{
-    image-rendering: -moz-crisp-edges;         /* Firefox */
-    image-rendering:   -o-crisp-edges;         /* Opera */
-    image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+    image-rendering: -moz-crisp-edges;
+    image-rendering:   -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-    -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+    -ms-interpolation-mode: nearest-neighbor;
+    padding-right:.5rem;
+}
 
+.nav-link:hover,
+.nav-link:active{
+    color:#C1E6FF;
 }
 
 .nav-login{
@@ -110,3 +122,78 @@ a {
 .list-inline li i:hover{
     color:white;
 }
+
+/*---------------------------------------- Homepage/index.html ----------------------------------------*/
+
+.callout-border{
+    border:1px solid rgba(255, 255, 255, 0.473);
+    border-radius:25px;
+}
+
+.callout-img{
+    filter: drop-shadow(0.4rem 0.4rem 5rem rgba(0, 3, 8, 0.87));
+}
+
+.home-callout{
+    font-size:5vw;
+}
+
+.register-link{
+    font-size:3vw;
+}
+
+.register-link:hover{
+    color:#C1E6FF;
+}
+
+.mobile-callout{
+    border:1px solid rgba(6, 0, 90, 0.445);
+    border-radius:25px;
+    background-color:rgb(1, 27, 65);
+    filter: drop-shadow(0.4rem 0.4rem 10rem rgba(255, 255, 255, 0.247));
+}
+/*---------- Media Queries ----------*/
+@media (max-width: 330px) {
+    .moneynav{
+        padding-right:0;
+    }
+
+    .mrpregame{
+        font-size:15px;
+    }
+}
+
+@media (max-width: 374px) {
+    .mrpregame{
+        font-size:20px;
+    }
+}  
+
+@media (max-width: 768px) {
+    .callout-border{
+        border:none;
+    }
+
+    .home-callout{
+        font-size:10vw;
+    }
+
+    .register-link{
+        font-size:6vw;
+    }
+}
+
+@media (min-width: 2000px) {
+    .mrpregame{
+        font-size:50px;
+    }
+
+    .nav-login{
+        font-size:40px;
+    }
+
+    .nav-link{
+        font-size:25px;
+    }   
+}
+
