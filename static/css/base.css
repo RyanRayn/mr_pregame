@@ -15,11 +15,14 @@ body, html {
 
 #content{
     flex-grow:1;
-    height:100vh;
 }
 
-a {
+a{
     text-decoration:none !important; 
+}
+
+hr{
+    width:85%;
 }
 
 .montserrat{
@@ -104,6 +107,9 @@ a {
     font-size:25px;
 }
 
+.no-show{
+    display:none;
+}
 /*---------- Footer ----------*/
 .page-footer{
     width:100%;
@@ -125,17 +131,24 @@ a {
 
 /*---------------------------------------- Homepage/index.html ----------------------------------------*/
 
-.callout-border{
-    border:1px solid rgba(255, 255, 255, 0.473);
+/* Drop Shadow - https://css-irl.info/drop-shadow-the-underrated-css-filter/ */
+.callout-shadow{
+    border:3px solid rgba(0, 7, 26, 0.336);
     border-radius:25px;
+    background-color:rgb(0, 29, 71);
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
 }
 
 .callout-img{
-    filter: drop-shadow(0.4rem 0.4rem 5rem rgba(0, 3, 8, 0.87));
+    border-radius: 23px;
+    position:relative;
+    left:4px;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
 }
 
 .home-callout{
     font-size:5vw;
+    text-shadow:0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.342);
 }
 
 .register-link{
@@ -150,7 +163,12 @@ a {
     border:1px solid rgba(6, 0, 90, 0.445);
     border-radius:25px;
     background-color:rgb(1, 27, 65);
-    filter: drop-shadow(0.4rem 0.4rem 10rem rgba(255, 255, 255, 0.247));
+}
+
+.fa-analytics{
+    font-size:10rem;
+    --fa-primary-color:#067EED;
+    --fa-secondary-color:#FF7C1F;
 }
 /*---------- Media Queries ----------*/
 @media (max-width: 330px) {
@@ -169,17 +187,43 @@ a {
     }
 }  
 
-@media (max-width: 768px) {
-    .callout-border{
-        border:none;
-    }
-
+@media (max-width: 767px) {
     .home-callout{
-        font-size:10vw;
+        font-size:40px;
     }
 
     .register-link{
-        font-size:6vw;
+        font-size:40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .home-callout{
+        font-size:35px;
+    }
+
+    .register-link{
+        font-size:35px;
+    }
+}
+
+@media (max-width: 475px) {
+    .home-callout{
+        font-size:25px;
+    }
+
+    .register-link{
+        font-size:25px;
+    }
+}
+
+@media (max-width: 375px) {
+    .home-callout{
+        font-size:20px;
+    }
+
+    .register-link{
+        font-size:20px;
     }
 }
 
