@@ -31,6 +31,10 @@ hr{
 }
     
 /*---------- Colors ----------*/
+.dark-blue{
+    color:rgb(1, 27, 65);
+}
+
 .blue{
     color:#067EED;
 }
@@ -136,15 +140,14 @@ hr{
 /*---------------------------------------- Homepage/index.html ----------------------------------------*/
 
 /* Drop Shadow - https://css-irl.info/drop-shadow-the-underrated-css-filter/ */
-.container-shadow{
+.header-container-shadow{
     border:3px solid rgba(0, 7, 26, 0.336);
     border-radius:25px;
-    background-color:;
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
-    background: rgb(0, 29, 71);
-    background: -webkit-linear-gradient(top left, rgb(0, 29, 71), rgb(0, 25, 78));
-    background: -moz-linear-gradient(top left, rgb(0, 29, 71), rgb(0, 25, 78));
-    background: linear-gradient(to bottom right, rgb(0, 29, 71), rgb(0, 25, 78));
+    background: rgb(1, 27, 65);
+    background: -webkit-linear-gradient(top left, rgb(1, 27, 65), rgb(0, 25, 78));
+    background: -moz-linear-gradient(top left, rgb(1, 27, 65), rgb(0, 25, 78));
+    background: linear-gradient(to bottom right, rgb(1, 27, 65), rgb(0, 25, 78));
 }
 
 .callout-img{
@@ -182,8 +185,8 @@ hr{
     background-color:rgb(1, 27, 65);
 }
 
-.info-row{
-    height:400px;
+.info-container{
+    background-color:white;
 }
 
 .info-header{
@@ -191,11 +194,20 @@ hr{
     text-shadow:0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.342);
 }
 
-.fa-analytics{
-    font-size:10rem;
-    --fa-primary-color:#067EED;
-    --fa-secondary-color:#FF7C1F;
+.moneybag-container-shadow{
+    border:3px solid rgba(0, 7, 26, 0.336);
+    border-radius:25px;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
+    background: rgb(1, 27, 65);
+    background: -webkit-linear-gradient(top left,rgb(0, 25, 78), rgb(1, 27, 65));
+    background: -moz-linear-gradient(top left,rgb(0, 25, 78), rgb(1, 27, 65));
+    background: linear-gradient(to bottom right,rgb(0, 25, 78), rgb(1, 27, 65));
 }
+
+.moneybag-banner-img{
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {
