@@ -30,11 +30,13 @@
     <div class="wrapper">
         <header>
             {% if request.user.is_authenticated %}
-                <nav class="navbar navbar-expand-lg mx-3 my-2">
-                    <a class="navbar-brand d-inline-block align-top rounded-circle moneynav ml-1 mr-4" href="{% url 'home' %}">
+                <nav class="navbar navbar-expand-lg ml-2 mr-1">
+                    <a class="navbar-brand d-inline-block align-top rounded-circle moneynav pr-2 ml-1 mr-3" href="{% url 'home' %}">
                         <img src="/media/money_bag2.png" width="40" height="40" alt="">
                     </a>
-                    <a class="d-inline-block mrpregame text-nowrap" href="{% url 'home' %}">MR. PREGAME&nbsp;&nbsp;&nbsp;</a>
+                    {% if request.user.is_authenticated %}
+                        <a class="d-inline-block mrpregame text-nowrap" href="{% url 'home' %}">MR. PREGAME&nbsp;&nbsp;&nbsp;</a>
+                    {% endif %}    
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-plus-circle light-blue"></i>
                     </button>

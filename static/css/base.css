@@ -61,6 +61,11 @@ hr{
 /*---------------------------------------- base.html ----------------------------------------*/
 
 /*---------- Navigation ----------*/
+.navbar{
+    margin-right:1.5rem;
+    margin-left:1.5rem;
+}
+
 .mrpregame{
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
@@ -78,7 +83,6 @@ hr{
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor;
-    padding-right:.5rem;
 }
 
 .nav-link:hover,
@@ -132,11 +136,15 @@ hr{
 /*---------------------------------------- Homepage/index.html ----------------------------------------*/
 
 /* Drop Shadow - https://css-irl.info/drop-shadow-the-underrated-css-filter/ */
-.callout-shadow{
+.container-shadow{
     border:3px solid rgba(0, 7, 26, 0.336);
     border-radius:25px;
-    background-color:rgb(0, 29, 71);
+    background-color:;
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
+    background: rgb(0, 29, 71);
+    background: -webkit-linear-gradient(top left, rgb(0, 29, 71), rgb(0, 25, 78));
+    background: -moz-linear-gradient(top left, rgb(0, 29, 71), rgb(0, 25, 78));
+    background: linear-gradient(to bottom right, rgb(0, 29, 71), rgb(0, 25, 78));
 }
 
 .callout-img{
@@ -144,6 +152,15 @@ hr{
     position:relative;
     left:4px;
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
+}
+
+.header{
+    font-size:5vw;
+    text-shadow:0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.342);
+}
+
+.sub-header{
+    font-size:30px;
 }
 
 .home-callout{
@@ -165,12 +182,93 @@ hr{
     background-color:rgb(1, 27, 65);
 }
 
+.info-row{
+    height:400px;
+}
+
+.info-header{
+    font-size:4vw;
+    text-shadow:0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.342);
+}
+
 .fa-analytics{
     font-size:10rem;
     --fa-primary-color:#067EED;
     --fa-secondary-color:#FF7C1F;
 }
 /*---------- Media Queries ----------*/
+
+@media (max-width: 1200px) {
+    .sub-header{
+        font-size:19px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header{
+        font-size:55px;
+    }
+
+    .home-callout,
+    .register-link,
+    .info-header{
+        font-size:40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header{
+        font-size:45px;
+    }
+
+    .home-callout,
+    .register-link,
+    .info-header{
+        font-size:35px;
+    }
+}
+
+@media (max-width: 475px) {
+    .navbar{
+        margin-right:1rem;
+        margin-left:1rem;
+    }
+
+    .header{
+        font-size:30px;
+    }
+
+    .sub-header{
+        font-size:15px;
+    }
+
+    .home-callout,
+    .register-link,
+    .info-header{
+        font-size:25px;
+    }
+}
+
+@media (max-width: 375px) {
+    .header{
+        font-size:25px;
+    }
+
+    .sub-header{
+        font-size:12px;
+    }
+
+    .home-callout,
+    .register-link,
+    .info-header{
+        font-size:20px;
+    }
+
+    .mrpregame{
+        font-size:20px;
+    }
+}
+
 @media (max-width: 330px) {
     .moneynav{
         padding-right:0;
@@ -179,51 +277,19 @@ hr{
     .mrpregame{
         font-size:15px;
     }
-}
 
-@media (max-width: 374px) {
-    .mrpregame{
-        font-size:20px;
-    }
-}  
-
-@media (max-width: 767px) {
-    .home-callout{
-        font-size:40px;
+    .header{
+        font-size:23px;
     }
 
-    .register-link{
-        font-size:40px;
-    }
-}
-
-@media (max-width: 576px) {
-    .home-callout{
-        font-size:35px;
+    .sub-header{
+        font-size:10px;
     }
 
-    .register-link{
-        font-size:35px;
-    }
-}
-
-@media (max-width: 475px) {
-    .home-callout{
-        font-size:25px;
-    }
-
-    .register-link{
-        font-size:25px;
-    }
-}
-
-@media (max-width: 375px) {
-    .home-callout{
-        font-size:20px;
-    }
-
-    .register-link{
-        font-size:20px;
+    .home-callout,
+    .register-link,
+    .info-header{
+        font-size:17px;
     }
 }
 

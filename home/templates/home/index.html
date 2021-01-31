@@ -3,8 +3,8 @@
 
 {% block content %}
     <div id="content">
-        <div class="container-fluid callout-container">
-            <div class="row callout-shadow mx-3">
+        <div class="container-fluid">
+            <div class="row container-shadow mx-3">
                 <div class="col-md-6 my-auto">
                     <div class="py-1 mx-3">
 <!-- SM Screens -->
@@ -13,9 +13,12 @@
                             Welcome Back, NAME HERE!
                         </h1>
                     {% else %}
-                        <h1 class="d-flex d-md-none home-callout white justify-content-center mt-2">
-                            Game Picks and Research!
+                        <h1 class="d-flex d-md-none header light-blue montserrat justify-content-center">
+                            MR. PREGAME
                         </h1>
+                        <h2 class="d-flex d-md-none white montserrat sub-header justify-content-center">
+                            Sports Betting Management
+                        </h2>
                     {% endif %}    
 <!-- MD/LG Screens -->              
                     {% if request.user.is_authenticated %}
@@ -23,14 +26,17 @@
                             Welcome Back,<br>NAME HERE!
                         </h1>
                     {% else %}
-                        <h1 class="d-none d-md-flex home-callout white justify-content-center">
-                            Bet Tracking,<br>Custom Stats,<br>Pregame Picks.
+                        <h1 class="d-none d-md-flex header light-blue montserrat justify-content-center">
+                            MR. PREGAME
                         </h1>
+                        <h2 class="d-none d-md-flex white montserrat sub-header justify-content-center">
+                            Sports Betting Management
+                        </h2>
                     {% endif %}
-                        </div>    
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <img src="/media/ipaddesk.png" class="img-fluid callout-img ml-2" alt="Responsive image">
+                    </div>    
+                </div>
+                <div class="col-12 col-md-6">
+                    <img src="/media/ipaddesk.png" class="img-fluid callout-img ml-2" alt="Responsive image">
                 </div>
             </div>
             <div class="row">
@@ -46,54 +52,47 @@
                     {% endif %}        
                 </div>
             </div>
-        </div>
-        <hr class="rounded orange-background mx-auto mt-0 mb-3">
-        <div class="container-fluid info-container">
-            <div class="row mx-3">
-                <div class="col-12 col-md-6 callout-shadow d-flex justify-content-center align-items-center p-4">
-                    <div>
-                        <i class="fad fa-analytics"></i>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 home-callout white d-flex align-items-center pl-4">
-                    
-                        <h1>
+        
+            <div class="row mx-3 my-3 d-flex justify-content-center">
+                <div class="col-12 col-md-4 pl-0"> 
+                    <div class="container-shadow">
+                        <i class="fad fa-analytics"></i><br>
+                        <h1 class="info-header white">
                             Professional stats and data the pros rely on.
                         </h1>
-                        
+                    </div>             
                 </div>
-            </div>
-            <div class="row mx-3">
-                <div class="col-12 col-md-6 home-callout white d-flex align-items-center pl-4">
-                    
-                        <h1>
-                            Professional stats and data the pros rely on.
-                        </h1>
-                        
-                </div>
-                <div class="col-12 col-md-6 callout-shadow d-flex justify-content-center align-items-center p-4">
-                    <div>
-                        <i class="fad fa-analytics"></i>
-                    </div>
-                </div>
-                
-            </div>
-             <div class="row mx-3">
-                <div class="col-12 col-md-6 callout-shadow d-flex justify-content-center align-items-center p-4">
-                    <div>
-                        <i class="fad fa-analytics"></i>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 home-callout white d-flex align-items-center pl-4">
-                    
-                        <h1>
-                            Professional stats and data the pros rely on.
-                        </h1>
-                        
-                </div>
-            </div>
-        </div>
 
+                <div class="col-12 col-md-4"> 
+                    <div class="container-shadow">
+                        <i class="fad fa-analytics"></i><br>
+                        <h1 class="info-header white">
+                            Professional stats and data the pros rely on.
+                        </h1>
+                    </div>             
+                </div>
+                <div class="col-12 col-md-4 pr-0"> 
+                    <div class="container-shadow">
+                        <i class="fad fa-analytics"></i><br>
+                        <h1 class="info-header white">
+                            Professional stats and data the pros rely on.
+                        </h1>
+                    </div>             
+                </div>
+            </div>    
 
+                <div class="row mx-3 mt-4 d-flex justify-content-center">
+                    <div class="col-6 col-md-3">
+                        <img class="img-fluid callout-img" src="/media/money_bag3.png" alt="responsive image">
+                    </div>
+                    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center pl-5 my-3">
+                        <h1 class="orange info-header">
+                            Win big with Mr. Pregame's guaranteed game picks!
+                        </h1>
+                    </div>
+                </div>
+            
+
+        </div>
     </div>
 {% endblock %}
