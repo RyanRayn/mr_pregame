@@ -35,6 +35,10 @@ hr{
     color:rgb(1, 27, 65);
 }
 
+.dark-blue-background{
+    background-color:rgb(1, 27, 65);
+}
+
 .blue{
     color:#067EED;
 }
@@ -144,10 +148,6 @@ hr{
     border:3px solid rgba(0, 7, 26, 0.336);
     border-radius:25px;
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
-    background: rgb(1, 27, 65);
-    background: -webkit-linear-gradient(top left, rgb(1, 27, 65), rgb(0, 25, 78));
-    background: -moz-linear-gradient(top left, rgb(1, 27, 65), rgb(0, 25, 78));
-    background: linear-gradient(to bottom right, rgb(1, 27, 65), rgb(0, 25, 78));
 }
 
 .callout-img{
@@ -179,33 +179,12 @@ hr{
     color:#C1E6FF;
 }
 
-.mobile-callout{
-    border:1px solid rgba(6, 0, 90, 0.445);
-    border-radius:25px;
-    background-color:rgb(1, 27, 65);
-}
-
-.info-container{
-    background-color:white;
-}
-
-.info-header{
-    font-size:4vw;
-    text-shadow:0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.342);
-}
-
-.moneybag-container-shadow{
-    border:3px solid rgba(0, 7, 26, 0.336);
-    border-radius:25px;
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
-    background: rgb(1, 27, 65);
-    background: -webkit-linear-gradient(top left,rgb(0, 25, 78), rgb(1, 27, 65));
-    background: -moz-linear-gradient(top left,rgb(0, 25, 78), rgb(1, 27, 65));
-    background: linear-gradient(to bottom right,rgb(0, 25, 78), rgb(1, 27, 65));
-}
-
 .moneybag-banner-img{
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
+}
+
+.icon-box{
+    font-size:7vw;
 }
 
 /*---------- Media Queries ----------*/
@@ -305,6 +284,25 @@ hr{
     }
 }
 
+@media (min-width: 1500px) {
+    .mrpregame{
+        font-size:40px;
+    }
+
+    .nav-login{
+        font-size:30px;
+    }
+
+    .nav-link,
+    .copyright{
+        font-size:25px;
+    }
+    
+    .list-inline li i{
+        font-size:50px;
+}
+}
+
 @media (min-width: 2000px) {
     .mrpregame{
         font-size:50px;
@@ -314,8 +312,13 @@ hr{
         font-size:40px;
     }
 
-    .nav-link{
-        font-size:25px;
-    }   
+    .nav-link,
+    .copyright{
+        font-size:35px;
+    }
+    
+    .list-inline li i{
+        font-size:60px;
+}
 }
 
