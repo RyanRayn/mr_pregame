@@ -6,11 +6,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 white">
-                    {% for key, value in games_today.items %}  
-                        <tr> 
-                            <td>{{key}}</td> 
-                            <td>{{value}}</td> 
-                        </tr> 
+                    {% for game in games_by_date %}  
+                        <p>{{ game }}</p> 
                     {% endfor %}       
                 </div>
             </div>
