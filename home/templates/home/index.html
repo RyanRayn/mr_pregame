@@ -4,7 +4,7 @@
 {% block content %}
     <div id="content">
         <div class="container-fluid">
-            <div class="row navy-container-shadow mx-3">
+            <div class="row navy-container-shadow top-right-gradient mx-3">
                 <div class="col-md-6 my-auto">
                     <div class="py-1 mx-3">
 <!-- SM Screens -->
@@ -22,22 +22,21 @@
                     {% endif %}    
 <!-- MD/LG Screens -->              
                     {% if request.user.is_authenticated %}
+                        <h1 class="d-none d-md-flex home-callout white justify-content-center">
+                            Welcome Back,<br>NAME HERE!
+                        </h1>
+                    {% else %}
                         <h1 class="d-none d-md-flex header light-blue montserrat justify-content-center">
                             MR. PREGAME
                         </h1>
                         <h2 class="d-none d-md-flex white montserrat sub-header justify-content-center">
                             Sports Betting Management
                         </h2>
-                        
-                    {% else %}
-                        <h1 class="d-none d-md-flex home-callout white justify-content-center">
-                            Welcome Back,<br>NAME HERE!
-                        </h1>
                     {% endif %}
                     </div>    
                 </div>
                 <div class="col-12 col-md-6">
-                    <img src="/media/ipaddesk.png" class="img-fluid callout-img ml-2" alt="Responsive image">
+                    <img src="/media/ipaddesk.png" class="img-fluid img-shadow callout-img ml-2" alt="Responsive image">
                 </div>
             </div>
             <div class="row my-3">
@@ -54,32 +53,40 @@
                 </div>
             </div>
             <hr class="rounded orange-background mx-auto mt-4">
-            
+        {% if request.user.is_authenticated %}
+        
+        {% else %}
             <div class="row mx-3 mt-4">
-                <div class="col-6 d-flex justify-content-center align-items-center">
-                    <div class="w-50"><img src="/media/mockups.png" class="img-fluid img-shadow" alt="Responsive image"></div>
+                <div class="col-6 d-flex justify-content-center align-items-center navy-container-shadow top-right-gradient">
+                    <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
                 </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="w-50"><img src="/media/moneypile.png" class="img-fluid img-shadow" alt="Responsive image"></div>
+                <div class="col-6 d-flex justify-content-center navy-container-shadow top-left-gradient">
+                    <div class="home-img-row"><img src="/media/moneypile.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
                 </div>        
             </div>
-            <div class="row mx-3 mb-4">
-                <div class="col-6 d-flex justify-content-center">
-                    <h4 class="light-blue sub-header">Custom Pregame Research and Results</h4>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <h4 class="light-blue sub-header">Win Big With Our Guranteed Game Picks!</h4>
-                </div>
-            </div>    
-        
-            <div class="row navy-container-shadow mx-3 p-3">
+            <div class="row mx-3 my-3">
                 <div class="col-6">
-                    <img class="d-flex justify-content-center img-fluid img-shadow mx-auto w-50" src="/media/money_bag3.png" alt="responsive image">
+                    <h4 class="d-flex justify-content-center light-blue sub-header font-700">Custom Pregame Research and Results</h4>
                 </div>
-                <div class="col-6 d-flex justify-content-center align-items-center my-3">
-                    <h1 class="home-callout white d-flex justify-content-center align-items-center h-100 my-auto">Better Pregame,<br>Better Betting,<br>Better Bettors.</h1>
+                <div class="col-6">
+                    <h4 class="d-flex justify-content-center light-blue sub-header font-700">Win Big With Our Guranteed Game Picks!</h4>
                 </div>
             </div>
+            <hr class="rounded orange-background mx-auto mb-4">    
+            <div class="row navy-container-shadow  top-left-gradient mx-3 p-2">
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                    <div class="mr-moneybag"><img class="img-fluid img-shadow img-resize" src="/media/money_bag3.png" alt="responsive image"></div>
+                </div>
+                <div class="col-6 d-flex justify-content-center align-items-center my-3">
+                    <div class="flex-column justify-content-center align-items-center">
+                        <h1 class="better white">Better Pregame,<br>Better Betting,<br>Better Bettors.</h1>
+                        <div class="text-center">
+                            <h4><a class="orange better-link text-nowrap" href="{% url 'account_signup' %}">Click to get better today!</a></h4>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        {% endif %}    
         </div>
 
         

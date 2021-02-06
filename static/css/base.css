@@ -4,7 +4,7 @@ body, html {
     margin: 0px;
     padding: 0px;
     font-family: 'Oswald', sans-serif;
-    background-color:rgb(1, 27, 65);
+    background-color:rgb(13, 29, 53);
 }
 
 .wrapper{
@@ -25,18 +25,27 @@ hr{
     width:85%;
 }
 
+img {
+    max-width:100%;
+    height:auto;
+}
+
 .montserrat{
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
 }
+
+.font-700{
+    font-weight:700;
+}
     
 /*---------- Colors ----------*/
 .dark-blue{
-    color:rgb(1, 27, 65);
+    color:rgb(19, 35, 58);
 }
 
 .dark-blue-background{
-    background-color:rgb(1, 27, 65);
+    background-color:rgb(19, 35, 58);
 }
 
 .blue{
@@ -66,6 +75,22 @@ hr{
 .white{
     color:#FFFFFF
 }
+
+/* Gradient - https://uigradients.com/#Royal */
+.top-left-gradient{
+    background: #141e30; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,  #20354d, #141e30); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right,  #20354d, #141e30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+.top-right-gradient{
+    background: #141e30; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #141e30, #20354d); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #141e30, #20354d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 /*---------------------------------------- base.html ----------------------------------------*/
 
 /*---------- Navigation ----------*/
@@ -154,7 +179,6 @@ hr{
     border-radius: 23px;
     position:relative;
     left:4px;
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
 }
 
 .header{
@@ -170,6 +194,10 @@ hr{
     font-size:5vw;
 }
 
+.home-img-row{
+    width:70%;
+}
+
 .register-link{
     font-size:3vw;
 }
@@ -178,8 +206,24 @@ hr{
     color:#C1E6FF;
 }
 
+.mr-moneybag{
+    width:50%;
+}
+
+.better{
+    font-size:5vw;
+}
+
+.better-link{
+    font-size:2vw;
+}
+
+.better-link:hover{
+    color:#C1E6FF;
+}
+
 .img-shadow{
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.747));
 }
 
 
@@ -197,9 +241,12 @@ hr{
     }
 
     .home-callout,
-    .register-link,
-    .info-header{
+    .register-link{
         font-size:40px;
+    }
+
+    .home-img-row{
+        width:85%;
     }
 }
 
@@ -209,10 +256,22 @@ hr{
     }
 
     .home-callout,
-    .register-link,
-    .info-header{
+    .register-link{
         font-size:35px;
     }
+
+    .mr-moneybag{
+        width:75%;
+    }
+
+    .better{
+        font-size:25px;
+    }
+
+    .better-link{
+        font-size:12px;
+    }
+
 }
 
 @media (max-width: 475px) {
@@ -230,9 +289,20 @@ hr{
     }
 
     .home-callout,
-    .register-link,
-    .info-header{
+    .register-link{
         font-size:25px;
+    }
+
+    .better{
+        font-size:20px;
+    }
+
+    .better-link{
+        font-size:10px;
+    }
+
+    .home-img-row{
+        width:100%;
     }
 }
 
@@ -246,13 +316,16 @@ hr{
     }
 
     .home-callout,
-    .register-link,
-    .info-header{
+    .register-link{
         font-size:20px;
     }
 
     .mrpregame{
         font-size:20px;
+    }
+
+    .better{
+        font-size:15px;
     }
 }
 
@@ -274,14 +347,14 @@ hr{
     }
 
     .home-callout,
-    .register-link,
-    .info-header{
+    .register-link{
         font-size:17px;
     }
 }
 
 @media (min-width: 1500px) {
-    .mrpregame{
+    .mrpregame,
+    .sub-header{
         font-size:40px;
     }
 
@@ -296,11 +369,12 @@ hr{
     
     .list-inline li i{
         font-size:50px;
-}
+    }
 }
 
 @media (min-width: 2000px) {
-    .mrpregame{
+    .mrpregame,
+    .sub-header{
         font-size:50px;
     }
 
