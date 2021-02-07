@@ -7,17 +7,18 @@ from django.conf import settings
 def games(request):
     """ View to return games page """
 
-    games_by_date = 'https://sportsdata.io/developers/api-documentation/ncaa-basketball#/scores/games-by-date'
+    date = '2021-FEB-06'
+    key = settings.SPORTSDATA_KEY
+    games_by_date = 'https://api.sportsdata.io/v3/cbb/scores/json/TeamGameStatsByDate/'
 
-    params = {
-        'key': settings.SPORTSDATA_KEY,
-        'date': '2021-FEB-06',
-    }
+    query_url = f"{games_by_date}{date}?key={key}"
+
+    r = requests.get(query_url)
+
+    results = r.json()
 
     context = {
-        'games': games
+        'results': results,
     }
 
-    r = requests.get(games_by_date, params=params)
-    print(games)
     return render(request, 'games/games.html', context)

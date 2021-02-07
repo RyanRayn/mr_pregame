@@ -5,9 +5,10 @@
     <div id="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 white">
-                    {% for game in games_by_date %}  
-                        <p>{{ game }}</p> 
+                <div class="col-12">
+                    {% for result in results %}  
+                        <p class="white">{{ result.Name }}</p>
+                        <p class="white">{{ result.TeamID }}</p> 
                     {% endfor %}       
                 </div>
             </div>
