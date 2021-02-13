@@ -15,7 +15,7 @@
                 <li><a class="nav-item nav-link orange" href="{% url 'games' %}">Games</a></li>
                 <li><a class="d-lg-none nav-item nav-link orange" href="{% url 'account_logout' %}">Logout</a></li>
             {% if request.user.is_superuser %}
-                <li><a class="nav-item nav-link orange" href="#">Site Management</a></li>
+                <li><a class="nav-item nav-link orange" href="{% url 'management' %}">Site Management</a></li>
             {% endif %}            
             </ul>
         </div>

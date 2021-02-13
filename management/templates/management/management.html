@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div id="content">
+        {% for game in schedule %}
+            {% if game.points_for == game.boxscore.home_points %}
+         <div>
+              <h5 class="white">{{ game.opponent_name }}</h5>
+              <h5 class="white">{{ game.points_for }}</h5>
+              <h5 class="white">{{ game.points_against }}</h5>
+              <h5 class="white">{{ game.boxscore.home_field_goals }}</h5>
+              <h5 class="white">{{ game.boxscore.home_field_goal_attempts }}</h5>
+              <h5 class="white">{{ game.boxscore.home_three_point_field_goals }}</h5>
+              <h5 class="white">{{ game.boxscore.home_three_point_field_goal_attempts }}</h5>
+              <h5 class="white">{{ game.boxscore.home_free_throws }}</h5>
+              <h5 class="white">{{ game.boxscore.home_free_throw_attempts }}</h5>
+              <h5 class="white">{{ game.boxscore.home_offensive_rebounds }}</h5>
+              <h5 class="white">{{ game.boxscore.home_defensive_rebounds }}</h5>
+              <h5 class="white">{{ game.boxscore.home_total_rebounds }}</h5>
+              <h5 class="white">{{ game.boxscore.home_assists }}</h5>
+              <h5 class="white">{{ game.boxscore.home_steals }}</h5>
+              <h5 class="white">{{ game.boxscore.home_blocks }}</h5>
+              <h5 class="white">{{ game.boxscore.home_turnovers }}</h5>
+              <h5 class="white">{{ game.boxscore.home_personal_fouls }}</h5>
+         </div>
+            {% endif %}
+        {% endfor %}      
+    </div>
+{% endblock %}

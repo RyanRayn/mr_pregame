@@ -6,15 +6,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    {% for team, boxscores in team_schedule.Game.items %}
-                        team_schedule(Purdue):
-                            {% for stat in boxscores %}
-                        <div>
-                            <h4 class="white">{{ stat.date }}</h4>
-                            <h4 class="white">{{ stat.boxscore.away_total_rebounds }}</h4>
-                        </div>
-                    {% endfor %}
+                    {% for schedule in games.results %}
+                        {% for game in schedule %}
+                        <p class="white">{{ game }}</p>
+                        <p class="white"></p>
                         {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
         </div>    
