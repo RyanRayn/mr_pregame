@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
     'home',
     'games',
     'management',
@@ -62,6 +63,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mr_pregame.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {

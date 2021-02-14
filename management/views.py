@@ -1,6 +1,7 @@
 import requests
 import json
 from django.shortcuts import render
+from .forms import BasketballGame
 
 from datetime import datetime
 from sportsipy.ncaab.boxscore import Boxscore
@@ -20,3 +21,14 @@ def management(request):
     }
 
     return render(request, 'management/management.html', context)
+
+
+def add_basketball(request):
+    """ Add a basketball game to database """
+    form = BasketballGame()
+    template = 'management/add_basketball.html'
+    context = {
+        'form': form
+    }
+
+    return render(request, template, context)
