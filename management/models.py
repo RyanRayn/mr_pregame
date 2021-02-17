@@ -27,7 +27,7 @@ class Team(models.Model):
 
 
 class Season(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, default='')
     teams = models.ManyToManyField('Team', max_length=20)
 
     def __str__(self):
