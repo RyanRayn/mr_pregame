@@ -1,5 +1,6 @@
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
 from .forms import BasketballGame
 import datetime
 from sportsipy.ncaab.boxscore import Boxscore
@@ -16,11 +17,11 @@ def management(request):
     for game in schedule:
         date = game.date
         date_time_date = datetime.datetime.strptime(date, '%a, %b %d, %Y')
-        print(date_time_date.date())
 
     context = {
         'team': team,
         'schedule': schedule,
+        'date_time_date': date_time_date
     }
 
     return render(request, 'management/management.html',
@@ -29,11 +30,23 @@ def management(request):
 
 def add_basketball(request):
     """ Add a basketball game to database """
+    if request.method == "POST":
+        form = BasketballGame(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added game!')
+            return redirect(reverse('add_basketball'))
+        else:
+            messages.error(request,
+                           "Failed to add game. Please ensure form is valid.")
+    else:
+        form = BasketballGame()
 
-    form = BasketballGame()
+    team_auto = Team.objects.filter(league__name='NCAAB')
     template = 'management/add_basketball.html'
     context = {
-        'form': form
+        'form': form,
+        'team_auto': team_auto,
     }
 
     return render(request, template, context)

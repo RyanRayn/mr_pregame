@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <div id="content">
-           
-                <p class="white"><h5 class="white"></h5></p>
-               
+       <div class="container-fluid">
+           <div class="row">
+               <a class="btn nav-login white orange-background" href="{% url 'add_basketball' %}">Add Basketball</a>
+           </div>
+       </div>
     </div>
 {% endblock %}

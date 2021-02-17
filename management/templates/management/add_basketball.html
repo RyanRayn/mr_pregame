@@ -10,14 +10,38 @@
                     <h1 class="white text-center">Add Basketball Games</h1>
                </div>
            </div>
-           <div class="row">
-               <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                   <form class="" method="POST" action="{% url 'add_basketball' %}">
+           <div class="row h-100">
+               <div class="col-12 col-md-4">
+                    <form method="POST" action="{% url 'management' %}">
                         {% csrf_token %}
+                            <input list="abbreviation" name="abbreviation">
+                            <datalist id="abbreviation">
+                            {% for team in team_auto %}     
+                                <option>{{ team.abbreviation }}</option>
+                            {% endfor %}    
+                            </datalist>
+                            <button type="submit" class="btn nav-login light-blue-background white">Submit</button>
+                    </form>
+               </div>
+               <div class="col-12 col-md-4">
+                   <form class="white" method="POST" action="{% url 'add_basketball' %}">
+                        {% csrf_token %}
+                            <input list="team-names" placeholder="NCAA Basketball Teams">
+                            <input list="team-abbr" placeholder="NCAA Basketball Abbreviation">
+                            <datalist id="team-names">
+                            {% for team in team_auto %}    
+                                <option>{{ team.name }}</option>
+                            {% endfor %}    
+                            </datalist>
+                            <datalist id="team-abbr">
+                            {% for team in team_auto %}     
+                                <option>{{ team.abbreviation }}</option>
+                            {% endfor %}    
+                            </datalist>
                         {{ form | crispy }}
                         <div>
                             <a class="btn nav-login white orange-background" href="{% url 'management' %}">Cancel</a>
-                            <button class="btn nav-login light-blue-background white">Submit</button>
+                            <button type="submit" class="btn nav-login light-blue-background white">Save</button>
                         </div>    
                    </form>
                </div>

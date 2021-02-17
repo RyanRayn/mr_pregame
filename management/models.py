@@ -2,7 +2,7 @@ from django.db import models
 
 
 class League(models.Model):
-    LEAGUES = (
+    leagues = (
         ('MLB', ('MLB')),
         ('NBA', ('NBA')),
         ('NCAAB', ('NCAAB')),
@@ -10,7 +10,7 @@ class League(models.Model):
     )
 
     name = models.CharField(
-        max_length=10, choices=LEAGUES, null=False, blank=False)
+        max_length=10, choices=leagues, null=False, blank=False)
 
     def __str__(self):
         return self.name
