@@ -3,8 +3,8 @@
 
 {% block content %}
     <div id="content">
-        <div class="container-fluid">
-            <div class="row navy-container-shadow top-right-gradient mx-3">
+        <div class="container-fluid p-0">
+            <div class="row navy-container-shadow mx-3">
                 <div class="col-md-6 my-auto">
                     <div class="py-1 mx-3">
 <!-- SM Screens -->
@@ -30,7 +30,7 @@
                             MR. PREGAME
                         </h1>
                         <h2 class="d-none d-md-flex white montserrat sub-header justify-content-center">
-                            Sports Betting Management
+                            Sport Wager Management
                         </h2>
                     {% endif %}
                     </div>    
@@ -39,39 +39,39 @@
                     <img src="/media/ipaddesk.png" class="img-fluid img-shadow callout-img ml-2" alt="Responsive image">
                 </div>
             </div>
-            <div class="row my-3">
-                <div class="col-12 d-flex justify-content-center">
-                    {% if request.user.is_authenticated %}
-                        <h4 class="d-flex justify-content-center mb-0">
-                            <a class="register-link orange" href="">Click here to view your profile.</a>
-                        </h4>
-                    {% else %}
-                        <h4 class="d-flex justify-content-center">
-                            <a class="register-link orange" href="{% url 'account_signup' %}">Click here to get started!</a>
-                        </h4>
-                    {% endif %}        
+            <hr class="rounded orange-background mx-auto my-4">
+            <div class="info-container white-background mx-3 px-2 py-5">
+                <div class="row mx-3">
+                    <div class="d-none d-sm-flex col-sm-6 justify-content-center align-items-center">
+                        <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize info-img-shadow" alt="Responsive image"></div>
+                    </div>
+                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center align-items-center mb-3">
+                        <h4 class="orange align-self-start font-700">Professional Pregame Research</h4>
+                        <p class="dark-blue">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <hr class="rounded orange-background mx-auto mt-4">
-        
-            <div class="row mx-3 mt-4">
-                <div class="col-6 d-flex justify-content-center align-items-center navy-container-shadow top-right-gradient">
-                    <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
+                <div class="row mx-3 mb-4 d-sm-none">
+                    <div class="col-6 d-flex justify-content-center align-items-center">
+                        <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize " alt="Responsive image"></div>
+                    </div>
+                    <div class="col-6 d-flex justify-content-center">
+                        <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize" alt="Responsive image"></div>
+                    </div>        
                 </div>
-                <div class="col-6 d-flex justify-content-center navy-container-shadow top-left-gradient">
-                    <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
-                </div>        
-            </div>
-            <div class="row mx-3 my-3">
-                <div class="col-6">
-                    <h4 class="d-flex justify-content-center light-blue sub-header font-700">Custom Pregame Research and Results</h4>
+                <div class="row mx-3 mt-4">
+                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center align-items-center ">
+                        <h4 class="orange align-self-start font-700">Win Big. Guaranteed!</h4>
+                        <p class="dark-blue">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
+                        </p>
+                    </div>
+                    <div class="d-none d-sm-flex col-sm-6 justify-content-center align-items-center">
+                        <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize info-img-shadow" alt="Responsive image"></div>
+                    </div> 
                 </div>
-                <div class="col-6">
-                    <h4 class="d-flex justify-content-center light-blue sub-header font-700">Win Big With Our Guranteed Game Picks!</h4>
-                </div>
-            </div>
-            <hr class="rounded orange-background mx-auto mb-4">    
-            <div class="row navy-container-shadow  top-left-gradient mx-3 p-2">
+            </div>    
+            <hr class="rounded orange-background mx-auto my-4">    
+            <div class="row navy-container-shadow mx-3 p-2">
                 <div class="col-6 d-flex justify-content-center align-items-center">
                     <div class="mr-moneybag"><img class="img-fluid img-shadow img-resize" src="/media/money_bag3.png" alt="responsive image"></div>
                 </div>

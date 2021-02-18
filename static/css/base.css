@@ -45,7 +45,7 @@ img {
 }
 
 .dark-blue-background{
-    background-color:rgb(19, 35, 58);
+    background-color:rgb(13, 29, 53);
 }
 
 .blue{
@@ -74,6 +74,10 @@ img {
 
 .white{
     color:#FFFFFF
+}
+
+.white-background{
+    background-color:#FFFFFF
 }
 
 /* Gradient - https://uigradients.com/#Royal */
@@ -142,7 +146,11 @@ img {
 .navbar-toggler-icon:focus {
     outline: none;
     box-shadow: none;
-    font-size:25px;
+}
+
+.fa-plus-circle,
+.fa-minus-circle{
+    font-size:40px;
 }
 
 .no-show{
@@ -227,6 +235,21 @@ img {
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.747));
 }
 
+.info-img-shadow{
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(128, 128, 128, 0.747));
+}
+
+.info-container{
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
+    border:3px solid rgba(197, 197, 197, 0.445);
+    border-radius:20px;
+}
+
+.light-blue-info{
+    border-top:3px solid rgba(255, 153, 0, 0.445);
+    border-radius:25px;
+    bottom:0;
+}
 
 /*---------- Media Queries ----------*/
 
@@ -302,11 +325,6 @@ img {
         font-size:30px;
     }
 
-    .fa-plus-circle,
-    .fa-minus-circle{
-        font-size:40px;
-    }
-
     .sub-header{
         font-size:15px;
     }
@@ -328,8 +346,18 @@ img {
         width:100%;
     }
 
+    .moneynav{
+        width:15%;
+    }
+
     .mrpregame{
-        display:none;
+        margin-right:0px;
+        font-size:25px;
+    }
+
+    .fa-plus-circle,
+    .fa-minus-circle{
+        font-size:30px;
     }
 }
 
@@ -350,6 +378,15 @@ img {
     .better{
         font-size:15px;
     }
+
+    .mrpregame{
+        font-size:20px;
+    }
+
+    .moneynav{
+        width:20%;
+    }
+
 }
 
 @media (max-width: 330px) {
@@ -368,6 +405,15 @@ img {
     .home-callout,
     .register-link{
         font-size:17px;
+    }
+
+    .mrpregame{
+        font-size:18px;
+    }
+
+    .fa-plus-circle,
+    .fa-minus-circle{
+        font-size:25px;
     }
 }
 
