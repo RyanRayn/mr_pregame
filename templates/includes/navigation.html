@@ -1,38 +1,49 @@
 
-{% if request.user.is_authenticated %}
     <nav class="navbar navbar-expand-lg ml-2 mr-1">
-        <a class="navbar-brand d-inline-block align-top rounded-circle moneynav ml-1" href="{% url 'home' %}">
+        {% if request.user.is_authenticated %}
+            <a class="navbar-brand d-inline-block align-top rounded-circle ml-1 mr-0" href="{% url 'home' %}">
             <img class="nav-img" src="/media/money_bag2.png" alt="">
-        </a>
-        <a class="mrpregame text-nowrap" href="{% url 'home' %}">MR. PREGAME&nbsp;&nbsp;&nbsp;</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-plus-circle light-blue"></i>
-        </button>
-        <div class="collapse navbar-collapse mt-2 ml-2" id="navbarNav">
-            <ul class="navbar-nav d-flex flex-row justify-content-around">
-                <li><a class="nav-item nav-link active orange" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
-                <li><a class="nav-item nav-link orange" href="#">Profile</a></li>
-                <li><a class="nav-item nav-link orange" href="{% url 'games' %}">Games</a></li>
-                <li><a class="d-lg-none nav-item nav-link orange" href="{% url 'account_logout' %}">Logout</a></li>
-            {% if request.user.is_superuser %}
-                <li><a class="nav-item nav-link orange" href="{% url 'management' %}">Site Management</a></li>
-            {% endif %}            
-            </ul>
-        </div>
-        <div class="nav-item d-none d-lg-block mr-1">    
-            <button class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_logout' %}">Log Out</button>
-        </div>
-    </nav>                
-{% else %}
-    <div class="row">
-        <div class="col-6">
-            <a class="navbar-brand d-inline-block align-top rounded-circle moneynav mr-3" href="{% url 'home' %}">
-            <img src="/media/money_bag2.png" width="40" height="40" alt="">
             </a>
-            <a class="d-none d-sm-inline-block mrpregame mt-2" href="{% url 'home' %}">MR. PREGAME</a>
-        </div>    
-        <div class="col-6 d-flex justify-content-end my-1">
-            <a href="{% url 'account_login' %}" class="btn nav-login white light-blue-background">Log in</a>
-        </div>
-    </div> 
-{% endif %}
+            <a class="mrpregame text-nowrap" href="{% url 'home' %}">MR. PREGAME</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-plus-circle light-blue"></i>
+            </button>
+            <div class="collapse navbar-collapse mt-2 ml-2" id="navbarNav">
+                <ul class="navbar-nav d-flex flex-row justify-content-around">
+                    <li><a class="nav-item nav-link active orange" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a class="nav-item nav-link orange" href="#">Profile</a></li>
+                    <li><a class="nav-item nav-link orange" href="{% url 'games' %}">Games</a></li>
+                    <li><a class="d-lg-none nav-item nav-link orange" href="{% url 'account_logout' %}">Log out</a></li>
+                {% if request.user.is_superuser %}
+                    <li><a class="nav-item nav-link orange" href="{% url 'management' %}">Site Management</a></li>
+                {% endif %}            
+                </ul>
+                <div class="nav-item d-none d-lg-block mr-3 ml-auto">    
+                    <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_logout' %}">Log Out</a>
+                </div>
+            </div>
+        {% else %}
+<!-- LG Screens Pre-Auth-->        
+            <a class="d-none d-lg-block navbar-brand d-inline-block align-top rounded-circle ml-2 mr-0" href="{% url 'home' %}">
+            <img class="nav-img" src="/media/money_bag2.png" alt="">
+            </a>
+            <a class="d-none d-lg-block mrpregame text-nowrap" href="{% url 'home' %}">MR. PREGAME</a>
+            <div class="d-none d-lg-block nav-item d-block mr-3 ml-auto">    
+                <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_login' %}">Log in</a>
+            </div>
+<!-- SM/MD Screens Pre-Auth-->            
+            <a class="d-inline-block d-lg-none navbar-brand align-top rounded-circle ml-2 mr-0" href="{% url 'home' %}">
+            <img class="nav-img-sm" src="/media/money_bag2.png" alt="">
+            </a>
+            <a class="d-none d-sm-block d-lg-none mrpregame text-nowrap" href="{% url 'home' %}">MR. PREGAME</a>
+            <div class="d-none d-sm-block d-lg-none nav-item mr-2 ml-auto">    
+                <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_login' %}">Log in</a>
+            </div>
+            <div class="d-sm-none nav-item mr-2 ml-auto">   
+                <a class="btn nav-login orange text-nowrap" href="{% url 'account_login' %}">
+                    Log in<i class="fas fa-sign-in-alt orange ml-3"></i>
+                </a>
+            </div>
+        {% endif %}        
+    </nav>               
+

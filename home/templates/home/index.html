@@ -4,43 +4,48 @@
 {% block content %}
     <div id="content">
         <div class="container-fluid p-0">
-            <div class="icons d-flex flex-column">
-                <a href="" class="white orange-background font-700">Sign in<i class="fas fa-sign-in-alt orange"></i></a>
-                <a href="" class="white light-blue-background font-700">Register<i class="fas fa-user-plus light-blue"></i></a>
+<!-- Login/Register Side Tabs -->            
+            <div class="d-none d-sm-flex icons d-flex flex-column">
+                <a href="{% url 'account_login' %}" class="white orange-background font-700">Sign in<i class="fas fa-sign-in-alt orange"></i></a>
+                <a href="{% url 'account_signup' %}" class="white light-blue-background font-700">Register<i class="fas fa-user-plus light-blue"></i></a>
             </div>
             <div class="row">
-                <div class="col-md-6 my-auto">
-                    <div class="py-1 mx-3">
+                <div class="col-md-6 home-callout-margin">
+                    <div class="flex-column">
 <!-- SM Screens -->
                     {% if request.user.is_authenticated %}
                         <h1 class="d-flex d-md-none home-callout white justify-content-center mt-2">
                             Welcome Back, NAME HERE!
                         </h1>
-                    {% else %}
-                        <h1 class="d-flex d-md-none header light-blue montserrat justify-content-center">
+                {% else %}
+                        <h1 class="d-md-none d-flex header light-blue montserrat">
                             MR. PREGAME
                         </h1>
-                        <h2 class="d-flex d-md-none white montserrat sub-header justify-content-center">
+                        <h2 class="d-md-none d-flex white montserrat sub-header">
                             Sports Betting Management
                         </h2>
-                    {% endif %}    
+                {% endif %}    
 <!-- MD/LG Screens -->              
-                    {% if request.user.is_authenticated %}
-                        <h1 class="d-none d-md-flex home-callout white justify-content-center">
+                {% if request.user.is_authenticated %}
+                        <h1 class="d-none d-md-flex justify-content-center home-callout white">
                             Welcome Back,<br>NAME HERE!
                         </h1>
-                    {% else %}
-                        <h1 class="d-none d-md-flex header light-blue montserrat justify-content-center">
+                {% else %}
+                        <h1 class="d-none d-md-flex justify-content-center header light-blue montserrat font-800">
                             MR. PREGAME
                         </h1>
-                        <h2 class="d-none d-md-flex white montserrat sub-header justify-content-center">
-                            Sport Wager Management
+                        <h2 class="d-none d-md-flex justify-content-center white montserrat font-700 sub-header">
+                            Sports Betting Management
                         </h2>
-                    {% endif %}
-                    </div>    
+                        <div class="d-none d-md-flex justify-content-center">
+                            <a href="{% url 'account_login' %}" class="btn white orange-background register-button">Click for free access!</a>
+                        </div>     
+                    </div>  
+                    
+                {% endif %}    
                 </div>
-                <div class="col-12 col-md-6">
-                    <img src="/media/ipaddesk.png" class="img-fluid callout-img" alt="Responsive image">
+                <div class="col-12 col-md-6 home-callout-img">
+                    <img src="/media/ipaddesk.png" class="img-fluid" alt="Responsive image">
                 </div>
             </div>
             <div class="info-container white-background">
@@ -50,33 +55,12 @@
                         <p class="dark-blue">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
                         </p>
                     </div>
-                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center align-items-center mb-3">
+                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center align-items-center">
                         <h4 class="orange align-self-start font-700">Professional Pregame Research</h4>
                         <p class="dark-blue">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
                         </p>
                     </div>
                 </div>
-                <div class="row mx-3 mb-4 d-sm-none">
-                    <div class="col-6 d-flex justify-content-center align-items-center">
-                        <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize " alt="Responsive image">
-                        </div>
-                    </div>
-                    <div class="col-6 d-flex justify-content-center">
-                        <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize" alt="Responsive image">
-                        </div>
-                    </div>        
-                </div>
-                <div class="row mx-3 mt-4">
-                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center align-items-center ">
-                        <h4 class="orange align-self-start font-700">Win Big. Guaranteed!</h4>
-                        <p class="white">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
-                        </p>
-                    </div>
-                    <div class="d-none d-sm-flex col-sm-6 justify-content-center align-items-center">
-                        <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize info-img-shadow" alt="Responsive image">
-                        </div>
-                    </div> 
-                </div>  
             </div>    
             <div class="row navy-container-shadow mx-3 p-2">
                 <div class="col-6 d-flex justify-content-center align-items-center">

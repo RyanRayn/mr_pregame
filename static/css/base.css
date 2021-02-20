@@ -32,7 +32,10 @@ img {
 
 .montserrat{
     font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
+}
+
+.font-800{
+    font-weight:800;
 }
 
 .font-700{
@@ -98,13 +101,19 @@ img {
     color:#C1E6FF;
     font-size:25px;
     display:inline-block;
+    margin-left:20px;
 }
 
 .mrpregame:hover{
     color:#C1E6FF;
 }
 
-.moneynav{
+.nav-img{
+    width:65px;
+}
+
+.nav-img,
+.nav-img-sm{
     image-rendering: -moz-crisp-edges;
     image-rendering:   -o-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
@@ -118,15 +127,20 @@ img {
 }
 
 .nav-login{
-    border-radius:20px;
-    font-size:20px;
+    border-radius:50px;
+    font-size:22px;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
+    font-weight: 700;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transition:all 0.3s ease 0s;
+    outline:none;
 }
 
 .nav-login:hover{
     color:#C1E6FF;
     background-color:#ffffff;
+    box-shadow:0px 8px 15px rgba(255, 255, 255, 0.267);
+    transform:translateY(-7px)
 }
 
 .navbar-toggler,
@@ -142,9 +156,6 @@ img {
     font-size:40px;
 }
 
-.no-show{
-    display:none;
-}
 /*---------- Footer ----------*/
 .page-footer{
     width:100%;
@@ -164,17 +175,18 @@ img {
     color:white;
 }
 
-/*---------------------------------------- Homepage/index.html ----------------------------------------*/
-
+/*----------------------------- Homepage/index.html -------------------------------*/
+/*---------- Sign in/ Register Side Tabs ----------*/
 .icons{
     position:fixed;
-    top:40%;
+    top:41%;
     left:0%;
     width:200px;
 }
 
 .icons a{
     text-decoration:none;
+    font-family: 'Montserrat', sans-serif;
     font-size:22px;
     padding:10px;
     margin:2px 2px 2px 0px;
@@ -203,6 +215,7 @@ img {
     border-radius:50%;
     transition:all 0.5s;
 }
+
 /* Drop Shadow - https://css-irl.info/drop-shadow-the-underrated-css-filter/ */
 .navy-container-shadow{
     border-bottom:3px solid rgba(0, 7, 26, 0.336);
@@ -210,13 +223,40 @@ img {
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
 }
 
+.home-callout-img{
+    margin-top:70px;
+}
+
+.home-callout-margin{
+    margin-top:55px;
+}
+
 .header{
     font-size:5vw;
-    text-shadow:0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.342);
+    margin:0 0 0 5rem;
 }
 
 .sub-header{
     font-size:30px;
+    margin:0 0 0 5rem;
+}
+
+.register-button{
+    margin:3rem 0 0 5rem;
+    border-radius:50px;
+    font-size:22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:700;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transition:all 0.3s ease 0s;
+    outline:none;
+}
+
+.register-button:hover{
+    color:white;
+    background-color:#FF7C1F;
+    box-shadow:0px 8px 15px rgba(255, 124, 31, 0.267);
+    transform:translateY(-7px)
 }
 
 .home-callout{
@@ -225,14 +265,6 @@ img {
 
 .home-img-row{
     width:70%;
-}
-
-.register-link{
-    font-size:3vw;
-}
-
-.register-link:hover{
-    color:#C1E6FF;
 }
 
 .mr-moneybag{
@@ -264,26 +296,39 @@ img {
 
 @media (max-width: 1200px) {
     .sub-header{
-        font-size:19px;
+        font-size:25px;
     }
 }
 
 @media (max-width: 991px) {
-    .nav-img{
-        width:65%;
+    .nav-img-sm{
+        width:75px;
     }
 
     .mrpregame{
         margin-right:50px;
     }
+
+    .sub-header{
+        font-size:20px;
+    }
 }
-@media (max-width: 767px) {
+
+@media (max-width: 800px) {
     .header{
-        font-size:55px;
+        font-size:35px;
     }
 
-    .home-callout,
-    .register-link{
+    .sub-header{
+        font-size:18px;
+    }
+
+    .register-button{
+        font-size:20px;
+    }
+}
+@media (max-width: 767px) {
+    .home-callout{
         font-size:40px;
     }
 
@@ -294,6 +339,10 @@ img {
     .mrpregame{
         margin-right:40px;
     }
+
+    .nav-img-sm{
+        width:60px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -302,7 +351,7 @@ img {
     }
 
     .home-callout,
-    .register-link{
+    .register-button{
         font-size:35px;
     }
 
@@ -355,12 +404,13 @@ img {
         width:100%;
     }
 
-    .moneynav{
-        width:15%;
+    .nav-img{
+        width:50px;
     }
 
     .mrpregame{
-        margin-right:0px;
+        margin-left:20px;
+        margin-right:0;
         font-size:25px;
     }
 
@@ -392,14 +442,18 @@ img {
         font-size:20px;
     }
 
-    .moneynav{
-        width:20%;
+    .nav-img{
+        width:40px;
+    }
+
+    .nav-img-sm{
+        width:40px;
     }
 
 }
 
 @media (max-width: 330px) {
-    .moneynav{
+    .nav-img{
         padding-right:0;
     }
 
@@ -427,22 +481,24 @@ img {
 }
 
 @media (min-width: 1500px) {
-    .mrpregame,
     .sub-header{
         font-size:40px;
     }
 
-    .nav-login{
-        font-size:30px;
-    }
-
     .nav-link,
-    .copyright{
+    .copyright,
+    .icons a,
+    .nav-login,
+    .register-button{
         font-size:25px;
     }
     
     .list-inline li i{
         font-size:50px;
+    }
+
+    .icons{
+    top:30%;
     }
 }
 
@@ -452,17 +508,19 @@ img {
         font-size:50px;
     }
 
-    .nav-login{
-        font-size:40px;
-    }
-
     .nav-link,
-    .copyright{
+    .copyright,
+    .nav-login,
+    .register-button{
         font-size:35px;
     }
     
     .list-inline li i{
         font-size:60px;
-}
+    }
+
+    .nav-img{
+        width:100px;
+    }
 }
 
