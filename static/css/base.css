@@ -112,6 +112,15 @@ img {
     width:65px;
 }
 
+.nav-img:hover{
+    -webkit-transform:rotate(720deg);
+    -moz-transform:rotate(720deg);
+    -o-transform:rotate(720deg);
+    -ms-transform:rotate(720deg);
+    transform:rotate(720deg);
+    transition:all 1.0s;
+}
+
 .nav-img,
 .nav-img-sm{
     image-rendering: -moz-crisp-edges;
@@ -137,10 +146,13 @@ img {
 }
 
 .nav-login:hover{
-    color:#C1E6FF;
-    background-color:#ffffff;
-    box-shadow:0px 8px 15px rgba(255, 255, 255, 0.267);
+    color:white;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
     transform:translateY(-7px)
+}
+
+.nav-login-xs{
+    display:none;
 }
 
 .navbar-toggler,
@@ -176,6 +188,7 @@ img {
 }
 
 /*----------------------------- Homepage/index.html -------------------------------*/
+
 /*---------- Sign in/ Register Side Tabs ----------*/
 .icons{
     position:fixed;
@@ -192,17 +205,30 @@ img {
     margin:2px 2px 2px 0px;
     text-align:right;
     border-radius:0px 50px 50px 0px;
-    transform: translate(-125px, 0px);
+    transform:translate(-125px, 0px);
+    -webkit-transform:translate(-125px, 0px);
+    -moz-transform:translate(-125px, 0px);
+    -o-transform:translate(-125px, 0px);
+    -ms-transform:translate(-125px, 0px);
     transition: all 0.5s;
 }
 
 .icons a:hover{
     transform:translate(0px, 0px);
+    -webkit-transform:translate(0px, 0px);
+    -moz-transform:translate(0px, 0px);
+    -o-transform:translate(0px, 0px);
+    -ms-transform:translate(0px, 0px);
     color:white;
 }
 
 .icons a:hover i{
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
     transform:rotate(360deg);
+    transition:all 1.0s;
 }
 
 .icons a i{
@@ -214,13 +240,6 @@ img {
     line-height:40px;
     border-radius:50%;
     transition:all 0.5s;
-}
-
-/* Drop Shadow - https://css-irl.info/drop-shadow-the-underrated-css-filter/ */
-.navy-container-shadow{
-    border-bottom:3px solid rgba(0, 7, 26, 0.336);
-    border-radius:20px;
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.534));
 }
 
 .home-callout-img{
@@ -255,7 +274,7 @@ img {
 .register-button:hover{
     color:white;
     background-color:#FF7C1F;
-    box-shadow:0px 8px 15px rgba(255, 124, 31, 0.267);
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
     transform:translateY(-7px)
 }
 
@@ -265,6 +284,54 @@ img {
 
 .home-img-row{
     width:70%;
+}
+
+.margin-80{
+    margin-left:80px;
+    margin-right:80px;
+}
+
+.instagram-border,
+.social-row{
+    border-radius:50px 0 0 50px;
+}
+
+.social-row{
+    margin-left:80px;
+}
+
+.fa-instagram,
+.fa-facebook-f,
+.fa-twitter,
+.social-banner{
+    font-size:50px;
+}
+
+.fa-facebook-f:hover{
+    -webkit-transform:rotate(720deg) scale(1.3);
+    -moz-transform:rotate(720deg) scale(1.3);
+    -o-transform:rotate(720deg) scale(1.3);
+    -ms-transform:rotate(720deg) scale(1.3);
+    transform:rotate(720deg) scale(1.3);
+    transition:all 1.0s;
+}
+
+.fa-instagram:hover{
+    -webkit-transform:rotate(720deg) scale(1.5);
+    -moz-transform:rotate(720deg) scale(1.5);
+    -o-transform:rotate(720deg) scale(1.5);
+    -ms-transform:rotate(720deg) scale(1.5);
+    transform:rotate(720deg) scale(1.5);
+    transition:all 1.0s;
+}
+
+.fa-twitter:hover{
+    -webkit-transform:rotate(720deg) scale(1.5);
+    -moz-transform:rotate(720deg) scale(1.5);
+    -o-transform:rotate(720deg) scale(1.5);
+    -ms-transform:rotate(720deg) scale(1.5);
+    transform:rotate(720deg) scale(1.5);
+    transition:all 1.0s;
 }
 
 .mr-moneybag{
@@ -286,17 +353,18 @@ img {
 .img-shadow{
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.747));
 }
-
-.margin-80{
-    margin-left:80px;
-    margin-right:80px;
-}
-
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {
     .sub-header{
         font-size:25px;
+    }
+
+    .fa-instagram,
+    .fa-facebook-f,
+    .fa-twitter,
+    .social-banner{
+        font-size:40px;
     }
 }
 
@@ -312,6 +380,13 @@ img {
     .sub-header{
         font-size:20px;
     }
+
+    .fa-instagram,
+    .fa-facebook-f,
+    .fa-twitter,
+    .social-banner{
+        font-size:35px;
+    }
 }
 
 @media (max-width: 800px) {
@@ -326,10 +401,19 @@ img {
     .register-button{
         font-size:20px;
     }
+
+    .social-row{
+        margin-left:70px;
+    }
+
 }
 @media (max-width: 767px) {
     .home-callout{
         font-size:40px;
+    }
+
+    .home-callout-margin{
+        margin-top:0px;
     }
 
     .home-img-row{
@@ -338,10 +422,32 @@ img {
 
     .mrpregame{
         margin-right:40px;
+        font-size:25px;
     }
 
     .nav-img-sm{
         width:60px;
+    }
+
+    .header{
+        margin:0;
+        font-size:60px;
+    }
+
+    .sub-header{
+        margin:0;
+        font-size:25px;
+    }
+
+    .margin-80,
+    .social-row{
+        margin-left:0px;
+        margin-right:0px;
+    }
+
+    .social-row,
+    .instagram-border{
+        border-radius:0;
     }
 }
 
@@ -369,6 +475,17 @@ img {
 
     .mrpregame{
         margin-right:30px;
+        font-size:20px;
+    }
+
+    .nav-login{
+    box-shadow:none;
+    transition:none;
+    }
+
+    .nav-login:hover{
+    box-shadow:none;
+    transform:none;
     }
 
 }
@@ -379,12 +496,8 @@ img {
         margin-left:1rem;
     }
 
-    .header{
-        font-size:30px;
-    }
-
     .sub-header{
-        font-size:15px;
+        font-size:20px;
     }
 
     .home-callout,
@@ -411,7 +524,6 @@ img {
     .mrpregame{
         margin-left:20px;
         margin-right:0;
-        font-size:25px;
     }
 
     .fa-plus-circle,
@@ -422,11 +534,11 @@ img {
 
 @media (max-width: 375px) {
     .header{
-        font-size:25px;
+        font-size:35px;
     }
 
     .sub-header{
-        font-size:12px;
+        font-size:18px;
     }
 
     .home-callout,
@@ -446,23 +558,14 @@ img {
         width:40px;
     }
 
-    .nav-img-sm{
-        width:40px;
+    .nav-login{
+        font-size:15px;
     }
-
 }
 
 @media (max-width: 330px) {
     .nav-img{
         padding-right:0;
-    }
-
-    .header{
-        font-size:23px;
-    }
-
-    .sub-header{
-        font-size:10px;
     }
 
     .home-callout,
@@ -503,7 +606,9 @@ img {
 }
 
 @media (min-width: 2000px) {
-    .mrpregame,
+    .mrpregame{
+        font-size:35px;
+    }
     .sub-header{
         font-size:50px;
     }
@@ -521,6 +626,23 @@ img {
 
     .nav-img{
         width:100px;
+    }
+
+    .icons{
+        top:33%;
+        width:300px;
+    }
+
+    .icons a{
+        font-size:35px;
+        padding:20px;
+        transform: translate(-192px, 0px);
+    }
+
+    .icons a i{
+        height:60px;
+        width:60px;
+        line-height:60px;
     }
 }
 
