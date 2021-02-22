@@ -3,11 +3,12 @@
 
 {% block content %}
     <div id="content">
-        <div class="container-fluid">
-            <div class="row ">
+        <div class="container-fluid px-0">
+            <div class="row">
                 <div class="col-12 col-md-6 flex-column home-callout-margin">            
                     {% if request.user.is_authenticated %}
-                        <h1 class="d-flex justify-content-center home-callout white">
+                        <i class="far fa-comment fa-flip-horizontal white"></i>
+                        <h1 class="d-flex justify-content-center home-callout font-700 white">
                             Welcome Back,<br>NAME HERE!
                         </h1>
                     {% else %}
@@ -23,7 +24,7 @@
                     {% endif %}         
                 </div> 
                 <div class="col-12 col-md-6 home-callout-img">
-                    <img src="/media/ipaddesk.png" class="img-fluid" alt="Responsive image">
+                    <img src="/media/ipaddesk.png" class="img-fluid callout-img-shadow" alt="Responsive image">
                 </div>
             </div>
  
@@ -36,8 +37,8 @@
                 </div>
             {% endif %}            
 <!-- Social Media ToolBar -->            
-            <div class="row social-row white-background">
-                <div class="d-none d-md-flex col-md-6 d-flex justify-content-center">
+            <div class="row social-row white-background mr-0">
+                <div class="d-none d-md-flex col-md-6 d-flex justify-content-center align-items-center">
                     <h2 class="social-banner dark-blue">Follow for gameday tips!</h2>
                 </div>
                 <div class="col-4 col-md-2 d-flex justify-content-center light-blue-background instagram-border social-icon py-2">
@@ -59,26 +60,53 @@
                     </a>
                 </div>
             </div>
-            <div class="info-container">
-                <div class="row margin-80 py-5">
-                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center">
-                        <h4 class="orange align-self-start font-700">Win Big. Guaranteed!</h4>
-                        <p class="dark-blue">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
+            <div class="info-container pb-lg-5">
+            {% if request.user.is_authenticated %} 
+
+            {% else %}
+<!-- SM/MD Screens -->
+                <div class="row d-flex d-lg-none pt-5 px-5 ml-md-3">
+                    <div class="col-12 col-sm-6 flex-column pl-sm-4 mb-5">
+                        <h4 class="orange font-700">Professional Research</h4>
+                        <p class="white">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
                         </p>
                     </div>
-                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center">
-                        <h4 class="orange align-self-start font-700">Professional Research</h4>
-                        <p class="dark-blue">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
+                    <div class="col-12 col-sm-6 flex-column">
+                        <h4 class="orange font-700">Win Big. Guaranteed!</h4>
+                        <p class="white">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
                         </p>
                     </div>
                 </div>
+                <hr class="d-lg-none rounded orange-background mx-auto">
+<!-- LG Screens -->               
+                <div class="row d-none d-lg-flex p-5 mockup-row dark-blue-background">
+                    <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
+                        <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
+                    </div>
+                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center px-5">
+                        <h4 class="orange align-self-start font-700">Professional Research</h4>
+                        <p class="white">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
+                        </p>
+                    </div>
+                </div>     
+                <div class="row d-none d-lg-flex p-5 moneypile-row dark-blue-background">   
+                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center px-5">
+                        <h4 class="orange align-self-start font-700">Win Big. Guaranteed!</h4>
+                        <p class="white">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
+                        </p>
+                    </div>
+                    <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
+                        <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
+                    </div>
+                </div>
+            {% endif %}    
             </div>    
-            <div class="row navy-container-shadow mx-3 p-2">
+            <div class="row pt-5 pb-3 margin-80">
                 <div class="col-6 d-flex justify-content-center align-items-center">
                     <div class="mr-moneybag"><img class="img-fluid img-shadow img-resize" src="/media/money_bag3.png" alt="responsive image">
                     </div>
                 </div>
-                <div class="col-6 d-flex justify-content-center align-items-center my-3">
+                <div class="col-6 d-flex justify-content-center align-items-center">
                     <div class="flex-column justify-content-center align-items-center">
                         <h1 class="better white">Better Pregame,<br>Better Betting,<br>Better Bettors.</h1>
                         <div class="text-center">

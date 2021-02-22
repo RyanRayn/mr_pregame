@@ -112,15 +112,6 @@ img {
     width:65px;
 }
 
-.nav-img:hover{
-    -webkit-transform:rotate(720deg);
-    -moz-transform:rotate(720deg);
-    -o-transform:rotate(720deg);
-    -ms-transform:rotate(720deg);
-    transform:rotate(720deg);
-    transition:all 1.0s;
-}
-
 .nav-img,
 .nav-img-sm{
     image-rendering: -moz-crisp-edges;
@@ -184,7 +175,9 @@ img {
 }
 
 .list-inline li i:hover{
-    color:white;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transform:translateY(-7px);
+    color:#C1E6FF;
 }
 
 /*----------------------------- Homepage/index.html -------------------------------*/
@@ -246,6 +239,10 @@ img {
     margin-top:70px;
 }
 
+.callout-img-shadow{
+    filter: drop-shadow(-0.35rem -0.35rem 0.6rem rgba(0, 0, 0, 0.747));
+}
+
 .home-callout-margin{
     margin-top:55px;
 }
@@ -273,7 +270,7 @@ img {
 
 .register-button:hover{
     color:white;
-    background-color:#FF7C1F;
+    background-color:#C1E6FF;
     box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
     transform:translateY(-7px)
 }
@@ -291,13 +288,13 @@ img {
     margin-right:80px;
 }
 
-.instagram-border,
-.social-row{
+.instagram-border{
     border-radius:50px 0 0 50px;
 }
 
 .social-row{
     margin-left:80px;
+    border-radius:50px 0 0 0;
 }
 
 .fa-instagram,
@@ -308,30 +305,49 @@ img {
 }
 
 .fa-facebook-f:hover{
-    -webkit-transform:rotate(720deg) scale(1.3);
-    -moz-transform:rotate(720deg) scale(1.3);
-    -o-transform:rotate(720deg) scale(1.3);
-    -ms-transform:rotate(720deg) scale(1.3);
-    transform:rotate(720deg) scale(1.3);
+    -webkit-transform:rotate(360deg) scale(1.3);
+    -moz-transform:rotate(360deg) scale(1.3);
+    -o-transform:rotate(360deg) scale(1.3);
+    -ms-transform:rotate(360deg) scale(1.3);
+    transform:rotate(360deg) scale(1.3);
     transition:all 1.0s;
 }
 
 .fa-instagram:hover{
-    -webkit-transform:rotate(720deg) scale(1.5);
-    -moz-transform:rotate(720deg) scale(1.5);
-    -o-transform:rotate(720deg) scale(1.5);
-    -ms-transform:rotate(720deg) scale(1.5);
-    transform:rotate(720deg) scale(1.5);
+    -webkit-transform:rotate(360deg) scale(1.5);
+    -moz-transform:rotate(360deg) scale(1.5);
+    -o-transform:rotate(360deg) scale(1.5);
+    -ms-transform:rotate(360deg) scale(1.5);
+    transform:rotate(360deg) scale(1.5);
     transition:all 1.0s;
 }
 
 .fa-twitter:hover{
-    -webkit-transform:rotate(720deg) scale(1.5);
-    -moz-transform:rotate(720deg) scale(1.5);
-    -o-transform:rotate(720deg) scale(1.5);
-    -ms-transform:rotate(720deg) scale(1.5);
-    transform:rotate(720deg) scale(1.5);
+    -webkit-transform:rotate(360deg) scale(1.5);
+    -moz-transform:rotate(360deg) scale(1.5);
+    -o-transform:rotate(360deg) scale(1.5);
+    -ms-transform:rotate(360deg) scale(1.5);
+    transform:rotate(360deg) scale(1.5);
     transition:all 1.0s;
+}
+
+.info-container{
+    margin-left:80px;
+    border:3px solid white;
+    border-top:none;
+    border-right:none;
+    border-radius:0 0 0px 50px;
+    background-color:white;
+}
+
+.mockup-row{
+    margin:0 0 0 60px;
+    border-radius:40px 0 0 0;
+}
+
+.moneypile-row{
+    margin:0 0 0 60px;
+    border-radius:0 0 0 40px;
 }
 
 .mr-moneybag{
@@ -360,6 +376,10 @@ img {
         font-size:25px;
     }
 
+    .home-callout{
+        font-size:60px;
+    }
+
     .fa-instagram,
     .fa-facebook-f,
     .fa-twitter,
@@ -377,6 +397,10 @@ img {
         margin-right:50px;
     }
 
+    .home-callout{
+        font-size:50px;
+    }
+
     .sub-header{
         font-size:20px;
     }
@@ -386,6 +410,20 @@ img {
     .fa-twitter,
     .social-banner{
         font-size:35px;
+    }
+
+    .social-row{
+    margin-left:80px;
+    border-radius:50px 0 0 50px;
+    }
+
+    .info-container{
+        margin-left:0;
+        border:none;
+        border-top:none;
+        border-right:none;
+        border-radius:0;
+        background-color:rgb(13, 29, 53);
     }
 }
 
@@ -404,6 +442,10 @@ img {
 
     .social-row{
         margin-left:70px;
+    }
+
+    .social-banner{
+        font-size:30px;
     }
 
 }
@@ -603,6 +645,22 @@ img {
     .icons{
     top:30%;
     }
+
+    .mockup-row p{
+        font-size:22px;
+    }
+
+    .mockup-row h4{
+        font-size:32px;
+    }
+
+    .moneypile-row p{
+        font-size:22px;
+    }
+
+    .moneypile-row h4{
+        font-size:32px;
+    }
 }
 
 @media (min-width: 2000px) {
@@ -643,6 +701,22 @@ img {
         height:60px;
         width:60px;
         line-height:60px;
+    }
+
+    .mockup-row p{
+        font-size:30px;
+    }
+
+    .mockup-row h4{
+        font-size:40px;
+    }
+
+    .moneypile-row p{
+        font-size:30px;
+    }
+
+    .moneypile-row h4{
+        font-size:40px;
     }
 }
 
