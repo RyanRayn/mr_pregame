@@ -288,7 +288,7 @@ img {
     margin-right:80px;
 }
 
-.instagram-border{
+.twitter-border{
     border-radius:50px 0 0 50px;
 }
 
@@ -342,12 +342,14 @@ img {
 
 .mockup-row{
     margin:0 0 0 60px;
-    border-radius:40px 0 0 0;
+    border-radius:40px 0 0 40px;
+    box-shadow: 0 0 10px;
 }
 
 .moneypile-row{
     margin:0 0 0 60px;
-    border-radius:0 0 0 40px;
+    border-radius:40px 0 0 40px;
+    box-shadow: 0 0 10px;
 }
 
 .mr-moneybag{
@@ -356,10 +358,6 @@ img {
 
 .better{
     font-size:5vw;
-}
-
-.better-link{
-    font-size:2vw;
 }
 
 .better-link:hover{
@@ -413,8 +411,8 @@ img {
     }
 
     .social-row{
-    margin-left:80px;
-    border-radius:50px 0 0 50px;
+        margin-left:80px;
+        border-radius:50px 0 0 50px;
     }
 
     .info-container{
@@ -454,6 +452,10 @@ img {
         font-size:40px;
     }
 
+    .home-callout-img{
+        margin-top:20px;
+    }    
+
     .home-callout-margin{
         margin-top:0px;
     }
@@ -488,8 +490,12 @@ img {
     }
 
     .social-row,
-    .instagram-border{
+    .twitter-border{
         border-radius:0;
+    }
+
+    .better{
+        font-size:40px;
     }
 }
 
@@ -508,11 +514,7 @@ img {
     }
 
     .better{
-        font-size:25px;
-    }
-
-    .better-link{
-        font-size:12px;
+        font-size:30px;
     }
 
     .mrpregame{
@@ -529,7 +531,6 @@ img {
     box-shadow:none;
     transform:none;
     }
-
 }
 
 @media (max-width: 475px) {
@@ -548,11 +549,7 @@ img {
     }
 
     .better{
-        font-size:20px;
-    }
-
-    .better-link{
-        font-size:10px;
+        font-size:25px;
     }
 
     .home-img-row{
@@ -576,7 +573,7 @@ img {
 
 @media (max-width: 375px) {
     .header{
-        font-size:35px;
+        font-size:33px;
     }
 
     .sub-header{
@@ -589,7 +586,7 @@ img {
     }
 
     .better{
-        font-size:15px;
+        font-size:23px;
     }
 
     .mrpregame{
