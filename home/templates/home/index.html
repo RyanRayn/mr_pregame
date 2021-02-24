@@ -3,123 +3,121 @@
 
 {% block content %}
     <div id="content">
-        <div class="container-fluid px-0">
-            <div class="row">
-                <div class="col-12 col-md-6 flex-column home-callout-margin pr-0">            
-                    {% if request.user.is_authenticated %}
-                        <span class="fa-layers ">
-                            <i class="far fa-comment fa-flip-horizontal white"></i>
-                            <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900">Welcome Back,<br> NAME HERE!</span>
-                        </span>
-                        <h1 class="d-flex justify-content-center home-callout font-700 white">
-                            Welcome Back,<br>NAME HERE!
-                        </h1>
-                    {% else %}
-                        <h1 class="d-flex justify-content-center header light-blue montserrat font-800">
-                            MR. PREGAME
-                        </h1>
-                        <h2 class="d-flex justify-content-center white montserrat font-700 sub-header">
-                            Sports Betting Management
-                        </h2>
-                        <div class="d-none d-md-flex justify-content-center">
-                            <a href="{% url 'account_login' %}" class="btn white orange-background register-button">Click for free access!</a>
+            <div class="container-fluid px-0">
+                <div class="row px-0 mx-0">
+                    <div class="col-12 col-md-6 flex-column home-callout-margin px-0">            
+                        {% if request.user.is_authenticated %}
+                            <span class="fa-layers ">
+                                <i class="far fa-comment fa-flip-horizontal white"></i>
+                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3">Welcome Back,<br> NAME HERE!</span>
+                            </span>
+                            <h1 class="d-flex justify-content-center home-callout font-700 white">
+                                Welcome Back,<br>NAME HERE!
+                            </h1>
+                        {% else %}
+                            <h1 class="d-flex justify-content-center header light-blue montserrat font-800">
+                                MR. PREGAME
+                            </h1>
+                            <h2 class="d-flex justify-content-center white montserrat font-700 sub-header">
+                                Sports Betting Management
+                            </h2>
+                            <div class="d-none d-md-flex justify-content-center">
+                                <a href="{% url 'account_login' %}" class="btn white orange-background register-button">Click for free access!</a>
+                            </div>
+                        {% endif %}         
+                    </div> 
+                    <div class="col-12 col-md-6 home-callout-img px-0">
+                        <img src="/media/ipaddesk.png" class="img-fluid callout-img-shadow" alt="Responsive image">
+                    </div>
+                </div>
+    
+    <!-- Login/Register Side Tabs --> 
+                {% if request.user.is_authenticated %}
+                {% else %}    
+                    <div class="d-none d-lg-flex icons d-flex flex-column">
+                        <a href="{% url 'account_login' %}" class="white orange-background font-700">Sign in<i class="fas fa-sign-in-alt orange"></i></a>
+                        <a href="{% url 'account_signup' %}" class="white light-blue-background font-700">Register<i class="fas fa-user-plus light-blue"></i></a>
+                    </div>
+                {% endif %}            
+    <!-- Social Media ToolBar -->            
+                <div class="row social-row white-background mr-0">
+                    <div class="d-none d-md-flex col-md-6 d-flex justify-content-center align-items-center">
+                        <h2 class="social-banner dark-blue">Follow for gameday tips!</h2>
+                    </div>
+                    <div class="col-4 col-md-2 d-flex justify-content-center light-blue-background twitter-border py-2">
+                        <a target="_blank" href="https://twitter.com/MrPregame">
+                        <i class="fab fa-twitter white" aria-hidden="true"></i>
+                        <span class="sr-only">Twitter</span>
+                        </a>
+                    </div>
+                    <div class="col-4 col-md-2 d-flex justify-content-center orange-background py-2">
+                        <a target="_blank" href="https://www.instagram.com/misterpregame/">
+                        <i class="fab fa-instagram white" aria-hidden="true"></i>
+                        <span class="sr-only">Instagram</span>
+                        </a>
+                    </div>
+                    <div class="col-4 col-md-2 d-flex justify-content-center blue-background py-2">
+                        <a target="_blank" href="https://www.facebook.com/">
+                        <i class="fab fa-facebook-f white" aria-hidden="true"></i>
+                        <span class="sr-only">Facebook</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="info-container pb-lg-5">
+                {% if request.user.is_authenticated %} 
+
+                {% else %}
+    <!-- SM/MD Screens -->
+                    <div class="row d-flex d-lg-none p-5 pb-3 no-gutters mx-0">
+                        <div class="col-12 col-sm-6 flex-column pl-sm-4 mb-3">
+                            <h4 class="orange font-700 text-center">Professional Research</h4>
+                            <p class="white">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
+                            </p>
                         </div>
-                    {% endif %}         
-                </div> 
-                <div class="col-12 col-md-6 home-callout-img pl-0">
-                    <img src="/media/ipaddesk.png" class="img-fluid callout-img-shadow" alt="Responsive image">
-                </div>
-            </div>
- 
-<!-- Login/Register Side Tabs --> 
-            {% if request.user.is_authenticated %}
-            {% else %}    
-                <div class="d-none d-md-flex icons d-flex flex-column">
-                    <a href="{% url 'account_login' %}" class="white orange-background font-700">Sign in<i class="fas fa-sign-in-alt orange"></i></a>
-                    <a href="{% url 'account_signup' %}" class="white light-blue-background font-700">Register<i class="fas fa-user-plus light-blue"></i></a>
-                </div>
-            {% endif %}            
-<!-- Social Media ToolBar -->            
-            <div class="row social-row white-background mr-0">
-                <div class="d-none d-md-flex col-md-6 d-flex justify-content-center align-items-center">
-                    <h2 class="social-banner dark-blue">Follow for gameday tips!</h2>
-                </div>
-                <div class="col-4 col-md-2 d-flex justify-content-center light-blue-background twitter-border py-2">
-                    <a target="_blank" href="https://twitter.com/MrPregame">
-                    <i class="fab fa-twitter white" aria-hidden="true"></i>
-                    <span class="sr-only">Twitter</span>
-                    </a>
-                </div>
-                <div class="col-4 col-md-2 d-flex justify-content-center orange-background py-2">
-                    <a target="_blank" href="https://www.instagram.com/misterpregame/">
-                    <i class="fab fa-instagram white" aria-hidden="true"></i>
-                    <span class="sr-only">Instagram</span>
-                    </a>
-                </div>
-                <div class="col-4 col-md-2 d-flex justify-content-center blue-background py-2">
-                    <a target="_blank" href="https://www.facebook.com/">
-                    <i class="fab fa-facebook-f white" aria-hidden="true"></i>
-                    <span class="sr-only">Facebook</span>
-                    </a>
-                </div>
-            </div>
-            <div class="info-container pb-lg-5">
-            {% if request.user.is_authenticated %} 
-
-            {% else %}
-<!-- SM/MD Screens -->
-                <div class="row d-flex d-lg-none p-5 pb-3 ml-md-4">
-                    <div class="col-12 col-sm-6 flex-column pl-sm-4 mb-3">
-                        <h4 class="orange font-700 text-center">Professional Research</h4>
-                        <p class="white">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
-                        </p>
+                        <div class="col-12 col-sm-6 flex-column">
+                            <h4 class="orange font-700 text-center">Win Big. Guaranteed!</h4>
+                            <p class="white">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-12 col-sm-6 flex-column">
-                        <h4 class="orange font-700 text-center">Win Big. Guaranteed!</h4>
-                        <p class="white">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
-                        </p>
-                    </div>
-                </div>
-                <hr class="d-lg-none rounded orange-background mx-auto">
-<!-- LG Screens -->               
-                <div class="row d-none d-lg-flex p-5 mockup-row dark-blue-background mb-2">
-                    <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
-                        <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
-                    </div>
-                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center px-5">
-                        <h4 class="orange align-self-start font-700">Professional Research</h4>
-                        <p class="white">Mr. Pregame disects each game to offer members free custom pregame research and his paid guaranteed picks of the day. Breakdowns are done showcasing statistical advantages, charting trends, and revealing any edge that would give a team an upperhand.    
-                        </p>
-                    </div>
-                </div>     
-                <div class="row d-none d-lg-flex p-5 moneypile-row dark-blue-background mt-2">   
-                    <div class="col-12 col-sm-6 flex-column d-flex justify-content-center px-5">
-                        <h4 class="orange align-self-start font-700">Win Big. Guaranteed!</h4>
-                        <p class="white">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
-                        </p>
-                    </div>
-                    <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
-                        <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
-                    </div>
-                </div>
-            {% endif %}    
-            </div>    
-            <div class="row pt-5 pb-3 margin-80">
-                <div class="col-6 d-flex justify-content-center align-items-center pr-0">
-                    <div class="mr-moneybag"><img class="img-fluid img-shadow img-resize" src="/media/money_bag3.png" alt="responsive image">
-                    </div>
-                </div>
-                <div class="col-6 d-flex align-items-center px-0">
-                    <div class="flex-column align-items-center">
-                        <h1 class="better white mb-0">Better Pregame,</h1>
-                        <h1 class="better white mb-0">Better Betting,</h1>
-                        <h1 class="better white mb-0">Better Bettor.</h1>
-                        <a href="{% url 'account_signup' %}"><h1 class="orange better better-link">Better Start!</h1></a>
+                    <hr class="d-lg-none rounded orange-background mx-auto">
+    <!-- LG Screens -->               
+                    <div class="row d-none d-lg-flex p-5 mockup-row dark-blue-background mb-2">
+                        <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
+                            <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
+                        </div>
+                        <div class="col-12 col-sm-6 flex-column d-flex justify-content-center px-5">
+                            <h4 class="orange align-self-start font-700">Professional Research</h4>
+                            <p class="white">Mr. Pregame disects each game to offer members free custom pregame research and his paid guaranteed picks of the day. Breakdowns are done showcasing statistical advantages, charting trends, and revealing any edge that would give a team an upperhand.    
+                            </p>
+                        </div>
                     </div>     
+                    <div class="row d-none d-lg-flex p-5 moneypile-row dark-blue-background mt-2">   
+                        <div class="col-12 col-sm-6 flex-column d-flex justify-content-center px-5">
+                            <h4 class="orange align-self-start font-700">Win Big. Guaranteed!</h4>
+                            <p class="white">When the research is done and Mr. Pregame has anylized all the game data, he will make available for purchase his top picks of the day. For a small investment, you will get access to all his bets for that day and if his guaranteed 'Moneybag Pick of the Day' loses you will get a full refund, even if his other picks win.
+                            </p>
+                        </div>
+                        <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
+                            <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
+                        </div>
+                    </div>
+                {% endif %}    
+                </div>    
+                <div class="row pt-5 pb-3 margin-80">
+                    <div class="col-6 d-flex justify-content-center align-items-center pr-0">
+                        <div class="mr-moneybag"><img class="img-fluid img-shadow img-resize" src="/media/money_bag3.png" alt="responsive image">
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex align-items-center px-0">
+                        <div class="flex-column align-items-center">
+                            <h1 class="better white mb-0">Better Pregame,</h1>
+                            <h1 class="better white mb-0">Better Betting,</h1>
+                            <h1 class="better white mb-0">Better Bettor,</h1>
+                            <a href="{% url 'account_signup' %}"><h1 class="orange better better-link">Better Start!</h1></a>
+                        </div>     
+                    </div>
                 </div>
             </div>
-        </div>
-
-        
     </div>
 {% endblock %}
