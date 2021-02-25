@@ -4,10 +4,11 @@
 
 {% block content %}
     <div id="content">
-       <div class="container-fluid">
-           <div class="row">
-               <a class="btn nav-login white orange-background" href="{% url 'add_basketball' %}">Add Basketball</a>
-           </div>
+        <div class="container-fluid">
+            <h1 class="white text-center font-700">Site Management</h1>
+            <div class="menu orange-background border-radius w-25 h-100">
+                <a class="white" href="{% url 'add_basketball' %}">Add Basketball</a>
+            </div>    
        </div>
     </div>
 {% endblock %}

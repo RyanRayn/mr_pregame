@@ -3,42 +3,33 @@
 
 {% block content %}
     <div id="content">
+
+        {% if request.user.is_authenticated %}
+            {% include 'includes/authenticated.html' %}                 
+        {% else %}
+
             <div class="container-fluid px-0">
                 <div class="row px-0 mx-0">
-                    <div class="col-12 col-md-6 flex-column home-callout-margin px-0">            
-                        {% if request.user.is_authenticated %}
-                            <span class="fa-layers ">
-                                <i class="far fa-comment fa-flip-horizontal white"></i>
-                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3">Welcome Back,<br> NAME HERE!</span>
-                            </span>
-                            <h1 class="d-flex justify-content-center home-callout font-700 white">
-                                Welcome Back,<br>NAME HERE!
-                            </h1>
-                        {% else %}
-                            <h1 class="d-flex justify-content-center header light-blue montserrat font-800">
-                                MR. PREGAME
-                            </h1>
-                            <h2 class="d-flex justify-content-center white montserrat font-700 sub-header">
-                                Sports Betting Management
-                            </h2>
-                            <div class="d-none d-md-flex justify-content-center">
-                                <a href="{% url 'account_login' %}" class="btn white orange-background register-button">Click for free access!</a>
-                            </div>
-                        {% endif %}         
+                    <div class="col-12 col-md-6 flex-column home-callout-margin px-0">
+                        <h1 class="d-flex justify-content-center header light-blue montserrat font-800">
+                            MR. PREGAME
+                        </h1>
+                        <h2 class="d-flex justify-content-center white montserrat font-700 sub-header">
+                            Sports Betting Management
+                        </h2>
+                        <div class="d-none d-md-flex justify-content-center">
+                            <a href="{% url 'account_login' %}" class="btn white orange-background register-button">Click for free access!</a>
+                        </div>        
                     </div> 
                     <div class="col-12 col-md-6 home-callout-img px-0">
                         <img src="/media/ipaddesk.png" class="img-fluid callout-img-shadow" alt="Responsive image">
                     </div>
                 </div>
-    
-    <!-- Login/Register Side Tabs --> 
-                {% if request.user.is_authenticated %}
-                {% else %}    
+    <!-- Login/Register Side Tabs -->   
                     <div class="d-none d-lg-flex icons d-flex flex-column">
                         <a href="{% url 'account_login' %}" class="white orange-background font-700">Sign in<i class="fas fa-sign-in-alt orange"></i></a>
                         <a href="{% url 'account_signup' %}" class="white light-blue-background font-700">Register<i class="fas fa-user-plus light-blue"></i></a>
-                    </div>
-                {% endif %}            
+                    </div>           
     <!-- Social Media ToolBar -->            
                 <div class="row social-row white-background mr-0">
                     <div class="d-none d-md-flex col-md-6 d-flex justify-content-center align-items-center">
@@ -63,15 +54,13 @@
                         </a>
                     </div>
                 </div>
-                <div class="info-container pb-lg-5">
-                {% if request.user.is_authenticated %} 
 
-                {% else %}
+                <div class="info-container pb-lg-5">
     <!-- SM/MD Screens -->
                     <div class="row d-flex d-lg-none p-5 pb-3 no-gutters mx-0">
                         <div class="col-12 col-sm-6 flex-column pl-sm-4 mb-3">
                             <h4 class="orange font-700 text-center">Professional Research</h4>
-                            <p class="white">Mr. Pregame disects each game to offer members custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
+                            <p class="white">Mr. Pregame disects each game to offer you custom pregame research and his guaranteed picks of the day. Statistical breakdowns are done showcasing advantages, charting trends, and revealing any edge that would give a team an upperhand.    
                             </p>
                         </div>
                         <div class="col-12 col-sm-6 flex-column">
@@ -88,7 +77,7 @@
                         </div>
                         <div class="col-12 col-sm-6 flex-column d-flex justify-content-center px-5">
                             <h4 class="orange align-self-start font-700">Professional Research</h4>
-                            <p class="white">Mr. Pregame disects each game to offer members free custom pregame research and his paid guaranteed picks of the day. Breakdowns are done showcasing statistical advantages, charting trends, and revealing any edge that would give a team an upperhand.    
+                            <p class="white">Mr. Pregame disects each game to offer you free custom pregame research and his paid guaranteed picks of the day. Breakdowns are done showcasing statistical advantages, charting trends, and revealing any edge that would give a team an upperhand.    
                             </p>
                         </div>
                     </div>     
@@ -101,8 +90,7 @@
                         <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
                             <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resize img-shadow" alt="Responsive image"></div>
                         </div>
-                    </div>
-                {% endif %}    
+                    </div>   
                 </div>    
                 <div class="row pt-5 pb-3 margin-80">
                     <div class="col-6 d-flex justify-content-center align-items-center pr-0">
@@ -119,5 +107,6 @@
                     </div>
                 </div>
             </div>
+        {% endif %}     
     </div>
 {% endblock %}
