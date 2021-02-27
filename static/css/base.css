@@ -180,6 +180,19 @@ img {
     color:#C1E6FF;
 }
 
+/*----------------------------- AllAuth Templates --------------------------------*/
+.signin-button{
+    border-radius:50px;
+    font-size:22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:700;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+}
+
+.signin-button:hover{
+    color:#FF7C1F;
+    background-color:white;
+}
 /*----------------------------- Homepage/index.html -------------------------------*/
 
 /*---------- Sign in/ Register Side Tabs ----------*/
