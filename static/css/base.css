@@ -138,6 +138,7 @@ img {
 
 .nav-login:hover{
     color:white;
+    background-color:#FF7C1F;
     box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
     transform:translateY(-7px)
 }
@@ -187,11 +188,39 @@ img {
     font-family: 'Montserrat', sans-serif;
     font-weight:700;
     box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transition:all 0.3s ease 0s;
 }
 
 .signin-button:hover{
-    color:#FF7C1F;
-    background-color:white;
+    color:white;
+    transform:translateY(-7px);
+}
+
+.allauth-width{
+}
+
+.fa-user-unlock,
+.register,
+.fa-user-lock,
+.fa-key{
+    font-size:15rem;
+    --fa-secondary-opacity: 0.50;
+    --fa-primary-color:rgb(11, 25, 46);
+    --fa-secondary-color:#FF7C1F;
+}
+
+.allauth-btn{
+    border-radius:50px;
+    font-size:22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:700;
+    transition:all 0.3s ease 0s;
+    outline:none;
+}
+
+.allauth-btn:hover{
+    color:white;
+    transform:translateY(-7px);
 }
 /*----------------------------- Homepage/index.html -------------------------------*/
 
@@ -510,6 +539,17 @@ img {
     .better{
         font-size:40px;
     }
+
+    .register-button{
+        margin:0;
+    }
+
+    .fa-user-unlock,
+    .register,
+    .fa-user-lock,
+    .fa-key{
+        font-size:10rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -517,8 +557,7 @@ img {
         font-size:45px;
     }
 
-    .home-callout,
-    .register-button{
+    .home-callout{
         font-size:35px;
     }
 
@@ -536,13 +575,13 @@ img {
     }
 
     .nav-login{
-    box-shadow:none;
-    transition:none;
+        box-shadow:none;
+        transition:none;
     }
 
     .nav-login:hover{
-    box-shadow:none;
-    transform:none;
+        box-shadow:none;
+        transform:none;
     }
 }
 
@@ -579,7 +618,8 @@ img {
     }
 
     .fa-plus-circle,
-    .fa-minus-circle{
+    .fa-minus-circle,
+    .fa-user-lock{
         font-size:30px;
     }
 }
