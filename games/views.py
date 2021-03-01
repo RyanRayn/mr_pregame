@@ -14,7 +14,7 @@ def games(request):
 
     games = requests.request("GET", url, headers=headers).json()
 
-    print(type(games))
+    print(games)
 
     context = {
         'games': games

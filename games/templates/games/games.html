@@ -6,11 +6,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    {% for schedule in games.results %}
-                        {% for game in schedule %}
-                        <p class="white">{{ game }}</p>
-                        <p class="white"></p>
-                        {% endfor %}
+                    {% for game in games.results %}
+                        <p class="white">Home: {{ game.teams.home.team }} {{ game.odds.spread.current.home }}</p>
+                        <p class="white">Away: {{ game.teams.away.team }} {{ game.odds.spread.current.home }}</p>
                     {% endfor %}
                 </div>
             </div>
