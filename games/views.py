@@ -12,12 +12,11 @@ def games(request):
         'x-rapidapi-host': "sportspage-feeds.p.rapidapi.com"
         }
 
-    games = requests.request("GET", url, headers=headers).json()
-
-    print(games)
+    results = requests.request("GET", url, headers=headers).json()
+    games = results['results']
 
     context = {
-        'games': games
+        'games': games,
     }
 
     return render(request, 'games/games.html', context)

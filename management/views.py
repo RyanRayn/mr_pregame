@@ -3,25 +3,28 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from .forms import BasketballGame
 import datetime
-from sportsipy.ncaab.boxscore import Boxscore
-from sportsipy.ncaab.boxscore import Boxscores
-from sportsipy.ncaab.schedule import Schedule
+from sportsipy.nba.boxscore import Boxscore
+from sportsipy.nba.boxscore import Boxscores
+from sportsipy.nba.schedule import Schedule
 from .models import Team, League, Season, Game
 
 
 def management(request):
     """ View to return site management page """
-    team = 'PURDUE'
+    team = 'CHI'
     team_schedule = Schedule(team)
     schedule = list((team_schedule))
+
     for game in schedule:
         date = game.date
         date_time_date = datetime.datetime.strptime(date, '%a, %b %d, %Y')
+        game_date = date_time_date.strftime('%Y-%m-%d')
+        print(game.boxscore.winning_abbr)
 
     context = {
         'team': team,
         'schedule': schedule,
-        'date_time_date': date_time_date
+        'game_date': game_date
     }
 
     return render(request, 'management/management.html',
@@ -42,7 +45,7 @@ def add_basketball(request):
     else:
         form = BasketballGame()
 
-    team_auto = Team.objects.filter(league__name='NCAAB')
+    team_auto = Team.objects.filter(league__name='NBA')
     template = 'management/add_basketball.html'
     context = {
         'form': form,

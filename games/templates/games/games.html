@@ -4,14 +4,47 @@
 {% block content %}
     <div id="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    {% for game in games.results %}
-                        <p class="white">Home: {{ game.teams.home.team }} {{ game.odds.spread.current.home }}</p>
-                        <p class="white">Away: {{ game.teams.away.team }} {{ game.odds.spread.current.home }}</p>
-                    {% endfor %}
+            <div class="row px-2">
+            {% for game in games %}    
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="gamecard p-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 class="game-summary white opacity-90 text-center font-800 mb-0">{{ game.summary }}</h3>
+                                <p class="white opacity-90 mb-2 text-center"><small>{{game.venue.name }} - {{ game.venue.city }}, {{ game.venue.state }}</small></p>
+                            </div>    
+                        </div>    
+                        <hr class="rounded orange-background mx-auto my-0">
+                        <div class="row mt-2">
+                            <div class="col-6 d-flex justify-content-center">
+                                <p class="mt-2 light-blue"><strong class="white opacity-90">{{ game.teams.away.abbreviation }}</strong><br>
+                                    {% for points in game.odds %}
+                                        Spread: {% if points.spread.current.away > 0 %} +{{ points.spread.current.away }} {% else %} {{ points.spread.current.away }} {% endif %}<br>
+                                        Moneyline: {{ points.moneyline.current.awayOdds }}
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center">   
+                                <p class="mt-2 light-blue"><strong class="white opacity-90">{{ game.teams.home.abbreviation }}</strong><br>
+                                    {% for points in game.odds %}
+                                        Spread: {% if points.spread.current.home > 0 %} +{{ points.spread.current.home }} {% else %} {{ points.spread.current.home }} {% endif %}<br>
+                                        Moneyline: {{ points.moneyline.current.homeOdds }}  
+                                </p>
+                            </div>    
+                        </div> 
+                        <p class="light-blue text-center">Total: {{ points.total.current.total }}</p>
+                                    {% endfor %}
+                        <hr class="rounded orange-background mx-auto my-0">            
+                        <div class="row mt-3 mb-1"> 
+                            <div class="col-12 d-flex justify-content-center">                 
+                                <a href="#" class="btn matchup-btn orange-background white opacity-90">Matchup</a>
+                            </div>     
+                        </div>   
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>    
     </div>      
 {% endblock %}
+                            

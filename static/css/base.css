@@ -45,6 +45,10 @@ img {
 .border-radius{
     border-radius:50px;
 }
+
+.opacity-90{
+    opacity:90%;
+}
     
 /*---------- Colors ----------*/
 .dark-blue{
@@ -80,11 +84,11 @@ img {
 }
 
 .white{
-    color:#FFFFFF
+    color:#FFFFFF;
 }
 
 .white-background{
-    background-color:#FFFFFF
+    background-color:#FFFFFF;
 }
 
 /*---------------------------------------- base.html ----------------------------------------*/
@@ -194,9 +198,6 @@ img {
 .signin-button:hover{
     color:white;
     transform:translateY(-7px);
-}
-
-.allauth-width{
 }
 
 .fa-user-unlock,
@@ -409,6 +410,30 @@ img {
 
 .fa-comment{
     font-size:13rem;
+}
+
+/*----------------------------- Games/games.html -------------------------------*/
+
+.gamecard{
+    background-color:rgb(15, 33, 61);
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
+    border-radius:20px;
+}
+
+.matchup-btn{
+    border-radius:50px;
+    font-size:22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:700;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transition:all 0.3s ease 0s;
+    outline:none;
+}
+
+.matchup-btn:hover{
+    color:white;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transform:translateY(-7px)
 }
 /*---------- Media Queries ----------*/
 
