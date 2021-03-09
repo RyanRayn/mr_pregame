@@ -11,24 +11,31 @@
                         <div class="row">
                             <div class="col-12">
                                 <h3 class="game-summary white opacity-90 text-center font-800 mb-0">{{ game.summary }}</h3>
-                                <p class="white opacity-90 mb-2 text-center"><small>{{game.venue.name }} - {{ game.venue.city }}, {{ game.venue.state }}</small></p>
+                                <p class="white opacity-90 mb-0 text-center">
+                                    <i class="fad fa-calendar-alt orange pr-2"></i>{{ game.game_date }} 
+                                    <i class="fad fa-clock orange pl-4 pr-2"></i>{{ game.game_time }}
+                                </p>
+                                <p class="white opacity-90 mb-2 text-center"><small>{{ game.venue.name }} - {{ game.venue.city }}, {{ game.venue.state }}</small></p>
                             </div>    
                         </div>    
                         <hr class="rounded orange-background mx-auto my-0">
                         <div class="row mt-2">
-                            <div class="col-6 d-flex justify-content-center">
+                            <div class="col-4 d-flex justify-content-end">
                                 <p class="mt-2 light-blue"><strong class="white opacity-90">{{ game.teams.away.abbreviation }}</strong><br>
                                     {% for points in game.odds %}
-                                        Spread: {% if points.spread.current.away > 0 %} +{{ points.spread.current.away }} {% else %} {{ points.spread.current.away }} {% endif %}<br>
-                                        Moneyline: {{ points.moneyline.current.awayOdds }}
+                                        <span class="spread">{% if points.spread.current.away > 0 %} +{{ points.spread.current.away }} {% else %} {{ points.spread.current.away }} {% endif %}</span><br>
+                                        ML {% if points.moneyline.current.awayOdds > 0 %} +{{ points.moneyline.current.awayOdds }} {% else %} {{ points.moneyline.current.awayOdds }} {% endif %}
                                     {% endfor %}
                                 </p>
                             </div>
-                            <div class="col-6 d-flex justify-content-center">   
+                            <div class="col-4 d-flex justify-content-center align-items-center">
+                                <h2 class="orange"><i class="fad fa-at"></i></h2>
+                            </div>
+                            <div class="col-4 d-flex justify-content-start">   
                                 <p class="mt-2 light-blue"><strong class="white opacity-90">{{ game.teams.home.abbreviation }}</strong><br>
                                     {% for points in game.odds %}
-                                        Spread: {% if points.spread.current.home > 0 %} +{{ points.spread.current.home }} {% else %} {{ points.spread.current.home }} {% endif %}<br>
-                                        Moneyline: {{ points.moneyline.current.homeOdds }}  
+                                        <span class="spread">{% if points.spread.current.home > 0 %} +{{ points.spread.current.home }} {% else %} {{ points.spread.current.home }} {% endif %}</span><br>
+                                        ML {% if points.moneyline.current.homeOdds > 0 %} +{{ points.moneyline.current.homeOdds }} {% else %} {{ points.moneyline.current.homeOdds }} {% endif %}  
                                 </p>
                             </div>    
                         </div> 

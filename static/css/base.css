@@ -435,6 +435,11 @@ img {
     box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
     transform:translateY(-7px)
 }
+
+.spread{
+    font-size:30px;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {
