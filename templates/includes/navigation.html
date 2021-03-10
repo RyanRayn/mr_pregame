@@ -4,7 +4,7 @@
             <a class="navbar-brand d-inline-block align-top rounded-circle ml-1 mr-0" href="{% url 'home' %}">
             <img class="nav-img" src="/media/money_bag2.png" alt="">
             </a>
-            <a class="mrpregame text-nowrap mt-2" href="{% url 'home' %}">MR. PREGAME</a>
+            <a class="mrpregame text-nowrap opacity-90 mt-2" href="{% url 'home' %}">MR. PREGAME</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-plus-circle light-blue"></i>
             </button>
@@ -19,14 +19,14 @@
                 {% endif %}            
                 </ul>
                 <div class="nav-item d-none d-lg-block mr-3 ml-auto">    
-                    <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_logout' %}">Log Out</a>
+                    <a class="logout light-blue text-nowrap opacity-90" href="{% url 'account_logout' %}">Sign Out</a>
                 </div>
             </div>
         {% else %}      
             <a class="navbar-brand d-inline-block align-top rounded-circle ml-2 mr-0" href="{% url 'home' %}">
             <img class="nav-img" src="/media/money_bag2.png" alt="">
             </a>
-            <a class="d-none d-md-block mrpregame text-nowrap" href="{% url 'home' %}">MR. PREGAME</a>
+            <a class="d-none d-md-block mrpregame opacity-90 text-nowrap" href="{% url 'home' %}">MR. PREGAME</a>
             <div class="nav-item mr-4 ml-auto">    
                 <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_login' %}">Log in</a>
             </div>
