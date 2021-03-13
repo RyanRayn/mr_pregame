@@ -10,13 +10,13 @@
             </button>
             <div class="collapse navbar-collapse mt-1 ml-2" id="navbarNav">
                 <ul class="navbar-nav d-flex flex-row justify-content-around">
-                    <li><a class="nav-item nav-link active orange" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a class="nav-item nav-link orange" href="#">Profile</a></li>
-                    <li><a class="nav-item nav-link orange" href="{% url 'games' %}">Games</a></li>
-                    <li><a class="d-lg-none nav-item nav-link orange" href="{% url 'account_logout' %}">Log out</a></li>
+                    <li><a class="nav-item nav-link active orange font-700" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a class="nav-item nav-link orange font-700" href="#">Profile</a></li>
+                    <li><a id="games" class="nav-item nav-link orange font-700">Games</a></li> 
+                    <li><a class="d-lg-none nav-item nav-link orange font-700" href="{% url 'account_logout' %}">Log out</a></li>
                 {% if request.user.is_superuser %}
-                    <li><a class="nav-item nav-link orange" href="{% url 'management' %}">Site Management</a></li>
-                {% endif %}            
+                    <li><a class="nav-item nav-link orange font-700" href="{% url 'management' %}">Site Management</a></li>
+                {% endif %}              
                 </ul>
                 <div class="nav-item d-none d-lg-block mr-3 ml-auto">    
                     <a class="logout light-blue text-nowrap opacity-90" href="{% url 'account_logout' %}">Sign Out</a>
@@ -31,5 +31,24 @@
                 <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_login' %}">Log in</a>
             </div>
         {% endif %}        
-    </nav>               
+    </nav>
+    <div id="league-menu" class="row no-show">
+        <div class="col-12">
+            <ul class="league-list d-flex justify-content-around pl-0">
+                <li class="league"><a class="white" href="{% url 'games' %}">MLB</a></li>
+                <li class="league"><a class="white" href="{% url 'games' %}">NBA</a></li>
+                <li class="league"><a class="white" href="{% url 'games' %}">NCAA Basketball</a></li>
+                <li class="league"><a class="white" href="{% url 'games' %}">NFL</a></li>
+            </ul>
+        </div>
+    </div>
+
+{% block postloadjs %}    
+    <script>
+        /* Shows and hides league menu in navbar */
+        $("#games").click(function(){
+            $("#league-menu").toggleClass('no-show');
+        });
+    </script>    
+{% endblock %}    
 
