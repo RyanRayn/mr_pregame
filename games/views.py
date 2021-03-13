@@ -21,6 +21,9 @@ def games(request):
         datetime_date = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%fZ')
         game['game_date'] = datetime_date.strftime('%B %d, %Y')
         game['game_time'] = datetime_date.strftime('%-I:%M %p')
+        if 'scoreboard' in game and 'score' in game['scoreboard']:
+            score = game['scoreboard']['score']
+            game['total'] = score['home'] + score['away']
 
     context = {
         'games': games,

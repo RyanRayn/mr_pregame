@@ -13,7 +13,7 @@
                     <li><a class="nav-item nav-link active orange font-700" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
                     <li><a class="nav-item nav-link orange font-700" href="#">Profile</a></li>
                     <li><a id="games" class="nav-item nav-link orange font-700">Games</a></li> 
-                    <li><a class="d-lg-none nav-item nav-link orange font-700" href="{% url 'account_logout' %}">Log out</a></li>
+                    <li><a class="d-lg-none nav-item nav-link orange font-700" href="{% url 'account_logout' %}">Sign out</a></li>
                 {% if request.user.is_superuser %}
                     <li><a class="nav-item nav-link orange font-700" href="{% url 'management' %}">Site Management</a></li>
                 {% endif %}              
@@ -28,7 +28,7 @@
             </a>
             <a class="d-none d-md-block mrpregame opacity-90 text-nowrap" href="{% url 'home' %}">MR. PREGAME</a>
             <div class="nav-item mr-4 ml-auto">    
-                <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_login' %}">Log in</a>
+                <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_login' %}">Sign in</a>
             </div>
         {% endif %}        
     </nav>
