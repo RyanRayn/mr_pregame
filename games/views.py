@@ -6,11 +6,11 @@ import datetime
 
 def games(request):
     """ View to return games page """
-    if request.method == "POST":
-        tomorrows_games = request.POST.get('date')
-       
-    params = {"league": "ncaab", "date": ""}
+    if request.method == "GET":
+        day = request.GET.get('gameDate')
 
+    params = {"league": "nba", "date": day}
+    print(day)
     url = "https://sportspage-feeds.p.rapidapi.com/games"
 
     headers = {
@@ -41,6 +41,7 @@ def games(request):
         'games': games,
         'today': today,
         'tomorrow': tomorrow,
+        'day': day,
     }
 
     return render(request, 'games/games.html', context)

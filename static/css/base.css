@@ -480,12 +480,12 @@ img {
     font-size:30px;
 }
 
-.tomorrow-btn{
+.day-form-btn{
     background:none;
     border:none;
 }
 
-.tomorrow-btn:hover{
+.day-form-btn:hover{
     color:white;
 }
 

@@ -41,14 +41,4 @@
                 <li class="league"><a class="white" href="{% url 'games' %}">NFL</a></li>
             </ul>
         </div>
-    </div>
-
-{% block postloadjs %}    
-    <script>
-        /* Shows and hides league menu in navbar */
-        $("#games").click(function(){
-            $("#league-menu").toggleClass('no-show');
-        });
-    </script>    
-{% endblock %}    
-
+    </div>   

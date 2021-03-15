@@ -42,13 +42,21 @@
             {% include 'includes/footer.html' %}
         </footer>    
     </div>
-        {% block postloadjs %}
+    {% block postloadjs %}
     <script>
         /* Toggle plus/minus icon in navbar */
         $('.navbar-toggler').click(function() { 
             $(this).find('i').toggleClass('fa-plus-circle fa-minus-circle'); 
         });
-    </script>
-        {% endblock %}
+    </script>   
+    <script>
+        /* Shows and hides league menu in navbar */
+        $("#games").click(function(){
+            $("#league-menu").toggleClass('no-show');
+        });
+    </script>  
+    {% endblock %}
+
+    
   </body>
 </html>
