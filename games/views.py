@@ -7,10 +7,10 @@ import datetime
 def games(request):
     """ View to return games page """
     if request.method == "GET":
-        day = request.GET.get('gameDate')
+        gameday = request.GET.get('gameDate')
 
-    params = {"league": "nba", "date": day}
-    print(day)
+    params = {"league": "nba", "date": gameday}
+    
     url = "https://sportspage-feeds.p.rapidapi.com/games"
 
     headers = {
@@ -23,8 +23,9 @@ def games(request):
                                params=params).json()
 
     games = results['results']
-    today = datetime.date.today()
-    tomorrow = today + datetime.timedelta(days=1)
+    todays_date = datetime.date.today()
+    today = todays_date.strftime('%Y-%m-%d')
+    tomorrow = todays_date + datetime.timedelta(days=1)
 
     for game in games:
         gamedate = game['schedule']['date']
@@ -33,15 +34,17 @@ def games(request):
                                                    '%Y-%m-%dT%H:%M:%S.%fZ')
         game['game_date'] = datetime_date.strftime('%B %d, %Y')
         game['game_time'] = datetime_date.strftime('%-I:%M %p')
+        
         if 'scoreboard' in game and 'score' in game['scoreboard']:
             score = game['scoreboard']['score']
             game['total'] = score['home'] + score['away']
+            
 
     context = {
         'games': games,
         'today': today,
         'tomorrow': tomorrow,
-        'day': day,
+        'gameday': gameday,
     }
 
     return render(request, 'games/games.html', context)
