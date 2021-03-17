@@ -15,11 +15,11 @@
                     <li><a id="games" class="nav-item nav-link orange font-700">Games</a></li> 
                     <li><a class="d-lg-none nav-item nav-link orange font-700" href="{% url 'account_logout' %}">Sign out</a></li>
                 {% if request.user.is_superuser %}
-                    <li><a class="nav-item nav-link orange font-700" href="{% url 'management' %}">Site Management</a></li>
+                    <li><a class="nav-item nav-link orange font-700" href="{% url 'management' %}">Site Admin</a></li>
                 {% endif %}              
                 </ul>
                 <div class="nav-item d-none d-lg-block mr-3 ml-auto">    
-                    <a class="logout light-blue text-nowrap opacity-90" href="{% url 'account_logout' %}">Sign Out</a>
+                    <a class="logout light-blue text-nowrap opacity-90 p-2" href="{% url 'account_logout' %}">Sign Out</a>
                 </div>
             </div>
         {% else %}      
@@ -35,10 +35,42 @@
     <div id="league-menu" class="row no-show">
         <div class="col-12">
             <ul class="league-list d-flex justify-content-around pl-0">
-                <li class="league"><a class="white" href="{% url 'games' %}">MLB</a></li>
-                <li class="league"><a class="white" href="{% url 'games' %}">NBA</a></li>
-                <li class="league"><a class="white" href="{% url 'games' %}">NCAA Basketball</a></li>
-                <li class="league"><a class="white" href="{% url 'games' %}">NFL</a></li>
+                <li class="league">
+                    <form action="{% url 'games' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="hidden" id="MLB" name="leagueName" value="MLB">
+                        <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                            MLB
+                        </button>
+                    </form>
+                </li>
+                <li class="league">
+                    <form action="{% url 'games' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="hidden" id="NBA" name="leagueName" value="NBA">
+                        <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                            NBA
+                        </button>
+                    </form>
+                </li>
+                <li class="league">
+                    <form action="{% url 'games' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="hidden" id="NCAAB" name="leagueName" value="NCAAB">
+                        <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                            NCAA Basketball
+                        </button>
+                    </form>
+                </li>
+                <li class="league">
+                    <form action="{% url 'games' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="hidden" id="NFL" name="leagueName" value="NFL">
+                        <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                            NFL
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>   
