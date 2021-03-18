@@ -28,7 +28,7 @@ def games(request):
                                params=params).json()
 
     games = results['results']
-    print(games)
+
     for game in games:
         gamedate = game['schedule']['date']
         datetime_date = datetime.datetime.strptime(

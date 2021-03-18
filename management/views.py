@@ -11,7 +11,7 @@ from .models import Team, League, Season, Game
 
 def management(request):
     """ View to return site management page """
-    team = 'CHI'
+    team = ''
     team_schedule = Schedule(team)
     schedule = list((team_schedule))
 
