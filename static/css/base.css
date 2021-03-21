@@ -494,6 +494,10 @@ img {
     color:white;
 }
 
+.desk-bored{
+    width:70%;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

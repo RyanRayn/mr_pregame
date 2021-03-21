@@ -1,37 +1,35 @@
 {% if gameday == today or gameday is none %}
     <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <h1 class="orange">No Games Today</h1>
-        </div>
-    </div>
-    <div class="row mb-4">
-        <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 d-flex flex-column justify-content-center align-items-center">
+            <h1 class="orange header">No Games Today</h1>
             <form method="GET">
                 {% csrf_token %}
                 <input type="hidden" id="tomorrow" name="gameDate" value="{{ tomorrow|date:'Y-m-d' }}">
                 <input type="hidden" id="league" name="leagueName" value="{{ league }}">
-                <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                <button class="btn day-form-btn light-blue sub-header opacity-90" type="submit">
                     View Tomorrow's Games<i class="fas fa-calendar-day ml-1"></i>
                 </button>
             </form>
         </div>
-    </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-center">
+                <img src="/media/desk_bored.png" class="img-fluid callout-img-shadow desk-bored" alt="Responsive image">
+        </div>
+    </div>    
 {% else %} 
     <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <h1 class="orange">No Games Tomorrow</h1>
-        </div>
-    </div>   
-    <div class="row mb-4">
-        <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 d-flex flex-column justify-content-center align-items-center">
+            <h1 class="orange header">No Games Tomorrow</h1>
             <form method="GET">
                 {% csrf_token %}
                 <input type="hidden" id="today" name="gameDate" value="{{ today }}">
                 <input type="hidden" id="league2" name="leagueName" value="{{ league }}">
-                <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                <button class="btn day-form-btn light-blue sub-header opacity-90" type="submit">
                     <i class="fas fa-calendar-day mr-1"></i>View Today's Games
                 </button>
             </form>
+        </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-center">
+            <img src="/media/desk_bored.png" class="img-fluid callout-img-shadow desk-bored" alt="Responsive image">
         </div>
     </div>    
 {% endif %}    

@@ -5,39 +5,14 @@
 {% block content %}
     <div id="content">
         <div class="container-fluid">
-            <h1 class="white text-center font-700">Site Management</h1>
-            <div class="menu orange-background border-radius w-25 h-100">
-                <a class="white" href="{% url 'add_basketball' %}">Add Basketball</a>
-            </div>
-            {% for game in schedule %}
-                <div class="row">
-                    <div class="col-12">
-                        <h4 class="white">{{ game }}</h4>
-                    </div>    
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <h1 class="orange">Site Admin</h1>
                 </div>
-            {% endfor %}      
+            </div> 
+            <div class="row">
+                <div class="col-12"><a class="white" href="{% url 'add_basketball' %}">Add Basketball</a></div>
+            </div>             
        </div>
     </div>
 {% endblock %}
-
-game_data = Game(
-            name = 'CHI',
-            season = 'NBA202021',
-            date = game_date,
-            record = 
-            opponent = 
-            points_for = 
-            field_goals = 
-            field_goal_attempts = 
-            three_pointers = 
-            three_point_attempts = 
-            free_throws = 
-            free_throw_attempts = 
-            offensive_rebounds = 
-            defensive_rebounds = 
-            assists = 
-            steals = 
-            blocks = 
-            turnovers = 
-            personal_fouls = 
-        )

@@ -4,48 +4,107 @@
 
 {% block content %}
     <div id="content">
-       <div class="container-fluid">
-           <div class="row">
-               <div class="col-12">
-                    <h1 class="white text-center">Add Basketball Games</h1>
-               </div>
-           </div>
-           <div class="row h-100">
-               <div class="col-12 col-md-4">
-                    <form method="POST" action="{% url 'management' %}">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="orange text-center">Add Basketball Games</h1>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 d-flex justify-content-center">
+                    <form method="GET" action="{% url 'add_basketball' %}">
                         {% csrf_token %}
-                            <input list="abbreviation" name="abbreviation">
-                            <datalist id="abbreviation">
-                            {% for team in team_auto %}     
-                                <option>{{ team.abbreviation }}</option>
-                            {% endfor %}    
-                            </datalist>
-                            <button type="submit" class="btn nav-login light-blue-background white">Submit</button>
+                        <div class="form-row mb-2">
+                            <div class="float-left mr-3">
+                                <label class="d-block white" for="abbreviation">Team*</label>
+                                <input class="d-block rounded p-2" list="abbreviation" name="abbreviation" placeholder="Choose Team">
+                                    <datalist id="abbreviation">
+                                    {% for team in team_auto %}     
+                                        <option>{{ team.abbreviation }}</option>
+                                    {% endfor %}    
+                                    </datalist>
+                            </div>
+                            <div class="float-left mr-3">        
+                                <label class="white d-block" for="game_date">Date*</label>    
+                                <input class="d-block rounded p-2 text-secondary" type="date" id="game_date" name="game_date">
+                            </div>  
+                            <button type="submit" class="btn nav-login light-blue-background white p-1 mt-4">Submit</button> 
+                        </div>      
                     </form>
-               </div>
-               <div class="col-12 col-md-4">
-                   <form class="white" method="POST" action="{% url 'add_basketball' %}">
-                        {% csrf_token %}
-                            <input list="team-names" placeholder="NCAA Basketball Teams">
-                            <input list="team-abbr" placeholder="NCAA Basketball Abbreviation">
-                            <datalist id="team-names">
-                            {% for team in team_auto %}    
-                                <option>{{ team.name }}</option>
-                            {% endfor %}    
-                            </datalist>
-                            <datalist id="team-abbr">
-                            {% for team in team_auto %}     
-                                <option>{{ team.abbreviation }}</option>
-                            {% endfor %}    
-                            </datalist>
-                        {{ form | crispy }}
-                        <div>
-                            <a class="btn nav-login white orange-background" href="{% url 'management' %}">Cancel</a>
-                            <button type="submit" class="btn nav-login light-blue-background white">Save</button>
-                        </div>    
-                   </form>
-               </div>
-           </div>
-       </div>
+                </div>
+            </div>   
+            <form class="white" method="POST" action="{% url 'add_basketball' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.season|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.date|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.record|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">   
+                    <div class="col-md-2">
+                        {{ form.opponent|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.points_for|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.field_goals|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.field_goal_attempts|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.three_pointers|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.three_point_attempts|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        {{ form.free_throws|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.free_throw_attempts|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.offensive_rebounds|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.defensive_rebounds|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.assists|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.steals|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        {{ form.blocks|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.turnovers|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.personal_fouls|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <a class="btn nav-login white orange-background mr-2" href="{% url 'management' %}">Cancel</a>
+                    <button type="submit" class="btn nav-login light-blue-background white">Save</button>
+                </div>    
+            </form>
+        </div>
     </div>
-{% endblock %}
+{% endblock %}    

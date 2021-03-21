@@ -11,21 +11,19 @@ from .models import Team, League, Season, Game
 
 def management(request):
     """ View to return site management page """
-    team = ''
-    team_schedule = Schedule(team)
-    schedule = list((team_schedule))
-
+    schedule = Schedule('CHI')
     for game in schedule:
+        boxscore = game.boxscore
         date = game.date
         date_time_date = datetime.datetime.strptime(date, '%a, %b %d, %Y')
         game_date = date_time_date.strftime('%Y-%m-%d')
-        print(game.boxscore.winning_abbr)
+        away_total_rebounds = game.boxscore.away_total_rebounds
+        print(away_total_rebounds)
 
-    context = {
-        'team': team,
-        'schedule': schedule,
-        'game_date': game_date
-    }
+        context = {
+            'game_date': game_date,
+            'boxscore': boxscore,
+        }
 
     return render(request, 'management/management.html',
                   context)
@@ -33,6 +31,10 @@ def management(request):
 
 def add_basketball(request):
     """ Add a basketball game to database """
+    if request.method == "GET":
+        team = request.GET.get('abbreviation')
+        game_date = request.GET.get('game_date')
+
     if request.method == "POST":
         form = BasketballGame(request.POST, request.FILES)
         if form.is_valid():
@@ -50,6 +52,8 @@ def add_basketball(request):
     context = {
         'form': form,
         'team_auto': team_auto,
+        'team': team,
+        'game_date': game_date,
     }
 
     return render(request, template, context)
