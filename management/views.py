@@ -2,28 +2,18 @@ import requests
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from .forms import BasketballGame
-import datetime
-from sportsipy.nba.boxscore import Boxscore
+from datetime import datetime
 from sportsipy.nba.boxscore import Boxscores
+from sportsipy.nba.teams import Teams
 from sportsipy.nba.schedule import Schedule
 from .models import Team, League, Season, Game
 
 
 def management(request):
     """ View to return site management page """
-    schedule = Schedule('CHI')
-    for game in schedule:
-        boxscore = game.boxscore
-        date = game.date
-        date_time_date = datetime.datetime.strptime(date, '%a, %b %d, %Y')
-        game_date = date_time_date.strftime('%Y-%m-%d')
-        away_total_rebounds = game.boxscore.away_total_rebounds
-        print(away_total_rebounds)
 
-        context = {
-            'game_date': game_date,
-            'boxscore': boxscore,
-        }
+    context = {
+    }
 
     return render(request, 'management/management.html',
                   context)
@@ -32,11 +22,47 @@ def management(request):
 def add_basketball(request):
     """ Add a basketball game to database """
     if request.method == "GET":
-        team = request.GET.get('abbreviation')
-        game_date = request.GET.get('game_date')
+        abbreviation = request.GET.get('abbreviation')
+
+    teams = Teams()
+    for team in teams:
+        if team.abbreviation == abbreviation:
+            name = team.name
+            points_for = team.opp_points
+            field_goals = team.field_goals
+            field_goal_attempts = team.field_goal_attempts
+            three_pointers = team.three_point_field_goals
+            three_point_attempts = team.three_point_field_goal_attempts
+            free_throws = team.free_throws
+            free_throw_attempts = team.free_throw_attempts
+            offensive_rebounds = team.offensive_rebounds
+            defensive_rebounds = team.defensive_rebounds
+            assists = team.assists
+            steals = team.steals
+            blocks = team.blocks
+            turnovers = team.turnovers
+            personal_fouls = team.personal_fouls
+
+    initial = {
+                'name': name,
+                'points_for': points_for,
+                'field_goals': field_goals,
+                'field_goal_attempts': field_goal_attempts,
+                'three_pointers': three_pointers,
+                'three_point_attempts': three_point_attempts,
+                'free_throws': free_throws,
+                'free_throw_attempts': free_throw_attempts,
+                'offensive_rebounds': offensive_rebounds,
+                'defensive_rebounds': defensive_rebounds,
+                'assists': assists,
+                'steals': steals,
+                'blocks': blocks,
+                'turnovers': turnovers,
+                'personal_fouls': personal_fouls,
+            }
 
     if request.method == "POST":
-        form = BasketballGame(request.POST, request.FILES)
+        form = BasketballGame(request.POST, request.FILES, initial=initial)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully added game!')
@@ -52,8 +78,6 @@ def add_basketball(request):
     context = {
         'form': form,
         'team_auto': team_auto,
-        'team': team,
-        'game_date': game_date,
     }
 
     return render(request, template, context)
