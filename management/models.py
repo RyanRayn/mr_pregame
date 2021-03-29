@@ -16,7 +16,7 @@ class League(models.Model):
         return self.name
 
 
-class Team(models.Model):
+class TeamName(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     abbreviation = models.CharField(max_length=10, null=False, blank=False)
     league = models.ForeignKey(
@@ -28,28 +28,33 @@ class Team(models.Model):
 
 class Season(models.Model):
     name = models.CharField(max_length=100, default='')
-    teams = models.ManyToManyField('Team', max_length=20)
+    teams = models.ManyToManyField('TeamName', max_length=20)
 
     def __str__(self):
         return self.name
 
 
-class Game(models.Model):
+class TeamStats(models.Model):
     name = models.ForeignKey(
-        'Team', null=False, blank=False, on_delete=models.CASCADE)
+        'TeamName', null=False, blank=False, on_delete=models.CASCADE)
     season = models.ForeignKey(
         'Season', null=False, blank=False, on_delete=models.CASCADE)
-    date = models.DateField(null=True)
     record = models.CharField(max_length=10)
-    opponent = models.CharField(max_length=100)
+    games_played = models.IntegerField()
     points_for = models.IntegerField()
+    points_against = models.IntegerField()
     field_goals = models.IntegerField()
     field_goal_attempts = models.IntegerField()
     three_pointers = models.IntegerField()
     three_point_attempts = models.IntegerField()
     free_throws = models.IntegerField()
     free_throw_attempts = models.IntegerField()
+    opp_free_throw_attempts = models.IntegerField()
     offensive_rebounds = models.IntegerField()
+    defensive_rebounds = models.IntegerField()
+    opp_offensive_rebounds = models.IntegerField()
+    opp_defensive_rebounds = models.IntegerField()
+    opp_field_goal_percentage = models.FloatField()
     defensive_rebounds = models.IntegerField()
     assists = models.IntegerField()
     steals = models.IntegerField()
