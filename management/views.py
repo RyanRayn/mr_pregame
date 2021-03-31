@@ -4,9 +4,10 @@ from django.contrib import messages
 from .forms import BasketballGame
 from datetime import datetime
 from sportsipy.nba.boxscore import Boxscores
-from sportsipy.nba.teams import Teams
+from sportsipy.nba.teams import Teams as NBATeams
+from sportsipy.mlb.teams import Teams as MLBTeams
 from sportsipy.nba.schedule import Schedule
-from .models import TeamName, League, Season, TeamStats
+from .models import BasketballTeamStats, BaseballTeamStats
 
 
 def management(request):
@@ -34,9 +35,9 @@ def add_basketball(request):
 
 def get_nba_stats(request):
     season_stats = {}
-    teams = Teams()
+    teams = NBATeams()
     for team in teams:
-        team_stats = TeamStats(
+        team_stats = BasketballTeamStats(
             name=team.name,
             season='',
             points_for=team.points,
@@ -61,4 +62,50 @@ def get_nba_stats(request):
             opp_field_goal_percentage=team.opp_field_goal_percentage,
         )
         team_stats.save()
-        season_stats = TeamStats.objects.all()
+        season_stats = BasketballTeamStats.objects.all()
+
+
+def add_baseball(request):
+    """ Add a baskeball game to database """
+
+    team_auto = TeamName.objects.filter(league__name='MLB')
+    template = 'management/add_baseball.html'
+
+    context = {
+        'team_auto': team_auto,
+    }
+
+    return render(request, template, context)
+
+
+def get_mlb_stats(request):
+    season_stats = {}
+    teams = MLBTeams()
+    for team in teams:
+        team_stats = BaseballTeamStats(
+            name=team.name,
+            season='MLB2020',
+            wins=team.wins,
+            losses=team.losses,
+            games_played=team.games,
+            home_record=team.home_record,
+            away_record=team.away_record,
+            runs_allowed_per_game=team.runs_allowed_per_game,
+            batting_average=team.batting_average,
+            earned_runs_against=team.earned_runs_against,
+            hits=team.hits,
+            hits_allowed=team.hits_allowed,
+            home_runs=team.home_runs,
+            home_runs_against=team.home_runs_against,
+            record_vs_lefties=team.record_vs_left_handed_pitchers,
+            record_vs_righties=team.record_vs_right_handed_pitchers,
+            record_vs_500_teams=team.record_vs_teams_over_500,
+            record_vs_teams_under_500=team.record_vs_teams_under_500,
+            on_base_percentage=team.on_base_percentage,
+            run_difference=team.run_difference,
+            streak=team.streak,
+            total_runs=team.total_runs,
+            last_ten=team.last_ten_games_record,
+        )
+        team_stats.save()
+        season_stats = BaseballTeamStats.objects.all()

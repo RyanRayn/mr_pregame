@@ -1,9 +1,9 @@
 from django import forms
-from .models import TeamStats
+from .models import BasketballTeamStats
 
 
 class BasketballGame(forms.ModelForm):
 
     class Meta:
-        model = TeamStats
+        model = BasketballTeamStats
         fields = '__all__'

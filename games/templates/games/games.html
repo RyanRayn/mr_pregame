@@ -135,6 +135,8 @@
                                             <span class="spread">{% if points.spread.current.away > 0 %} +{{ points.spread.current.away }} 
                                             {% else %} {{ points.spread.current.away }} {% endif %}</span><br>
                                         <!-- If Away Team Favored Show '+' with Moneyline else '-'  -->
+                                            Odds {% if points.spread.current.awayOdds > 0 %} +{{ points.spread.current.awayOdds }} 
+                                            {% else %} {{ points.spread.current.awayOdds }} {% endif %}<br>    
                                             ML {% if points.moneyline.current.awayOdds > 0 %} +{{ points.moneyline.current.awayOdds }} 
                                             {% else %} {{ points.moneyline.current.awayOdds }} {% endif %}
                                         {% endfor %}
@@ -149,7 +151,9 @@
                                         <!-- If Home Team Point Spread Greater than 0 show '+' else '-' -->
                                             <span class="spread">{% if points.spread.current.home > 0 %} +{{ points.spread.current.home }} 
                                             {% else %} {{ points.spread.current.home }} {% endif %}</span><br>
-                                        <!-- If Home Team Favored Show '+' with Moneyline else '-'  -->    
+                                        <!-- If Home Team Favored Show '+' with Moneyline else '-'  --> 
+                                            Odds {% if points.spread.current.homeOdds > 0 %} +{{ points.spread.current.homeOdds }} 
+                                            {% else %} {{ points.spread.current.homeOdds }} {% endif %}<br>
                                             ML {% if points.moneyline.current.homeOdds > 0 %} +{{ points.moneyline.current.homeOdds }} 
                                             {% else %} {{ points.moneyline.current.homeOdds }} {% endif %}  
                                         </p>

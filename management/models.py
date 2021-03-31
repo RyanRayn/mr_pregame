@@ -34,7 +34,7 @@ class Season(models.Model):
         return self.name
 
 
-class TeamStats(models.Model):
+class BasketballTeamStats(models.Model):
     name = models.ForeignKey(
         'TeamName', null=False, blank=False, on_delete=models.CASCADE)
     season = models.ForeignKey(
@@ -61,6 +61,37 @@ class TeamStats(models.Model):
     blocks = models.IntegerField()
     turnovers = models.IntegerField()
     personal_fouls = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+class BaseballTeamStats(models.Model):
+    name = models.ForeignKey(
+        'TeamName', null=False, blank=False, on_delete=models.CASCADE)
+    season = models.ForeignKey(
+        'Season', null=False, blank=False, on_delete=models.CASCADE)
+    wins = models.IntegerField()
+    losses = models.IntegerField()
+    games_played = models.IntegerField()
+    home_record = models.CharField(max_length=20)
+    away_record = models.CharField(max_length=20)
+    runs_allowed_per_game = models.FloatField()
+    batting_average = models.FloatField()
+    earned_runs_against = models.FloatField()
+    hits = models.IntegerField()
+    hits_allowed = models.IntegerField()
+    home_runs = models.IntegerField()
+    home_runs_against = models.IntegerField()
+    record_vs_lefties = models.CharField(max_length=20)
+    record_vs_righties = models.CharField(max_length=20)
+    record_vs_500_teams = models.CharField(max_length=20)
+    record_vs_teams_under_500 = models.CharField(max_length=20)
+    on_base_percentage = models.FloatField()
+    run_difference = models.FloatField()
+    streak = models.CharField(max_length=20)
+    total_runs = models.IntegerField()
+    last_ten = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
