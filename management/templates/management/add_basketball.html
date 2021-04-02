@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="orange text-center">Add Basketball Games</h1>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 d-flex justify-content-center">
+                    <form method="GET" action="{% url 'add_basketball' %}">
+                        {% csrf_token %}
+                        <div class="form-row mb-2">
+                            <div class="float-left mr-3">
+                                <label class="d-block white" for="abbreviation">Team*</label>
+                                <input class="d-block rounded p-2" list="abbreviation" name="abbreviation" placeholder="Choose Team">
+                                    <datalist id="abbreviation">
+                                    {% for team in team_auto %}     
+                                        <option>{{ team.abbreviation }}</option>
+                                    {% endfor %}    
+                                    </datalist>
+                            </div> 
+                            <button type="submit" class="btn nav-login light-blue-background white p-1 mt-4">Submit</button> 
+                        </div>      
+                    </form>
+                </div>
+            </div>   
+        </div>
+    </div>
+{% endblock %}    
