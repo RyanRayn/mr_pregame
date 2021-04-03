@@ -67,48 +67,40 @@ class BasketballTeamStats(models.Model):
         return self.name
 
 
-class BaseballTeamStats(models.Model):
-    teams = (
-        ('Los Angeles Dodgers', ('Los Angeles Dodgers')),
-        ('Tampa Bay Rays', ('Tampa Bay Rays')),
-        ('San Diego Padres', ('San Diego Padres')),
-        ('Minnesota Twins', ('Minnesota Twins')),
-        ('Oakland Athletics', ('Oakland Athletics')),
-        ('Atlanta Braves', ('Atlanta Braves')),
-        ('Chicago White Sox', ('Chicago White Sox')),
-        ('Cleveland Indians', ('Cleveland Indians')),
-        ('Chicago Cubs', ('Chicago Cubs')),
-        ('New York Yankees', ('New York Yankees')),
-        ('Toronto Blue Jays', ('Toronto Blue Jays')),
-        ('St. Louis Cardinals', ('St. Louis Cardinals')),
-        ('Miami Marlins', ('Miami Marlins')),
-        ('Cincinnati Reds', ('Cincinnati Reds')),
-        ('Houston Astros', ('Houston Astros')),
-        ('San Francisco Giants', ('San Francisco Giants')),
-        ('Milwaukee Brewers', ('Milwaukee Brewers')),
-        ('Philadelphia Phillies', ('Philadelphia Phillies')),
-        ('Seattle Mariners', ('Seattle Mariners')),
-        ('New York Mets', ('New York Mets')),
-        ('Colorado Rockies', ('Colorado Rockies')),
-        ('Kansas City Royals', ('Kansas City Royals')),
-        ('Los Angeles Angels', ('Los Angeles Angels')),
-        ('Washington Nationals', ('Washington Nationals')),
-        ('Baltimore Orioles', ('Baltimore Orioles')),
-        ('Arizona Diamondbacks', ('Arizona Diamondbacks')),
-        ('Boston Red Sox', ('Boston Red Sox')),
-        ('Detroit Tigers', ('Detroit Tigers')),
-        ('Texas Rangers', ('Texas Rangers')),
-        ('Pittsburgh Pirates', ('Pittsburgh Pirates')),
-    )
-
-    name = models.ForeignKey('TeamName', choices=teams,
+class BaseballGame(models.Model):
+    name = models.ForeignKey('TeamName',
                              null=False, blank=False, on_delete=models.CASCADE)
-
-    seasons = (
-        ('MLB2021', ('MLB2021')),
+    nicknames = (
+        ('Rays', ('Rays')),
+        ('Orioles', ('Orioles')),
+        ('BlueJays', ('BlueJays')),
+        ('RedSox', ('RedSox')),
+        ('Yankees', ('Yankees')),
+        ('Tigers', ('Tigers')),
+        ('Royals', ('Royals')),
+        ('WhiteSox', ('WhiteSox')),
+        ('Indians', ('Indians')),
+        ('Twins', ('Twins')),
+        ('Astros', ('Astros')),
+        ('Angels', ('Angels')),
+        ('Mariners', ('Mariners')),
+        ('Rangers', ('Rangers')),
+        ('Athletics', ('Athletics')),
+        ('Phillies', ('Phillies')),
+        ('Mets', ('Mets')),
+        ('Nationals', ('Nationals')),
+        ('Braves', ('Braves')),
+        ('Marlins', ('Marlins')),
+        ('Brewers', ('Brewers')),
+        ('Pirates', ('Pirates')),
+        ('Cardinals', ('Cardinals')),
+        ('Cubs', ('Cubs')),
+        ('Reds', ('Reds'))
     )
 
-    season = models.ForeignKey('Season', choices=seasons, default='MLB2021',
+    nickname = models.CharField(max_length=20,
+                                choices=nicknames, default='MLB')
+    season = models.ForeignKey('Season',
                                null=False, blank=False,
                                on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
@@ -119,75 +111,43 @@ class BaseballTeamStats(models.Model):
     runs = models.IntegerField(null=True, blank=True)
     runs_allowed = models.IntegerField(null=True, blank=True)
     runs_first_five = models.IntegerField(null=True, blank=True)
-    runs_against_first_five = models.IntegerField(null=True, blank=True)
+    runs_allowed_first_five = models.IntegerField(null=True, blank=True)
     at_bats = models.IntegerField(null=True, blank=True)
     hits = models.IntegerField(null=True, blank=True)
+    opponent_at_bats = models.IntegerField(null=True, blank=True)
     hits_allowed = models.IntegerField(null=True, blank=True)
     home_runs = models.IntegerField(null=True, blank=True)
     home_runs_against = models.IntegerField(null=True, blank=True)
     strikeouts = models.IntegerField(null=True, blank=True)
     errors = models.IntegerField(null=True, blank=True)
-    bullpen_innings = models.IntegerField(null=True, blank=True)
+    bullpen_innings = models.DecimalField(
+                                          null=True, blank=True,
+                                          max_digits=4, decimal_places=2)
     bullpen_runs = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.nickname
 
 
 class StartingPitcher(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
-    teams = (
-        ('Los Angeles Dodgers', ('Los Angeles Dodgers')),
-        ('Tampa Bay Rays', ('Tampa Bay Rays')),
-        ('San Diego Padres', ('San Diego Padres')),
-        ('Minnesota Twins', ('Minnesota Twins')),
-        ('Oakland Athletics', ('Oakland Athletics')),
-        ('Atlanta Braves', ('Atlanta Braves')),
-        ('Chicago White Sox', ('Chicago White Sox')),
-        ('Cleveland Indians', ('Cleveland Indians')),
-        ('Chicago Cubs', ('Chicago Cubs')),
-        ('New York Yankees', ('New York Yankees')),
-        ('Toronto Blue Jays', ('Toronto Blue Jays')),
-        ('St. Louis Cardinals', ('St. Louis Cardinals')),
-        ('Miami Marlins', ('Miami Marlins')),
-        ('Cincinnati Reds', ('Cincinnati Reds')),
-        ('Houston Astros', ('Houston Astros')),
-        ('San Francisco Giants', ('San Francisco Giants')),
-        ('Milwaukee Brewers', ('Milwaukee Brewers')),
-        ('Philadelphia Phillies', ('Philadelphia Phillies')),
-        ('Seattle Mariners', ('Seattle Mariners')),
-        ('New York Mets', ('New York Mets')),
-        ('Colorado Rockies', ('Colorado Rockies')),
-        ('Kansas City Royals', ('Kansas City Royals')),
-        ('Los Angeles Angels', ('Los Angeles Angels')),
-        ('Washington Nationals', ('Washington Nationals')),
-        ('Baltimore Orioles', ('Baltimore Orioles')),
-        ('Arizona Diamondbacks', ('Arizona Diamondbacks')),
-        ('Boston Red Sox', ('Boston Red Sox')),
-        ('Detroit Tigers', ('Detroit Tigers')),
-        ('Texas Rangers', ('Texas Rangers')),
-        ('Pittsburgh Pirates', ('Pittsburgh Pirates')),
-    )
-
-    team = models.ForeignKey('TeamName', choices=teams,
+    team = models.ForeignKey('TeamName',
                              null=False, blank=False, on_delete=models.CASCADE)
-    seasons = (
-        ('MLB2021', ('MLB2021')),
-    )
-
-    season = models.ForeignKey('Season', choices=seasons, default='MLB2021',
+    season = models.ForeignKey('Season',
                                null=False, blank=False,
                                on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    win = models.IntegerField()
-    loss = models.IntegerField()
-    innings = models.IntegerField()
-    runs = models.IntegerField()
-    runs_first_five = models.IntegerField()
-    strikeouts = models.IntegerField()
-    hits = models.IntegerField()
-    walks = models.IntegerField()
-    home_runs = models.IntegerField()
+    win = models.IntegerField(null=True, blank=True)
+    loss = models.IntegerField(null=True, blank=True)
+    innings = models.DecimalField(
+                                  null=True, blank=True,
+                                  max_digits=4, decimal_places=2)
+    runs = models.IntegerField(null=True, blank=True)
+    runs_first_five = models.IntegerField(null=True, blank=True)
+    strikeouts = models.IntegerField(null=True, blank=True)
+    hits = models.IntegerField(null=True, blank=True)
+    walks = models.IntegerField(null=True, blank=True)
+    home_runs = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name

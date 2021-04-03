@@ -2,12 +2,12 @@ import requests
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import BaseballGame, Pitcher
+from .forms import BaseballGames, Pitcher
 from datetime import datetime
 from sportsipy.nba.teams import Teams as NBATeams
 from sportsipy.mlb.teams import Teams as MLBTeams
 from .models import BasketballTeamStats, TeamName, Season
-from .models import BaseballTeamStats, StartingPitcher
+from .models import BaseballGame, StartingPitcher
 
 
 @login_required
@@ -40,37 +40,50 @@ def add_baseball(request):
         messages.error(request, 'Sorry, only Admin can do that.')
         return redirect(reverse('home'))
 
-    addGame = BaseballGame(request.POST, request.FILES)
-    addPitcher = Pitcher(request.POST, request.FILES)
-
     if request.method == "POST":
-        if 'add_game' in request.POST:
-            if addGame.is_valid():
-                addGame.save()
-                messages.success(request, 'Successfully added stats!')
-                return redirect(reverse('add_baseball'))
-            else:
-                messages.error(request,
-                               "Failed to add stats.")
+        form = BaseballGames(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added stats!')
+            return redirect('/management/add_pitcher')
         else:
-            addGame = BaseballGame()
-
-        if 'add_pitcher' in request.POST:
-            if addPitcher.is_valid():
-                addPitcher.save()
-                messages.success(request, 'Successfully added stats!')
-                return redirect(reverse('add_baseball'))
-            else:
-                messages.error(request,
-                               "Failed to add stats.")
-        else:
-            addPitcher = Pitcher()
+            messages.error(request,
+                           "Failed to add stats.")
+    else:
+        form = BaseballGames()
 
     template = 'management/add_baseball.html'
 
     context = {
-        'addPitcher': addPitcher,
-        'addGame': addGame
+        'form': form,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def add_pitcher(request):
+    """ Add a baseball stats to database """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
+
+    if request.method == "POST":
+        form = Pitcher(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added stats!')
+            return redirect('add_baseball')
+        else:
+            messages.error(request,
+                           "Failed to add stats.")
+    else:
+        form = Pitcher()
+
+    template = 'management/add_pitcher.html'
+
+    context = {
+        'form': form,
     }
 
     return render(request, template, context)

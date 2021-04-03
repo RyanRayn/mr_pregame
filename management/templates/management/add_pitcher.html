@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="orange text-center mb-0">Pitching Stats</h1>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <a href="{% url 'add_baseball' %}" class="light-blue opacity-90 form-header-anchor">
+                        <i class="far fa-angle-double-left mr-1"></i>Back to Game Stats
+                    </a>
+                </div>
+            </div>  
+            <div class="row px-3">
+                <div class="col-12 col-md-6">
+                    <form class="white" method="POST" action="{% url 'add_pitcher' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                {{ form.name|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form.team|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.season|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.date|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.innings|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.win|as_crispy_field }}
+                            </div>  
+                            <div class="col-6">
+                                {{ form.loss|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.runs|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.runs_first_five|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.strikeouts|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.hits|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.walks|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.home_runs|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-4">
+                            <a class="btn nav-login white orange-background mr-2" href="{% url 'management' %}">Cancel</a>
+                            <button type="submit" class="btn nav-login light-blue-background white">Save</button>
+                        </div>    
+                    </form>
+                </div>
+            </div>        
+        </div>
+    </div>
+{% endblock %}    
