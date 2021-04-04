@@ -120,9 +120,7 @@ class BaseballGame(models.Model):
     home_runs_against = models.IntegerField(null=True, blank=True)
     strikeouts = models.IntegerField(null=True, blank=True)
     errors = models.IntegerField(null=True, blank=True)
-    bullpen_innings = models.DecimalField(
-                                          null=True, blank=True,
-                                          max_digits=4, decimal_places=2)
+    bullpen_inning_thirds = models.IntegerField(null=True, blank=True)
     bullpen_runs = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -139,9 +137,7 @@ class StartingPitcher(models.Model):
     date = models.DateField(default=datetime.date.today)
     win = models.IntegerField(null=True, blank=True)
     loss = models.IntegerField(null=True, blank=True)
-    innings = models.DecimalField(
-                                  null=True, blank=True,
-                                  max_digits=4, decimal_places=2)
+    inning_thirds = models.IntegerField(null=True, blank=True)
     runs = models.IntegerField(null=True, blank=True)
     runs_first_five = models.IntegerField(null=True, blank=True)
     strikeouts = models.IntegerField(null=True, blank=True)
