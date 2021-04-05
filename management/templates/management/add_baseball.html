@@ -13,7 +13,7 @@
             <div class="row mb-4">
                 <div class="col-12 text-center">
                     <a href="{% url 'add_pitcher' %}" class="light-blue opacity-90 form-header-anchor">
-                        To Pitching Stats<i class="far fa-angle-double-right ml-1"></i>
+                        Pitching Stats<i class="far fa-angle-double-right ml-1"></i>
                     </a>
                 </div>
             </div>  
@@ -22,70 +22,71 @@
                     <form class="white" method="POST" action="{% url 'add_baseball' %}">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="col-12 col-lg-4">
+                            <div class="col-6">
                                 {{ form.name|as_crispy_field }}
                             </div>
-                            <div class="col-12 col-lg-4">
+                            <div class="col-6">
                                 {{ form.nickname|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-lg-4">
+                            <div class="col-6">
                                 {{ form.season|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-lg-4">
+                            <div class="col-6">
                                 {{ form.date|as_crispy_field }}
                             </div> 
-                            <div class="col-6 col-md-3">
+                            <div class="col-3">
                                 {{ form.win_home|as_crispy_field }}
                             </div>  
-                            <div class="col-6 col-md-3">
+                            <div class="col-3">
                                 {{ form.loss_home|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-md-3">
+                            <div class="col-3">
                                 {{ form.win_away|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-md-3">
+                            <div class="col-3">
                                 {{ form.loss_away|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-lg-3">
+                            <div class="col-3">
                                 {{ form.runs|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-lg-3">
+                            <div class="col-3">
                                 {{ form.runs_first_five|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-lg-3">
-                                {{ form.runs_allowed|as_crispy_field }}
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                {{ form.runs_allowed_first_five|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
-                                {{ form.at_bats|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
+                            <div class="col-3">
                                 {{ form.hits|as_crispy_field }}
                             </div>
-                            <div class="col-6">
-                                {{ form.opponent_at_bats|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
-                                {{ form.hits_allowed|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
-                                {{ form.home_runs|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
-                                {{ form.home_runs_against|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
-                                {{ form.strikeouts|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
+                            <div class="col-3">
                                 {{ form.errors|as_crispy_field }}
                             </div>
-                            <div class="col-6">
-                                {{ form.bullpen_innings|as_crispy_field }}
+                            <div class="col-6 col-lg-4">
+                                {{ form.hits_allowed|as_crispy_field }}
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 col-lg-4">
+                                {{ form.runs_allowed|as_crispy_field }}
+                            </div>
+                            <div class="col-6 col-lg-4">
+                                {{ form.runs_allowed_first_five|as_crispy_field }}
+                            </div>
+                            <div class="col-3 col-lg-2">
+                                {{ form.home_runs|as_crispy_field }}
+                            </div>
+                            <div class="col-3">
+                                {{ form.strikeouts|as_crispy_field }}
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                {{ form.at_bats|as_crispy_field }}
+                            </div>
+                            <div class="col-6 col-lg-4">
+                                {{ form.opponent_at_bats|as_crispy_field }}
+                            </div>
+                            
+                            <div class="col-4 col-lg-4">
+                                {{ form.home_runs_against|as_crispy_field }}
+                            </div>
+                            <div class="col-4 col-lg-4">
+                                {{ form.bullpen_inning_thirds|as_crispy_field }}
+                            </div>
+                            <div class="col-4 col-lg-4">
                                 {{ form.bullpen_runs|as_crispy_field }}
                             </div>
                         </div>

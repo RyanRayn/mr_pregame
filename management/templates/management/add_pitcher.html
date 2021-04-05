@@ -37,7 +37,7 @@
                                 {{ form.date|as_crispy_field }}
                             </div>
                             <div class="col-6">
-                                {{ form.innings|as_crispy_field }}
+                                {{ form.inning_thirds|as_crispy_field }}
                             </div>
                             <div class="col-6">
                                 {{ form.win|as_crispy_field }}
@@ -46,19 +46,19 @@
                                 {{ form.loss|as_crispy_field }}
                             </div>
                             <div class="col-6">
+                                {{ form.hits|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
                                 {{ form.runs|as_crispy_field }}
                             </div>
                             <div class="col-6">
                                 {{ form.runs_first_five|as_crispy_field }}
                             </div>
                             <div class="col-6">
-                                {{ form.strikeouts|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
-                                {{ form.hits|as_crispy_field }}
-                            </div>
-                            <div class="col-6">
                                 {{ form.walks|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.strikeouts|as_crispy_field }}
                             </div>
                             <div class="col-6">
                                 {{ form.home_runs|as_crispy_field }}

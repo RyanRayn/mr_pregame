@@ -21,6 +21,9 @@ class BaseballGames(forms.ModelForm):
                                                  required=False)
     home_runs = forms.IntegerField(label='HR', required=False)
     home_runs_against = forms.IntegerField(label='HR allowed', required=False)
+    bullpen_inning_thirds = forms.IntegerField(label='BP outs',
+                                               required=False)
+    bullpen_runs = forms.IntegerField(label='BP runs', required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -28,7 +31,8 @@ class BaseballGames(forms.ModelForm):
         names = [(season.id, season.name) for season in seasons]
         self.fields['season'].choices = names
 
-        team_names = TeamName.objects.filter(league__name='MLB')
+        team_names = TeamName.objects.filter(league__name='MLB').order_by(
+                                             'name')
         teams = [(team.id, team.name)for team in team_names]
         self.fields['name'].choices = teams
 
@@ -39,9 +43,12 @@ class Pitcher(forms.ModelForm):
         model = StartingPitcher
         fields = '__all__'
 
+    inning_thirds = forms.IntegerField(label='Outs', required=False)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        team_names = TeamName.objects.filter(league__name='MLB')
+        team_names = TeamName.objects.filter(league__name='MLB').order_by(
+                                             'name')
         teams = [(team.id, team.name)for team in team_names]
         self.fields['team'].choices = teams
 
