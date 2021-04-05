@@ -1,0 +1,28 @@
+                    
+                    <form action="{% url 'matchups' %}" method="GET">
+                    {% csrf_token %}
+                        <input type="hidden" id="league{{ forloop.counter }}" name="league" value="{{ league }}">
+                        <input type="hidden" id="homeNickname{{ forloop.counter }}" name="homeNickname" value="{{ game.teams.home.mascot }}">
+                        <input type="hidden" id="awayNickname{{ forloop.counter }}" name="awayNickname" value="{{ game.teams.away.mascot }}">
+                        <input type="hidden" id="homeFull{{ forloop.counter }}" name="homeFull" value="{{ game.teams.home.team }}">
+                        <input type="hidden" id="awayFull{{ forloop.counter }}" name="awayFull" value="{{ game.teams.away.team }}">  
+                        <input type="hidden" id="date{{ forloop.counter }}" name="date" value="{{ game.game_date }}">
+                        <input type="hidden" id="time{{ forloop.counter }}" name="time" value="{{ game.game_time }}">
+                        <input type="hidden" id="venue{{ forloop.counter }}" name="venue" value="{{ game.venue.name }}">
+                        <input type="hidden" id="city{{ forloop.counter }}" name="city" value="{{ game.venue.city }}">
+                        <input type="hidden" id="state{{ forloop.counter }}" name="state" value="{{ game.venue.state }}">
+                        <input type="hidden" id="awayAbbr{{ forloop.counter }}" name="awayAbbr" value="{{ game.teams.away.abbreviation }}">  
+                        <input type="hidden" id="homeAbbr{{ forloop.counter }}" name="homeAbbr" value="{{ game.teams.home.abbreviation }}">
+                        {% for points in game.odds %}
+                            <input type="hidden" id="awaySpread{{ forloop.counter }}" name="awaySpread" value="{{ points.spread.current.away }}">
+                            <input type="hidden" id="homeSpread{{ forloop.counter }}" name="homeSpread" value="{{ points.spread.current.home }}">
+                            <input type="hidden" id="awayOdds{{ forloop.counter }}" name="awayOdds" value="{{ points.spread.current.awayOdds }}"> 
+                            <input type="hidden" id="homeOdds{{ forloop.counter }}" name="homeOdds" value="{{ points.spread.current.homeOdds }}">
+                            <input type="hidden" id="homeML{{ forloop.counter }}" name="homeML" value="{{ points.moneyline.current.homeOdds }}">
+                            <input type="hidden" id="awayML{{ forloop.counter }}" name="awayML" value="{{ points.moneyline.current.awayOdds }}">
+                            <input type="hidden" id="total{{ forloop.counter }}" name="total" value="{{ points.total.current.total }}}">
+                        {% endfor %}
+                        <button class="btn matchup-btn orange-background white opacity-90" type="submit">
+                            Matchup
+                        </button>
+                    </form>    

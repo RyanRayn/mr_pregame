@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'home',
     'games',
     'management',
+    'matchups',
 ]
 
 MIDDLEWARE = [

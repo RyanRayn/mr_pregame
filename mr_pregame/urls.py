@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('home.urls')),
     path('games/', include('games.urls')),
     path('management/', include('management.urls')),
+    path('matchups/', include('matchups.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
