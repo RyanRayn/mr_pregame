@@ -105,28 +105,64 @@ class BaseballGame(models.Model):
 
     nickname = models.CharField(max_length=20,
                                 choices=nicknames, default='MLB')
+    teams = (
+        ('Arizona Diamondbacks', ('Arizona Diamondbacks')),
+        ('Atlanta Braves', ('Atlanta Braves')),
+        ('Baltimore Orioles', ('Baltimore Orioles')),
+        ('Boston Red Sox', ('Boston Red Sox')),
+        ('Chicago Cubs', ('Chicago Cubs')),
+        ('Chicago White Sox', ('Chicago White Sox')),
+        ('Cincinnati Reds', ('Cincinnati Reds')),
+        ('Cleveland Indians', ('Cleveland Indians')),
+        ('Colorado Rockies', ('Colorado Rockies')),
+        ('Detroit Tigers', ('Detroit Tigers')),
+        ('Houston Astros', ('Houston Astros')),
+        ('Kansas City Royals', ('Kansas City Royals')),
+        ('Los Angeles Angels', ('Los Angeles Angels')),
+        ('Los Angeles Dodgers', ('Los Angeles Dodgers')),
+        ('Miami Marlins', ('Miami Marlins')),
+        ('Milwaukee Brewers', ('Milwaukee Brewers')),
+        ('Minnesota Twins', ('Minnesota Twins')),
+        ('New York Mets', ('New York Mets')),
+        ('New York Yankees', ('New York Yankees')),
+        ('Oakland Athletics', ('Oakland Athletics')),
+        ('Philadelphia Phillies', ('Philadelphia Phillies')),
+        ('Pittsburgh Pirates', ('Pittsburgh Pirates')),
+        ('San Diego Padres', ('San Diego Padres')),
+        ('San Francisco Giants', ('San Francisco Giants')),
+        ('Seattle Mariners', ('Seattle Mariners')),
+        ('St. Louis Cardinals', ('St. Louis Cardinals')),
+        ('Tampa Bay Rays', ('Tampa Bay Rays')),
+        ('Texas Rangers', ('Texas Rangers')),
+        ('Toronto Blue Jays', ('Toronto Blue Jays')),
+        ('Washington Nationals', ('Washington Nationals'))
+    )
+
+    opponent = models.CharField(max_length=50, choices=teams, default='MLB')
     season = models.ForeignKey('Season',
                                null=False, blank=False,
                                on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    win_home = models.IntegerField(null=True, blank=True)
-    loss_home = models.IntegerField(null=True, blank=True)
-    win_away = models.IntegerField(null=True, blank=True)
-    loss_away = models.IntegerField(null=True, blank=True)
-    runs = models.IntegerField(null=True, blank=True)
-    runs_allowed = models.IntegerField(null=True, blank=True)
-    runs_first_five = models.IntegerField(null=True, blank=True)
-    runs_allowed_first_five = models.IntegerField(null=True, blank=True)
-    at_bats = models.IntegerField(null=True, blank=True)
-    hits = models.IntegerField(null=True, blank=True)
-    opponent_at_bats = models.IntegerField(null=True, blank=True)
-    hits_allowed = models.IntegerField(null=True, blank=True)
-    home_runs = models.IntegerField(null=True, blank=True)
-    home_runs_against = models.IntegerField(null=True, blank=True)
-    strikeouts = models.IntegerField(null=True, blank=True)
-    errors = models.IntegerField(null=True, blank=True)
-    bullpen_inning_thirds = models.IntegerField(null=True, blank=True)
-    bullpen_runs = models.IntegerField(null=True, blank=True)
+    win_home = models.IntegerField(null=True, blank=True, default=0)
+    loss_home = models.IntegerField(null=True, blank=True, default=0)
+    win_away = models.IntegerField(null=True, blank=True, default=0)
+    loss_away = models.IntegerField(null=True, blank=True, default=0)
+    runs = models.IntegerField(null=True, blank=True, default=0)
+    runs_allowed = models.IntegerField(null=True, blank=True, default=0)
+    runs_first_five = models.IntegerField(null=True, blank=True, default=0)
+    runs_allowed_first_five = models.IntegerField(null=True, blank=True,
+                                                  default=0)
+    at_bats = models.IntegerField(null=True, blank=True, default=0)
+    hits = models.IntegerField(null=True, blank=True, default=0)
+    opponent_at_bats = models.IntegerField(null=True, blank=True, default=0)
+    hits_allowed = models.IntegerField(null=True, blank=True, default=0)
+    home_runs = models.IntegerField(null=True, blank=True, default=0)
+    home_runs_against = models.IntegerField(null=True, blank=True, default=0)
+    strikeouts = models.IntegerField(null=True, blank=True, default=0)
+    errors = models.IntegerField(null=True, blank=True, default=0)
+    bullpen_inning_thirds = models.IntegerField(null=True, blank=True,
+                                                default=0)
+    bullpen_runs = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return self.nickname
@@ -140,15 +176,15 @@ class StartingPitcher(models.Model):
                                null=False, blank=False,
                                on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    win = models.IntegerField(null=True, blank=True)
-    loss = models.IntegerField(null=True, blank=True)
-    inning_thirds = models.IntegerField(null=True, blank=True)
-    runs = models.IntegerField(null=True, blank=True)
-    runs_first_five = models.IntegerField(null=True, blank=True)
-    strikeouts = models.IntegerField(null=True, blank=True)
-    hits = models.IntegerField(null=True, blank=True)
-    walks = models.IntegerField(null=True, blank=True)
-    home_runs = models.IntegerField(null=True, blank=True)
+    win = models.IntegerField(null=True, blank=True, default=0)
+    loss = models.IntegerField(null=True, blank=True, default=0)
+    inning_thirds = models.IntegerField(null=True, blank=True, default=0)
+    runs = models.IntegerField(null=True, blank=True, default=0)
+    runs_first_five = models.IntegerField(null=True, blank=True, default=0)
+    strikeouts = models.IntegerField(null=True, blank=True, default=0)
+    hits = models.IntegerField(null=True, blank=True, default=0)
+    walks = models.IntegerField(null=True, blank=True, default=0)
+    home_runs = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return self.name

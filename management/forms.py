@@ -16,14 +16,17 @@ class BaseballGames(forms.ModelForm):
         model = BaseballGame
         fields = '__all__'
 
-    runs_first_five = forms.IntegerField(label='Runs 5', required=False)
+    runs_first_five = forms.IntegerField(label='Runs 5', required=False,
+                                         initial=0)
     runs_allowed_first_five = forms.IntegerField(label='Runs allowed 5',
-                                                 required=False)
-    home_runs = forms.IntegerField(label='HR', required=False)
-    home_runs_against = forms.IntegerField(label='HR allowed', required=False)
+                                                 required=False, initial=0)
+    home_runs = forms.IntegerField(label='HR', required=False, initial=0)
+    home_runs_against = forms.IntegerField(label='HR allowed', required=False,
+                                           initial=0)
     bullpen_inning_thirds = forms.IntegerField(label='BP outs',
-                                               required=False)
-    bullpen_runs = forms.IntegerField(label='BP runs', required=False)
+                                               required=False, initial=0)
+    bullpen_runs = forms.IntegerField(label='BP runs', required=False,
+                                      initial=0)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,7 +46,7 @@ class Pitcher(forms.ModelForm):
         model = StartingPitcher
         fields = '__all__'
 
-    inning_thirds = forms.IntegerField(label='Outs', required=False)
+    inning_thirds = forms.IntegerField(label='Outs', required=False, initial=0)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

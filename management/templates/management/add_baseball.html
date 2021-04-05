@@ -22,11 +22,14 @@
                     <form class="white" method="POST" action="{% url 'add_baseball' %}">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-6 col-lg-4">
                                 {{ form.name|as_crispy_field }}
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 col-lg-4">
                                 {{ form.nickname|as_crispy_field }}
+                            </div>
+                            <div class="col-6 col-lg-4">
+                                {{ form.opponent|as_crispy_field }}
                             </div>
                             <div class="col-6">
                                 {{ form.season|as_crispy_field }}
@@ -67,10 +70,13 @@
                             <div class="col-6 col-lg-4">
                                 {{ form.runs_allowed_first_five|as_crispy_field }}
                             </div>
-                            <div class="col-3 col-lg-2">
+                            <div class="col-4 col-lg-3">
                                 {{ form.home_runs|as_crispy_field }}
                             </div>
-                            <div class="col-3">
+                            <div class="col-4 col-lg-3">
+                                {{ form.home_runs_against|as_crispy_field }}
+                            </div>
+                            <div class="col-4 col-lg-3">
                                 {{ form.strikeouts|as_crispy_field }}
                             </div>
                             <div class="col-6 col-lg-3">
@@ -79,13 +85,10 @@
                             <div class="col-6 col-lg-4">
                                 {{ form.opponent_at_bats|as_crispy_field }}
                             </div>
-                            <div class="col-4 col-lg-4">
-                                {{ form.home_runs_against|as_crispy_field }}
-                            </div>
-                            <div class="col-4 col-lg-4">
+                            <div class="col-6 col-lg-4">
                                 {{ form.bullpen_inning_thirds|as_crispy_field }}
                             </div>
-                            <div class="col-4 col-lg-4">
+                            <div class="col-6 col-lg-4">
                                 {{ form.bullpen_runs|as_crispy_field }}
                             </div>
                         </div>
