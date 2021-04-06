@@ -1,6 +1,7 @@
                     
                     <form action="{% url 'matchups' %}" method="GET">
                     {% csrf_token %}
+                        <input type="hidden" id="summary{{ forloop.counter }}" name="summary" value="{{ game.summary }}">
                         <input type="hidden" id="league{{ forloop.counter }}" name="league" value="{{ league }}">
                         <input type="hidden" id="homeNickname{{ forloop.counter }}" name="homeNickname" value="{{ game.teams.home.mascot }}">
                         <input type="hidden" id="awayNickname{{ forloop.counter }}" name="awayNickname" value="{{ game.teams.away.mascot }}">

@@ -142,7 +142,8 @@ class BaseballGame(models.Model):
     season = models.ForeignKey('Season',
                                null=False, blank=False,
                                on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.date.today)
+    date = models.DateField(default=datetime.date.today() + datetime.timedelta(
+                            days=-1))
     win_home = models.IntegerField(null=True, blank=True, default=0)
     loss_home = models.IntegerField(null=True, blank=True, default=0)
     win_away = models.IntegerField(null=True, blank=True, default=0)
@@ -175,7 +176,8 @@ class StartingPitcher(models.Model):
     season = models.ForeignKey('Season',
                                null=False, blank=False,
                                on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.date.today)
+    date = models.DateField(default=datetime.date.today() + datetime.timedelta(
+                            days=-1))
     win = models.IntegerField(null=True, blank=True, default=0)
     loss = models.IntegerField(null=True, blank=True, default=0)
     inning_thirds = models.IntegerField(null=True, blank=True, default=0)

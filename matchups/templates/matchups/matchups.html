@@ -3,8 +3,10 @@
 
 {% block content %}
     <div id="content">
-        <div class="container-fluid">
-       
+        <div class="container-fluid"> 
+            {% if league == 'MLB' %}
+                {% include 'includes/mlb_matchup.html' %}
+            {% endif %} 
         </div>    
     </div>      
 {% endblock %}

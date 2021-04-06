@@ -503,6 +503,11 @@ img {
     color:white;
 }
 
+/*----------------------------- Matchup -------------------------------*/
+.matchup-header-container{
+    width:55%;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

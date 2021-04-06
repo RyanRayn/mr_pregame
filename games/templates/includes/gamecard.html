@@ -7,10 +7,16 @@
                     <div class="row">       
                         <div class="col-12">
                             <h3 class="game-summary white opacity-90 text-center font-800 mb-0">{{ game.summary }}</h3>
-                            <p class="white opacity-90 mb-0 text-center">
-                                <i class="fad fa-calendar-alt orange pr-2"></i>{{ game.game_date }} 
-                                <i class="fad fa-clock orange pl-4 pr-2"></i>{{ game.game_time }}
-                            </p>
+                            {% if 'scoreboard' in game and 'score' in game.scoreboard %}
+                                <p class="orange opacity-90 mb-0 mt-1 text-center">
+                                    <i class="fad fa-clock orange pr-2"></i>{{ game.status|upper }} 
+                                </p>
+                            {% else %}
+                                <p class="white opacity-90 mb-0 text-center">
+                                    <i class="fad fa-calendar-alt orange pr-2"></i>{{ game.game_date }} 
+                                    <i class="fad fa-clock orange pl-4 pr-2"></i>{{ game.game_time }}
+                                </p>
+                            {% endif %}    
                             <p class="white opacity-90 mb-2 text-center">
                                 <small>{{ game.venue.name }} - {{ game.venue.city }}, {{ game.venue.state }}</small>
                             </p>
@@ -30,7 +36,7 @@
                                         <span class="spread">{{ game.scoreboard.score.away }}</span><br>
                                         <span class="spread">
                                         <!-- If Away Team is Favored Show Spread -->    
-                                            {% if points.spread.current.away > 0 %}{% else %}{{ points.spread.current.away }{% endif %}
+                                            {% if points.spread.current.away > 0 %}{% else %}{{ points.spread.current.away }}{% endif %}
                                         </span><br>
                                     {% else %}
                                         <span class="spread green">{{ game.scoreboard.score.away }}</span><br>
@@ -71,14 +77,21 @@
                         <!-- If Game Total Points GREATER than the Total Line Print OVER else UNDER -->
                             {% if game.total > points.total.current.total %}
                                 <p class="light-blue text-center">
-                                    Total: {{ game.total }} <span class="green">OVER</span> {{ points.total.current.total }}
+                                    Over/Under: {{ points.total.current.total }}&nbsp;&nbsp;&nbsp;Current Total: <span class="green">OVER</span> 
                                 </p>
                             {% else %}  
-                                <p class="light-blue text-center">
-                                    Total: {{ game.total }} <span class="orange">UNDER</span> {{ points.total.current.total }
+                                <p class="light-blue text-center mt-2">
+                                    Over/Under: {{ points.total.current.total }}&nbsp;&nbsp;&nbsp;Current Total: <span class="orange">UNDER</span>
                                 </p>   
                             {% endif %}  
                         {% endfor %}
+                        <hr class="rounded orange-background mx-auto my-0">
+                        <!-- Matchup Button and Hidden Input Fields for Matchup Field-->            
+                        <div class="row mt-3 mb-1"> 
+                            <div class="col-12 d-flex justify-content-center">
+                                {% include 'includes/matchup_form.html' %}
+                            </div>     
+                        </div> 
                     {% else %}
                     <!-- If Game Odds Have Already Been Set Render the Lines else 'No Lines Yet' -->
                         {% if game.odds %}        
@@ -115,7 +128,7 @@
                                     </p>
                                 </div>    
                             </div> 
-                            <p class="light-blue text-center">Total: {{ points.total.current.total }}</p>
+                            <p class="light-blue text-center">Over/Under: {{ points.total.current.total }}</p>
                                     {% endfor %}
                         {% else %}
 <!-- Templates For When No Game Lines Are Set. Different Font Awesome Icons Used For Each Specific Sport -->
