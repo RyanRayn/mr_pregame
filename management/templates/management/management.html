@@ -9,15 +9,25 @@
                 <div class="col-12 d-flex justify-content-center">
                     <h1 class="orange">Site Admin</h1>
                 </div>
-            </div> 
-            <div class="row">
-                <div class="col-12"><a class="white" href="{% url 'add_basketball' %}">Add Basketball</a></div>
             </div>
+
             <div class="row">
-                <div class="col-12"><a class="white" href="{% url 'add_baseball_away' %}">Add Baseball</a></div>
-            </div>  
-            <div class="row">
-                <div class="col-12"><a class="white" href="{% url 'add_pitcher' %}">Add Pitcher</a></div>
+                <div class="col-12 col-md-6">
+                    <div class="">
+                        <a class="white" href="{% url 'add_basketball' %}">Add Basketball</a>
+                    </div>
+                    <div class="">
+                        <a class="white" href="{% url 'add_baseball_away' %}">Add Baseball</a>
+                    </div>
+                    <div class="">
+                        <a class="white" href="{% url 'add_pitcher_away' %}">Add Pitcher</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mx-5 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid img-shadow img-resize w-75" src="/media/admin.png" alt="responsive image">
+                    </div>    
+                </div>    
             </div>                                                  
        </div>
     </div>

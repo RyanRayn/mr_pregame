@@ -11,5 +11,6 @@ urlpatterns = [
          views.add_baseball_away, name='add_baseball_away'),
     path('add_baseball_home',
          views.add_baseball_home, name='add_baseball_home'),
-    path('add_pitcher', views.add_pitcher, name='add_pitcher'),
+    path('add_pitcher_away', views.add_pitcher_away, name='add_pitcher_away'),
+    path('add_pitcher_home', views.add_pitcher_home, name='add_pitcher_home'),
 ]

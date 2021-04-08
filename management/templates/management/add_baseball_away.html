@@ -12,13 +12,13 @@
             </div>
             <div class="row mb-4">
                 <div class="col-12 text-center">
-                    <a href="{% url 'add_pitcher' %}" class="light-blue opacity-90 form-header-anchor">
+                    <a href="{% url 'add_pitcher_away' %}" class="light-blue opacity-90 form-header-anchor">
                         Pitching Stats<i class="far fa-angle-double-right ml-1"></i>
                     </a>
                 </div>
             </div>  
             <div class="row px-3">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 mt-3">
                     <form class="white" method="POST" action="{% url 'add_baseball_away' %}">
                         {% csrf_token %}
                         <div class="row">
@@ -97,6 +97,11 @@
                             <button type="submit" class="btn nav-login light-blue-background white">Save</button>
                         </div>    
                     </form>
+                </div>
+                <div class="d-none d-md-flex col-md-6">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img class="img-fluid img-shadow img-resize mr-hitter" src="/media/Mr_Hitter.png" alt="responsive image">
+                    </div>    
                 </div>
             </div>        
         </div>

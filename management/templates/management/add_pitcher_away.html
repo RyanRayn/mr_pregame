@@ -18,8 +18,8 @@
                 </div>
             </div>  
             <div class="row px-3">
-                <div class="col-12 col-md-6">
-                    <form class="white" method="POST" action="{% url 'add_pitcher' %}">
+                <div class="col-12 col-md-6 mt-3">
+                    <form class="white" method="POST" action="{% url 'add_pitcher_away' %}">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center">
@@ -69,6 +69,11 @@
                             <button type="submit" class="btn nav-login light-blue-background white">Save</button>
                         </div>    
                     </form>
+                </div>
+                <div class="d-none d-md-flex col-md-6">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img class="img-fluid img-shadow img-resize mr-hitter" src="/media/Mr_Pitcher.png" alt="responsive image">
+                    </div>    
                 </div>
             </div>        
         </div>

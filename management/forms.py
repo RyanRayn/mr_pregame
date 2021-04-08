@@ -64,6 +64,11 @@ class HomeBaseballGames(forms.ModelForm):
         names = [(season.id, season.name) for season in seasons]
         self.fields['season'].choices = names
 
+        team_names = TeamName.objects.filter(league__name='MLB').order_by(
+                                             'name')
+        teams = [(team.id, team.name)for team in team_names]
+        self.fields['name'].choices = teams
+
 
 class Pitcher(forms.ModelForm):
 

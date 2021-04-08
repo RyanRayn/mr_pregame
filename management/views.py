@@ -45,7 +45,7 @@ def add_baseball_away(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully added stats!')
-            return redirect('/management/add_baseball_home')
+            return redirect('/management/add_pitcher_away')
         else:
             messages.error(request,
                            "Failed to add stats.")
@@ -75,10 +75,10 @@ def add_baseball_home(request):
     hits_allowed = game.hits
     home_runs = game.home_runs_against
     home_runs_against = game.home_runs
-    win_home = game.loss_home
-    loss_home = game.win_home
-    win_away = game.loss_away
-    loss_away = game.win_away
+    win_home = game.loss_away
+    loss_home = game.win_away
+    win_away = game.loss_home
+    loss_away = game.win_home
     at_bats = game.opponent_at_bats
     opponent_at_bats = game.at_bats
 
@@ -109,7 +109,7 @@ def add_baseball_home(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully added stats!')
-            return redirect('/management/add_pitcher')
+            return redirect('/management/add_pitcher_home')
         else:
             messages.error(request,
                            "Failed to add stats.")
@@ -126,8 +126,52 @@ def add_baseball_home(request):
 
 
 @login_required
-def add_pitcher(request):
+def add_pitcher_away(request):
     """ Add a baseball stats to database """
+    game = BaseballGame.objects.last()
+
+    runs_first_five = game.runs_allowed_first_five
+
+    initial = {
+        'runs_first_five': runs_first_five,
+    }
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
+
+    if request.method == "POST":
+        form = Pitcher(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added stats!')
+            return redirect('add_baseball_home')
+        else:
+            messages.error(request,
+                           "Failed to add stats.")
+    else:
+        form = Pitcher(initial=initial)
+
+    template = 'management/add_pitcher_away.html'
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def add_pitcher_home(request):
+    """ Add a baseball stats to database """
+    game = BaseballGame.objects.last()
+
+    runs_first_five = game.runs_allowed_first_five
+
+    initial = {
+        'runs_first_five': runs_first_five,
+    }
+
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only Admin can do that.')
         return redirect(reverse('home'))
@@ -142,9 +186,9 @@ def add_pitcher(request):
             messages.error(request,
                            "Failed to add stats.")
     else:
-        form = Pitcher()
+        form = Pitcher(initial=initial)
 
-    template = 'management/add_pitcher.html'
+    template = 'management/add_pitcher_home.html'
 
     context = {
         'form': form,
