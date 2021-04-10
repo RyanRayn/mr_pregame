@@ -27,6 +27,10 @@ class AwayBaseballGames(forms.ModelForm):
                                                required=False, initial=0)
     bullpen_runs = forms.IntegerField(label='BP runs', required=False,
                                       initial=0)
+    opponent_at_bats = forms.IntegerField(label='Op. At bats', required=False,
+                                          initial=0)
+    opponent_errors = forms.IntegerField(label='Op. Errors', required=False,
+                                         initial=0)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,7 +39,7 @@ class AwayBaseballGames(forms.ModelForm):
         self.fields['season'].choices = names
 
         team_names = TeamName.objects.filter(league__name='MLB').order_by(
-                                             'name')
+            'name')
         teams = [(team.id, team.name)for team in team_names]
         self.fields['name'].choices = teams
 
@@ -57,6 +61,8 @@ class HomeBaseballGames(forms.ModelForm):
                                                required=False, initial=0)
     bullpen_runs = forms.IntegerField(label='BP runs', required=False,
                                       initial=0)
+    opponent_at_bats = forms.IntegerField(label='Op. At bats', required=False,
+                                          initial=0)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -65,7 +71,7 @@ class HomeBaseballGames(forms.ModelForm):
         self.fields['season'].choices = names
 
         team_names = TeamName.objects.filter(league__name='MLB').order_by(
-                                             'name')
+            'name')
         teams = [(team.id, team.name)for team in team_names]
         self.fields['name'].choices = teams
 
@@ -81,7 +87,7 @@ class Pitcher(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         team_names = TeamName.objects.filter(league__name='MLB').order_by(
-                                             'name')
+            'name')
         teams = [(team.id, team.name)for team in team_names]
         self.fields['team'].choices = teams
 

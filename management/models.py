@@ -161,6 +161,7 @@ class BaseballGame(models.Model):
     home_runs_against = models.IntegerField(null=True, blank=True, default=0)
     strikeouts = models.IntegerField(null=True, blank=True, default=0)
     errors = models.IntegerField(null=True, blank=True, default=0)
+    opponent_errors = models.IntegerField(null=True, blank=True, default=0)
     bullpen_inning_thirds = models.IntegerField(null=True, blank=True,
                                                 default=0)
     bullpen_runs = models.IntegerField(null=True, blank=True, default=0)

@@ -81,6 +81,7 @@ def add_baseball_home(request):
     loss_away = game.win_home
     at_bats = game.opponent_at_bats
     opponent_at_bats = game.at_bats
+    errors = game.opponent_errors
 
     initial = {
         'opponent': opponent,
@@ -97,7 +98,8 @@ def add_baseball_home(request):
         'win_away': win_away,
         'loss_away': loss_away,
         'at_bats': at_bats,
-        'opponent_at_bats': opponent_at_bats
+        'opponent_at_bats': opponent_at_bats,
+        'errors': errors,
     }
 
     if not request.user.is_superuser:

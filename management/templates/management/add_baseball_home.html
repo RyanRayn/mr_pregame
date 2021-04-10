@@ -34,7 +34,7 @@
                             <div class="col-6">
                                 {{ form.season|as_crispy_field }}
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-lg-6">
                                 {{ form.date|as_crispy_field }}
                             </div> 
                             <div class="col-3">
@@ -49,26 +49,33 @@
                             <div class="col-3">
                                 {{ form.loss_away|as_crispy_field }}
                             </div>
-                            <div class="col-3">
+                            <div class="col-6 col-lg-3">
                                 {{ form.runs|as_crispy_field }}
                             </div>
-                            <div class="col-3">
+                            <div class="col-6 col-lg-3">
                                 {{ form.runs_first_five|as_crispy_field }}
                             </div>
-                            <div class="col-3">
-                                {{ form.hits|as_crispy_field }}
-                            </div>
-                            <div class="col-3">
-                                {{ form.errors|as_crispy_field }}
-                            </div>
-                            <div class="col-6 col-lg-4">
-                                {{ form.hits_allowed|as_crispy_field }}
-                            </div>
-                            <div class="col-6 col-lg-4">
+                            <div class="col-6 col-lg-3">
                                 {{ form.runs_allowed|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-lg-4">
+                            <div class="col-6 col-lg-3">
                                 {{ form.runs_allowed_first_five|as_crispy_field }}
+                            </div>
+                            <div class="col-4">
+                                {{ form.hits|as_crispy_field }}
+                            </div>
+                            <div class="col-4">
+                                {{ form.errors|as_crispy_field }}
+                            </div>
+                            <div class="col-4">
+                                {{ form.hits_allowed|as_crispy_field }}
+                            </div>
+                            
+                            <div class="col-6 col-lg-3">
+                                {{ form.at_bats|as_crispy_field }}
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                {{ form.opponent_at_bats|as_crispy_field }}
                             </div>
                             <div class="col-4 col-lg-3">
                                 {{ form.home_runs|as_crispy_field }}
@@ -76,12 +83,7 @@
                             <div class="col-4 col-lg-3">
                                 {{ form.home_runs_against|as_crispy_field }}
                             </div>
-                            <div class="col-6 col-lg-3">
-                                {{ form.at_bats|as_crispy_field }}
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                {{ form.opponent_at_bats|as_crispy_field }}
-                            </div>
+                            
                             <div class="col-4 col-lg-4">
                                 {{ form.strikeouts|as_crispy_field }}
                             </div>
