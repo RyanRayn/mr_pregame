@@ -19,7 +19,7 @@ def games(request):
     url = "https://sportspage-feeds.p.rapidapi.com/games"
 
     headers = {
-        'x-rapidapi-key': settings.SPORTSPAGE_FEEDS_KEY,
+        'x-rapidapi-key': settings.RAPID_API_KEY,
         'x-rapidapi-host': "sportspage-feeds.p.rapidapi.com"
         }
 

@@ -161,5 +161,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Sportspage Feeds Key
-SPORTSPAGE_FEEDS_KEY = os.getenv('SPORTSPAGE_FEEDS_KEY', '')
+# RapidApi Key
+RAPID_API_KEY = os.getenv('SPORTSPAGE_FEEDS_KEY', '')

@@ -508,9 +508,13 @@ img {
 }
 
 /*----------------------------- Matchup -------------------------------*/
-.matchup-header-container{
-    width:55%;
+
+.matchup-info-box{
+    background-color:#ff7c1fb2;
+    border-radius:20px;
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);    
 }
+
 
 /*---------- Media Queries ----------*/
 

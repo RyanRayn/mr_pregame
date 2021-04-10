@@ -1,4 +1,6 @@
 from django.shortcuts import render
+import requests
+from django.conf import settings
 
 
 def matchups(request):
@@ -7,8 +9,8 @@ def matchups(request):
     if request.method == "GET":
         summary = request.GET.get('summary')
         league = request.GET.get('league')
-        homeTeam = request.GET.get('homeTeam')
-        awayTeam = request.GET.get('awayTeam')
+        homeTeam = request.GET.get('homeFull')
+        awayTeam = request.GET.get('awayFull')
         date = request.GET.get('date')
         time = request.GET.get('time')
         venue = request.GET.get('venue')
@@ -23,6 +25,21 @@ def matchups(request):
         homeML = request.GET.get('homeML')
         awayML = request.GET.get('awayML')
         total = request.GET.get('total')
+        over = request.GET.get('over')
+        under = request.GET.get('under')
+
+    params = {"q": city}
+
+    url = "https://community-open-weather-map.p.rapidapi.com/weather"
+
+    headers = {
+        'x-rapidapi-key': settings.RAPID_API_KEY,
+        'x-rapidapi-host': "community-open-weather-map.p.rapidapi.com"
+    }
+
+    results = requests.request("GET", url,
+                               headers=headers, params=params).json()
+    print(results)
 
     context = {
         'summary': summary,
@@ -43,6 +60,9 @@ def matchups(request):
         'homeML': homeML,
         'awayML': awayML,
         'total': total,
+        'over': over,
+        'under': under,
+        'results': results,
     }
 
     return render(request, 'matchups/matchups.html', context)

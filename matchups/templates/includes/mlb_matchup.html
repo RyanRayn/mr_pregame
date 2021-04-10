@@ -1,19 +1,34 @@
 
-            <div class="row d-flex justify-content-center">
-                <div class="gamecard matchup-header-container p-2">
-                    <div class="row">
-                        <div class="col-12 text-center white">
-                            <h1>{{ summary }}</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <p class="white opacity-90 mb-0 text-center">
-                                <i class="fad fa-calendar-alt orange pr-1"></i>{{ date }} 
-                                <i class="fad fa-clock orange pl-4 pr-1"></i>{{ time }}
-                                <i class="fad fa-map-marker-alt orange pl-4 pr-1"></i>{{ venue }}- {{ city }}, {{ state }}
-                            </p>
-                        </div>
-                    </div>
+            
+            <div class="row mb-3">
+                <div class="col-12 text-center white opacity-90">
+                    <h1>{{ summary }}</h1>
                 </div>
-            </div>        
+            </div>
+            <div class="row mx-3">
+                <div class="col-2 matchup-info-box px-3">
+                    <h4 class="dark-blue text-center"><strong>Game Info</strong></h4>
+                    <p class="dark-blue mb-1"><i class="fad fa-map-marker-alt dark-blue mr-2"></i>{{ venue }} - {{ city }}</p>
+                    <p class="dark-blue mb-1"><i class="fad fa-calendar-alt dark-blue mr-1"></i>{{ date }}<i class="fad fa-clock dark-blue ml-3 mr-1"></i>{{ time }}</p>
+                    <br>
+                    <h6 class="dark-blue text-center mt-2">Betting Lines</h6> 
+                    <p class="dark-blue mb-0"><strong>{{ awayAbbr }}</strong>:&nbsp;{{ awaySpread }}&nbsp;&nbsp;
+                        {% if "-" in awayOdds %}{{ awayOdds }}{% else %}+{{ awayOdds }}{% endif %}
+                    </p>
+                    <p class="dark-blue mb-1">MoneyLine:&nbsp;
+                        {% if "-" in awayML %}{{ awayML }}{% else %}+{{ awayML }}{% endif %}
+                    </p>
+                    <br>
+                    <p class="dark-blue mb-1"><strong>{{ homeAbbr }}</strong>:&nbsp;{{ homeSpread }}&nbsp;&nbsp;
+                        {% if "-" in homeOdds %}{{ homeOdds }}{% else %}+{{ homeOdds }}{% endif %}
+                    </p>
+                    <p class="dark-blue mb-1">MoneyLine:&nbsp;
+                        {% if "-" in homeML %}{{ homeML }}{% else %}+{{ homeML }}{% endif %}
+                    </p>
+                    <br>
+                    <p class="dark-blue text-center mb-0"><strong>O/U</strong>: {{ total }}</p>
+                    <p class="dark-blue text-center">Over: {{ over }}&nbsp;&nbsp;Under: {{ under }}</p>
+                </div>
+            </div>
+               
+            
