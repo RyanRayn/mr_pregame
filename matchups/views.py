@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import requests
 from django.conf import settings
+from pprint import pprint
+import datetime
 
 
 def matchups(request):
@@ -28,9 +30,11 @@ def matchups(request):
         over = request.GET.get('over')
         under = request.GET.get('under')
 
-    params = {"q": city}
+    country = ",us"
+    cityWeather = city + country
+    params = {"q": cityWeather, "units": "imperial"}
 
-    url = "https://community-open-weather-map.p.rapidapi.com/weather"
+    url = "https://community-open-weather-map.p.rapidapi.com/forecast"
 
     headers = {
         'x-rapidapi-key': settings.RAPID_API_KEY,
@@ -39,7 +43,11 @@ def matchups(request):
 
     results = requests.request("GET", url,
                                headers=headers, params=params).json()
-    print(results)
+    data = results['list']
+    for result in data:
+        des = result['dt_txt']
+        weatherDate = datetime.datetime.strptime(des, '%Y-%m-%d %H:%M:%S')
+        pprint(weatherDate)
 
     context = {
         'summary': summary,

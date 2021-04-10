@@ -162,4 +162,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # RapidApi Key
-RAPID_API_KEY = os.getenv('SPORTSPAGE_FEEDS_KEY', '')
+RAPID_API_KEY = os.getenv('RAPID_API_KEY', '')
