@@ -3,6 +3,7 @@ import requests
 from django.conf import settings
 from pprint import pprint
 import datetime
+import pytz
 
 
 def matchups(request):
@@ -34,7 +35,7 @@ def matchups(request):
     cityWeather = city + country
     params = {"q": cityWeather, "units": "imperial"}
 
-    url = "https://community-open-weather-map.p.rapidapi.com/forecast"
+    url = "https://community-open-weather-map.p.rapidapi.com/weather"
 
     headers = {
         'x-rapidapi-key': settings.RAPID_API_KEY,
@@ -43,16 +44,9 @@ def matchups(request):
 
     results = requests.request("GET", url,
                                headers=headers, params=params).json()
-    data = results['list']
-    for weather in data:
-        weather_date = weather['dt_txt']
-        weatherDatetime = datetime.datetime.strptime(
-                                                 weather_date,
-                                                 '%Y-%m-%d %H:%M:%S')
-        weather['gameDate'] = weatherDatetime.strftime("%B %d, %Y")
-        weather['gameTime'] = weatherDatetime.strftime("%-I%p")
-        weather['gameTemp'] = round(weather['main']['temp'])
-        weather['gameWeather'] = weather['weather'][0]['main']
+
+    temp = round(results['main']['temp'])
+    weather = results['weather'][0]['main']
 
     context = {
         'summary': summary,
@@ -75,8 +69,8 @@ def matchups(request):
         'total': total,
         'over': over,
         'under': under,
-        'results': results,
-        'data': data,
+        'temp': temp,
+        'weather': weather,
     }
 
     return render(request, 'matchups/matchups.html', context)

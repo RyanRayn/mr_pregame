@@ -516,9 +516,15 @@ img {
 }
 
 .weather-rain-box{
-    background-color:rgb(15, 33, 61);
+    background-color:rgba(150, 160, 175, 0.575);
     border-radius:20px;
     box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
+}
+
+.fa-cloud-showers-heavy{
+    --fa-primary-color:white;
+    --fa-secondary-color:#067EED;
+    --fa-secondary-opacity: 1.00;
 }
 
 /*---------- Media Queries ----------*/

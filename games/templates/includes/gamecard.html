@@ -42,7 +42,7 @@
                                         <span class="spread green">{{ game.scoreboard.score.away }}</span><br>
                                         <span class="spread green">
                                         <!-- If Away Team is Favored Show Spread -->     
-                                            {% if points.spread.current.away > 0 %}{% else %}{{ points.spread.current.away }{% endif %}
+                                            {% if points.spread.current.away > 0 %}{% else %}{{ points.spread.current.away }}{% endif %}
                                         </span><br>        
                                     {% endif %} 
                                 {% endfor %}       
@@ -60,7 +60,7 @@
                                         <span class="spread">{{ game.scoreboard.score.home }}</span><br>
                                         <span class="spread orange">
                                         <!-- If Home Team is Favored Show Spread -->    
-                                            {% if points.spread.current.home > 0 %}{% else %}{{ points.spread.current.home }{% endif %}
+                                            {% if points.spread.current.home > 0 %}{% else %}{{ points.spread.current.home }}{% endif %}
                                         </span><br>
                                     {% else %}
                                         <span class="spread green">{{ game.scoreboard.score.home }}</span><br>

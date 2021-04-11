@@ -6,48 +6,39 @@
                 </div>
             </div>
             <div class="row mx-3">
-                    <div class="col-2 weather-rain-box mb-3 px-3">
-                        <h4 class="white text-center">Gameday Forcast</h4>
-                        {% for weather in data %}
-                            {% if weather.gameDate == date %}
-                                <div class="text-center mx-2">
-                                    {% if weather.gameWeather == 'Clear' %}
-                                        <p class="white m-0"><small><i class="fad fa-sun-cloud"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Clouds' %}
-                                        <p class="white m-0"><small><i class="fad fa-clouds"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Rain' %}
-                                        <p class="white m-0"><small><i class="fad fa-cloud-showers-heavy"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Haze' %}
-                                        <p class="white m-0"><small><i class="fad fa-fog"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Fog' %}
-                                        <p class="white m-0"><small><i class="fad fa-fog"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Drizzle' %}
-                                        <p class="white m-0"><small><i class="fad fa-cloud-drizzle"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Mist' %}
-                                        <p class="white m-0"><small><i class="fad fa-cloud-drizzle"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Thunderstorm' %}
-                                        <p class="white m-0"><small><i class="fad fa-thunderstorm"></i></small></p>
-                                    {% endif %}
-                                    {% if weather.gameWeather == 'Snow' %}
-                                        <p class="white m-0"><small><i class="fad fa-cloud-snow"></i></small></p>
-                                    {% endif %}
-                                    <p class="white m-0"><small>{{ weather.gameTemp }}°</small></p>  
-                                    <p class="white m-0"><small>{{ weather.gameTime }}</small></p>
-                                </div>       
-                            {% endif %}    
-                        {% endfor %}    
+                <div class="col-2 weather-rain-box text-center mb-3 px-1">
+                    <h4 class="dark-blue mb-0">Weather</h4>
+                    <p class="dark-blue mb-0"><small><i class="fad fa-map-marker-alt dark-blue"></i>
+                        {{ venue }}- {{ city }}</small>
+                    </p>
+                    <div class="d-inline-block text-center mx-2">
+                        {% if weather == 'Clear' %}
+                            <h2 class="white mb-1"><i class="fad fa-sun-cloud"></i></h2>
+                        {% endif %}
+                        {% if weather == 'Clouds' %}
+                            <h2 class="white mb-1"><i class="fad fa-clouds"></i></h2>
+                        {% endif %}
+                        {% if weather == 'Rain' %}
+                            <h2 class="mb-1"><i class="fad fa-cloud-showers-heavy"></i></h2>
+                        {% endif %}
+                        {% if weather == 'Haze' or weather == 'Fog' %}
+                            <h2 class="white mb-1"><i class="fad fa-fog"></i></h2>
+                        {% endif %}
+                        {% if weather == 'Drizzle' or weather == 'Mist' %}
+                            <h2 class="white mb-1"><i class="fad fa-cloud-drizzle"></i></h2>
+                        {% endif %}
+                        {% if weather == 'Thunderstorm' %}
+                            <h2 class="white mb-1"><i class="fad fa-thunderstorm"></i></h2>
+                        {% endif %}
+                        {% if weather == 'Snow' %}
+                            <h2 class="white mb-1"><i class="fad fa-cloud-snow"></i></h2>
+                        {% endif %}
+                        <h3 class="white mb-1">{{ temp }}°</h3>  
                     </div>
-                   
+                </div>
             </div>
             <div class="row mx-3">
-                <div class="col-2 matchup-info-box px-3">
+                <div class="col-2 matchup-info-box text-center px-1">
                     {% include 'includes/mlb_info_box.html' %}
                 </div>    
             </div>
