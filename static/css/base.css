@@ -515,6 +515,11 @@ img {
     box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);    
 }
 
+.weather-rain-box{
+    background-color:rgb(15, 33, 61);
+    border-radius:20px;
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
+}
 
 /*---------- Media Queries ----------*/
 

@@ -1,0 +1,24 @@
+
+            
+                    <h4 class="dark-blue text-center"><strong>Game Info</strong></h4>
+                    <p class="dark-blue mb-1"><i class="fad fa-map-marker-alt dark-blue mr-2"></i>{{ venue }} - {{ city }}</p>
+                    <p class="dark-blue mb-1"><i class="fad fa-calendar-alt dark-blue mr-1"></i>{{ date }}<i class="fad fa-clock dark-blue ml-3 mr-1"></i>{{ time }}</p>
+                    <br>
+                    <h6 class="dark-blue text-center mt-2">Betting Lines</h6> 
+                    <p class="dark-blue mb-0"><strong>{{ awayAbbr }}</strong>:&nbsp;{{ awaySpread }}&nbsp;&nbsp;
+                        {% if "-" in awayOdds %}{{ awayOdds }}{% else %}+{{ awayOdds }}{% endif %}
+                    </p>
+                    <p class="dark-blue mb-1">MoneyLine:&nbsp;
+                        {% if "-" in awayML %}{{ awayML }}{% else %}+{{ awayML }}{% endif %}
+                    </p>
+                    <br>
+                    <p class="dark-blue mb-1"><strong>{{ homeAbbr }}</strong>:&nbsp;{{ homeSpread }}&nbsp;&nbsp;
+                        {% if "-" in homeOdds %}{{ homeOdds }}{% else %}+{{ homeOdds }}{% endif %}
+                    </p>
+                    <p class="dark-blue mb-1">MoneyLine:&nbsp;
+                        {% if "-" in homeML %}{{ homeML }}{% else %}+{{ homeML }}{% endif %}
+                    </p>
+                    <br>
+                    <p class="dark-blue text-center mb-0"><strong>O/U</strong>: {{ total }}</p>
+                    <p class="dark-blue text-center">Over: {{ over }}&nbsp;&nbsp;Under: {{ under }}</p>
+             

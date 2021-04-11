@@ -44,10 +44,15 @@ def matchups(request):
     results = requests.request("GET", url,
                                headers=headers, params=params).json()
     data = results['list']
-    for result in data:
-        des = result['dt_txt']
-        weatherDate = datetime.datetime.strptime(des, '%Y-%m-%d %H:%M:%S')
-        pprint(weatherDate)
+    for weather in data:
+        weather_date = weather['dt_txt']
+        weatherDatetime = datetime.datetime.strptime(
+                                                 weather_date,
+                                                 '%Y-%m-%d %H:%M:%S')
+        weather['gameDate'] = weatherDatetime.strftime("%B %d, %Y")
+        weather['gameTime'] = weatherDatetime.strftime("%-I%p")
+        weather['gameTemp'] = round(weather['main']['temp'])
+        weather['gameWeather'] = weather['weather'][0]['main']
 
     context = {
         'summary': summary,
@@ -71,6 +76,7 @@ def matchups(request):
         'over': over,
         'under': under,
         'results': results,
+        'data': data,
     }
 
     return render(request, 'matchups/matchups.html', context)
