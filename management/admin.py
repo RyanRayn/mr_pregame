@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import League, TeamName, Season
+from .models import League, TeamName, Season, MLBToday
 from .models import BasketballTeamStats, BaseballGame, StartingPitcher
 
 
@@ -9,3 +9,4 @@ admin.site.register(Season)
 admin.site.register(BasketballTeamStats)
 admin.site.register(BaseballGame)
 admin.site.register(StartingPitcher)
+admin.site.register(MLBToday)

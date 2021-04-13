@@ -1,0 +1,32 @@
+
+                    <h4 class="dark-blue mb-0">Weather</h4>
+                    <p class="dark-blue mb-0"><small><i class="fad fa-map-marker-alt dark-blue"></i>
+                        {{ venue }}- {{ city }}</small>
+                    </p>
+                    {% for weather in weather_data|slice:":5" %}
+                        <div class="d-inline-block text-center mx-1 text-nowrap">
+                            <p class="white mb-1"><small>{{ weather.gameTime }}</small></p>
+                            {% if weather.gameWeather == 'Clear' %}
+                                <p class="white mb-1"><i class="fad fa-sun-cloud"></i></p>
+                            {% endif %}
+                            {% if weather.gameWeather == 'Clouds' %}
+                                <p class="white mb-1"><i class="fad fa-clouds"></i></p>
+                            {% endif %}
+                            {% if weather.gameWeather == 'Rain' %}
+                                <p class="mb-1"><i class="fad fa-cloud-showers-heavy"></i></p>
+                            {% endif %}
+                            {% if weather.gameWeather == 'Haze' or weather.gameWeather == 'Fog' %}
+                                <p class="white mb-1"><i class="fad fa-fog"></i></p>
+                            {% endif %}
+                            {% if weather.gameWeather == 'Drizzle' or weather.gameWeather == 'Mist' %}
+                                <p class="white mb-1"><i class="fad fa-cloud-drizzle"></i></p>
+                            {% endif %}
+                            {% if weather.gameWeather == 'Thunderstorm' %}
+                                <p class="white mb-1"><i class="fad fa-thunderstorm"></i></p>
+                            {% endif %}
+                            {% if weather.gameWeather == 'Snow' %}
+                                <p class="white mb-1"><i class="fad fa-cloud-snow"></i></p>
+                            {% endif %}
+                            <p class="white mb-1"><small>{{ weather.gameTemp }}°</small></p>  
+                        </div>
+                    {% endfor %}

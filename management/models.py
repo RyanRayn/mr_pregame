@@ -191,3 +191,28 @@ class StartingPitcher(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class MLBToday(models.Model):
+    game_id = models.IntegerField()
+    schedule = models.DateTimeField()
+    summary = models.CharField(max_length=100)
+    away_team = models.CharField(max_length=100)
+    away_abbr = models.CharField(max_length=10)
+    home_team = models.CharField(max_length=100)
+    home_abbr = models.CharField(max_length=10)
+    venue = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2)
+    away_spread = models.IntegerField()
+    away_odds = models.IntegerField()
+    away_moneyline = models.IntegerField()
+    home_spread = models.IntegerField()
+    home_odds = models.IntegerField()
+    home_moneyline = models.IntegerField()
+    total = models.IntegerField()
+    over_odds = models.IntegerField()
+    under_odds = models.IntegerField()
+
+    def __str__(self):
+        return self.game_id
