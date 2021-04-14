@@ -30,7 +30,6 @@ def matchups(request):
         total = request.GET.get('total')
         over = request.GET.get('over')
         under = request.GET.get('under')
-        games = request.GET.get('games')
 
     country = ",us"
     cityWeather = city + country
@@ -79,8 +78,6 @@ def matchups(request):
         'over': over,
         'under': under,
         'weather_data': weather_data,
-        'games': games,
     }
-    pprint(games)
 
     return render(request, 'matchups/matchups.html', context)
