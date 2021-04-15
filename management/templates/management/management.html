@@ -22,6 +22,11 @@
                     <div class="">
                         <a class="white" href="{% url 'add_pitcher_away' %}">Add Pitcher</a>
                     </div>
+                    <div class="">
+                        <form method="GET" action="{% url 'final_scores' %}">
+                            <button type="submit" class="btn white">Get Scores</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mx-5 d-flex justify-content-center align-items-center">

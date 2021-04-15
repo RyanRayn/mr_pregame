@@ -200,57 +200,90 @@ def add_pitcher_home(request):
 
 
 @login_required
-def mlb_games_today():
+def final_scores(request):
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
 
-    todays_date = datetime.datetime.now(timezone('America/Los_Angeles'))
-    today = todays_date.strftime('%Y-%m-%d')
+    if request.method == "GET":
 
-    params = {"league": 'MLB', "date": today}
+        todays_date = datetime.datetime.now(timezone('America/Los_Angeles'))
+        yesterday = todays_date.strftime('%Y-%m-%d')
 
-    url = "https://sportspage-feeds.p.rapidapi.com/games"
+        params = {"league": 'MLB', "date": yesterday}
 
-    headers = {
-        'x-rapidapi-key': settings.RAPID_API_KEY,
-        'x-rapidapi-host': "sportspage-feeds.p.rapidapi.com"
+        url = "https://sportspage-feeds.p.rapidapi.com/games"
+
+        headers = {
+            'x-rapidapi-key': settings.RAPID_API_KEY,
+            'x-rapidapi-host': "sportspage-feeds.p.rapidapi.com"
         }
 
-    results = requests.request("GET", url,
-                               headers=headers,
-                               params=params).json()
+        results = requests.request("GET", url,
+                                   headers=headers,
+                                   params=params).json()
 
-    games = results['results']
+        games = results['results']
 
-    for game in games:
-        game_id = game['gameId']
-        schedule = game['schedule']['date']
-        summary = game['summary']
-        away_team = game['teams']['away']['team']
-        away_abbr = game['teams']['away']['abbreviation']
-        home_team = game['teams']['home']['team']
-        home_abbr = game['teams']['home']['abbreviation']
-        venue = game['venue']['name']
-        city = game['venue']['city']
-        state = game['venue']['state']
-        away_spread = game['odds'][0]['spread']['current']['away']
-        home_spread = game['odds'][0]['spread']['current']['home']
-        away_odds = game['odds'][0]['spread']['current']['awayOdds']
-        home_odds = game['odds'][0]['spread']['current']['homeOdds']
-        away_moneyline = game['odds'][0]['moneyline']['current']['awayOdds']
-        home_moneyline = game['odds'][0]['moneyline']['current']['homeOdds']
-        total = game['odds'][0]['total']['current']['total']
-        over_odds = game['odds'][0]['total']['current']['overOdds']
-        under_odds = game['odds'][0]['total']['current']['underOdds']
+        for game in games:
+            game_id = game['gameId']
+            gamedate = game['schedule']['date']
+            summary = game['summary']
+            away_team = game['teams']['away']['team']
+            away_abbr = game['teams']['away']['abbreviation']
+            home_team = game['teams']['home']['team']
+            home_abbr = game['teams']['home']['abbreviation']
+            venue = game['venue']['name']
+            city = game['venue']['city']
+            state = game['venue']['state']
+            status = game['status']
+            if 'odds' in game:
+                away_spread = game['odds'][0]['spread']['current']['away']
+                home_spread = game['odds'][0]['spread']['current']['home']
+                away_odds = game['odds'][0]['spread']['current']['awayOdds']
+                home_odds = game['odds'][0]['spread']['current']['homeOdds']
+                away_moneyline = game['odds'][0]['moneyline']['current']['awayOdds']
+                home_moneyline = game['odds'][0]['moneyline']['current']['homeOdds']
+                total = game['odds'][0]['total']['current']['total']
+                over_odds = game['odds'][0]['total']['current']['overOdds']
+                under_odds = game['odds'][0]['total']['current']['underOdds']
 
-        MLBToday.objects.update_or_create(
-            game_id=game_id, defaults={
-                'game_id': game_id, 'schedule': schedule,
-                'summary': summary, 'away_team': away_team,
-                'away_abbr': away_abbr, 'home_team': home_team,
-                'home_abbr': home_abbr, 'venue': venue,
-                'city': city, 'state': state, 'total': total,
-                'away_spread': away_spread, 'home_spread': home_spread,
-                'away_odds': away_odds, 'home_odds': home_odds,
-                'away_moneyline': away_moneyline, 'over_odds': over_odds,
-                'home_moneyline': home_moneyline,
-                'under_odds': under_odds}
+                MLBToday.objects.update_or_create(
+                    game_id=game_id, defaults={
+                        'game_id': game_id,
+                        'gamedate': gamedate,
+                        'summary': summary,
+                        'status': status,
+                        'away_team': away_team,
+                        'away_abbr': away_abbr,
+                        'home_team': home_team,
+                        'home_abbr': home_abbr,
+                        'venue': venue,
+                        'city': city,
+                        'state': state,
+                        'total': total,
+                        'away_spread': away_spread,
+                        'home_spread': home_spread,
+                        'away_odds': away_odds,
+                        'home_odds': home_odds,
+                        'away_moneyline': away_moneyline,
+                        'over_odds': over_odds,
+                        'home_moneyline': home_moneyline,
+                        'under_odds': under_odds}
                 )
+            else:
+                MLBToday.objects.update_or_create(
+                    game_id=game_id, defaults={
+                        'game_id': game_id,
+                        'gamedate': gamedate,
+                        'summary': summary,
+                        'status': status,
+                        'away_team': away_team,
+                        'away_abbr': away_abbr,
+                        'home_team': home_team,
+                        'home_abbr': home_abbr,
+                        'venue': venue,
+                        'city': city,
+                        'state': state}
+                )
+    return render(request, 'management/management.html')

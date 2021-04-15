@@ -2,12 +2,13 @@ import requests
 from django.shortcuts import render
 from django.conf import settings
 import datetime
-from pytz import timezone
+import pytz
+from management.models import MLBToday
 
 
 def games(request):
     """ View to return games page """
-    todays_date = datetime.datetime.now(timezone('America/Los_Angeles'))
+    todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
     today = todays_date.strftime('%Y-%m-%d')
     tomorrow = todays_date + datetime.timedelta(days=1)
     print(todays_date)
@@ -32,7 +33,28 @@ def games(request):
     games = results['results']
 
     for game in games:
+        game_id = game['gameId']
         gamedate = game['schedule']['date']
+        summary = game['summary']
+        status = game['status']
+        away_team = game['teams']['away']['team']
+        away_abbr = game['teams']['away']['abbreviation']
+        home_team = game['teams']['home']['team']
+        home_abbr = game['teams']['home']['abbreviation']
+        venue = game['venue']['name']
+        city = game['venue']['city']
+        state = game['venue']['state']
+        if 'odds' in game:
+            away_spread = game['odds'][0]['spread']['current']['away']
+            home_spread = game['odds'][0]['spread']['current']['home']
+            away_odds = game['odds'][0]['spread']['current']['awayOdds']
+            home_odds = game['odds'][0]['spread']['current']['homeOdds']
+            away_moneyline = game['odds'][0]['moneyline']['current']['awayOdds']
+            home_moneyline = game['odds'][0]['moneyline']['current']['homeOdds']
+            total = game['odds'][0]['total']['current']['total']
+            over_odds = game['odds'][0]['total']['current']['overOdds']
+            under_odds = game['odds'][0]['total']['current']['underOdds']
+
         datetime_date = datetime.datetime.strptime(
             gamedate,
             '%Y-%m-%dT%H:%M:%S.%fZ')
@@ -40,8 +62,23 @@ def games(request):
         game['game_time'] = datetime_date.strftime('%-I:%M %p')
 
         if 'scoreboard' in game and 'score' in game['scoreboard']:
-            score = game['scoreboard']['score']
-            game['total'] = score['home'] + score['away']
+            home_score = game['scoreboard']['score']['home']
+            away_score = game['scoreboard']['score']['away']
+
+        MLBToday.objects.update_or_create(
+            game_id=game_id, defaults={
+                'game_id': game_id, 'gamedate': gamedate,
+                'summary': summary, 'away_team': away_team,
+                'away_abbr': away_abbr, 'home_team': home_team,
+                'home_abbr': home_abbr, 'venue': venue,
+                'city': city, 'state': state, 'total': total,
+                'away_spread': away_spread, 'home_spread': home_spread,
+                'away_odds': away_odds, 'home_odds': home_odds,
+                'away_moneyline': away_moneyline, 'over_odds': over_odds,
+                'home_moneyline': home_moneyline, 'status': status,
+                'under_odds': under_odds, 'home_score': home_score,
+                'away_score': away_score}
+        )
 
     context = {
         'games': games,

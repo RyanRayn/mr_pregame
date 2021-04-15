@@ -195,7 +195,7 @@ class StartingPitcher(models.Model):
 
 class MLBToday(models.Model):
     game_id = models.IntegerField()
-    schedule = models.DateTimeField()
+    gamedate = models.DateTimeField()
     summary = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     away_abbr = models.CharField(max_length=10)
@@ -204,15 +204,18 @@ class MLBToday(models.Model):
     venue = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=2)
-    away_spread = models.IntegerField()
-    away_odds = models.IntegerField()
-    away_moneyline = models.IntegerField()
-    home_spread = models.IntegerField()
-    home_odds = models.IntegerField()
-    home_moneyline = models.IntegerField()
-    total = models.IntegerField()
-    over_odds = models.IntegerField()
-    under_odds = models.IntegerField()
+    away_spread = models.IntegerField(default=0)
+    away_odds = models.IntegerField(default=0)
+    away_moneyline = models.IntegerField(default=0)
+    home_spread = models.IntegerField(default=0)
+    home_odds = models.IntegerField(default=0)
+    home_moneyline = models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
+    over_odds = models.IntegerField(default=0)
+    under_odds = models.IntegerField(default=0)
+    home_score = models.IntegerField(default=0)
+    away_score = models.IntegerField(default=0)
+    status = models.CharField(max_length=25)
 
     def __str__(self):
-        return self.game_id
+        return str(self.game_id)

@@ -13,4 +13,5 @@ urlpatterns = [
          views.add_baseball_home, name='add_baseball_home'),
     path('add_pitcher_away', views.add_pitcher_away, name='add_pitcher_away'),
     path('add_pitcher_home', views.add_pitcher_home, name='add_pitcher_home'),
+    path('final_scores', views.final_scores, name='final_scores'),
 ]
