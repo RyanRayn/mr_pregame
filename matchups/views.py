@@ -4,10 +4,12 @@ from django.conf import settings
 from pprint import pprint
 import datetime
 import pytz
+from management.models import MLBGameLine
 
 
 def matchups(request):
     """ a view to show MLB game matchups """
+    game_lines = MLBGameLine.objects.all()
 
     if request.method == "GET":
         summary = request.GET.get('summary')
@@ -78,6 +80,7 @@ def matchups(request):
         'over': over,
         'under': under,
         'weather_data': weather_data,
+        'game_lines': game_lines,
     }
 
     return render(request, 'matchups/matchups.html', context)

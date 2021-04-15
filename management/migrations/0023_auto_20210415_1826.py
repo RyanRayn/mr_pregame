@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mlbgameline',
             name='gameday',
-            field=models.DateTimeField(default=django.utils.timezone.now),
+            field=models.DateTimeField(default=0),
             preserve_default=False,
         ),
         migrations.AddField(

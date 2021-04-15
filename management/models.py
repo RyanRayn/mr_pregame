@@ -196,7 +196,6 @@ class StartingPitcher(models.Model):
 class MLBGameLine(models.Model):
     game_id = models.IntegerField()
     gamedate = models.DateTimeField()
-    gameday = models.DateTimeField()
     summary = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     away_abbr = models.CharField(max_length=10)
@@ -221,4 +220,4 @@ class MLBGameLine(models.Model):
     pick_type = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return str(self.gameday)
+        return str(self.summary)

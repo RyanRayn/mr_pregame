@@ -1,4 +1,25 @@
-
+            <div id="mlbGames" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="col-1 carousel-item active">
+                        <p class="white">MLB</p>
+                    </div>
+                    {% for game in game_lines %}
+                        <div class="col-1 carousel-item text-center">
+                            <p class="white">{{ game.away_abbr }}</p>
+                            <p class="white">vs.</p>
+                            <p class="white">{{ game.home_abbr }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#mlbGames" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#mlbGames" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+            </div>
             <div class="row mb-3">
                 <div class="col-12 text-center white opacity-90">
                     <h1>{{ summary }}</h1>
