@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import AwayBaseballGames, HomeBaseballGames, Pitcher
 import datetime
 from sportsipy.mlb.teams import Teams as MLBTeams
-from .models import BaseballGame, MLBToday
+from .models import MLBGame, MLBGameLine
 from pytz import timezone
 
 
@@ -64,7 +64,7 @@ def add_baseball_away(request):
 @login_required
 def add_baseball_home(request):
     """ Add a baseball stats to database """
-    game = BaseballGame.objects.last()
+    game = MLBGame.objects.last()
 
     opponent = game.name
     runs = game.runs_allowed
@@ -130,7 +130,7 @@ def add_baseball_home(request):
 @login_required
 def add_pitcher_away(request):
     """ Add a baseball stats to database """
-    game = BaseballGame.objects.last()
+    game = MLBGame.objects.last()
 
     runs_first_five = game.runs_allowed_first_five
 
@@ -166,7 +166,7 @@ def add_pitcher_away(request):
 @login_required
 def add_pitcher_home(request):
     """ Add a baseball stats to database """
-    game = BaseballGame.objects.last()
+    game = MLBGame.objects.last()
 
     runs_first_five = game.runs_allowed_first_five
 
@@ -208,9 +208,9 @@ def final_scores(request):
     if request.method == "GET":
 
         todays_date = datetime.datetime.now(timezone('America/Los_Angeles'))
-        yesterday = todays_date.strftime('%Y-%m-%d')
+        gameday = todays_date.strftime('%Y-%m-%d')
 
-        params = {"league": 'MLB', "date": yesterday}
+        params = {"league": 'MLB', "date": gameday}
 
         url = "https://sportspage-feeds.p.rapidapi.com/games"
 
@@ -238,17 +238,18 @@ def final_scores(request):
             state = game['venue']['state']
             status = game['status']
             if 'odds' in game:
-                away_spread = game['odds'][0]['spread']['current']['away']
-                home_spread = game['odds'][0]['spread']['current']['home']
-                away_odds = game['odds'][0]['spread']['current']['awayOdds']
-                home_odds = game['odds'][0]['spread']['current']['homeOdds']
-                away_moneyline = game['odds'][0]['moneyline']['current']['awayOdds']
-                home_moneyline = game['odds'][0]['moneyline']['current']['homeOdds']
-                total = game['odds'][0]['total']['current']['total']
-                over_odds = game['odds'][0]['total']['current']['overOdds']
-                under_odds = game['odds'][0]['total']['current']['underOdds']
+                game_odds = game['odds'][0]
+                away_spread = game_odds['spread']['current']['away']
+                home_spread = game_odds['spread']['current']['home']
+                away_odds = game_odds['spread']['current']['awayOdds']
+                home_odds = game_odds['spread']['current']['homeOdds']
+                away_moneyline = game_odds['moneyline']['current']['awayOdds']
+                home_moneyline = game_odds['moneyline']['current']['homeOdds']
+                total = game_odds['total']['current']['total']
+                over_odds = game_odds['total']['current']['overOdds']
+                under_odds = game_odds['total']['current']['underOdds']
 
-                MLBToday.objects.update_or_create(
+                MLBGameLine.objects.update_or_create(
                     game_id=game_id, defaults={
                         'game_id': game_id,
                         'gamedate': gamedate,
@@ -269,10 +270,22 @@ def final_scores(request):
                         'away_moneyline': away_moneyline,
                         'over_odds': over_odds,
                         'home_moneyline': home_moneyline,
-                        'under_odds': under_odds}
+                        'under_odds': under_odds,
+                        'gameday': gameday}
                 )
+
+            elif 'scoreboard' in game and 'score' in game['scoreboard']:
+                home_score = game['scoreboard']['score']['home']
+                away_score = game['scoreboard']['score']['away']
+
+                MLBGameLine.objects.update_or_create(
+                    game_id=game_id, defaults={
+                        'home_score': home_score,
+                        'away_score': away_score}
+                )
+
             else:
-                MLBToday.objects.update_or_create(
+                MLBGameLine.objects.update_or_create(
                     game_id=game_id, defaults={
                         'game_id': game_id,
                         'gamedate': gamedate,
@@ -284,6 +297,7 @@ def final_scores(request):
                         'home_abbr': home_abbr,
                         'venue': venue,
                         'city': city,
-                        'state': state}
+                        'state': state,
+                        'gameday': gameday}
                 )
     return render(request, 'management/management.html')

@@ -67,7 +67,7 @@ class BasketballTeamStats(models.Model):
         return self.name
 
 
-class BaseballGame(models.Model):
+class MLBGame(models.Model):
     name = models.ForeignKey('TeamName',
                              null=False, blank=False, on_delete=models.CASCADE)
     nicknames = (
@@ -193,9 +193,10 @@ class StartingPitcher(models.Model):
         return self.name
 
 
-class MLBToday(models.Model):
+class MLBGameLine(models.Model):
     game_id = models.IntegerField()
     gamedate = models.DateTimeField()
+    gameday = models.DateTimeField()
     summary = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     away_abbr = models.CharField(max_length=10)
@@ -216,6 +217,8 @@ class MLBToday(models.Model):
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
     status = models.CharField(max_length=25)
+    pick = models.TextField(blank=True)
+    pick_type = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return str(self.game_id)
+        return str(self.gameday)

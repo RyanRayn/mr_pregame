@@ -1,5 +1,5 @@
 from django import forms
-from .models import BasketballTeamStats, BaseballGame
+from .models import BasketballTeamStats, MLBGame
 from .models import StartingPitcher, TeamName, Season
 
 
@@ -13,7 +13,7 @@ class BasketballGame(forms.ModelForm):
 class AwayBaseballGames(forms.ModelForm):
 
     class Meta:
-        model = BaseballGame
+        model = MLBGame
         fields = '__all__'
 
     runs_first_five = forms.IntegerField(label='Runs 5', required=False,
@@ -47,7 +47,7 @@ class AwayBaseballGames(forms.ModelForm):
 class HomeBaseballGames(forms.ModelForm):
 
     class Meta:
-        model = BaseballGame
+        model = MLBGame
         fields = '__all__'
 
     runs_first_five = forms.IntegerField(label='Runs 5', required=False,
