@@ -8,17 +8,27 @@ from management.models import MLBGameLine
 
 def games(request):
     """ View to return games page """
+
+    # Get the date for the SportspageFeeds API params
     todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
     today = todays_date.strftime('%Y-%m-%d')
     tomorrow = todays_date + datetime.timedelta(days=1)
-    print(todays_date)
+
+    # Get data for SportspageFeeds API params
+    # from form in Navbar for 'leagueName'.
+    # If gameday has value from 'Tomorrow' button on games.html
+    # the params will pull tomorrows games else 'today'
 
     if request.method == "GET":
         gameday = request.GET.get('gameDate')
-        league = request.GET.get('leagueName')
+        league_name = request.GET.get('leagueName')
 
-    params = {"league": league, "date": gameday}
-
+        if gameday:
+            params = {"league": league_name, "date": gameday}
+        else:
+            params = {"league": league_name, 'date': today}
+        print(today)
+        print(gameday)
     url = "https://sportspage-feeds.p.rapidapi.com/games"
 
     headers = {
@@ -32,10 +42,14 @@ def games(request):
 
     games = results['results']
 
+    # SportspageFeeds API data to be directly saved into
+    # db when league name is clicked in Nav.
+
     for game in games:
         game_id = game['gameId']
-        gamedate = game['schedule']['date']
+        timestamp = game['schedule']['date']
         summary = game['summary']
+        league = game['details']['league']
         status = game['status']
         away_team = game['teams']['away']['team']
         away_abbr = game['teams']['away']['abbreviation']
@@ -45,50 +59,96 @@ def games(request):
         city = game['venue']['city']
         state = game['venue']['state']
 
+        # SportspageFeeds API timestamp is UTC time.
+        # This converts it to US/Eastern.
+
         datetime_date = datetime.datetime.strptime(
-            gamedate,
+            timestamp,
             '%Y-%m-%dT%H:%M:%S.%fZ')
-        game['game_date'] = datetime_date.strftime('%B %d, %Y')
-        game['game_time'] = datetime_date.strftime('%-I:%M %p')
+
+        current_tz = pytz.timezone("UTC")
+        new_tz = pytz.timezone("US/Eastern")
+        localized_time = current_tz.localize(datetime_date)
+        new_timestamp = localized_time.astimezone(new_tz)
+        game['timestamp'] = new_timestamp
+        game['game_date'] = new_timestamp.strftime('%B %d, %Y')
+        game['game_time'] = new_timestamp.strftime('%-I:%M %p')
+        gamedate = new_timestamp
+
+        # Create new game instance in MLBGamline model
+        # or update with game_id as key.
+
+        MLBGameLine.objects.update_or_create(
+            game_id=game_id, defaults={
+                'game_id': game_id,
+                'gamedate': gamedate,
+                'summary': summary,
+                'status': status,
+                'away_team': away_team,
+                'away_abbr': away_abbr,
+                'home_team': home_team,
+                'home_abbr': home_abbr,
+                'venue': venue,
+                'city': city,
+                'state': state,
+                'league': league}
+        )
+
+        # If the game has odds already set,
+        # update or create new instance of game.
 
         if 'odds' in game:
             game_odds = game['odds'][0]
-            away_spread = game_odds['spread']['current']['away']
-            home_spread = game_odds['spread']['current']['home']
-            away_odds = game_odds['spread']['current']['awayOdds']
-            home_odds = game_odds['spread']['current']['homeOdds']
-            away_moneyline = game_odds['moneyline']['current']['awayOdds']
-            home_moneyline = game_odds['moneyline']['current']['homeOdds']
-            total = game_odds['total']['current']['total']
-            over_odds = game_odds['total']['current']['overOdds']
-            under_odds = game_odds['total']['current']['underOdds']
 
-            MLBGameLine.objects.update_or_create(
-                game_id=game_id, defaults={
-                    'game_id': game_id,
-                    'gamedate': gamedate,
-                    'summary': summary,
-                    'status': status,
-                    'away_team': away_team,
-                    'away_abbr': away_abbr,
-                    'home_team': home_team,
-                    'home_abbr': home_abbr,
-                    'venue': venue,
-                    'city': city,
-                    'state': state,
-                    'total': total,
-                    'away_spread': away_spread,
-                    'home_spread': home_spread,
-                    'away_odds': away_odds,
-                    'home_odds': home_odds,
-                    'away_moneyline': away_moneyline,
-                    'over_odds': over_odds,
-                    'home_moneyline': home_moneyline,
-                    'under_odds': under_odds,
-                    'gameday': gameday}
-            )
+            # If game has 'spread' in odds set,
+            # update or create new instance of game.
 
-        elif 'scoreboard' in game and 'score' in game['scoreboard']:
+            if 'spread' in game_odds:
+                away_spread = game_odds['spread']['current']['away']
+                home_spread = game_odds['spread']['current']['home']
+                away_odds = game_odds['spread']['current']['awayOdds']
+                home_odds = game_odds['spread']['current']['homeOdds']
+
+                MLBGameLine.objects.update_or_create(
+                    game_id=game_id, defaults={
+                        'away_spread': away_spread,
+                        'home_spread': home_spread,
+                        'away_odds': away_odds,
+                        'home_odds': home_odds}
+                )
+
+            # If game has 'moneyline' in odds set,
+            # update or create new instance of game.
+
+            if 'moneyline' in game_odds:
+                away_moneyline = game_odds['moneyline']['current']['awayOdds']
+                home_moneyline = game_odds['moneyline']['current']['homeOdds']
+
+                MLBGameLine.objects.update_or_create(
+                    game_id=game_id, defaults={
+                        'away_moneyline': away_moneyline,
+                        'home_moneyline': home_moneyline}
+                )
+
+            # If the game has 'total' in odds set,
+            # update or create new instance of game.
+
+            if 'total' in game_odds:
+                total = game_odds['total']['current']['total']
+                over_odds = game_odds['total']['current']['overOdds']
+                under_odds = game_odds['total']['current']['underOdds']
+
+                MLBGameLine.objects.update_or_create(
+                    game_id=game_id, defaults={
+                        'total': total,
+                        'over_odds': over_odds,
+                        'under_odds': under_odds}
+                )
+
+        # If the game is in progress or final,
+        # update score or create new instance of game.
+
+        if 'scoreboard' in game and 'score' in game['scoreboard']:
             home_score = game['scoreboard']['score']['home']
             away_score = game['scoreboard']['score']['away']
 
@@ -96,23 +156,6 @@ def games(request):
                 game_id=game_id, defaults={
                     'home_score': home_score,
                     'away_score': away_score}
-            )
-
-        else:
-            MLBGameLine.objects.update_or_create(
-                game_id=game_id, defaults={
-                    'game_id': game_id,
-                    'gamedate': gamedate,
-                    'summary': summary,
-                    'status': status,
-                    'away_team': away_team,
-                    'away_abbr': away_abbr,
-                    'home_team': home_team,
-                    'home_abbr': home_abbr,
-                    'venue': venue,
-                    'city': city,
-                    'state': state,
-                    'gameday': gameday}
             )
 
     context = {
