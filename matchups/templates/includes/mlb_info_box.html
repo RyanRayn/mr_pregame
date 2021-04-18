@@ -1,49 +1,69 @@
-            {% for game in game_lines %}
-                {% if game.game_id == gameID %}
+        {% for game in game_lines %}
+            {% if game.game_id == gameID %}
                     <h4 class="dark-blue text-center"><strong>Game Info</strong></h4>
-                    <p class="dark-blue mb-1 text-center"><i class="fad fa-calendar-alt dark-blue mr-1"></i>{{ game.gamedate|date }}<i class="fad fa-clock dark-blue ml-3 mr-1"></i>{{ game.gamedate|time }}</p>
-                    <br>
-                    <p class="dark-blue mb-0"><strong>Home:</strong></p>
+{# Game Date/Location #}                    
+                <div class="mb-2">   
+                    <p class="dark-blue mb-0">
+                        <small>
+                        <i class="fad fa-calendar-alt dark-blue mr-1"></i>{{ game.gamedate|date }}
+                        <i class="fad fa-clock dark-blue mr-1"></i>{{ game.gamedate|time }}
+                        </small>
+                    </p>
+                    <p class="dark-blue mb-0">
+                        <small>
+                        <i class="fad fa-map-marker-alt dark-blue mr-1"></i>{{ game.venue }}, {{ game.state }}
+                        </small>
+                    </p>
+                </div> 
+{# Away Team Line #}                   
+                <div class="mb-2">
                     {% if not game.away_odds %} 
-                        <p class="dark-blue mb-0"><strong>{{ game.away_team }}</strong>:</p>
+                        <p class="dark-blue mb-0"><strong>{{ game.away_team }}</strong></p>
                         <p class="dark-blue mb-0">No lines set.</p>
                     {% else %}
-                        <p class="dark-blue mb-0"><strong>{{ game.away_team }}</strong>:&nbsp;
+                        <p class="dark-blue mb-0">
+                            <strong>{{ game.away_team }}</strong>&nbsp;&nbsp;
                             {% if game.away_spread < 0 %}
-                                {{ game.away_spread }}&nbsp;&nbsp;
+                                {{ game.away_spread }}
                             {% else %}
                                 +{{ game.away_spread }}
                             {% endif %}
+                        </p>
+                        <p class="dark-blue mb-0">
                             {% if game.away_odds < 0 %}
-                                {{ game.away_odds }}
+                                Odds: {{ game.away_odds }}
                             {% else %}
-                                +{{ game.away_odds }}
+                                Odds: +{{ game.away_odds }}
                             {% endif %}
                         </p>   
-                        <p class="dark-blue mb-0">Moneyline:&nbsp;
+                        <p class="dark-blue mb-0">Moneyline:
                             {% if game.away_moneyline < 0 %}
                                 {{ game.away_moneyline }}
                             {% else %}
                                 +{{ game.away_moneyline }}
                             {% endif %}
                         </p>
-                    {% endif %}    
-                    <br>
+                    {% endif %} 
+                </div>
+{# Home Team Line #}                    
+                <div class="mb-2">
                     {% if not game.home_odds %}
-                        <p class="dark-blue mb-0"><strong>{{ game.home_team }}</strong>:</p>
+                        <p class="dark-blue mb-0"><strong>{{ game.home_team }}</strong></p>
                         <p class="dark-blue mb-0">No lines set.</p>
                     {% else %}    
-                        <p class="dark-blue mb-0"><strong>{{ game.home_team }}</strong>:</p>
                         <p class="dark-blue mb-0">
+                            <strong>{{ game.home_team }}</strong>&nbsp;&nbsp;
                             {% if game.home_spread < 0 %}
-                                {{ game.home_spread }}&nbsp;&nbsp;
+                                {{ game.home_spread }}
                             {% else %}
                                 +{{ game.home_spread }}
                             {% endif %}
+                        </p>
+                        <p class="dark-blue mb-0">
                             {% if game.home_odds < 0 %}
-                                {{ game.home_odds }}
+                                Odds: {{ game.home_odds }}
                             {% else %}
-                                +{{ game.home_odds }}
+                                Odds: +{{ game.home_odds }}
                             {% endif %}
                         </p>
                         <p class="dark-blue mb-0">MoneyLine:&nbsp;
@@ -53,12 +73,15 @@
                                 +{{ game.home_moneyline }}
                             {% endif %}
                         </p>
-                    {% endif %}    
-                    <br>
+                    {% endif %}
+                </div>
+{# Over/Under #}
+                <div>
                     {% if not game.total %}
                     {% else %}
-                        <p class="dark-blue mb-0"><strong>O/U</strong>: {{ game.total }}</p>
+                        <p class="dark-blue mb-0"><strong>Total</strong>&nbsp;&nbsp;{{ game.total }}</p>
                         <p class="dark-blue">Over: {{ game.over_odds }}&nbsp;&nbsp;Under: {{ game.under_odds }}</p>
-                    {% endif %} 
-                {% endif %}       
-            {% endfor %} 
+                        {% endif %}
+                </div>       
+            {% endif %}       
+        {% endfor %} 

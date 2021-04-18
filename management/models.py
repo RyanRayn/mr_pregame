@@ -206,13 +206,15 @@ class MLBGameLine(models.Model):
     venue = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=2)
-    away_spread = models.IntegerField(default=0)
+    away_spread = models.DecimalField(
+        max_digits=4, decimal_places=1, default=0.0)
     away_odds = models.IntegerField(default=0)
     away_moneyline = models.IntegerField(default=0)
-    home_spread = models.IntegerField(default=0)
+    home_spread = models.DecimalField(
+        max_digits=4, decimal_places=1, default=0.0)
     home_odds = models.IntegerField(default=0)
     home_moneyline = models.IntegerField(default=0)
-    total = models.IntegerField(default=0)
+    total = models.DecimalField(max_digits=4, decimal_places=1, default=0.0)
     over_odds = models.IntegerField(default=0)
     under_odds = models.IntegerField(default=0)
     home_score = models.IntegerField(default=0)
