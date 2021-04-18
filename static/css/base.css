@@ -527,6 +527,12 @@ img {
     --fa-secondary-opacity: 1.00;
 }
 
+.slick-button{
+    background-color:rgb(15, 33, 61);
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
+    border-radius:20px;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

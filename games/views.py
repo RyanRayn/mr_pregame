@@ -27,8 +27,7 @@ def games(request):
             params = {"league": league_name, "date": gameday}
         else:
             params = {"league": league_name, 'date': today}
-        print(today)
-        print(gameday)
+
     url = "https://sportspage-feeds.p.rapidapi.com/games"
 
     headers = {
@@ -91,7 +90,8 @@ def games(request):
                 'venue': venue,
                 'city': city,
                 'state': state,
-                'league': league}
+                'league': league,
+                'gameday': today}
         )
 
         # If the game has odds already set,
@@ -164,6 +164,7 @@ def games(request):
         'tomorrow': tomorrow,
         'gameday': gameday,
         'league': league,
+        'gamedate': gamedate,
     }
 
     return render(request, 'games/games.html', context)

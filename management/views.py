@@ -9,6 +9,7 @@ from sportsipy.mlb.teams import Teams as MLBTeams
 from .models import MLBGame, MLBGameLine
 import pytz
 
+
 @login_required
 def management(request):
     """ View to return site management page """
@@ -260,10 +261,11 @@ def final_scores(request):
             new_tz = pytz.timezone("US/Eastern")
             localized_time = current_tz.localize(datetime_date)
             new_timestamp = localized_time.astimezone(new_tz)
-            game['timestamp'] = new_timestamp
             game['game_date'] = new_timestamp.strftime('%B %d, %Y')
             game['game_time'] = new_timestamp.strftime('%-I:%M %p')
             gamedate = new_timestamp
+            print(summary)
+            print(gamedate)
 
             # Create new game instance in MLBGamline model
             # or update with game_id as key.
@@ -272,6 +274,7 @@ def final_scores(request):
                 game_id=game_id, defaults={
                     'game_id': game_id,
                     'gamedate': gamedate,
+                    'gameday': gameday,
                     'summary': summary,
                     'status': status,
                     'away_team': away_team,

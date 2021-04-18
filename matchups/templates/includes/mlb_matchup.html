@@ -1,24 +1,22 @@
-            <div id="mlbGames" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="col-1 carousel-item active">
-                        <p class="white">MLB</p>
-                    </div>
-                    {% for game in game_lines %}
-                        <div class="col-1 carousel-item text-center">
-                            <p class="white">{{ game.away_abbr }}</p>
-                            <p class="white">vs.</p>
-                            <p class="white">{{ game.home_abbr }}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-                <a class="carousel-control-prev" href="#mlbGames" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#mlbGames" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-                </a>
+            <div class="slick-slider">
+                {% for game in game_lines %}
+                    {% if game.status == 'scheduled' or game.status == 'in progress' %}
+                        <form action="{% url 'matchups' %}" method="GET">
+                            {% csrf_token %}
+                            <input type="hidden" id="gameId{{ forloop.counter }}" 
+                                    name="gameId" value="{{ game.game_id }}">
+                            <input type="hidden" id="city{{ forloop.counter }}" 
+                                    name="city" value="{{ game.city }}">
+                            <input type="hidden" id="league{{ forloop.counter }}"
+                                    name="league" value="{{ game.league }}">
+                            <button class="btn slick-button" type="submit">    
+                                <small class="white text-muted">{{ game.gamedate|time }}</small>
+                                <p class="white mb-0"><small>{{ game.away_abbr }}</small></p>
+                                <p class="white"><small>{{ game.home_abbr }}</small></p>
+                            </button>
+                        </form>    
+                    {% endif %}
+                {% endfor %}
             </div>
             <div class="row mb-3">
                 <div class="col-12 text-center white opacity-90">
@@ -31,7 +29,7 @@
                 </div>
             </div>
             <div class="row mx-3">
-                <div class="col-2 matchup-info-box text-center px-1">
+                <div class="col-2 matchup-info-box px-1">
                     {% include 'includes/mlb_info_box.html' %}
                 </div>    
             </div>

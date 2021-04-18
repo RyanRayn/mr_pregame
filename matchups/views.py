@@ -1,38 +1,29 @@
 from django.shortcuts import render
 import requests
 from django.conf import settings
-from pprint import pprint
 import datetime
-import pytz
-from management.models import MLBGameLine
+from management.models import MLBGameLine, MLBGame
 
 
 def matchups(request):
     """ a view to show MLB game matchups """
+    # Get all objects in MLBGameLine model
     game_lines = MLBGameLine.objects.all()
 
-    if request.method == "GET":
-        summary = request.GET.get('summary')
-        league = request.GET.get('league')
-        homeTeam = request.GET.get('homeFull')
-        awayTeam = request.GET.get('awayFull')
-        date = request.GET.get('date')
-        time = request.GET.get('time')
-        venue = request.GET.get('venue')
-        city = request.GET.get('city')
-        state = request.GET.get('state')
-        awayAbbr = request.GET.get('awayAbbr')
-        homeAbbr = request.GET.get('homeAbbr')
-        awaySpread = request.GET.get('awaySpread')
-        homeSpread = request.GET.get('homeSpread')
-        awayOdds = request.GET.get('awayOdds')
-        homeOdds = request.GET.get('homeOdds')
-        homeML = request.GET.get('homeML')
-        awayML = request.GET.get('awayML')
-        total = request.GET.get('total')
-        over = request.GET.get('over')
-        under = request.GET.get('under')
+    # Get game id from submitted form to show specific game info
+    # Get city from form for weather API
+    # Get league from form to render correct Matchup template
 
+    if request.method == "GET":
+        game_id = request.GET.get('gameId')
+        city = request.GET.get('city')
+        league = request.GET.get('league')
+
+    # Convert game_id from to an int to match game.game_id on matchup template
+
+    gameID = int(game_id)
+
+    # OpenWeatherMap API
     country = ",us"
     cityWeather = city + country
     params = {"q": cityWeather, "units": "imperial"}
@@ -59,28 +50,10 @@ def matchups(request):
         weather['gameWeather'] = weather['weather'][0]['main']
 
     context = {
-        'summary': summary,
-        'league': league,
-        'homeTeam': homeTeam,
-        'awayTeam': awayTeam,
-        'date': date,
-        'time': time,
-        'venue': venue,
-        'city': city,
-        'state': state,
-        'awayAbbr': awayAbbr,
-        'homeAbbr': homeAbbr,
-        'awaySpread': awaySpread,
-        'homeSpread': homeSpread,
-        'awayOdds': awayOdds,
-        'homeOdds': homeOdds,
-        'homeML': homeML,
-        'awayML': awayML,
-        'total': total,
-        'over': over,
-        'under': under,
+        'gameID': gameID,
         'weather_data': weather_data,
         'game_lines': game_lines,
+        'league': league,
     }
 
     return render(request, 'matchups/matchups.html', context)
