@@ -1,0 +1,67 @@
+<div class="row mx-1">
+    <div class="col-3 text-center">     
+        <div class="slick-slider">
+        {% for game in game_lines %}    
+            {% if game.status == 'scheduled' or game.status == 'in progress' %}
+                <div class="mx-1">
+                    <form action="{% url 'matchups' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="hidden" id="gameId{{ forloop.counter }}" 
+                                name="gameId" value="{{ game.game_id }}">
+                        <input type="hidden" id="city{{ forloop.counter }}" 
+                                name="city" value="{{ game.city }}">
+                        <input type="hidden" id="league{{ forloop.counter }}"
+                                name="league" value="{{ game.league }}">
+                        <button class="btn slick-button" type="submit">    
+                            <small class="white text-muted">{{ game.gamedate|time }} ET</small>
+                            <p class="white m-0">
+                                <small>
+                                {{ game.away_abbr }}&nbsp;&nbsp;
+                                {% if game.away_spread == 0.0 %}
+                                    no line set    
+                                {% elif game.away_spread < 0 %}
+                                    {{ game.away_spread }}
+                                {% else %}
+                                    +{{ game.away_spread }}
+                                {% endif %}
+                                &nbsp;&nbsp;
+                                {% if game.away_odds == 0 %}
+                                {% elif game.away_odds < 0 %}
+                                    {{ game.away_odds }}
+                                {% else %}
+                                    +{{ game.away_odds }}
+                                {% endif %}
+                                </small>
+                            </p>
+                            <p class="white m-0">
+                                <small>
+                                {{ game.home_abbr }}
+                                &nbsp;&nbsp;
+                                {% if game.home_spread == 0.0 %}
+                                    no line set
+                                {% elif game.home_spread < 0 %}
+                                    {{ game.home_spread }}
+                                {% else %}
+                                    +{{ game.home_spread }}
+                                {% endif %}
+                                &nbsp;&nbsp;
+                                {% if game.home_odds == 0 %}
+                                {% elif game.home_odds < 0 %}
+                                    {{ game.home_odds }}
+                                {% else %}
+                                    +{{ game.home_odds }}
+                                {% endif %}
+                                </small>
+                            </p>
+                            {% if game.status == 'in progress' %}
+                                <p class="orange m-0">
+                                    <small>In Progress</small>
+                                </p>
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endfor %} 
+    </div>                  
+</div>

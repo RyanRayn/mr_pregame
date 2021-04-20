@@ -527,8 +527,12 @@ img {
     --fa-secondary-opacity: 1.00;
 }
 
-.slick-button{
-    border-left:2px solid rgba(150, 160, 175, 0.575);
+.slick-button:hover{
+    background-color:#ff7c1fb2;
+}
+
+.slider-column{
+    border-radius:20px;
 }
 
 /*---------- Media Queries ----------*/
@@ -594,6 +598,17 @@ img {
 
     .mr-hitter{
         width:80%;
+    }
+}
+
+/* Weather box sizing */
+@media (max-width: 808px) {
+    .slice-five{
+        display:none;
+    }
+
+    .slice-four{
+        display:block;
     }
 }
 
@@ -803,6 +818,17 @@ img {
     .fa-plus-circle,
     .fa-minus-circle{
         font-size:25px;
+    }
+}
+
+/* Weather box sizing */
+@media (min-width: 808px) {
+    .slice-five{
+        display:block;
+    }
+
+    .slice-four{
+        display:none;
     }
 }
 
