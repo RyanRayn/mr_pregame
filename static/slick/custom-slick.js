@@ -2,10 +2,12 @@
 
 $(document).ready(function(){
     $('.slick-slider').slick({
-        vertical: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
+        autoplay:true,
+        infinite:true,
+        slidesToShow:1,
+        fade:true,
         arrows: true,
+        prevArrow: '<div class="arrow-prev"><i class="fas fa-chevron-left orange"></i></div>',
+        nextArrow: '<div class="arrow-next"><i class="fas fa-chevron-right orange"></i></div>',
     });
 });

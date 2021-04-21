@@ -527,14 +527,41 @@ img {
     --fa-secondary-opacity: 1.00;
 }
 
-.slick-button:hover{
-    background-color:#ff7c1fb2;
+.info-column{
+    background-color:#c1e6ff7a;
+    border-radius:20px;
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
 }
 
-.slider-column{
+.weather-box{
+    background-color:rgb(15, 33, 61);
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
     border-radius:20px;
 }
 
+.slick-slider{
+    position:relative;
+}
+
+.slick-slider:hover{
+    background-color:#c1e6ffc9;
+}
+
+.slick-button:hover{
+    color:#ff7c1fb2;
+}
+
+.slick-slider .arrow-prev{
+    position:absolute;
+    left:5px;
+    bottom:50%;
+}
+
+.slick-slider .arrow-next{
+    position:absolute;
+    right:5px;
+    bottom:50%;
+}
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

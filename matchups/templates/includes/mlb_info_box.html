@@ -1,21 +1,20 @@
+{% include 'includes/games_carousel.html' %}
 <div id="info-box">
-    {% for game in game_lines %}
-        {% if game.game_id == gameID %}
-            <div class="row mx-1">
-                <div class="col-3 white opacity-90 p-2 gamecard">
-                    <small id="time">
-                    {% if game.status == 'in progress' %}
-                        <p class="orange text-right">In progress</p>
-                    {% endif %}
-                    {% if game.status == 'scheduled' %}    
-                        <p class="mr-2 text-right">
-                            <i class="fad fa-clock mx-2"></i>{{ game.gamedate|time }} 
-                        </p> 
-                    {% endif %}
-                    {% if game.status == 'final' %}
-                        <p class="green text-right">Final</p>
-                    {% endif %}
-                    </small>
+    <div class="row mx-1">
+        <div class="col-3 white opacity-90 info-column text-center pt-1 px-0">
+            {% for game in game_lines %}        
+                {% if game.game_id == gameID %}
+                    <p id="time">
+                        {% if game.status == 'in progress' %}
+                            <small class="orange"><strong>In Progress</strong></small>
+                        {% endif %}
+                        {% if game.status == 'scheduled' %}
+                            <small class="white"><strong>{{ game.gamedate|time }} ET</strong></small>
+                        {% endif %} 
+                        {% if game.status == 'final' %}
+                            <small class="green"><strong>Final</strong></small>  
+                        {% endif %}
+                    </p>    
                     <h4 class="text-center mb-2">{{ game.away_team }}</h4>
                     <p class="light-blue text-center mb-2">
                         <small id="away_spread">
@@ -84,7 +83,7 @@
                     <p class="light-blue text-center mb-0">
                         <small id="total">Total: {{ game.total|floatformat }}</small>
                     </p>
-                    <p class="light-blue text-center mb-0">
+                    <p class="light-blue text-center mb-3">
                         <small id="over">
                         {% if game.over_odds == 0 %}
                         {% elif game.over_odds < 0 %}
@@ -103,8 +102,9 @@
                         {% endif %}
                         </small>
                     </p>
-                </div>
-            </div>
-        {% endif %}    
-    {% endfor %}
+                {% endif %}
+            {% endfor %}           
+            {% include 'includes/mlb_weather_box.html' %}
+        </div>
+    </div>
 </div>    
