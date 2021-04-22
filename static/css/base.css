@@ -543,24 +543,25 @@ img {
     position:relative;
 }
 
-.slick-slider:hover{
-    background-color:#c1e6ffc9;
+.slick-slide{
+    outline:none;
 }
 
 .slick-button:hover{
-    color:#ff7c1fb2;
+    background-color:#c1e6ff7a;
+    color:white;
 }
 
 .slick-slider .arrow-prev{
     position:absolute;
     left:5px;
-    bottom:50%;
+    bottom:30%;
 }
 
 .slick-slider .arrow-next{
     position:absolute;
     right:5px;
-    bottom:50%;
+    bottom:30%;
 }
 /*---------- Media Queries ----------*/
 

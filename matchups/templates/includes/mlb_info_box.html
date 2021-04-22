@@ -1,20 +1,38 @@
-{% include 'includes/games_carousel.html' %}
+
 <div id="info-box">
     <div class="row mx-1">
-        <div class="col-3 white opacity-90 info-column text-center pt-1 px-0">
+        <div class="col-12 white opacity-90 info-column text-center pt-1 px-0">
+<!-- Game Status/Time -->
             {% for game in game_lines %}        
                 {% if game.game_id == gameID %}
-                    <p id="time">
+                    <p id="time" class="mb-0">
                         {% if game.status == 'in progress' %}
                             <small class="orange"><strong>In Progress</strong></small>
                         {% endif %}
                         {% if game.status == 'scheduled' %}
-                            <small class="white"><strong>{{ game.gamedate|time }} ET</strong></small>
+                            <small>
+                            <i class="fad fa-clock white pr-1"></i>
+                            {{ game.gamedate|time }}ET
+                            </small>
                         {% endif %} 
                         {% if game.status == 'final' %}
                             <small class="green"><strong>Final</strong></small>  
                         {% endif %}
-                    </p>    
+                    </p>
+<!-- If Game is in Progress or Final Show Score -->
+                    <p id="score" class="white">
+                        {% if game.status == 'in progress' or game.status == 'final' %}
+                            <small>
+                                {{ game.away_abbr }}: {{ game.away_score }}
+                            </small>
+                            &nbsp;&nbsp;
+                            <small>
+                                {{ game.home_abbr }}: {{ game.home_score }}
+                            </small>
+                        {% else %}
+                        {% endif %}
+                    </p> 
+<!-- Away Team Name and Game Lines -->
                     <h4 class="text-center mb-2">{{ game.away_team }}</h4>
                     <p class="light-blue text-center mb-2">
                         <small id="away_spread">
@@ -50,6 +68,7 @@
                         <div class="col-2 orange text-center">at</div>
                         <div class="col-5"><hr class="rounded orange-background mx-auto"></div>
                     </div>
+<!-- Home Team Name and Game Lines -->
                     <h4 class="text-center mb-2">{{ game.home_team }}</h4>
                     <p class="light-blue text-center mb-3">
                         <small id="home_spread">
@@ -80,6 +99,7 @@
                         {% endif %}
                         </small>
                     </p>
+<!-- Game Total and Odds -->
                     <p class="light-blue text-center mb-0">
                         <small id="total">Total: {{ game.total|floatformat }}</small>
                     </p>
@@ -103,7 +123,8 @@
                         </small>
                     </p>
                 {% endif %}
-            {% endfor %}           
+            {% endfor %}
+<!-- Weather Box -->      
             {% include 'includes/mlb_weather_box.html' %}
         </div>
     </div>

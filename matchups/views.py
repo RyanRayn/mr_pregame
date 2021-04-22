@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 from django.conf import settings
 import datetime
+import pytz
 from management.models import MLBGameLine, MLBGame
 
 
@@ -40,12 +41,16 @@ def matchups(request):
     weather_data = results['list']
 
     for weather in weather_data:
+        current_tz = pytz.timezone("UTC")
+        new_tz = pytz.timezone("US/Eastern")
         weather_date = weather['dt_txt']
         weatherDatetime = datetime.datetime.strptime(
                                                  weather_date,
                                                  '%Y-%m-%d %H:%M:%S')
-        weather['gameDate'] = weatherDatetime.strftime("%B %d, %Y")
-        weather['gameTime'] = weatherDatetime.strftime("%-I%p")
+        localized_time = current_tz.localize(weatherDatetime)
+        gameDayWeather = localized_time.astimezone(new_tz)
+        weather['gameDate'] = gameDayWeather.strftime("%B %d, %Y")
+        weather['gameTime'] = gameDayWeather.strftime("%-I%p")
         weather['gameTemp'] = round(weather['main']['temp'])
         weather['gameWeather'] = weather['weather'][0]['main']
 

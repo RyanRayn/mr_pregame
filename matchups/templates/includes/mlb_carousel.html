@@ -1,0 +1,94 @@
+
+        <div class="carousel-container mb-2">
+            <div class="row mx-1">
+                <div class="col-12 px-0 pb-2">
+                    <div class="slick-slider white opacity-90">
+                        {% for game in game_lines %}
+                            {% if game.status == 'scheduled' or game.status == 'in progress' %}
+                                <div class="slide">
+                                    <div class="row">
+<!-- Game Time or Status -->                                         
+                                        <div class="col-12 text-center">
+                                            {% if game.status == 'in progress' %}
+                                                <small class="orange">In Progress</small>
+                                            {% endif %}
+                                            {% if game.status == 'scheduled' %}
+                                                <small class="white">
+                                                <i class="fad fa-clock orange pr-1"></i>
+                                                {{ game.gamedate|time }} ET
+                                                </small>
+                                            {% endif %} 
+                                            {% if game.status == 'final' %}
+                                                <small class="green">Final</small>  
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row mx-1">
+<!-- Game Lines or Score Depending on Status -->                                        
+                                        <div class="col-7 col-md-6 col-lg-8 px-0 d-flex flex-column justify-content-center text-right">
+                                            <p class="m-0">
+                                                <small class="d-inline-block d-md-none d-lg-inline-block">
+                                                {{ game.away_team}}
+                                                </small>
+                                                <small class="d-none d-md-inline-block d-lg-none">
+                                                {{ game.away_abbr}}
+                                                </small>
+                                                &nbsp;&nbsp;
+                                                <small>
+                                                {% if game.status == 'in progress' or game.status == 'final' %}
+                                                    {{ game.away_score }}
+                                                {% else %}
+                                                    {% if game.away_moneyline == 0 %}    
+                                                    {% elif game.away_moneyline < 0 %}
+                                                        {{ game.away_moneyline }}
+                                                    {% else %}
+                                                        +{{ game.away_moneyline }}
+                                                    {% endif %}
+                                                {% endif %}    
+                                                </small>
+                                            </p>
+                                            <p class="mb-0">
+                                                <small class="d-inline-block d-md-none d-lg-inline-block">
+                                                {{ game.home_team}}
+                                                </small>
+                                                <small class="d-none d-md-inline-block d-lg-none">
+                                                {{ game.home_abbr}}
+                                                </small>
+                                                &nbsp;&nbsp;
+                                                <small>
+                                                {% if game.status == 'in progress' or game.status == 'final' %}
+                                                    {{ game.home_score }}
+                                                {% else %}
+                                                    {% if game.home_moneyline == 0 %}
+                                                    {% elif game.home_moneyline < 0 %}
+                                                        {{ game.home_moneyline }}
+                                                    {% else %}
+                                                        +{{ game.home_moneyline }}
+                                                    {% endif %}
+                                                {% endif %}    
+                                                </small>
+                                            </p>
+                                        </div>
+<!-- Form to Send GameID to View and Switch Game in Template -->                                    
+                                        <div class="col-5 col-lg-4 px-0 d-flex justify-content-center align-items-center">      
+                                            <form action="{% url 'matchups' %}" method="GET">
+                                                {% csrf_token %}
+                                                <input type="hidden" id="gameId{{ forloop.counter }}" 
+                                                    name="gameId" value="{{ game.game_id }}">
+                                                <input type="hidden" id="city{{ forloop.counter }}" 
+                                                    name="city" value="{{ game.city }}">
+                                                <input type="hidden" id="league{{ forloop.counter }}"
+                                                    name="league" value="{{ game.league }}">    
+                                                <button class="btn white opacity-90 orange-background p-1 slick-button" type="submit">
+                                                    View    
+                                                </button>
+                                            </form>
+                                        </div>     
+                                    </div>     
+                                </div> 
+                            {% endif %}
+                        {% endfor %}     
+                    </div>
+                </div>          
+            </div>     
+        </div>
