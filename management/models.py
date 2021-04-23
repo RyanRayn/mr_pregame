@@ -222,6 +222,16 @@ class MLBGameLine(models.Model):
     status = models.CharField(max_length=25)
     pick = models.TextField(blank=True)
     pick_type = models.CharField(max_length=100, blank=True)
+    away_starter = models.CharField(max_length=100, blank=True)
+    home_starter = models.CharField(max_length=100, blank=True)
+    away_starter_era = models.DecimalField(
+        max_digits=4, decimal_places=2, default=0.00)
+    home_starter_era = models.DecimalField(
+        max_digits=4, decimal_places=2, default=0.00)
+    away_starter_record = models.CharField(max_length=6, blank=True)
+    home_starter_record = models.CharField(max_length=6, blank=True)
+    away_starter_k = models.IntegerField(default=0)
+    home_starter_k = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.summary)
