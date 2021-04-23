@@ -1,5 +1,5 @@
 from django import forms
-from .models import BasketballTeamStats, MLBGame
+from .models import BasketballTeamStats, MLBGame, MLBGameLine
 from .models import StartingPitcher, TeamName, Season
 
 
@@ -94,3 +94,19 @@ class Pitcher(forms.ModelForm):
         seasons = Season.objects.filter(name='MLB2021')
         names = [(season.id, season.name) for season in seasons]
         self.fields['season'].choices = names
+
+
+class EditGameLine(forms.ModelForm):
+
+    class Meta:
+        model = MLBGameLine
+        fields = '__all__'
+
+    away_starter = forms.CharField(label='Starter', required=False)
+    away_starter_era = forms.DecimalField(label='ERA', required=False)
+    away_starter_k = forms.IntegerField(label='K', required=False)
+    away_starter_record = forms.CharField(label='Record', required=False)
+    home_starter = forms.CharField(label='Starter', required=False)
+    home_starter_era = forms.DecimalField(label='ERA', required=False)
+    home_starter_k = forms.IntegerField(label='K', required=False)
+    home_starter_record = forms.CharField(label='Record', required=False)

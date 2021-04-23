@@ -3,7 +3,8 @@ from django.conf import settings
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import AwayBaseballGames, HomeBaseballGames, Pitcher
+from .forms import AwayBaseballGames, HomeBaseballGames
+from .forms import Pitcher, EditGameLine
 import datetime
 from sportsipy.mlb.teams import Teams as MLBTeams
 from .models import MLBGame, MLBGameLine
@@ -353,3 +354,41 @@ def final_scores(request):
                 )
 
     return render(request, 'management/management.html')
+
+
+@login_required
+def edit_gamelines(request):
+    """ Edit gameline info in database """
+    # Get all objects in MLBGameLine model
+    game_lines = MLBGameLine.objects.all()
+
+    todays_date = datetime.datetime.now(
+            pytz.timezone('America/Los_Angeles'))
+
+    gameday = todays_date.strftime('%Y-%m-%d')
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
+
+    if request.method == "POST":
+        form = EditGameLine(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added stats!')
+            return redirect('management.html')
+        else:
+            messages.error(request,
+                           "Failed to add game info.")
+    else:
+        form = EditGameLine()
+
+    template = 'management/edit_gamelines.html'
+
+    context = {
+        'game_lines': game_lines,
+        'form': form,
+        'gameday': gameday,
+    }
+
+    return render(request, template, context)
