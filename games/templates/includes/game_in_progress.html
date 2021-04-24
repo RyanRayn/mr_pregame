@@ -1,0 +1,67 @@
+
+<div class="row mt-2">
+    <div class="col-4 white d-flex justify-content-end">
+        <p class="text-center light-blue m-2">
+            <strong class="white opacity-90">{{ game.away_abbr }}</strong><br>
+        
+        <!-- If Away Team is Winning with Spread Factored in then Show Score in Green -->    
+            {% if game.away_score|add:game.away_spread <= game.home_score %}         
+                <span class="spread">{{ game.away_score }}</span><br>
+                <span class="spread">
+                <!-- If Away Team is Favored Show Spread -->    
+                    {% if game.away_spread > 0 %}
+                    {% else %}
+                        {{ game.away_spread }}
+                    {% endif %}
+                </span><br>
+            {% else %}
+                <span class="spread green">{{ game.away_score }}</span><br>
+                <span class="spread green">
+                <!-- If Away Team is Favored Show Spread -->     
+                    {% if game.away_spread > 0 %}
+                    {% else %}
+                        {{ game.spread_away }}
+                    {% endif %}
+                </span><br>        
+            {% endif %}      
+        </p>
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center">
+        <h4><i class="fad fa-minus orange"></i></h4>
+    </div>
+    <div class="col-4 white d-flex justify-content-start">
+        <p class="text-center light-blue m-2">
+            <strong class="white opacity-90">{{ game.home_abbr }}</strong><br>
+        <!-- If Home Team is Winning with Spread Factored in Show Score in Green -->   
+            {% if game.home_score|add:game.home_spread <= game.away_score %}    
+                <span class="spread">{{ game.home_score }}</span><br>
+                <span class="spread orange">
+                <!-- If Home Team is Favored Show Spread -->    
+                    {% if game.home_spread > 0 %}
+                    {% else %}
+                        {{ game.home_spread }}
+                    {% endif %}
+                </span><br>
+            {% else %}
+                <span class="spread green">{{ game.home_score }}</span><br>
+                <span class="spread green">
+                <!-- If Home Team is Favored Show Spread -->    
+                    {% if game.home_spread > 0 %}
+                    {% else %}
+                        {{ game.home_spread }}
+                    {% endif %}
+                </span><br>        
+            {% endif %}
+        </p>
+    </div>
+</div>
+<!-- If Game Total Points GREATER than the Total Line Print OVER else UNDER -->
+    {% if game.home_score|add:game.away_score > game.total %}
+        <p class="light-blue text-center">
+            Over/Under: {{ game.total }}&nbsp;&nbsp;&nbsp;Current Total: <span class="green">OVER</span> 
+        </p>
+    {% else %}  
+        <p class="light-blue text-center mt-2">
+            Over/Under: {{ game.total }}&nbsp;&nbsp;&nbsp;Current Total: <span class="orange">UNDER</span>
+        </p>   
+    {% endif %} 

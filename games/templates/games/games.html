@@ -5,8 +5,11 @@
     <div id="content">
         <div class="container-fluid">
         {% if games %}<!-- If There Aren't Any Games Render No Games Message --> 
-
-            {% include 'includes/games_header.html' %}<!-- Games Header and Link to View Tomorrow/Todays Games -->
+            <div class="row mb-4">
+                <div class="col-12 d-flex justify-content-center">
+                    <h1 class="orange">Today's Games</h1>
+                </div>
+            </div>
              
             {% include 'includes/gamecard.html' %}<!-- Gamecard -->
 

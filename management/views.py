@@ -357,38 +357,24 @@ def final_scores(request):
 
 
 @login_required
-def edit_gamelines(request):
+def edit_gamelines(request, game_id):
     """ Edit gameline info in database """
-    # Get all objects in MLBGameLine model
-    game_lines = MLBGameLine.objects.all()
-
-    todays_date = datetime.datetime.now(
-            pytz.timezone('America/Los_Angeles'))
-
-    gameday = todays_date.strftime('%Y-%m-%d')
-
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only Admin can do that.')
-        return redirect(reverse('home'))
-
-    if request.method == "POST":
-        form = EditGameLine(request.POST)
+    game = get_object_or_404(MLBGameLine, pk=game_id)
+    if request.method == 'POST':
+        form = EditGameLine(request.POST, request.FILES, instance=game)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully added stats!')
-            return redirect('management.html')
+            messages.success(request, 'Successfully updated game!')
+            return redirect(reverse('games'))
         else:
-            messages.error(request,
-                           "Failed to add game info.")
+            messages.error(request, 'Failed to update game.')
     else:
-        form = EditGameLine()
+        form = EditGameLine(instance=game)
 
     template = 'management/edit_gamelines.html'
-
     context = {
-        'game_lines': game_lines,
+        'game': game,
         'form': form,
-        'gameday': gameday,
     }
 
     return render(request, template, context)

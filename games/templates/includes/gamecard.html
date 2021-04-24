@@ -1,90 +1,39 @@
    
     <div class="row px-2">
-        {% for game in games %}  
-            <div class="col-12 col-lg-6 mb-4">                        
-                <div class="gamecard p-2">
+        {% for game in all_games %}
+            {% if game.gamedate|date == todays_date|date  %}
+                <div class="col-12 col-lg-6 mb-4">
+                    {% if request.user.is_superuser %}
+                        <small><a href="{% url 'edit_gamelines' game_id=game.game_id %}">Edit Game</a></small>
+                    {% endif %} 
+                    <small class="white">{{ game.game_id }}</small>                        
+                    <div class="gamecard p-2">
 <!-- Teams/Location/Time -->     
                     <div class="row">       
                         <div class="col-12">
                             <h3 class="game-summary white opacity-90 text-center font-800 mb-0">{{ game.summary }}</h3>
-                            {% if 'scoreboard' in game and 'score' in game.scoreboard %}
+                            {% if game.status == 'in progress' or game.status == 'final' %}
                                 <p class="orange opacity-90 mb-0 mt-1 text-center">
                                     <i class="fad fa-clock orange pr-2"></i>{{ game.status|upper }} 
                                 </p>
                             {% else %}
                                 <p class="white opacity-90 mb-0 text-center">
-                                    <i class="fad fa-calendar-alt orange pr-2"></i>{{ game.game_date }} 
-                                    <i class="fad fa-clock orange pl-4 pr-2"></i>{{ game.game_time }} <small>ET</small>
+                                    <i class="fad fa-calendar-alt orange pr-2"></i>{{ game.gamedate|date }} 
+                                    <i class="fad fa-clock orange pl-4 pr-2"></i>{{ game.gamedate|time }} <small>ET</small>
                                 </p>
                             {% endif %}    
                             <p class="white opacity-90 mb-2 text-center">
-                                <small>{{ game.venue.name }} - {{ game.venue.city }}, {{ game.venue.state }}</small>
+                                <small>{{ game.venue }} - {{ game.city }}, {{ game.state }}</small>
                             </p>
                         </div>    
                     </div>    
                     <hr class="rounded orange-background mx-auto my-0">
 <!-- GameLines and Scores -->                    
                 <!-- If Game is in Progress or Final Show Scores else Show Game Lines -->     
-                    {% if 'scoreboard' in game and 'score' in game.scoreboard %}
-                        <div class="row mt-2">
-                            <div class="col-4 white d-flex justify-content-end">
-                                <p class="text-center light-blue m-2">
-                                    <strong class="white opacity-90">{{ game.teams.away.abbreviation }}</strong><br>
-                                {% for points in game.odds %}
-                                <!-- If Away Team is Winning with Spread Factored in then Show Score in Green -->    
-                                    {% if game.scoreboard.score.away|add:points.spread.current.away <= game.scoreboard.score.home %}         
-                                        <span class="spread">{{ game.scoreboard.score.away }}</span><br>
-                                        <span class="spread">
-                                        <!-- If Away Team is Favored Show Spread -->    
-                                            {% if points.spread.current.away > 0 %}{% else %}{{ points.spread.current.away }}{% endif %}
-                                        </span><br>
-                                    {% else %}
-                                        <span class="spread green">{{ game.scoreboard.score.away }}</span><br>
-                                        <span class="spread green">
-                                        <!-- If Away Team is Favored Show Spread -->     
-                                            {% if points.spread.current.away > 0 %}{% else %}{{ points.spread.current.away }}{% endif %}
-                                        </span><br>        
-                                    {% endif %} 
-                                {% endfor %}       
-                                </p>
-                            </div>
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <h4><i class="fad fa-minus orange"></i></h4>
-                            </div>
-                            <div class="col-4 white d-flex justify-content-start">
-                                <p class="text-center light-blue m-2">
-                                    <strong class="white opacity-90">{{ game.teams.home.abbreviation }}</strong><br>
-                                {% for points in game.odds %}
-                                <!-- If Home Team is Winning with Spread Factored in then Show Score in Green -->   
-                                    {% if game.scoreboard.score.home|add:points.spread.current.home <= game.scoreboard.score.away %}    
-                                        <span class="spread">{{ game.scoreboard.score.home }}</span><br>
-                                        <span class="spread orange">
-                                        <!-- If Home Team is Favored Show Spread -->    
-                                            {% if points.spread.current.home > 0 %}{% else %}{{ points.spread.current.home }}{% endif %}
-                                        </span><br>
-                                    {% else %}
-                                        <span class="spread green">{{ game.scoreboard.score.home }}</span><br>
-                                        <span class="spread green">
-                                        <!-- If Home Team is Favored Show Spread -->    
-                                            {% if points.spread.current.home > 0 %}{% else %}{{ points.spread.current.home }}{% endif %}
-                                        </span><br>        
-                                    {% endif %} 
-                                {% endfor %}
-                                </p>
-                            </div>
-                        </div>
-                        {% for points in game.odds %}
-                        <!-- If Game Total Points GREATER than the Total Line Print OVER else UNDER -->
-                            {% if game.total > points.total.current.total %}
-                                <p class="light-blue text-center">
-                                    Over/Under: {{ points.total.current.total }}&nbsp;&nbsp;&nbsp;Current Total: <span class="green">OVER</span> 
-                                </p>
-                            {% else %}  
-                                <p class="light-blue text-center mt-2">
-                                    Over/Under: {{ points.total.current.total }}&nbsp;&nbsp;&nbsp;Current Total: <span class="orange">UNDER</span>
-                                </p>   
-                            {% endif %}  
-                        {% endfor %}
+                    {% if game.status == 'in progress' or game.status == 'final' %}
+
+                        {% include 'includes/game_in_progress.html' %}
+                        
                         <hr class="rounded orange-background mx-auto my-0">
                         <!-- Matchup Button and Hidden Input Fields for Matchup Field-->            
                         <div class="row mt-3 mb-1"> 
@@ -94,42 +43,73 @@
                         </div> 
                     {% else %}
                     <!-- If Game Odds Have Already Been Set Render the Lines else 'No Lines Yet' -->
-                        {% if game.odds %}        
+                        {% if game.status == 'scheduled' %}        
                             <div class="row mt-2">
                                 <div class="col-4 d-flex justify-content-end">
-                                    <p class="mt-2 light-blue text-center"><strong class="white opacity-90">
-                                        {{game.teams.away.abbreviation }}</strong><br>
-                                    {% for points in game.odds %}
+                                    <p class="mt-2 light-blue text-center">
+                                        <strong class="white opacity-90">
+                                        {{ game.away_abbr }}
+                                        </strong><br>
                                     <!-- If Away Team Point Spread Greater than 0 show '+' else '-' -->
-                                        <span class="spread">{% if points.spread.current.away > 0 %} +{{ points.spread.current.away }} 
-                                        {% else %} {{ points.spread.current.away }} {% endif %}</span><br>
+                                        <span class="spread">
+                                            {% if game.away_spread > 0 %} 
+                                                +{{ game.away_spread }} 
+                                            {% else %} 
+                                                {{ game.away_spread }} 
+                                            {% endif %}
+                                        </span><br>
                                     <!-- If Away Team Favored Show '+' with Moneyline else '-'  -->
-                                        Odds {% if points.spread.current.awayOdds > 0 %} +{{ points.spread.current.awayOdds }} 
-                                        {% else %} {{ points.spread.current.awayOdds }} {% endif %}<br>    
-                                        ML {% if points.moneyline.current.awayOdds > 0 %} +{{points.moneyline.current.awayOdds }} 
-                                        {% else %} {{ points.moneyline.current.awayOdds }} {% endif %}
-                                    {% endfor %}
+                                        Odds 
+                                        {% if game.away_odds > 0 %} 
+                                            +{{ game.away_odds }} 
+                                        {% else %} 
+                                            {{ game.away_odds }} 
+                                        {% endif %}
+                                        <br>    
+                                        ML 
+                                        {% if game.away_moneyline > 0 %} 
+                                            +{{ game.away_moneyline }} 
+                                        {% else %} 
+                                            {{ game.away_moneyline }} 
+                                        {% endif %}
                                     </p>
                                 </div>
                                 <div class="col-4 d-flex justify-content-center align-items-center">
                                     <h2 class="orange"><i class="fad fa-at"></i></h2>
                                 </div>
                                 <div class="col-4 d-flex justify-content-start">   
-                                    <p class="mt-2 light-blue text-center"><strong class="white opacity-90">{{game.teams.home.abbreviation }}</strong><br>
-                                    {% for points in game.odds %}
+                                    <p class="mt-2 light-blue text-center">
+                                        <strong class="white opacity-90">
+                                            {{ game.home_abbr }}
+                                        </strong><br>
                                     <!-- If Home Team Point Spread Greater than 0 show '+' else '-' -->
-                                        <span class="spread">{% if points.spread.current.home > 0 %} +{{points.spread.current.home }} 
-                                        {% else %} {{ points.spread.current.home }} {% endif %}</span><br>
+                                        <span class="spread">
+                                            {% if game.home_spread > 0 %}
+                                                +{{ game.home_spread }} 
+                                            {% else %} 
+                                                {{ game.home_spread }} 
+                                            {% endif %}
+                                        </span><br>
                                     <!-- If Home Team Favored Show '+' with Moneyline else '-'  --> 
-                                        Odds {% if points.spread.current.homeOdds > 0 %} +{{ points.spread.current.homeOdds }} 
-                                        {% else %} {{ points.spread.current.homeOdds }} {% endif %}<br>
-                                        ML {% if points.moneyline.current.homeOdds > 0 %} +{{points.moneyline.current.homeOdds }} 
-                                        {% else %} {{ points.moneyline.current.homeOdds }} {% endif %}  
+                                        Odds 
+                                        {% if game.away_odds > 0 %} 
+                                            +{{ game.home_odds }} 
+                                        {% else %} 
+                                            {{ game.home_odds }} 
+                                        {% endif %}
+                                        <br>
+                                        ML 
+                                        {% if game.home_moneyline > 0 %} 
+                                            +{{ game.home_moneyline }} 
+                                        {% else %} 
+                                            {{ game.home_moneyline }} 
+                                        {% endif %}  
                                     </p>
                                 </div>    
                             </div> 
-                            <p class="light-blue text-center">Over/Under: {{ points.total.current.total }}</p>
-                                    {% endfor %}
+                            <p class="light-blue text-center">
+                                Over/Under: {{ game.total }}
+                            </p>
                         {% else %}
 <!-- Templates For When No Game Lines Are Set. Different Font Awesome Icons Used For Each Specific Sport -->
                             {% if league == 'NBA' %}
@@ -155,5 +135,6 @@
                     {% endif %}      
                     </div>
                 </div>
+            {% endif %}    
         {% endfor %}           
     </div>  
