@@ -74,7 +74,7 @@
                                             <form action="{% url 'matchups' %}" method="GET">
                                                 {% csrf_token %}
                                                 <input type="hidden" id="gameId{{ forloop.counter }}" 
-                                                    name="gameId" value="{{ game.game_id }}">
+                                                    name="gameId" value="{{ game.gameID }}">
                                                 <input type="hidden" id="city{{ forloop.counter }}" 
                                                     name="city" value="{{ game.city }}">
                                                 <input type="hidden" id="league{{ forloop.counter }}"

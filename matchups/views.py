@@ -24,6 +24,9 @@ def matchups(request):
 
     gameID = int(game_id)
 
+    # Get currently selected game for template
+    current = MLBGameLine.objects.get(gameID=gameID)
+
     # OpenWeatherMap API
     country = ",us"
     cityWeather = city + country
@@ -55,10 +58,10 @@ def matchups(request):
         weather['gameWeather'] = weather['weather'][0]['main']
 
     context = {
-        'gameID': gameID,
         'weather_data': weather_data,
         'game_lines': game_lines,
         'league': league,
+        'current': current,
     }
 
     return render(request, 'matchups/matchups.html', context)

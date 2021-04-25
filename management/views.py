@@ -360,8 +360,9 @@ def final_scores(request):
 def edit_gamelines(request, game_id):
     """ Edit gameline info in database """
     game = get_object_or_404(MLBGameLine, pk=game_id)
+
     if request.method == 'POST':
-        form = EditGameLine(request.POST, request.FILES, instance=game)
+        form = EditGameLine(request.POST, instance=game)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated game!')
@@ -372,6 +373,7 @@ def edit_gamelines(request, game_id):
         form = EditGameLine(instance=game)
 
     template = 'management/edit_gamelines.html'
+
     context = {
         'game': game,
         'form': form,

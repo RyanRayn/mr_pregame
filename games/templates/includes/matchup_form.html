@@ -1,14 +1,14 @@
 <!-- Send Matchup Game Data to Template -->                    
-                    <form action="{% url 'matchups' %}" method="GET">
-                    {% csrf_token %}
-                        <input type="hidden" id="gameId{{ forloop.counter }}" 
-                                name="gameId" value="{{ game.gameId }}">
-                        <input type="hidden" id="city{{ forloop.counter }}"
-                                name="city" value="{{ game.venue.city }}">
-                        <input type="hidden" id="league{{ forloop.counter }}"
-                                name="league" value="{{ game.details.league }}">        
-                        <button class="btn matchup-btn orange-background white opacity-90" type="submit">
-                            Matchup
-                        </button>
-                    </form> 
-                      
+        <form action="{% url 'matchups' %}" method="GET">
+        {% csrf_token %}
+            <input type="hidden" id="gameId{{ forloop.counter }}" 
+                    name="gameId" value="{{ game.gameID }}">
+            <input type="hidden" id="city{{ forloop.counter }}"
+                    name="city" value="{{ game.city }}">
+            <input type="hidden" id="league{{ forloop.counter }}"
+                    name="league" value="{{ game.league }}">        
+            <button class="btn matchup-btn orange-background white opacity-90" type="submit">
+                Matchup
+            </button>
+        </form> 
+          

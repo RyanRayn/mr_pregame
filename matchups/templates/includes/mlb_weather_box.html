@@ -1,12 +1,8 @@
-<div class="weather-box text-center py-2">   
-    {% for game in game_lines %}
-        {% if gameID == game.game_id %}
+<div class="weather-box text-center py-2">  
 <!-- Game Stadium and City -->
-            <p class="white mb-1"><i class="fad fa-map-marker-alt orange mr-1"></i>
-                {{ game.venue }} - {{ game.city }}, {{ game.state }}
-            </p>
-        {% endif %}    
-    {% endfor %}  
+    <p class="white mb-1"><i class="fad fa-map-marker-alt orange mr-1"></i>
+        {{ current.venue }} - {{ current.city }}, {{ current.state }}
+    </p>  
     <div class="">
         {% for weather in weather_data|slice:":5" %}
             <div class="d-inline-block white text-center mx-1 text-nowrap">

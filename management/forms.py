@@ -100,22 +100,17 @@ class EditGameLine(forms.ModelForm):
 
     class Meta:
         model = MLBGameLine
-        fields = '__all__'
+        fields = ['summary', 'away_team', 'away_starter',
+                  'away_starter_record', 'away_starter_era',
+                  'away_starter_k', 'home_team', 'home_starter',
+                  'home_starter_record', 'home_starter_era',
+                  'home_starter_k', 'pick_type', 'pick']
 
-    away_starter = forms.CharField(label='Starter', required=False)
-    away_starter_era = forms.DecimalField(label='ERA', required=False)
-    away_starter_k = forms.IntegerField(label='K', required=False)
-    away_starter_record = forms.CharField(label='Record', required=False)
-    away_spread = forms.DecimalField(label='Spread')
-    away_odds = forms.IntegerField(label='Odds')
-    away_moneyline = forms.IntegerField(label='ML')
-    home_starter = forms.CharField(label='Starter', required=False)
-    home_starter_era = forms.DecimalField(label='ERA', required=False)
-    home_starter_k = forms.IntegerField(label='K', required=False)
-    home_starter_record = forms.CharField(label='Record', required=False)
-    home_spread = forms.DecimalField(label='Spread')
-    home_odds = forms.IntegerField(label='Odds')
-    home_moneyline = forms.IntegerField(label='ML')
-    total = forms.DecimalField(label='Total')
-    under_odds = forms.IntegerField(label='Under')
-    over_odds = forms.IntegerField(label='Over')
+    away_starter = forms.CharField(label='Away Starter', required=False)
+    away_starter_era = forms.DecimalField(label='Away ERA', required=False)
+    away_starter_k = forms.IntegerField(label='Away K', required=False)
+    away_starter_record = forms.CharField(label='Away Record', required=False)
+    home_starter = forms.CharField(label='Home Starter', required=False)
+    home_starter_era = forms.DecimalField(label='Home ERA', required=False)
+    home_starter_k = forms.IntegerField(label='Home K', required=False)
+    home_starter_record = forms.CharField(label='Home Record', required=False)

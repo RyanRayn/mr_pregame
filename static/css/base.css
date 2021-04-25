@@ -465,6 +465,10 @@ img {
     border-radius:20px;
 }
 
+.edit-btn:hover{
+    color:#C1E6FF;
+}
+
 .matchup-btn{
     border-radius:50px;
     font-size:22px;

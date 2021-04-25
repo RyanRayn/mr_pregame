@@ -14,5 +14,6 @@ urlpatterns = [
     path('add_pitcher_away', views.add_pitcher_away, name='add_pitcher_away'),
     path('add_pitcher_home', views.add_pitcher_home, name='add_pitcher_home'),
     path('final_scores', views.final_scores, name='final_scores'),
-    path('edit/<int:game_id>/', views.edit_gamelines, name='edit_gamelines'),
+    path('edit_gamelines/<int:game_id>/',
+         views.edit_gamelines, name='edit_gamelines'),
 ]

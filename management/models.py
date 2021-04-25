@@ -194,7 +194,7 @@ class StartingPitcher(models.Model):
 
 
 class MLBGameLine(models.Model):
-    game_id = models.IntegerField()
+    gameID = models.IntegerField()
     gamedate = models.DateTimeField()
     gameday = models.DateTimeField(null=True)
     league = models.CharField(max_length=10)
