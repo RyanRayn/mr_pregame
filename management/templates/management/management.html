@@ -23,6 +23,16 @@
                         <a class="white" href="{% url 'add_pitcher_away' %}">Add Pitcher</a>
                     </div>
                     <div class="">
+                        <form action="{% url 'games' %}" method="GET">
+                            {% csrf_token %}
+                            <input type="hidden" id="MLB" name="leagueName" value="MLB">
+                            <input type="hidden" id="tomorrow" name="gameDate" value="tomorrow">
+                            <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                                MLB Tomorrow
+                            </button>
+                        </form>
+                    </div>
+                    <div class="">
                         <form method="GET" action="{% url 'final_scores' %}">
                             <button type="submit" class="btn white">Get Scores</button>
                         </form>

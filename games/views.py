@@ -11,7 +11,8 @@ def games(request):
     # Get the date for the SportspageFeeds API params
     todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
     today = todays_date.strftime('%Y-%m-%d')
-    tomorrow = todays_date + datetime.timedelta(days=1)
+    tomorrows_date = todays_date + datetime.timedelta(days=1)
+    tomorrow = tomorrows_date.strftime('%Y-%m-%d')
 
     # Get data for SportspageFeeds API params
     # from form in Navbar for 'leagueName'.

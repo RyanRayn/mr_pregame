@@ -238,7 +238,7 @@ def final_scores(request):
         # db when league name is clicked in Nav.
 
         for game in games:
-            game_id = game['gameId']
+            gameID = game['gameId']
             timestamp = game['schedule']['date']
             summary = game['summary']
             league = game['details']['league']
@@ -265,15 +265,13 @@ def final_scores(request):
             game['game_date'] = new_timestamp.strftime('%B %d, %Y')
             game['game_time'] = new_timestamp.strftime('%-I:%M %p')
             gamedate = new_timestamp
-            print(summary)
-            print(gamedate)
 
             # Create new game instance in MLBGamline model
             # or update with game_id as key.
 
             MLBGameLine.objects.update_or_create(
-                game_id=game_id, defaults={
-                    'game_id': game_id,
+                gameID=gameID, defaults={
+                    'gameID': gameID,
                     'gamedate': gamedate,
                     'gameday': gameday,
                     'summary': summary,
@@ -304,7 +302,7 @@ def final_scores(request):
                     home_odds = game_odds['spread']['current']['homeOdds']
 
                 MLBGameLine.objects.update_or_create(
-                    game_id=game_id, defaults={
+                    gameID=gameID, defaults={
                         'away_spread': away_spread,
                         'home_spread': home_spread,
                         'away_odds': away_odds,
@@ -320,7 +318,7 @@ def final_scores(request):
                     home_moneyline = moneyline['current']['homeOdds']
 
                 MLBGameLine.objects.update_or_create(
-                    game_id=game_id, defaults={
+                    gameID=gameID, defaults={
                         'away_moneyline': away_moneyline,
                         'home_moneyline': home_moneyline}
                 )
@@ -334,7 +332,7 @@ def final_scores(request):
                     under_odds = game_odds['total']['current']['underOdds']
 
                 MLBGameLine.objects.update_or_create(
-                    game_id=game_id, defaults={
+                    gameID=gameID, defaults={
                         'total': total,
                         'over_odds': over_odds,
                         'under_odds': under_odds}
@@ -348,7 +346,7 @@ def final_scores(request):
                 away_score = game['scoreboard']['score']['away']
 
                 MLBGameLine.objects.update_or_create(
-                    game_id=game_id, defaults={
+                    gameID=gameID, defaults={
                         'home_score': home_score,
                         'away_score': away_score}
                 )

@@ -107,10 +107,10 @@ class EditGameLine(forms.ModelForm):
                   'home_starter_k', 'pick_type', 'pick']
 
     away_starter = forms.CharField(label='Away Starter', required=False)
-    away_starter_era = forms.DecimalField(label='Away ERA', required=False)
-    away_starter_k = forms.IntegerField(label='Away K', required=False)
-    away_starter_record = forms.CharField(label='Away Record', required=False)
+    away_starter_era = forms.DecimalField(label='ERA', required=False)
+    away_starter_k = forms.IntegerField(label="K's", required=False)
+    away_starter_record = forms.CharField(label='Record', required=False)
     home_starter = forms.CharField(label='Home Starter', required=False)
-    home_starter_era = forms.DecimalField(label='Home ERA', required=False)
-    home_starter_k = forms.IntegerField(label='Home K', required=False)
-    home_starter_record = forms.CharField(label='Home Record', required=False)
+    home_starter_era = forms.DecimalField(label='ERA', required=False)
+    home_starter_k = forms.IntegerField(label="K's", required=False)
+    home_starter_record = forms.CharField(label='Record', required=False)
