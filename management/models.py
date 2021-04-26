@@ -142,8 +142,7 @@ class MLBGame(models.Model):
     season = models.ForeignKey('Season',
                                null=False, blank=False,
                                on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.date.today() + datetime.timedelta(
-                            days=-1))
+    date = models.DateField()
     win_home = models.IntegerField(null=True, blank=True, default=0)
     loss_home = models.IntegerField(null=True, blank=True, default=0)
     win_away = models.IntegerField(null=True, blank=True, default=0)
@@ -177,8 +176,7 @@ class StartingPitcher(models.Model):
     season = models.ForeignKey('Season',
                                null=False, blank=False,
                                on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.date.today() + datetime.timedelta(
-                            days=-1))
+    date = models.DateField()
     win = models.IntegerField(null=True, blank=True, default=0)
     loss = models.IntegerField(null=True, blank=True, default=0)
     inning_thirds = models.IntegerField(null=True, blank=True, default=0)
@@ -232,6 +230,12 @@ class MLBGameLine(models.Model):
     home_starter_record = models.CharField(max_length=6, blank=True)
     away_starter_k = models.IntegerField(default=0)
     home_starter_k = models.IntegerField(default=0)
+    away_starter_ip = models.DecimalField(
+        max_digits=4, decimal_places=1, default=0.0)
+    home_starter_ip = models.DecimalField(
+        max_digits=4, decimal_places=1, default=0.0)
+    away_starter_hand = models.CharField(max_length=3, blank=True)
+    home_starter_hand = models.CharField(max_length=3, blank=True)
 
     def __str__(self):
         return str(self.summary)
