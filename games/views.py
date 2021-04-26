@@ -14,6 +14,9 @@ def games(request):
     tomorrows_date = todays_date + datetime.timedelta(days=1)
     tomorrow = tomorrows_date.strftime('%Y-%m-%d')
 
+    # Date format for gamecard "if statement"
+    date_LA = todays_date.strftime('%B %d, %Y')
+
     # Get data for SportspageFeeds API params
     # from form in Navbar for 'leagueName'.
     # If gameday has value from 'Tomorrow' button on games.html
@@ -170,7 +173,7 @@ def games(request):
         'gameday': gameday,
         'league': league,
         'all_games': all_games,
-        'todays_date': todays_date,
+        'date_LA': date_LA,
     }
 
     return render(request, 'games/games.html', context)

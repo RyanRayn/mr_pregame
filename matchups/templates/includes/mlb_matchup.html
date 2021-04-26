@@ -3,4 +3,40 @@
         {% include 'includes/mlb_carousel.html' %}
         {% include 'includes/mlb_info_box.html' %}
     </div>
+    <div id="pitchers" class="col-12 col-md-4 col-lg-6">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="white d-inline mr-3">{{ current.away_starter }}</h5>
+                <p class="white d-inline">
+                    {{ current.away_starter_record }}
+                </p>
+                <p class="white d-inline mx-2">
+                    {{ current.away_starter_era }}
+                    <small>ERA</small>
+                </p>
+                <p class="white d-inline">
+                    {{ current.away_starter_k }}
+                    <small>K</small>
+                </p>    
+            </div>
+            <div class="col-12">
+                <h5 class="white d-inline mr-3">{{ current.home_starter }}</h5>
+                <p class="white d-inline">
+                    {{ current.home_starter_record }}
+                </p>
+                <p class="white d-inline mx-2">
+                    {{ current.home_starter_era }}
+                    <small>ERA</small>
+                </p>
+                <p class="white d-inline">
+                    {{ current.home_starter_k }}
+                    <small>K</small>
+                </p>    
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-12 col-md-4 col-lg-3">
+        <h5 class="white"></h5>
+    </div>
 </div>
