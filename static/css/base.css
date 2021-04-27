@@ -543,30 +543,11 @@ img {
     border-radius:20px;
 }
 
-.slick-slider{
-    position:relative;
-}
-
-.slick-slide{
-    outline:none;
-}
-
-.slick-button:hover{
+.carousel-view-button:hover{
     background-color:#c1e6ff7a;
     color:white;
 }
 
-.slick-slider .arrow-prev{
-    position:absolute;
-    left:5px;
-    bottom:30%;
-}
-
-.slick-slider .arrow-next{
-    position:absolute;
-    right:5px;
-    bottom:30%;
-}
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {
@@ -799,6 +780,10 @@ img {
     .fa-minus-circle,
     .fa-user-lock{
         font-size:30px;
+    }
+
+    .pitching-font{
+        font-size:small;
     }
 }
 

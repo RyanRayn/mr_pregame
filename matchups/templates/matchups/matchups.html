@@ -17,8 +17,11 @@
 
 {% block postloadjs %}
     {{ block.super }}
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>  
-    <script type="text/javascript" src="{% static 'slick/custom-slick.js' %}"></script>
+<!-- Add 'active' to first carousel-item in for loop -->    
+    <script>
+        $(document).ready(function () {
+          $('#game-carousel').find('.carousel-item').first().addClass('active');
+        });
+    </script>
 {% endblock %}
                             

@@ -1,0 +1,80 @@
+
+        <div id="pitchers" class="white opacity-90">
+            <p class="text-center mb-0">Current Season</p>
+            <table>
+                <tbody>
+                    <tr scope="row">
+                        <td class="text-right">
+                            <small class="light-blue">
+                                {{ current.away_abbr }} -
+                            </small>
+                            <p class="d-inline pr-2">
+                                {{ current.away_starter }}
+                                <small class="text-muted pitching-font">
+                                {{ current.away_starter_hand }}
+                                </small>
+                            </p>
+                        </td>
+                        <td class="d-none d-sm-block">
+                            <p class="d-inline pr-2">
+                                {{ current.away_starter_record }}
+                            </p>
+                        </td>
+                        <td>
+                            <p class="d-inline pitching-font pr-2">
+                                {{ current.away_starter_ip }} 
+                                <small>IP</small>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="d-inline pitching-font pr-2">
+                                {{ current.away_starter_era }}
+                                <small>ERA</small>
+                            </p>
+                        </td>
+                        <td>   
+                            <p class="d-inline pitching-font pr-2">
+                                {{ current.away_starter_k }}
+                                <small>K</small>
+                            </p> 
+                        </td>     
+                    </tr>    
+                    <tr scope="row">
+                        <td class="text-right">
+                            <small class="light-blue">
+                                {{ current.home_abbr }} -
+                            </small>
+                            <p class="d-inline pr-2">
+                                {{ current.home_starter }}
+                                <small class="text-muted pitching-font">
+                                {{ current.home_starter_hand }}
+                                </small>
+                            </p>
+                        </td>
+                        <td class="d-none d-sm-block">
+                            <p class="d-inline">
+                                {{ current.home_starter_record }}
+                            </p>
+                        </td>
+                        <td>
+                            <p class="d-inline pitching-font">
+                                {{ current.home_starter_ip }} 
+                                <small>IP</small>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="d-inline pitching-font">
+                                {{ current.home_starter_era }}
+                                <small>ERA</small>
+                            </p>
+                        </td>
+                        <td>   
+                            <p class="d-inline pitching-font">
+                                {{ current.home_starter_k }}
+                                <small>K</small>
+                            </p> 
+                        </td>     
+                    </tr>    
+                </tbody>          
+            </table>
+        </div>
