@@ -208,18 +208,20 @@ def final_scores(request):
         messages.error(request, 'Sorry, only Admin can do that.')
         return redirect(reverse('home'))
 
+    # Get the date for the SportspageFeeds API params
+    todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
+    today = todays_date.strftime('%Y-%m-%d')
+    tomorrows_date = todays_date + datetime.timedelta(days=1)
+    tomorrow = tomorrows_date.strftime('%Y-%m-%d')
+
     # Get data from SportspageFeeds API via button click on management.html
 
     if request.method == "GET":
 
-        # Get the date for the SportspageFeeds API params
+        gameday = request.GET.get('gameDate')
+        league_name = request.GET.get('leagueName')
 
-        todays_date = datetime.datetime.now(
-            pytz.timezone('America/Los_Angeles'))
-
-        gameday = todays_date.strftime('%Y-%m-%d')
-
-        params = {"league": 'MLB', "date": gameday}
+        params = {"league": league_name, "date": gameday}
 
         url = "https://sportspage-feeds.p.rapidapi.com/games"
 
@@ -351,7 +353,12 @@ def final_scores(request):
                         'away_score': away_score}
                 )
 
-    return render(request, 'management/management.html')
+    context = {
+        'today': today,
+        'tomorrow': tomorrow,
+    }
+
+    return render(request, context, 'management/management.html')
 
 
 @login_required

@@ -157,11 +157,13 @@ def games(request):
             if 'scoreboard' in game and 'score' in game['scoreboard']:
                 home_score = game['scoreboard']['score']['home']
                 away_score = game['scoreboard']['score']['away']
+                current_inning = game['scoreboard']['currentPeriod']
 
                 MLBGameLine.objects.update_or_create(
                     gameID=gameID, defaults={
                         'home_score': home_score,
-                        'away_score': away_score}
+                        'away_score': away_score,
+                        'current_inning': current_inning}
                 )
 
     all_games = MLBGameLine.objects.all()

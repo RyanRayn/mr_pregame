@@ -20,6 +20,7 @@ class League(models.Model):
 class TeamName(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     abbreviation = models.CharField(max_length=10, null=False, blank=False)
+    twitter_id = models.CharField(max_length=100, default=name)
     league = models.ForeignKey(
         'League', null=False, blank=False, on_delete=models.CASCADE)
 
@@ -217,6 +218,7 @@ class MLBGameLine(models.Model):
     under_odds = models.IntegerField(default=0)
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
+    current_inning = models.IntegerField(default=0)
     status = models.CharField(max_length=25)
     pick = models.TextField(blank=True)
     pick_type = models.CharField(max_length=100, blank=True)
