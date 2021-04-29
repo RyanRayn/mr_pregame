@@ -20,7 +20,7 @@
                                 <h3 class="game-summary white opacity-90 text-center font-800 mb-0">
                                     {{ game.summary }}
                                 </h3>
-                                {% if game.status == 'in progress' or game.status == 'final' %}
+                                {% if game.status != 'scheduled' %}
                                     <p class="orange opacity-90 mb-0 mt-1 text-center">
                                         <i class="fad fa-clock orange pr-2"></i>{{ game.status|upper }} 
                                     </p>

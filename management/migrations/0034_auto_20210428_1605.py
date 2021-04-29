@@ -13,11 +13,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mlbgameline',
             name='current_inning',
-            field=models.IntegerField(default=0),
+            field=models.IntegerField(default=0, null=True),
         ),
         migrations.AddField(
             model_name='teamname',
             name='twitter_id',
-            field=models.CharField(default=models.CharField(max_length=100), max_length=100),
+            field=models.CharField(
+                default=models.CharField(max_length=100), max_length=100),
         ),
     ]

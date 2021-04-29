@@ -218,7 +218,7 @@ class MLBGameLine(models.Model):
     under_odds = models.IntegerField(default=0)
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
-    current_inning = models.IntegerField(default=0)
+    current_inning = models.IntegerField(default=0, null=True)
     status = models.CharField(max_length=25)
     pick = models.TextField(blank=True)
     pick_type = models.CharField(max_length=100, blank=True)
