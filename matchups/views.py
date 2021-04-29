@@ -4,7 +4,7 @@ from django.conf import settings
 import datetime
 import pytz
 import tweepy
-from management.models import MLBGameLine, MLBGame
+from management.models import MLBGameLine, MLBGame, TeamName
 
 
 def matchups(request):
@@ -64,9 +64,10 @@ def matchups(request):
     auth.set_access_token(
         settings.TWITTER_ACCESS_TOKEN, settings.TWITTER_SECRET_ACCESS_TOKEN)
 
-    api = tweepy.API(auth)
-    home_team_tweets = tweepy.Cursor(api.user_timeline, id=home_team).items()
-    away_team_tweets = tweepy.Cursor(api.user_timeline, id=away_team).items()
+    home_team = current.home_team
+    home_object = TeamName.objects.get(name=home_team)
+    home_twitter = home_object.twitter_id
+    print(home_twitter)
 
     context = {
         'weather_data': weather_data,
