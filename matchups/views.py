@@ -84,10 +84,6 @@ def matchups(request):
     away_tweets = tweepy.Cursor(
         api.user_timeline, id=away_twitter, exclude_replies=True,
         since_id=yesterday).items(10)
-    for tweet in away_tweets:
-        media = tweet.entities
-        for m in media:
-            print(m.media.media_url)
 
     context = {
         'weather_data': weather_data,
@@ -96,6 +92,8 @@ def matchups(request):
         'current': current,
         'home_tweets': home_tweets,
         'away_tweets': away_tweets,
+        'home_twitter': home_twitter,
+        'away_twitter': away_twitter,
     }
 
     return render(request, 'matchups/matchups.html', context)

@@ -4,15 +4,45 @@
         {% include 'includes/mlb_carousel.html' %}
         {% include 'includes/mlb_info_box.html' %}
     </div>
-    <div class="col-12 col-md-8 col-lg-5 d-flex justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 d-flex justify-content-center">
         {% include 'includes/mlb_pitchers.html' %}
     </div>
-    <div class="col-lg-4">
-        {% for tweet in away_tweets %}
-            <div class="white opacity-90">
-                <p>{{ tweet.text }}</p>
-                <p>{{ tweet.entities.media.media_url_https }}</p>
+    <div class="col-lg-3">
+        <div id="tweet-box" class="info-column pt-1 mb-3">
+            <div class="row py-1">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <h5 class="white opacity-90">
+                        @{{ home_twitter }}
+                    </h5>
+                </div>
             </div>
-        {% endfor %}
+            <div class="weather-box h-100 overflow-auto p-2">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <h5 class="orange opacity-90">
+                            @{{ away_twitter }}
+                        </h5>
+                    </div>
+                </div>
+                <hr class="rounded light-blue-background mx-auto mt-0 mb-4">
+                {% for tweet in away_tweets %}
+                    <div class="white opacity-90">
+                        <p class="">
+                            <i class="fab fa-twitter light-blue mr-2"></i>
+                            {{ away_twitter }} -
+                            <small class="text-muted">{{ tweet.created_at|date }}</small>
+                        </p>
+                        <p class="card-text">{{ tweet.text }}</p>
+                        {% if 'media' in tweet.entities %}
+                            {% for media in tweet.extended_entities.media %}
+                                <img src="{{ media.media_url }}" alt="">
+                                <a href="#" class="btn btn-primary"><i class="far fa-expand-alt"></i></a>
+                            {% endfor %}
+                        {% endif %}        
+                    </div>
+                    <hr class="rounded light-blue-background mx-auto my-3">
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
