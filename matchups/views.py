@@ -5,10 +5,16 @@ import datetime
 import pytz
 import tweepy
 from management.models import MLBGameLine, MLBGame, TeamName
+import pprint
 
 
 def matchups(request):
     """ a view to show MLB game matchups """
+    # Get the date for the SportspageFeeds API params
+    todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
+    yesterdays_date = todays_date + datetime.timedelta(days=-1)
+    yesterday = yesterdays_date.strftime('%Y-%m-%d')
+
     # Get all objects in MLBGameLine model
     game_lines = MLBGameLine.objects.all()
 
@@ -58,22 +64,38 @@ def matchups(request):
         weather['gameTemp'] = round(weather['main']['temp'])
         weather['gameWeather'] = weather['weather'][0]['main']
 
-    # Twitter/Tweepy Access Keys
+    # Twitter/Tweepy API
     auth = tweepy.OAuthHandler(
         settings.TWITTER_API_KEY, settings.TWITTER_SECRET_KEY)
     auth.set_access_token(
         settings.TWITTER_ACCESS_TOKEN, settings.TWITTER_SECRET_ACCESS_TOKEN)
 
-    home_team = current.home_team
-    home_object = TeamName.objects.get(name=home_team)
+    # Get current teams Twitter handles from db
+    home_object = TeamName.objects.get(name=current.home_team)
     home_twitter = home_object.twitter_id
-    print(home_twitter)
+
+    away_object = TeamName.objects.get(name=current.away_team)
+    away_twitter = away_object.twitter_id
+
+    api = tweepy.API(auth)
+    home_tweets = tweepy.Cursor(
+        api.user_timeline, id=home_twitter, exclude_replies=True,
+        since_id=yesterday).items(10)
+    away_tweets = tweepy.Cursor(
+        api.user_timeline, id=away_twitter, exclude_replies=True,
+        since_id=yesterday).items(10)
+    for tweet in away_tweets:
+        media = tweet.entities
+        for m in media:
+            print(m.media.media_url)
 
     context = {
         'weather_data': weather_data,
         'game_lines': game_lines,
         'league': league,
         'current': current,
+        'home_tweets': home_tweets,
+        'away_tweets': away_tweets,
     }
 
     return render(request, 'matchups/matchups.html', context)

@@ -22,7 +22,8 @@
                                 </h3>
                                 {% if game.status != 'scheduled' %}
                                     <p class="orange opacity-90 mb-0 mt-1 text-center">
-                                        <i class="fad fa-clock orange pr-2"></i>{{ game.status|upper }} 
+                                        <i class="fad fa-clock orange pr-2"></i>{{ game.status|upper }} -
+                                        {{ game.current_inning }} inning 
                                     </p>
                                 {% else %}
                                     <p class="white opacity-90 mb-0 text-center">

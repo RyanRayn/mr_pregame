@@ -7,7 +7,7 @@ from .forms import AwayBaseballGames, HomeBaseballGames
 from .forms import Pitcher, EditGameLine
 import datetime
 from sportsipy.mlb.teams import Teams as MLBTeams
-from .models import MLBGame, MLBGameLine
+from .models import MLBGame, MLBGameLine, StartingPitcher
 import pytz
 
 

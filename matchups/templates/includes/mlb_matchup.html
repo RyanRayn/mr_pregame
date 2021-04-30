@@ -7,4 +7,12 @@
     <div class="col-12 col-md-8 col-lg-5 d-flex justify-content-center">
         {% include 'includes/mlb_pitchers.html' %}
     </div>
+    <div class="col-lg-4">
+        {% for tweet in away_tweets %}
+            <div class="white opacity-90">
+                <p>{{ tweet.text }}</p>
+                <p>{{ tweet.entities.media.media_url_https }}</p>
+            </div>
+        {% endfor %}
+    </div>
 </div>
