@@ -1,8 +1,8 @@
    
     <div class="row px-2">
         {% for game in all_games %}
-            {% if game.gamedate|date == date_LA %}
-                <div class="col-12 col-lg-6 mb-4">                  
+            {% if game.gamedate|date == date_LA %} 
+                <div class="col-12 col-lg-6 mb-4">                
                     <div class="gamecard p-2">
 <!-- Edit Game Line Button -->
                         {% if request.user.is_superuser %}

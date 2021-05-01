@@ -7,42 +7,87 @@
     <div class="col-12 col-md-8 col-lg-6 d-flex justify-content-center">
         {% include 'includes/mlb_pitchers.html' %}
     </div>
-    <div class="col-lg-3">
-        <div id="tweet-box" class="info-column pt-1 mb-3">
-            <div class="row py-1">
-                <div class="col-12 d-flex justify-content-center align-items-center">
-                    <h5 class="white opacity-90">
-                        @{{ home_twitter }}
+    <div class="col-lg-3 mb-4">
+        <div id="twitter_accordion">
+            <div id="home_twitter_card">
+                <div id="homeHeader" class="d-flex justify-content-center align-items-center">
+                    <h5 class="mb-0">
+                        <button class="btn white" data-toggle="collapse" data-target="#homeInner" aria-expanded="true" aria-controls="homeInner">
+                            @{{ home_twitter }}
+                        </button>
                     </h5>
                 </div>
-            </div>
-            <div class="weather-box h-100 overflow-auto p-2">
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-center align-items-center">
-                        <h5 class="orange opacity-90">
-                            @{{ away_twitter }}
-                        </h5>
+                <div id="homeInner" class="collapse show" aria-labelledby="homeHeader" data-parent="#twitter_accordion">
+                    <div class="tweet-box">
+                        <div class="h-100 overflow-auto p-2">
+                            {% for tweet in home_tweets %}
+                                <div class="white opacity-90">
+                                    <p class="">
+                                        <i class="fab fa-twitter light-blue mr-2"></i>
+                                        {{ home_twitter }} -
+                                        <small class="text-muted">{{ tweet.created_at|date }}</small>
+                                    </p>
+                                    <p class="card-text">{{ tweet.text }}</p>
+                                    {% if 'media' in tweet.entities %}
+                                        {% for media in tweet.extended_entities.media %}
+                                            <img src="{{ media.media_url }}" alt="">
+                                            <a href="#" class="btn btn-primary"><i class="far fa-expand-alt"></i></a>
+                                        {% endfor %}
+                                    {% endif %}        
+                                </div>
+                                <hr class="rounded light-blue-background mx-auto my-3">
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-                <hr class="rounded light-blue-background mx-auto mt-0 mb-4">
-                {% for tweet in away_tweets %}
-                    <div class="white opacity-90">
-                        <p class="">
-                            <i class="fab fa-twitter light-blue mr-2"></i>
-                            {{ away_twitter }} -
-                            <small class="text-muted">{{ tweet.created_at|date }}</small>
-                        </p>
-                        <p class="card-text">{{ tweet.text }}</p>
-                        {% if 'media' in tweet.entities %}
-                            {% for media in tweet.extended_entities.media %}
-                                <img src="{{ media.media_url }}" alt="">
-                                <a href="#" class="btn btn-primary"><i class="far fa-expand-alt"></i></a>
+            <div id="away_twitter_card" class="weather-box">
+                <div id="awayHeader" class="d-flex justify-content-center align-items-center">
+                    <h5 class="mb-0">
+                        <button class="white btn collapsed" data-toggle="collapse" data-target="#awayInner" aria-expanded="false" aria-controls="awayInner">
+                            @{{ away_twitter }}
+                        </button>
+                    </h5>
+                </div>
+                <div id="awayInner" class="collapse" aria-labelledby="awayHeader" data-parent="#twitter_accordion">
+                    <div class="tweet-box">
+                        <div class="h-100 overflow-auto p-2">
+                            {% for tweet in away_tweets %}
+                                <div class="white opacity-90">
+                                    <p class="">
+                                        <i class="fab fa-twitter light-blue mr-2"></i>
+                                        {{ away_twitter }} -
+                                        <small class="text-muted">{{ tweet.created_at|date }}</small>
+                                    </p>
+                                    <p class="card-text">{{ tweet.text }}</p>
+                                    {% if 'media' in tweet.entities %}
+                                        {% for media in tweet.extended_entities.media %}
+                                            <img src="{{ media.media_url }}" alt="">
+                                            <a href="#" class="btn btn-primary"><i class="far fa-expand-alt"></i></a>
+                                        {% endfor %}
+                                    {% endif %}        
+                                </div>
+                                <hr class="rounded light-blue-background mx-auto my-3">
                             {% endfor %}
-                        {% endif %}        
+                        </div>
                     </div>
-                    <hr class="rounded light-blue-background mx-auto my-3">
-                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+{% block postloadjs %}
+<script>
+    $('#twitter_accordion').on('show.bs.collapse', function () {
+	  $(this).data('.collapse.show', true);
+    });
+
+    $('#twitter_accordion').on('hide.bs.collapse', function (event) {
+	  if (!$(this).data('.collapse.show')) {
+  	    event.preventDefault();
+      }
+  
+    $(this).data('.collapse.show', false);
+  });
+</script>
+{% endblock %}

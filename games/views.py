@@ -15,7 +15,7 @@ def games(request):
     tomorrow = tomorrows_date.strftime('%Y-%m-%d')
 
     # Date format for gamecard "if statement"
-    date_LA = todays_date.strftime('%B %d, %Y')
+    date_LA = todays_date.strftime('%B %-d, %Y')
 
     # Get data for SportspageFeeds API params
     # from form in Navbar for 'leagueName'.
