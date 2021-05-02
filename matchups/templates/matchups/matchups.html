@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'slick/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'slick/slick-theme.css' %}"/>
-{% endblock %}
 
 {% block content %}
     <div id="content">
@@ -17,11 +13,19 @@
 
 {% block postloadjs %}
     {{ block.super }}
-<!-- Add 'active' to first carousel-item in for loop -->    
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
-          $('#game-carousel').find('.carousel-item').first().addClass('active');
+            $('#game-carousel').find('.carousel-item').first().addClass('active');
         });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".btn-link").on("click", function() {
+                if (!$(this).hasClass("collapsed")) {
+                    $($(".btn-link").not(this).data('target')).collapse('show')
+                }
+            });
+        });       
     </script>
 {% endblock %}
                             

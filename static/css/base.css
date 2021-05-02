@@ -561,6 +561,15 @@ img {
     background-color:#c1e6ff00;
 }
 
+.card{
+    border:none !important;
+}
+
+.tweet-media{
+    border:2px solid rgba(255, 255, 255, 0.904);
+    border-radius:20px;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

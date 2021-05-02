@@ -79,11 +79,9 @@ def matchups(request):
 
     api = tweepy.API(auth)
     home_tweets = tweepy.Cursor(
-        api.user_timeline, id=home_twitter, exclude_replies=True,
-        since_id=yesterday).items(10)
+        api.user_timeline, id=home_twitter, exclude_replies=True, include_rts=False).items(20)
     away_tweets = tweepy.Cursor(
-        api.user_timeline, id=away_twitter, exclude_replies=True,
-        since_id=yesterday).items(10)
+        api.user_timeline, id=away_twitter, exclude_replies=True, include_rts=False).items(20)
 
     context = {
         'weather_data': weather_data,
