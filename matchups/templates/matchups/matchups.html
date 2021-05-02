@@ -20,12 +20,20 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $(".btn-link").on("click", function() {
-                if (!$(this).hasClass("collapsed")) {
-                    $($(".btn-link").not(this).data('target')).collapse('show')
+            $('.btn-link').on('click', function() {
+                if (!$(this).hasClass('collapsed')) {
+                    $($('.btn-link').not(this).data('target')).collapse('show')
                 }
             });
         });       
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.pop').on('click', function() {
+                $('.media-modal').attr('src', $(this).find('img').attr('src'));
+                $('#mediaModal').modal('show');
+            });
+        });
     </script>
 {% endblock %}
                             

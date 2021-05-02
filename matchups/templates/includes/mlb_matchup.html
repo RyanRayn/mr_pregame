@@ -2,77 +2,20 @@
 <div class="row">
     <div class="col-12 col-md-4 col-lg-3">
         {% include 'includes/mlb_carousel.html' %}
-        {% include 'includes/mlb_info_box.html' %}
     </div>
     <div class="col-12 col-md-8 col-lg-6 d-flex justify-content-center">
         {% include 'includes/mlb_pitchers.html' %}
     </div>
     <div class="col-lg-3 mb-4">
-        <div id="twitter_accordion">
-            <div id="home_twitter_card" class="card">
-                <div id="homeHeader" class="d-flex justify-content-center align-items-center">
-                    <h4 class="mb-0 p-2">
-                        <button class="twitter-home-btn btn-link btn white" data-toggle="collapse" data-parent="#twitter_accordion" data-target="#homeInner" aria-expanded="true" aria-controls="homeInner">
-                            @{{ home_twitter|title }}
-                        </button>
-                    </h4>
-                </div>
-                <div id="homeInner" class="card-inner collapse show" aria-labelledby="homeHeader" data-parent="#twitter_accordion">
-                    <div class="tweet-box">
-                        <div class="h-100 overflow-auto p-2">
-                            {% for tweet in home_tweets %}
-                                <div class="white opacity-90">
-                                    <p class="">
-                                        <i class="fab fa-twitter light-blue mr-2"></i>
-                                        {{ home_twitter|title }} -
-                                        <small class="light-blue">{{ tweet.created_at|date }}</small>
-                                    </p>
-                                    <p class="card-text">{{ tweet.text }}</p>
-                                    {% if 'media' in tweet.entities %}
-                                        {% for media in tweet.extended_entities.media %}
-                                            <img class="tweet-media"  src="{{ media.media_url }}" alt="">
-                                            <a href="#" class="btn btn-primary"><i class="far fa-expand-alt"></i></a>
-                                        {% endfor %}
-                                    {% endif %}        
-                                </div>
-                                <hr class="rounded light-blue-background mx-auto my-3">
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>    
-            <div id="away_twitter_card" class="card weather-box">
-                <div id="awayHeader" class="d-flex justify-content-center align-items-center">
-                    <h4 class="mb-0 p-2">
-                        <button class="twitter-away-btn btn-link white btn collapsed" data-toggle="collapse" data-parent="#twitter_accordion"  data-target="#awayInner" aria-expanded="false" aria-controls="awayInner">
-                            @{{ away_twitter|title }}
-                        </button>
-                    </h4>
-                </div>
-                <div id="awayInner" class="card-inner collapse" aria-labelledby="awayHeader" data-parent="#twitter_accordion">
-                    <div class="tweet-box">
-                        <div class="h-100 overflow-auto p-2">
-                            {% for tweet in away_tweets %}
-                                <div class="white opacity-90">
-                                    <p class="">
-                                        <i class="fab fa-twitter light-blue mr-2"></i>
-                                        {{ away_twitter|title }} -
-                                        <small class="light-blue">{{ tweet.created_at|date }}</small>
-                                    </p>
-                                    <p class="card-text">{{ tweet.text }}</p>
-                                    {% if 'media' in tweet.entities %}
-                                        {% for media in tweet.extended_entities.media %}
-                                            <img class="tweet-media" src="{{ media.media_url }}" alt="">
-                                            <a href="#" class="btn btn-primary"><i class="far fa-expand-alt"></i></a>
-                                        {% endfor %}
-                                    {% endif %}        
-                                </div>
-                                <hr class="rounded light-blue-background mx-auto my-3">
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12 col-md-4 col-lg-3">
+        {% include 'includes/mlb_info_box.html' %}
+    </div>
+    <div class="col-12 col-md-8 col-lg-6 d-flex justify-content-center">
+    </div>
+    <div class="col-lg-3 mb-4">
+        {% include 'includes/twitter.html' %}
+    </div>
+</div>        

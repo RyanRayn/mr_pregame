@@ -548,26 +548,38 @@ img {
     color:white;
 }
 
+/*----- Z-index to carousel to prevent elements from 'blinking' on slide change -----*/
+#game-carousel{
+    z-index:1000;
+}
+
 .tweet-box{
-    height:500px;
+    height:340px;
 }
 
 #twitter_accordion{
     background-color:#c1e6ff7a;
     border-radius:20px;
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726)
 }
 
 #home_twitter_card{
-    background-color:#c1e6ff00;
+    background-color:transparent;
 }
 
 .card{
     border:none !important;
 }
 
-.tweet-media{
-    border:2px solid rgba(255, 255, 255, 0.904);
+.tweet-media,
+.modal-content,
+.media-modal{
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
     border-radius:20px;
+}
+
+.btn-link:hover{
+    color:#C1E6FF;
 }
 
 /*---------- Media Queries ----------*/
