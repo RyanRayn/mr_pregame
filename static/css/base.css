@@ -582,6 +582,12 @@ img {
     color:#C1E6FF;
 }
 
+.orange-box{
+    background-color:#ff7c1fb7;
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
+    border-radius:20px;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

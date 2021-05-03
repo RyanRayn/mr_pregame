@@ -1,0 +1,23 @@
+<div id="records" class="orange-box p-2 pb-0 white opacity-90">
+    <table>
+        <tbody>
+            <tr scope="row">
+                <td class="pr-2">
+                    <p class="text-center dark-blue mb-0">Team</p>
+                    <p class="text-right mb-0">{{ current.away_team }}</p>
+                    <p class="text-right">{{ current.home_team }}</p>
+                </td>
+                <td class="pr-2 text-center">
+                    <p class="dark-blue mb-0"><small>Win/Loss</small></p>
+                    <p class="mb-0">{{ away_total_wins }} - {{ away_total_loss }}</p>
+                    <p>{{ home_total_wins }} - {{ home_total_loss }}</p>
+                </td>
+                <td class="text-right">
+                    <p class="dark-blue mb-0"><small>Home/Road</small></p>
+                    <p class="mb-0">Road {{ wins_away }} - {{ loss_away }}</p>
+                    <p>Home {{ wins_home }} - {{ loss_home }}</p>
+                </td>
+            </tr>
+        </tbody>    
+    </table>
+</div>    

@@ -1,21 +1,26 @@
   
-<div class="row">
-    <div class="col-12 col-md-4 col-lg-3">
+<div class="row mb-2">
+    <div class="d-none d-md-block col-3 d-lg-none"></div>
+    <div class="col-12 col-md-6 col-lg-3">
         {% include 'includes/mlb_carousel.html' %}
     </div>
-    <div class="col-12 col-md-8 col-lg-6 d-flex justify-content-center">
-        {% include 'includes/mlb_pitchers.html' %}
+    <div class="d-none d-md-block col-3 d-lg-none"></div>
+    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        {% include 'includes/team_records.html' %}
     </div>
-    <div class="col-lg-3 mb-4">
+    <div class="col-12 col-md-4 col-lg-3">
+        
     </div>
+
 </div>
 <div class="row">
-    <div class="col-12 col-md-4 col-lg-3">
+    <div class="col-12 col-md-6 col-lg-3">
         {% include 'includes/mlb_info_box.html' %}
     </div>
-    <div class="col-12 col-md-8 col-lg-6 d-flex justify-content-center">
+    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        {% include 'includes/mlb_pitchers.html' %}
     </div>
-    <div class="col-lg-3 mb-4">
+    <div class="col-12 col-md-4 col-lg-3 mb-4">
         {% include 'includes/twitter.html' %}
     </div>
 </div>        
