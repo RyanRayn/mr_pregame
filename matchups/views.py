@@ -92,15 +92,22 @@ def matchups(request):
 
     # Get all objects in MLBGame model for current game home team
     home_stats = MLBGame.objects.filter(name__name=current.home_team)
+    # Home team nickname
     home_stats.nickname = home_stats[0].nickname
+    # Home team total home wins
     home_stats.wins_home = home_stats.aggregate(
         Sum('win_home'))['win_home__sum']
+    # Home team total home loss
     home_stats.loss_home = home_stats.aggregate(
         Sum('loss_home'))['loss_home__sum']
+    # Home team total wins
     home_stats.total_wins = home_stats.aggregate(
         total=Sum('win_home') + Sum('win_away'))['total']
+    # Home team total loss
     home_stats.total_loss = home_stats.aggregate(
         total=Sum('loss_home') + Sum('loss_away'))['total']
+    # Home team total runs
+    home_stats.avg_runs = home_stats.aggregate(total=Avg('runs'))['total']
 
     # Get all objects in MLBGame model for current game away team
     away_stats = MLBGame.objects.filter(name__name=current.away_team)

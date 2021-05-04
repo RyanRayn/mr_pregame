@@ -21,8 +21,17 @@
     <div class="col-12 col-md-6 col-lg-3">
         {% include 'includes/mlb_info_box.html' %}
     </div>
-    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-        {% include 'includes/mlb_pitchers.html' %}
+    <div class="col-12 col-md-6 col-lg-6 d-flex flex-column align-items-center mt-1">
+        <div class="pitchers">
+            {% include 'includes/mlb_pitchers.html' %}
+        </div>
+        <div class="runs">
+            {% include 'includes/mlb_runs.html' %}
+        </div>
+    
+
+        
+        
     </div>
     <div class="col-12 col-md-4 col-lg-3 mb-4">
         {% include 'includes/twitter.html' %}
