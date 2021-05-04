@@ -9,13 +9,13 @@
                 </td>
                 <td class="pr-2 text-center">
                     <p class="dark-blue mb-0"><small>Win/Loss</small></p>
-                    <p class="mb-0">{{ away_total_wins }} - {{ away_total_loss }}</p>
-                    <p>{{ home_total_wins }} - {{ home_total_loss }}</p>
+                    <p class="mb-0">{{ away_stats.total_wins }} - {{ away_stats.total_loss }}</p>
+                    <p>{{ home_stats.total_wins }} - {{ home_stats.total_loss }}</p>
                 </td>
                 <td class="text-right">
                     <p class="dark-blue mb-0"><small>Home/Road</small></p>
-                    <p class="mb-0">Road {{ wins_away }} - {{ loss_away }}</p>
-                    <p>Home {{ wins_home }} - {{ loss_home }}</p>
+                    <p class="mb-0">Road {{ away_stats.wins_away }} - {{ away_stats.loss_away }}</p>
+                    <p>Home {{ home_stats.wins_home }} - {{ home_stats.loss_home }}</p>
                 </td>
             </tr>
         </tbody>    

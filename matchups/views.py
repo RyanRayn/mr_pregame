@@ -7,6 +7,7 @@ import tweepy
 from management.models import MLBGameLine, MLBGame, TeamName
 from django.db.models import Avg, Count, Min, Sum
 
+
 def matchups(request):
     """ a view to show MLB game matchups """
     # Get the date for the SportspageFeeds API params
@@ -14,8 +15,11 @@ def matchups(request):
     yesterdays_date = todays_date + datetime.timedelta(days=-1)
     yesterday = yesterdays_date.strftime('%Y-%m-%d')
 
-    # Get all objects in MLBGameLine model
-    game_lines = MLBGameLine.objects.all()
+    # Date format for carousel "if statement"
+    date_LA = todays_date.strftime('%B %-d, %Y')
+
+    # Get all objects in MLBGameLine model using for game carousel
+    all_games = MLBGameLine.objects.all()
 
     # Get game id from submitted form to show specific game info
     # Get city from form for weather API
@@ -27,7 +31,6 @@ def matchups(request):
         league = request.GET.get('league')
 
     # Convert game_id from to an int to match game.game_id on matchup template
-
     gameID = int(game_id)
 
     # Get currently selected game for template
@@ -72,7 +75,6 @@ def matchups(request):
     # Get current teams Twitter handles from db
     home_object = TeamName.objects.get(name=current.home_team)
     home_twitter = home_object.twitter_id
-
     away_object = TeamName.objects.get(name=current.away_team)
     away_twitter = away_object.twitter_id
 
@@ -85,44 +87,41 @@ def matchups(request):
         include_rts=False).items(20)
 
     # Get all objects in MLBGame model for current game home team
-    home_games = MLBGame.objects.filter(name__name=current.home_team)
-    home_nickname = home_games[0].nickname
-    wins_home = home_games.aggregate(Sum('win_home'))['win_home__sum']
-    loss_home = home_games.aggregate(Sum('loss_home'))['loss_home__sum']
-    home_total_wins = home_games.aggregate(
+    home_stats = MLBGame.objects.filter(name__name=current.home_team)
+    home_stats.nickname = home_stats[0].nickname
+    home_stats.wins_home = home_stats.aggregate(
+        Sum('win_home'))['win_home__sum']
+    home_stats.loss_home = home_stats.aggregate(
+        Sum('loss_home'))['loss_home__sum']
+    home_stats.total_wins = home_stats.aggregate(
         total=Sum('win_home') + Sum('win_away'))['total']
-    home_total_loss = home_games.aggregate(
+    home_stats.total_loss = home_stats.aggregate(
         total=Sum('loss_home') + Sum('loss_away'))['total']
 
     # Get all objects in MLBGame model for current game away team
-    away_games = MLBGame.objects.filter(name__name=current.away_team)
-    away_nickname = away_games[0].nickname
-    wins_away = away_games.aggregate(Sum('win_away'))['win_away__sum']
-    loss_away = away_games.aggregate(Sum('loss_away'))['loss_away__sum']
-    away_total_wins = away_games.aggregate(
+    away_stats = MLBGame.objects.filter(name__name=current.away_team)
+    away_stats.nickname = away_stats[0].nickname
+    away_stats.wins_away = away_stats.aggregate(
+        Sum('win_away'))['win_away__sum']
+    away_stats.loss_away = away_stats.aggregate(
+        Sum('loss_away'))['loss_away__sum']
+    away_stats.total_wins = away_stats.aggregate(
         total=Sum('win_home') + Sum('win_away'))['total']
-    away_total_loss = away_games.aggregate(
+    away_stats.total_loss = away_stats.aggregate(
         total=Sum('loss_home') + Sum('loss_away'))['total']
 
     context = {
         'weather_data': weather_data,
-        'game_lines': game_lines,
+        'all_games': all_games,
+        'date_LA': date_LA,
         'league': league,
         'current': current,
         'home_tweets': home_tweets,
         'away_tweets': away_tweets,
         'home_twitter': home_twitter,
         'away_twitter': away_twitter,
-        'home_nickname': home_nickname,
-        'away_nickname': away_nickname,
-        'wins_home': wins_home,
-        'loss_home': loss_home,
-        'home_total_wins': home_total_wins,
-        'home_total_loss': home_total_loss,
-        'wins_away': wins_away,
-        'loss_away': loss_away,
-        'away_total_wins': away_total_wins,
-        'away_total_loss': away_total_loss,
+        'away_stats': away_stats,
+        'home_stats': home_stats,
     }
 
     return render(request, 'matchups/matchups.html', context)
