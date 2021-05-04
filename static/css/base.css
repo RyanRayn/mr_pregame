@@ -588,6 +588,10 @@ img {
     border-radius:20px;
 }
 
+.team-website:hover{
+    color:white;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

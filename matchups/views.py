@@ -79,9 +79,13 @@ def matchups(request):
     away_twitter = away_object.twitter_id
 
     api = tweepy.API(auth)
+
+    # _user gets profile information _tweets gets status timeline
+    home_user = api.get_user(screen_name=home_twitter)
     home_tweets = tweepy.Cursor(
         api.user_timeline, id=home_twitter, exclude_replies=True,
         include_rts=False).items(20)
+    away_user = api.get_user(screen_name=away_twitter)
     away_tweets = tweepy.Cursor(
         api.user_timeline, id=away_twitter, exclude_replies=True,
         include_rts=False).items(20)
@@ -118,8 +122,8 @@ def matchups(request):
         'current': current,
         'home_tweets': home_tweets,
         'away_tweets': away_tweets,
-        'home_twitter': home_twitter,
-        'away_twitter': away_twitter,
+        'home_user': home_user,
+        'away_user': away_user,
         'away_stats': away_stats,
         'home_stats': home_stats,
     }
