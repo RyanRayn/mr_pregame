@@ -10,12 +10,12 @@
             </button>
             <div class="collapse navbar-collapse mt-1 ml-2" id="navbarNav">
                 <ul class="navbar-nav d-flex flex-row justify-content-around">
-                    <li><a class="nav-item nav-link active orange font-700" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a class="nav-item nav-link orange font-700" href="#">Profile</a></li>
+                    <li><a id="home" class="nav-item nav-link active orange font-700" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a id="profile" class="nav-item nav-link orange font-700" href="#">Profile</a></li>
                     <li><a id="games" class="nav-item nav-link orange font-700">Games</a></li> 
                     <li><a class="d-lg-none nav-item nav-link orange font-700" href="{% url 'account_logout' %}">Sign out</a></li>
                 {% if request.user.is_superuser %}
-                    <li><a class="nav-item nav-link orange font-700" href="{% url 'management' %}">Site Admin</a></li>
+                    <li><a id="admin" class="nav-item nav-link orange font-700" href="{% url 'management' %}">Site Admin</a></li>
                 {% endif %}              
                 </ul>
                 <div class="nav-item d-none d-lg-block mr-3 ml-auto">    

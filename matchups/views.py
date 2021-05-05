@@ -120,6 +120,8 @@ def matchups(request):
         total=Sum('win_home') + Sum('win_away'))['total']
     away_stats.total_loss = away_stats.aggregate(
         total=Sum('loss_home') + Sum('loss_away'))['total']
+    # Away team total runs
+    away_stats.avg_runs = away_stats.aggregate(total=Avg('runs'))['total']
 
     context = {
         'weather_data': weather_data,

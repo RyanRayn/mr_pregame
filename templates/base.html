@@ -57,7 +57,19 @@
     </script>   
     <script>
         /* Shows and hides league menu in navbar */
-        $("#games").click(function(){
+        $("#games").mouseover(function(){
+            $("#league-menu").toggleClass('no-show');
+        });
+        $("#home").mouseenter(function(){
+            $("#league-menu").addClass('no-show');
+        });
+        $("#profile").mouseenter(function(){
+            $("#league-menu").addClass('no-show');
+        });
+        $("#admin").mouseenter(function(){
+            $("#league-menu").addClass('no-show');
+        });
+        $("#league-menu").mouseleave(function(){
             $("#league-menu").toggleClass('no-show');
         });
     </script>  
