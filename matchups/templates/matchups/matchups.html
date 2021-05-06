@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_js %}
+    <!--Chart js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js" integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg==" crossorigin="anonymous"></script>
+{% endblock %}
+
 {% block content %}
     <div id="content">
         <div class="container-fluid"> 
@@ -13,27 +18,11 @@
 
 {% block postloadjs %}
     {{ block.super }}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#game-carousel').find('.carousel-item').first().addClass('active');
-        });
+    <script>
+        var data = '{% for runs in home_stats %}{{ runs.runs }}{% endfor %}'
+        var labels = '{% for game in home_stats %}{{ forloop.counter }}{% endfor %}';
     </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.btn-link').on('click', function() {
-                if (!$(this).hasClass('collapsed')) {
-                    $($('.btn-link').not(this).data('target')).collapse('show')
-                }
-            });
-        });       
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.pop').on('click', function() {
-                $('.media-modal').attr('src', $(this).find('img').attr('src'));
-                $('#mediaModal').modal('show');
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{% static 'js/matchup.js' %}"></script>
+  
 {% endblock %}
                             

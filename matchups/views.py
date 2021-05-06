@@ -123,6 +123,13 @@ def matchups(request):
     # Away team total runs
     away_stats.avg_runs = away_stats.aggregate(total=Avg('runs'))['total']
 
+    labels = []
+    data = []
+
+    for game in home_stats:
+        labels.append(game.date)
+        data.append(game.runs)
+
     context = {
         'weather_data': weather_data,
         'all_games': all_games,
@@ -135,6 +142,8 @@ def matchups(request):
         'away_user': away_user,
         'away_stats': away_stats,
         'home_stats': home_stats,
+        'labels': labels,
+        'data': data,
     }
 
     return render(request, 'matchups/matchups.html', context)
