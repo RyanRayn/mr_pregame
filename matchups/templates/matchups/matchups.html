@@ -19,8 +19,21 @@
 {% block postloadjs %}
     {{ block.super }}
     <script>
-        var data = '{% for runs in home_stats %}{{ runs.runs }}{% endfor %}'
-        var labels = '{% for game in home_stats %}{{ forloop.counter }}{% endfor %}';
+        var home = [];
+            '{% for home in all_games.home_ten %}'
+                home.push(parseInt('{{ home.runs }}'))
+            '{% endfor %}'
+            
+        var home_team = '{{ home_stats.nickname }}'
+
+        var away = [];
+            '{% for away in all_games.away_ten %}'
+                away.push(parseInt('{{ away.runs }}'))
+            '{% endfor %}' 
+
+        var away_team = '{{ away_stats.nickname }}'
+        
+        var labels = '{% for games in all_games.away_ten %}{{ forloop.counter }}{% endfor %}';
     </script>
     <script type="text/javascript" src="{% static 'js/matchup.js' %}"></script>
   

@@ -123,12 +123,10 @@ def matchups(request):
     # Away team total runs
     away_stats.avg_runs = away_stats.aggregate(total=Avg('runs'))['total']
 
-    labels = []
-    data = []
-
-    for game in home_stats:
-        labels.append(game.date)
-        data.append(game.runs)
+    all_games.home_ten = MLBGame.objects.filter(
+        name__name=current.home_team).order_by('-id')[:10]
+    all_games.away_ten = MLBGame.objects.filter(
+        name__name=current.away_team).order_by('-id')[:10]
 
     context = {
         'weather_data': weather_data,
@@ -142,8 +140,6 @@ def matchups(request):
         'away_user': away_user,
         'away_stats': away_stats,
         'home_stats': home_stats,
-        'labels': labels,
-        'data': data,
     }
 
     return render(request, 'matchups/matchups.html', context)

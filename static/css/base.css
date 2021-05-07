@@ -574,6 +574,13 @@ img {
     color:white;
 }
 
+.run-chart{
+    position: relative;
+    margin: auto;
+    height: 40vh;
+    width: 45vw;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

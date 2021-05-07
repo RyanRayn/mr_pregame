@@ -18,37 +18,50 @@
     });
     
     var ctx = document.getElementById('runChart').getContext('2d');
+    var home_runs = home.reverse();
+    var away_runs = away.reverse();
     var runChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
-            datasets: [{
-                label: 'Runs per game',
-                data: data,
+            datasets: [
+                {
+                label: home_team,
+                data: home_runs,
+                lineTension: 0.3,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    '#C1E6FF'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    '#C1E6FF'
                 ],
-                borderWidth: 1
-            }]
+                borderWidth: 3
+                },
+                {
+                    label: away_team,
+                    data: away_runs,
+                    reverse: true,
+                    lineTension: 0.3,
+                    backgroundColor: [
+                        '#FF7C1F'
+                    ],
+                    borderColor: [
+                        '#FF7C1F'
+                    ],
+                    borderWidth: 3
+                    }
+            ]
         },
         options: {
+            parsing: {
+                xAxisKey: 'runs',
+            },
+            responsive: true,
             scales: {
                 y: {
                     beginAtZero: true
-                }
+                },
+                x: {}
             }
-        }
+        },
     });
