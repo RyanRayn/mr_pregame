@@ -30,8 +30,12 @@
                 {% else %}
                 {% endif %}
             </p> 
-<!-- Away Team Name and Game Lines -->
-            <h4 class="text-center mb-2">{{ current.away_team }}</h4>
+<!-- Away Team Name, Record and Game Lines -->
+            <h4 class="text-center mb-0">{{ current.away_team }}</h4>
+            <p class="mt-0">
+                <small>Record: {{ away_stats.total_wins }}-{{ away_stats.total_loss }}</small>&nbsp;
+                <small>Away: {{ away_stats.wins_away }}-{{ away_stats.loss_away }}</small>
+            </p>
             <p class="light-blue text-center mb-2">
                 {% if current.away_spread == 0.0 %}
                     <small>No line set.</small>
@@ -68,8 +72,12 @@
                 <div class="col-2 orange text-center">at</div>
                 <div class="col-5"><hr class="rounded orange-background mx-auto"></div>
             </div>
-<!-- Home Team Name and Game Lines -->
-            <h4 class="text-center mb-2">{{ current.home_team }}</h4>
+<!-- Home Team Name, Record and Game Lines -->
+            <h4 class="text-center mb-0">{{ current.home_team }}</h4>
+            <p class="mt-0">
+                <small>Record: {{ home_stats.total_wins }}-{{ home_stats.total_loss }}</small>&nbsp;
+                <small>Home: {{ home_stats.wins_home }}-{{ home_stats.loss_home }}</small>
+            </p>
             <p class="light-blue text-center mb-3">
                 {% if current.away_spread == 0.0 %}
                     <small>No line set.</small>
