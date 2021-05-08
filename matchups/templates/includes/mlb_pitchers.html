@@ -1,80 +1,186 @@
 
         <div id="pitchers" class="white opacity-90">
-            <p class="text-center light-blue mb-0">Probable Starters</p>
-            <table>
-                <tbody>
-                    <tr scope="row">
-                        <td class="text-right">
-                            <small class="light-blue">
-                                {{ current.away_abbr }} -
-                            </small>
-                            <p class="d-inline pr-2">
-                                {{ current.away_starter }}
-                                <small class="text-muted pitching-font">
-                                {{ current.away_starter_hand }}
-                                </small>
-                            </p>
-                        </td>
-                        <td>
-                            <p class="d-inline pr-2">
-                                {{ current.away_starter_record }}
-                            </p>
-                        </td>
-                        <td>
-                            <p class="d-inline pitching-font pr-2">
-                                {{ current.away_starter_ip }} 
-                                <small>IP</small>
-                            </p>
-                        </td>
-                        <td>
-                            <p class="d-inline pitching-font pr-2">
-                                {{ current.away_starter_era }}
-                                <small>ERA</small>
-                            </p>
-                        </td>
-                        <td>   
-                            <p class="d-inline pitching-font pr-2">
-                                {{ current.away_starter_k }}
-                                <small>K</small>
-                            </p> 
-                        </td>     
-                    </tr>    
-                    <tr scope="row">
-                        <td class="text-right">
-                            <small class="light-blue">
-                                {{ current.home_abbr }} -
-                            </small>
-                            <p class="d-inline pr-2">
-                                {{ current.home_starter }}
-                                <small class="text-muted pitching-font">
-                                {{ current.home_starter_hand }}
-                                </small>
-                            </p>
-                        </td>
-                        <td>
-                            <p class="d-inline">
-                                {{ current.home_starter_record }}
-                            </p>
-                        </td>
-                        <td>
-                            <p class="d-inline pitching-font">
-                                {{ current.home_starter_ip }} 
-                                <small>IP</small>
-                            </p>
-                        </td>
-                        <td>
-                            <p class="d-inline pitching-font">
-                                {{ current.home_starter_era }}
-                                <small>ERA</small>
-                            </p>
-                        </td>
-                        <td>   
-                            <p class="d-inline pitching-font">
-                                {{ current.home_starter_k }}
-                                <small>K</small>
-                            </p> 
-                        </td>     
-                    </tr>    
-                </tbody>          
-            </table>
+            <h2 class="text-center orange mb-3">Probable Starters</h2>
+            <div id="awayStarter" class="mb-4">
+                <h5 class="text-center">
+                    <span class="light-blue">
+                    {{ away_stats.nickname }} -
+                    </span>
+                    <p class="d-inline pr-2 white opacity-90">
+                        {{ current.away_starter }}
+                        <small class="text-muted pitching-font">
+                        {{ current.away_starter_hand }}
+                        </small>
+                    </p>
+                </h5>
+                <table class="d-flex justify-content-center white opacity-90 mb-2">
+                    <tbody > 
+                        <tr scope="row">    
+                            <td>
+                                <p class="d-inline pr-2">
+                                    {{ current.away_starter_record }}
+                                    <small>W/L</small>
+                                </p>
+                            </td>
+                            <td>
+                                <p class="d-inline pitching-font pr-2">
+                                    {{ current.away_starter_ip }} 
+                                    <small>IP</small>
+                                </p>
+                            </td>
+                            <td>   
+                                <p class="d-inline pitching-font pr-2">
+                                    {{ current.away_starter_k }}
+                                    <small>K</small>
+                                </p> 
+                            </td>
+                            <td>
+                                <p class="d-inline pitching-font">
+                                    {{ current.away_starter_era }}
+                                    <small>ERA</small>
+                                </p>
+                            </td>     
+                        </tr>
+                        <tr scope="row">    
+                            <td>
+                                <p class="d-inline pr-2">
+                                    {% if probable_away.hits %}
+                                        {{ probable_away.hits|floatformat:2 }}
+                                    {% else %}
+                                        0.00
+                                    {% endif %}
+                                    <small>Hits/Start</small>        
+                                </p>
+                            </td>
+                            <td>
+                                <p class="d-inline pitching-font pr-2">
+                                    {% if probable_away.walks %}
+                                        {{ probable_away.walks|floatformat:2 }}
+                                    {% else %}
+                                        0.00
+                                    {% endif %}
+                                    <small>Walks/Start</small>        
+                                </p>
+                            </td>
+                            <td>   
+                                <p class="d-inline pitching-font pr-2">
+                                    {% if probable_away.hr %}
+                                        {{ probable_away.hr }}
+                                    {% else %}  
+                                        0 
+                                    {% endif %}    
+                                    <small>HR's</small>
+                                </p> 
+                            </td>
+                            <td>
+                                <p class="d-inline pitching-font">
+                                    {% if probable_away.run_five %}
+                                        {{ probable_away.run_five|floatformat:2 }}
+                                    {% else %}
+                                        0.00
+                                    {% endif %}        
+                                    <small>ERA through 5IP</small>
+                                </p>
+                            </td>     
+                        </tr>   
+                    </tbody>          
+                </table> 
+                <p class="d-inline light-blue d-flex justify-content-center">
+                    {{ away_stats.nickname}} Bullpen: &nbsp;
+                    <span class="white opacity-90">{{ away_stats.away_bullpen_ten }} <small>IP</small></span>&nbsp;
+                    and &nbsp;<span class="white opacity-90">{{ away_stats.away_bullpen_era|floatformat:2 }} <small>ERA</small></span>
+                    &nbsp; last 10 games
+                </p>
+            </div>    
+            <div id="homeStarter">          
+                <h5 class="text-center">
+                    <span class="light-blue">
+                        {{ home_stats.nickname }} -
+                    </span>
+                    <p class="d-inline pr-2 white opacity-90">
+                        {{ current.home_starter }}
+                        <small class="text-muted pitching-font">
+                        {{ current.home_starter_hand }}
+                        </small>
+                    </p>
+                </h5> 
+                <table class="d-flex justify-content-center white opacity-90">
+                    <tbody> 
+                        <tr scope="row">
+                            <td>
+                                <p class="d-inline pr-2">
+                                    {{ current.home_starter_record }}
+                                    <small>W/L</small>
+                                </p>
+                            </td>
+                            <td>
+                                <p class="d-inline pitching-font pr-2">
+                                    {{ current.home_starter_ip }} 
+                                    <small>IP</small>
+                                </p>
+                            </td>
+                            <td>   
+                                <p class="d-inline pitching-font pr-2">
+                                    {{ current.home_starter_k }}
+                                    <small>K</small>
+                                </p> 
+                            </td> 
+                            <td>
+                                <p class="d-inline pitching-font">
+                                    {{ current.home_starter_era }}
+                                    <small>ERA</small>
+                                </p>
+                            </td>    
+                        </tr>  
+                        <tr scope="row">
+                            <td>
+                                <p class="d-inline pr-2">
+                                    {% if probable_home.hits %}
+                                        {{ probable_home.hits|floatformat:2 }}
+                                    {% else %}
+                                        0.00
+                                    {% endif %}
+                                    <small>Hits/Start</small>        
+                                </p>
+                            </td>
+                            <td>
+                                <p class="d-inline pitching-font pr-2">
+                                    {% if probable_home.walks %}
+                                        {{ probable_home.walks|floatformat:2 }}
+                                    {% else %}
+                                        0.00
+                                    {% endif %}
+                                <small>Walks/Start</small> 
+                                </p>
+                            </td>
+                            <td>   
+                                <p class="d-inline pitching-font pr-2">
+                                    {% if probable_home.hr %}
+                                        {{ probable_home.hr }}
+                                    {% else %}  
+                                        0
+                                    {% endif %}      
+                                    <small>HR's</small>
+                                </p> 
+                            </td> 
+                            <td>
+                                <p class="d-inline pitching-font">
+                                    {% if probable_home.run_five %}
+                                        {{ probable_home.run_five|floatformat:2 }}
+                                    {% else %}
+                                        0.00
+                                    {% endif %}        
+                                    <small>ERA through 5IP</small>
+                                </p>
+                            </td>    
+                        </tr>  
+                    </tbody>      
+                </table>
+                <p class="d-inline light-blue  d-flex justify-content-center">
+                    {{ home_stats.nickname}} Bullpen: &nbsp;
+                    <span class="white opacity-90">{{ home_stats.home_bullpen_ten }} <small>IP</small></span>&nbsp;
+                    and &nbsp;<span class="white opacity-90">{{ home_stats.home_bullpen_era|floatformat:2 }} <small>ERA</small></span>
+                    &nbsp; last 10 games
+                </p> 
+            </div>      
         </div>
