@@ -38,30 +38,64 @@
                 borderWidth: 3
                 },
                 {
-                    label: away_team,
-                    data: away_runs,
-                    reverse: true,
-                    lineTension: 0.3,
-                    backgroundColor: [
-                        '#FF7C1F'
-                    ],
-                    borderColor: [
-                        '#FF7C1F'
-                    ],
-                    borderWidth: 3
-                    }
+                label: away_team,
+                data: away_runs,
+                reverse: true,
+                lineTension: 0.3,
+                backgroundColor: [
+                    '#FF7C1F'
+                ],
+                borderColor: [
+                    '#FF7C1F'
+                ],
+                borderWidth: 3
+                }
             ]
         },
         options: {
-            parsing: {
-                xAxisKey: 'runs',
-            },
             responsive: true,
+            maintainAspectRation: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white',
+                        font: {
+                            size: 15,
+                            family: 'Oswald, sans-serif'
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: false,
+                },
+            },
             scales: {
                 y: {
-                    beginAtZero: true
+                    title: {
+                        display: true,
+                        text: 'Runs',
+                        color: 'white',
+                    },
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid:{
+                        display: false,
+                    }
                 },
-                x: {}
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Games',
+                        color: 'white',
+                    },
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid: {
+                        display: false,
+                    }
+                },
             }
         },
     });

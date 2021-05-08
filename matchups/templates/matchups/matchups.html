@@ -33,7 +33,10 @@
 
         var away_team = '{{ away_stats.nickname }}'
         
-        var labels = '{% for games in away_stats.away_ten %}{{ forloop.counter }}{% endfor %}';
+        var labels = [];
+            '{% for games in away_stats.away_ten %}'
+                labels.push(parseInt('{{ forloop.counter }}'))
+            '{% endfor %}'
     </script>
     <script type="text/javascript" src="{% static 'js/matchup.js' %}"></script>
   

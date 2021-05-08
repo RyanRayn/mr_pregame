@@ -526,7 +526,7 @@ img {
 }
 
 .darkblue-box{
-    background-color:rgb(15, 33, 61);
+    background-color:rgb(19, 35, 58);
     box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
     border-radius:20px;
 }
@@ -577,8 +577,8 @@ img {
 .run-chart{
     position: relative;
     margin: auto;
-    height: 40vh;
-    width: 45vw;
+    height: 80vh;
+    width: 100%;
 }
 
 /*---------- Media Queries ----------*/
