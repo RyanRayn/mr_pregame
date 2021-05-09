@@ -32,33 +32,33 @@
                             <tr scope="row">    
                                 <td>
                                     <p class="mb-0"><small>W/L</small></p>
-                                    <p class="d-inline">
+                                    <p>
                                         {{ current.away_starter_record }}
                                     </p>
                                 </td>
                                 <td>
                                     <p class="mb-0"><small>IP</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p>
                                         {{ current.away_starter_ip }} 
                                     </p>
                                 </td>
                                 <td>  
                                     <p class="mb-0"><small>K</small></p> 
-                                    <p class="d-inline pitching-font">
+                                    <p>
                                         {{ current.away_starter_k }}
                                     </p> 
                                 </td>
                                 <td>
                                     <p class="mb-0"><small>ERA</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p>
                                         {{ current.away_starter_era }}
                                     </p>
                                 </td>     
                             </tr>
                             <tr scope="row">    
                                 <td>
-                                    <p class="mb-0"><small>Hits/Start</small></p>
-                                    <p class="d-inline">
+                                    <p class="mb-0"><small>Hits<br>Per 9</small></p>
+                                    <p>
                                         {% if probable_away.hits %}
                                             {{ probable_away.hits|floatformat:2 }}
                                         {% else %}
@@ -67,8 +67,8 @@
                                     </p>
                                 </td>
                                 <td class="px-2">
-                                    <p class="mb-0"><small>Walks/Start</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p class="mb-0"><small>Walks<br>Per 9</small></p>
+                                    <p>
                                         {% if probable_away.walks %}
                                             {{ probable_away.walks|floatformat:2 }}
                                         {% else %}
@@ -77,8 +77,8 @@
                                     </p>
                                 </td>
                                 <td class="pr-2">   
-                                    <p class="mb-0"><small>HR</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p class="mb-0"><small>Total<br>HR</small></p>
+                                    <p>
                                         {% if probable_away.hr %}
                                             {{ probable_away.hr }}
                                         {% else %}  
@@ -87,8 +87,8 @@
                                     </p> 
                                 </td>
                                 <td>
-                                    <p class="mb-0"><small>ERA/First 5</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p class="mb-0"><small>ERA<br>First 5 IP</small></p>
+                                    <p>
                                         {% if probable_away.run_five %}
                                             {{ probable_away.run_five|floatformat:2 }}
                                         {% else %}
@@ -130,7 +130,7 @@
                     <h5 class="text-center">
                         <p class="d-inline white opacity-90">
                             {{ current.home_starter }}
-                            <small class="text-muted pitching-font">
+                            <small class="text-muted">
                             {{ current.home_starter_hand }}
                             </small>
                         </p>
@@ -143,33 +143,33 @@
                             <tr scope="row">
                                 <td>
                                     <p class="mb-0"><small>W/L</small></p>
-                                    <p class="d-inline">
+                                    <p>
                                         {{ current.home_starter_record }}
                                     </p>
                                 </td>
                                 <td>
                                     <p class="mb-0"><small>IP</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p>
                                         {{ current.home_starter_ip }} 
                                     </p>
                                 </td>
                                 <td>   
                                     <p class="mb-0"><small>K</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p>
                                         {{ current.home_starter_k }}
                                     </p> 
                                 </td> 
                                 <td>
                                     <p class="mb-0"><small>ERA</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p>
                                         {{ current.home_starter_era }}
                                     </p>
                                 </td>    
                             </tr>  
                             <tr scope="row">
                                 <td>
-                                    <p class="mb-0"><small>Hits/Start</small></p>
-                                    <p class="d-inline">
+                                    <p class="mb-0"><small>Hits<br>Per 9</small></p>
+                                    <p>
                                         {% if probable_home.hits %}
                                             {{ probable_home.hits|floatformat:2 }}
                                         {% else %}
@@ -178,8 +178,8 @@
                                     </p>
                                 </td>
                                 <td class="px-2">
-                                    <p class="mb-0"><small>Walks/Start</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p class="mb-0"><small>Walks<br>Per 9</small></p>
+                                    <p>
                                         {% if probable_home.walks %}
                                             {{ probable_home.walks|floatformat:2 }}
                                         {% else %}
@@ -188,8 +188,8 @@
                                     </p>
                                 </td>
                                 <td class="pr-2">   
-                                    <p class="mb-0"><small>HR</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p class="mb-0"><small>Total<br>HR</small></p>
+                                    <p>
                                         {% if probable_home.hr %}
                                             {{ probable_home.hr }}
                                         {% else %}  
@@ -198,8 +198,8 @@
                                     </p> 
                                 </td> 
                                 <td>
-                                    <p class="mb-0"><small>ERA/First 5</small></p>
-                                    <p class="d-inline pitching-font">
+                                    <p class="mb-0"><small>ERA<br>First 5 IP</small></p>
+                                    <p>
                                         {% if probable_home.run_five %}
                                             {{ probable_home.run_five|floatformat:2 }}
                                         {% else %}

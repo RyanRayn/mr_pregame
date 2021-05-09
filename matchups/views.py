@@ -134,12 +134,15 @@ def matchups(request):
     # Home Starter total HR
     probable_home.hr = probable_home.aggregate(
         total=Sum('home_runs'))['total']
-    # Home Starter avg hits/game
-    probable_home.hits = probable_home.aggregate(
-        total=Avg('hits'))['total']
+    # Home Starter avg hits per 9
+    home_hits = probable_home.aggregate(total=Sum('hits'))['total']
+    home_innings = probable_home.aggregate(
+        total=Sum('inning_thirds'))['total'] / 3
+    probable_home.hits = (home_hits / home_innings) * 9
     # Home Starter avg walks/game
-    probable_home.walks = probable_home.aggregate(
-        total=Avg('walks'))['total']
+    home_walks = probable_home.aggregate(
+        total=Sum('walks'))['total']
+    probable_home.walks = (home_walks / home_innings) * 9
 
     # AWAY TEAM STATS
 
@@ -180,17 +183,21 @@ def matchups(request):
     probable_away = StartingPitcher.objects.filter(
         name=current.away_starter)
     # Away Starter runs first 5
+    probable_away.starts = probable_away.count()
     probable_away.run_five = probable_away.aggregate(
         total=Avg('runs_first_five'))['total']
     # Away Starter total HR
     probable_away.hr = probable_away.aggregate(
         total=Sum('home_runs'))['total']
     # Away Starter avg hits/game
-    probable_away.hits = probable_away.aggregate(
-        total=Avg('hits'))['total']
+    away_hits = probable_away.aggregate(total=Sum('hits'))['total']
+    away_innings = probable_away.aggregate(
+        total=Sum('inning_thirds'))['total'] / 3
+    probable_away.hits = (away_hits / away_innings) * 9
     # Away Starter avg walks
-    probable_away.walks = probable_away.aggregate(
-        total=Avg('walks'))['total']
+    away_walks = probable_away.aggregate(
+        total=Sum('walks'))['total']
+    probable_away.walks = (away_walks / away_innings) * 9
 
     context = {
         'weather_data': weather_data,

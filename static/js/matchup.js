@@ -54,7 +54,7 @@
         },
         options: {
             responsive: true,
-            maintainAspectRation: false,
+            maintainAspectRation: true,
             plugins: {
                 legend: {
                     labels: {

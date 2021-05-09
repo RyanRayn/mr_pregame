@@ -541,8 +541,8 @@ img {
     z-index:1000;
 }
 
-.tweet-box{
-    height:340px;
+.matchup-box-height{
+    height:375px;
 }
 
 #home_twitter_card{
@@ -577,7 +577,6 @@ img {
 .run-chart{
     position: relative;
     margin: auto;
-    height: 80vh;
     width: 100%;
 }
 
@@ -802,10 +801,6 @@ img {
     .fa-minus-circle,
     .fa-user-lock{
         font-size:30px;
-    }
-
-    .pitching-font{
-        font-size:small;
     }
 }
 
