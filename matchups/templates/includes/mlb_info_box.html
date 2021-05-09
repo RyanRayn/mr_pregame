@@ -2,6 +2,16 @@
 <div class="mb-3">
     <div class="row mx-1">
         <div class="col-12 white opacity-90 lightblue-box text-center pt-1 px-0">
+            <!-- Edit Game Line Button -->
+            {% if request.user.is_superuser %}
+                <div class="row mb-2">
+                    <div class="col-12 text-center">
+                        <small>
+                            <a class="edit-btn orange" href="{% url 'edit_gamelines' game_id=current.id %}">Edit Game</a>
+                        </small>
+                    </div>
+                </div>        
+            {% endif %}                        
 <!-- Game Status/Time -->
             <p id="time" class="mb-0">
                 {% if current.status == 'in progress' %}
