@@ -72,7 +72,7 @@
                                 </td>        
 <!-- Form to Send GameID to View and Switch Game in Template --> 
                                 <td class="pl-2">
-                                    <form action="{% url 'matchups' %}" method="GET">
+                                    <form action="{% url 'mlb_matchup' %}" method="GET">
                                         {% csrf_token %}
                                         <input type="hidden" id="gameId{{ forloop.counter }}" 
                                                             name="gameId" value="{{ game.gameID }}">

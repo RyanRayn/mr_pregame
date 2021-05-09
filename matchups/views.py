@@ -8,7 +8,7 @@ from management.models import MLBGameLine, MLBGame, TeamName, StartingPitcher
 from django.db.models import Avg, Count, Min, Sum
 
 
-def matchups(request):
+def mlb_matchup(request):
     """ a view to show MLB game matchups """
     # Get the date for the SportspageFeeds API params
     todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
@@ -125,24 +125,26 @@ def matchups(request):
         total=Sum('bullpen_runs'))['total']
     bullpen_innings = bullpen_outs / 3
     home_stats.home_bullpen_era = (bullpen_runs / bullpen_innings) * 9
+
     # Home Probable Starter stats from db
     probable_home = StartingPitcher.objects.filter(
         name=current.home_starter)
-    # Home Starter runs first 5
-    probable_home.run_five = probable_home.aggregate(
-        total=Avg('runs_first_five'))['total']
-    # Home Starter total HR
-    probable_home.hr = probable_home.aggregate(
-        total=Sum('home_runs'))['total']
-    # Home Starter avg hits per 9
-    home_hits = probable_home.aggregate(total=Sum('hits'))['total']
-    home_innings = probable_home.aggregate(
-        total=Sum('inning_thirds'))['total'] / 3
-    probable_home.hits = (home_hits / home_innings) * 9
-    # Home Starter avg walks/game
-    home_walks = probable_home.aggregate(
-        total=Sum('walks'))['total']
-    probable_home.walks = (home_walks / home_innings) * 9
+    if probable_home:
+        # Home Starter runs first 5
+        probable_home.run_five = probable_home.aggregate(
+            total=Avg('runs_first_five'))['total']
+        # Home Starter total HR
+        probable_home.hr = probable_home.aggregate(
+            total=Sum('home_runs'))['total']
+        # Home Starter avg hits per 9
+        home_hits = probable_home.aggregate(total=Sum('hits'))['total']
+        home_innings = probable_home.aggregate(
+            total=Sum('inning_thirds'))['total'] / 3
+        probable_home.hits = (home_hits / home_innings) * 9
+        # Home Starter avg walks/game
+        home_walks = probable_home.aggregate(
+            total=Sum('walks'))['total']
+        probable_home.walks = (home_walks / home_innings) * 9
 
     # AWAY TEAM STATS
 
@@ -179,25 +181,27 @@ def matchups(request):
         total=Sum('bullpen_runs'))['total']
     bullpen_innings = bullpen_outs / 3
     away_stats.away_bullpen_era = (bullpen_runs / bullpen_innings) * 9
+
     # Away Probable Starter stats from db
     probable_away = StartingPitcher.objects.filter(
         name=current.away_starter)
-    # Away Starter runs first 5
-    probable_away.starts = probable_away.count()
-    probable_away.run_five = probable_away.aggregate(
-        total=Avg('runs_first_five'))['total']
-    # Away Starter total HR
-    probable_away.hr = probable_away.aggregate(
-        total=Sum('home_runs'))['total']
-    # Away Starter avg hits/game
-    away_hits = probable_away.aggregate(total=Sum('hits'))['total']
-    away_innings = probable_away.aggregate(
-        total=Sum('inning_thirds'))['total'] / 3
-    probable_away.hits = (away_hits / away_innings) * 9
-    # Away Starter avg walks
-    away_walks = probable_away.aggregate(
-        total=Sum('walks'))['total']
-    probable_away.walks = (away_walks / away_innings) * 9
+    if probable_away:
+        # Away Starter runs first 5
+        probable_away.starts = probable_away.count()
+        probable_away.run_five = probable_away.aggregate(
+            total=Avg('runs_first_five'))['total']
+        # Away Starter total HR
+        probable_away.hr = probable_away.aggregate(
+            total=Sum('home_runs'))['total']
+        # Away Starter avg hits/game
+        away_hits = probable_away.aggregate(total=Sum('hits'))['total']
+        away_innings = probable_away.aggregate(
+            total=Sum('inning_thirds'))['total'] / 3
+        probable_away.hits = (away_hits / away_innings) * 9
+        # Away Starter avg walks
+        away_walks = probable_away.aggregate(
+            total=Sum('walks'))['total']
+        probable_away.walks = (away_walks / away_innings) * 9
 
     context = {
         'weather_data': weather_data,
@@ -215,4 +219,4 @@ def matchups(request):
         'probable_away': probable_away,
     }
 
-    return render(request, 'matchups/matchups.html', context)
+    return render(request, 'matchups/mlb_matchup.html', context)

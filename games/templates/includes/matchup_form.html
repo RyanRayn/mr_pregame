@@ -1,5 +1,5 @@
 <!-- Send Matchup Game Data to Template -->                    
-        <form action="{% url 'matchups' %}" method="GET">
+        <form action="{% url 'mlb_matchup' %}" method="GET">
         {% csrf_token %}
             <input type="hidden" id="gameId{{ forloop.counter }}" 
                     name="gameId" value="{{ game.gameID }}">
