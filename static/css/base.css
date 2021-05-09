@@ -511,6 +511,10 @@ img {
     width:50%;
 }
 
+.holding-img{
+    width:500px;
+}
+
 /*----------------------------- Matchup -------------------------------*/
 
 .fa-cloud-showers-heavy{
@@ -578,6 +582,14 @@ img {
     position: relative;
     margin: auto;
     width: 100%;
+}
+
+#stat-table td{
+    color:rgba(255, 255, 255, 0.904);
+}
+
+#stat-table th{
+    font-weight:normal;
 }
 
 /*---------- Media Queries ----------*/
@@ -665,6 +677,10 @@ img {
 
     .social-banner{
         font-size:30px;
+    }
+
+    .holding-img{
+        width:500px;
     }
 
 }

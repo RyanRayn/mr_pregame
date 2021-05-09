@@ -45,7 +45,7 @@
                     </form>
                 </li>
                 <li class="league">
-                    <form action="{% url 'games' %}" method="GET">
+                    <form action="{% url 'holding' %}" method="GET">
                         {% csrf_token %}
                         <input type="hidden" id="NBA" name="leagueName" value="NBA">
                         <button class="btn day-form-btn light-blue opacity-90" type="submit">
@@ -54,7 +54,7 @@
                     </form>
                 </li>
                 <li class="league">
-                    <form action="{% url 'games' %}" method="GET">
+                    <form action="{% url 'holding' %}" method="GET">
                         {% csrf_token %}
                         <input type="hidden" id="NCAAB" name="leagueName" value="NCAAB">
                         <button class="btn day-form-btn light-blue opacity-90" type="submit">
@@ -63,7 +63,7 @@
                     </form>
                 </li>
                 <li class="league">
-                    <form action="{% url 'games' %}" method="GET">
+                    <form action="{% url 'holding' %}" method="GET">
                         {% csrf_token %}
                         <input type="hidden" id="NFL" name="leagueName" value="NFL">
                         <button class="btn day-form-btn light-blue opacity-90" type="submit">

@@ -110,6 +110,37 @@ def mlb_matchup(request):
         total=Sum('loss_home') + Sum('loss_away'))['total']
     # Home team avg runs/game
     home_stats.avg_runs = home_stats.aggregate(total=Avg('runs'))['total']
+    # Home team avg runs allowed/game
+    home_stats.avg_runs_allowed = home_stats.aggregate(
+        total=Avg('runs_allowed'))['total']
+    # Home team avg runs first 5 innings
+    home_stats.avg_runs_five = home_stats.aggregate(
+        total=Avg('runs_first_five'))['total']
+    # Home team avg runs allowed first 5
+    home_stats.avg_runs_allowed_five = home_stats.aggregate(
+        total=Avg('runs_allowed_first_five'))['total']
+    # Home team total hits, at bats, BA
+    home_stats.total_hits = home_stats.aggregate(total=Sum('hits'))['total']
+    home_stats.total_at_bats = home_stats.aggregate(
+        total=Sum('at_bats'))['total']
+    home_stats.ba = home_stats.total_hits / home_stats.total_at_bats
+    # Home team opponent total hits, at bats, BA
+    home_stats.opponent_total_hits = home_stats.aggregate(
+        total=Sum('hits_allowed'))['total']
+    home_stats.opponent_total_at_bats = home_stats.aggregate(
+        total=Sum('opponent_at_bats'))['total']
+    home_stats.opponent_ba = (
+        home_stats.opponent_total_hits / home_stats.opponent_total_at_bats)
+    # Home team total HR
+    home_stats.total_hr = home_stats.aggregate(total=Sum('home_runs'))['total']
+    # Home team opponent HR
+    home_stats.opponent_hr = home_stats.aggregate(
+        total=Sum('home_runs_against'))['total']
+    # Home team offensive strikeouts
+    home_stats.total_k = home_stats.aggregate(total=Sum('strikeouts'))['total']
+    # Home team total errors
+    home_stats.total_errors = home_stats.aggregate(
+        total=Sum('errors'))['total']
     # Home team stats last ten games
     home_stats.home_ten = home_stats.order_by('-id')[:10]
     # Home team bullpen innings pitched last ten games
@@ -166,6 +197,38 @@ def mlb_matchup(request):
         total=Sum('loss_home') + Sum('loss_away'))['total']
     # Away team avg runs/game
     away_stats.avg_runs = away_stats.aggregate(total=Avg('runs'))['total']
+    # Away team avg runs allowed/game
+    away_stats.avg_runs_allowed = away_stats.aggregate(
+        total=Avg('runs_allowed'))['total']
+    # Away team avg runs first 5 innings
+    away_stats.avg_runs_five = away_stats.aggregate(
+        total=Avg('runs_first_five'))['total']
+    # Away team avg runs allowed first 5
+    away_stats.avg_runs_allowed_five = away_stats.aggregate(
+        total=Avg('runs_allowed_first_five'))['total']
+    # Away team avg hits/game, at bats, BA
+    away_stats.total_hits = away_stats.aggregate(
+        total=Sum('hits'))['total']
+    away_stats.total_at_bats = away_stats.aggregate(
+        total=Sum('at_bats'))['total']
+    away_stats.ba = away_stats.total_hits / away_stats.total_at_bats
+    # Away team opponent total hits, at bats, BA
+    away_stats.opponent_total_hits = away_stats.aggregate(
+        total=Sum('hits_allowed'))['total']
+    away_stats.opponent_total_at_bats = away_stats.aggregate(
+        total=Sum('opponent_at_bats'))['total']
+    away_stats.opponent_ba = (
+        away_stats.opponent_total_hits / away_stats.opponent_total_at_bats)
+    # Away team total HR
+    away_stats.total_hr = away_stats.aggregate(total=Sum('home_runs'))['total']
+    # Away team opponent HR
+    away_stats.opponent_hr = away_stats.aggregate(
+        total=Sum('home_runs_against'))['total']
+    # Away team offensive strikeouts
+    away_stats.total_k = away_stats.aggregate(total=Sum('strikeouts'))['total']
+    # Away team total errors
+    away_stats.total_errors = away_stats.aggregate(
+        total=Sum('errors'))['total']
     # Away team stats last ten games
     away_stats.away_ten = away_stats.order_by('-id')[:10]
     # Away team bullpen innings pitched last ten games

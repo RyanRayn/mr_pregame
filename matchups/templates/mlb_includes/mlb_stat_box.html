@@ -1,0 +1,56 @@
+<div id="stat-container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="orange opacity-90 text-center mb-0">Team Stats</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <table id="stat-table" class="light-blue opacity-90 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Avg Runs/9</th>
+                        <th scope="col">Runs Allowed</th>
+                        <th scope="col">Avg Runs/5</th>
+                        <th scope="col">Runs Allowed/5</th>
+                        <th scope="col">BA</th>
+                        <th scope="col">OP.BA</th>
+                        <th scope="col">HR</th>
+                        <th scope="col">HR Allowed</th>
+                        <th scope="col">Offense K's</th>
+                        <th scope="col">Errors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="py-2">{{away_stats.nickname}}:</th>
+                        <td>{{ away_stats.avg_runs|floatformat:2 }}</td>
+                        <td>{{ away_stats.avg_runs_allowed|floatformat:2 }}</td>
+                        <td>{{ away_stats.avg_runs_five|floatformat:2 }}</td>
+                        <td>{{ away_stats.avg_runs_allowed_five|floatformat:2 }}</td>
+                        <td>{{ away_stats.ba|floatformat:3|slice:"1:" }}</td>
+                        <td>{{ away_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
+                        <td>{{ away_stats.total_hr }}</td>
+                        <td>{{ away_stats.opponent_hr }}</td>
+                        <td>{{ away_stats.total_k }}</td>
+                        <td>{{ away_stats.total_errors }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{home_stats.nickname}}:</th>
+                        <td>{{ home_stats.avg_runs|floatformat:2 }}</td>
+                        <td>{{ home_stats.avg_runs_allowed|floatformat:2 }}</td>
+                        <td>{{ home_stats.avg_runs_five|floatformat:2 }}</td>
+                        <td>{{ home_stats.avg_runs_allowed_five|floatformat:2 }}</td>
+                        <td>{{ home_stats.ba|floatformat:3|slice:"1:" }}</td>
+                        <td>{{ home_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
+                        <td>{{ home_stats.total_hr }}</td>
+                        <td>{{ home_stats.opponent_hr }}</td>
+                        <td>{{ home_stats.total_k }}</td>
+                        <td>{{ home_stats.total_errors }}</td>
+                    </tr>    
+                </tbody>
+            </table>
+        </div>
+    </div>        
+</div>

@@ -385,3 +385,17 @@ def edit_gamelines(request, game_id):
     }
 
     return render(request, template, context)
+
+
+def holding(request):
+    """ View to return site holding page """
+
+    if request.method == "GET":
+        league = request.GET.get('leagueName')
+
+    context = {
+        'league': league,
+    }
+
+    return render(request, 'management/holding.html',
+                  context)
