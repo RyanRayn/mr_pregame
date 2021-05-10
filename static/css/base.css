@@ -584,11 +584,7 @@ img {
     width: 100%;
 }
 
-#stat-table td{
-    color:rgba(255, 255, 255, 0.904);
-}
-
-#stat-table th{
+.stat-table th{
     font-weight:normal;
 }
 

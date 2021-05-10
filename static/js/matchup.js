@@ -15,8 +15,27 @@
             $('.media-modal').attr('src', $(this).find('img').attr('src'));
             $('#mediaModal').modal('show');
         });
+
+        /* Add green class to higher values in stat-chart */
+        $('.higher').each(function() {
+            var $tds = $(this).find('td');
+            var values = $tds.map(function() {
+              return parseFloat($(this).text().trim().replace(',', '.'));
+            }).get();
+            $tds.eq(values.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0)).removeClass('white opacity-90').addClass('green');
+        });
+
+        /* Add green class to lower values in stat-chart */
+        $('.lower').each(function() {
+            var $tds = $(this).find('td');
+            var values = $tds.map(function() {
+              return parseFloat($(this).text().trim().replace(',', '.'));
+            }).get();
+            $tds.eq(values.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0)).removeClass('green').addClass('white opacity-90');
+        });
     });
     
+    /* Run Trend Chart */
     var ctx = document.getElementById('runChart').getContext('2d');
     var home_runs = home.reverse();
     var away_runs = away.reverse();

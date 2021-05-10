@@ -5,50 +5,90 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <table id="stat-table" class="light-blue opacity-90 text-center">
+        <div class="col-5 d-flex justify-content-center">
+            <table class="stat-table light-blue opacity-90 text-center">
                 <thead>
                     <tr>
+                        <th scope="col">{{ away_stats.nickname }}</th>
                         <th scope="col"></th>
-                        <th scope="col">Avg Runs/9</th>
-                        <th scope="col">Runs Allowed</th>
-                        <th scope="col">Avg Runs/5</th>
-                        <th scope="col">Runs Allowed/5</th>
-                        <th scope="col">BA</th>
-                        <th scope="col">OP.BA</th>
-                        <th scope="col">HR</th>
-                        <th scope="col">HR Allowed</th>
-                        <th scope="col">Offense K's</th>
-                        <th scope="col">Errors</th>
+                        <th scope="col">{{ home_stats.nickname }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row" class="py-2">{{away_stats.nickname}}:</th>
-                        <td>{{ away_stats.avg_runs|floatformat:2 }}</td>
-                        <td>{{ away_stats.avg_runs_allowed|floatformat:2 }}</td>
-                        <td>{{ away_stats.avg_runs_five|floatformat:2 }}</td>
-                        <td>{{ away_stats.avg_runs_allowed_five|floatformat:2 }}</td>
-                        <td>{{ away_stats.ba|floatformat:3|slice:"1:" }}</td>
-                        <td>{{ away_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
-                        <td>{{ away_stats.total_hr }}</td>
-                        <td>{{ away_stats.opponent_hr }}</td>
-                        <td>{{ away_stats.total_k }}</td>
-                        <td>{{ away_stats.total_errors }}</td>
+                        <td scope="row" class="white opacity-90">{{ away_stats.games_played }}</td>
+                        <th class="px-4">Games Played</th>
+                        <td class="white opacity-90">{{ home_stats.games_played }}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">{{home_stats.nickname}}:</th>
-                        <td>{{ home_stats.avg_runs|floatformat:2 }}</td>
-                        <td>{{ home_stats.avg_runs_allowed|floatformat:2 }}</td>
-                        <td>{{ home_stats.avg_runs_five|floatformat:2 }}</td>
-                        <td>{{ home_stats.avg_runs_allowed_five|floatformat:2 }}</td>
-                        <td>{{ home_stats.ba|floatformat:3|slice:"1:" }}</td>
-                        <td>{{ home_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
-                        <td>{{ home_stats.total_hr }}</td>
-                        <td>{{ home_stats.opponent_hr }}</td>
-                        <td>{{ home_stats.total_k }}</td>
-                        <td>{{ home_stats.total_errors }}</td>
+                    <tr class="lower">
+                        <td scope="row" class="green">{{ away_stats.total_errors }}</td>
+                        <th>Errors</th>
+                        <td class="green">{{ home_stats.total_errors }}</td>
+                    </tr>
+                    <tr class="higher">
+                        <td scope="row" class="white opacity-90">{{ away_stats.avg_runs|floatformat:2 }}</td>
+                        <th>Avg Runs/9</th>
+                        <td class="white opacity-90">{{ home_stats.avg_runs|floatformat:2 }}</td>
+                    </tr>
+                    <tr class="lower">
+                        <td scope="row" class="green">{{ away_stats.avg_runs_allowed|floatformat:2 }}</td>
+                        <th>Runs Allowed/9</th>
+                        <td class="green">{{ home_stats.avg_runs_allowed|floatformat:2 }}</td>
+                    </tr> 
+                    <tr class="higher">
+                        <td scope="row" class="white opacity-90">{{ away_stats.avg_runs_five|floatformat:2 }}</td>
+                        <th>Avg Runs/5</th>
+                        <td class="white opacity-90">{{ home_stats.avg_runs_five|floatformat:2 }}</td>
+                    </tr>   
+                    <tr class="lower">
+                        <td scope="row" class="green">{{ away_stats.avg_runs_allowed_five|floatformat:2 }}</td>
+                        <th>Runs Allowed/5</th>
+                        <td class="green">{{ home_stats.avg_runs_allowed_five|floatformat:2 }}</td>
                     </tr>    
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-5 d-flex justify-content-center">
+            <table class="stat-table light-blue opacity-90 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">{{ away_stats.nickname }}</th>
+                        <th scope="col"></th>
+                        <th scope="col">{{ home_stats.nickname }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="higher">
+                        <td scope="row" class="white opacity-90">{{ away_stats.ba|floatformat:3|slice:"1:" }}</td>
+                        <th class="px-4">Team BA</th>
+                        <td class="white opacity-90">{{ home_stats.ba|floatformat:3|slice:"1:" }}</td>
+                    </tr>    
+                    <tr class="lower">
+                        <td scope="row" class="green">{{ away_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
+                        <th>BA Allowed</th>
+                        <td class="green">{{ home_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
+                    </tr>
+                    <tr class="higher">
+                        <td scope="row" class="white opacity-90">{{ away_stats.total_hr }}</td>
+                        <th>Home Runs</th>
+                        <td class="white opacity-90">{{ home_stats.total_hr }}</td>
+                    </tr>    
+                    <tr class="lower">
+                        <td scope="row" class="green">{{ away_stats.opponent_hr }}</td>
+                        <th>HR Allowed</th>
+                        <td class="green">{{ home_stats.opponent_hr }}</td>
+                    </tr>    
+                    <tr class="lower">
+                        <td scope="row" class="green">{{ away_stats.total_k }}</td>
+                        <th>Offense K's</th>
+                        <td class="green">{{ home_stats.total_k }}</td>
+                    </tr>
+                    <tr class="higher">
+                        <td scope="row" class="white opacity-90">{{ away_stats.total_def_k }}</td>
+                        <th>Defense K's</th>
+                        <td class="white opacity-90">{{ home_stats.total_def_k }}</td>
+                    </tr>   
                 </tbody>
             </table>
         </div>

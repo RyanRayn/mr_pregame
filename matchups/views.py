@@ -108,6 +108,8 @@ def mlb_matchup(request):
     # Home team total loss
     home_stats.total_loss = home_stats.aggregate(
         total=Sum('loss_home') + Sum('loss_away'))['total']
+    # Home team games played
+    home_stats.games_played = home_stats.total_wins + home_stats.total_loss
     # Home team avg runs/game
     home_stats.avg_runs = home_stats.aggregate(total=Avg('runs'))['total']
     # Home team avg runs allowed/game
@@ -138,6 +140,10 @@ def mlb_matchup(request):
         total=Sum('home_runs_against'))['total']
     # Home team offensive strikeouts
     home_stats.total_k = home_stats.aggregate(total=Sum('strikeouts'))['total']
+    # Home team defensive strikeouts
+    home_opponent = MLBGame.objects.filter(opponent=current.home_team)
+    home_stats.total_def_k = home_opponent.aggregate(
+        total=Sum('strikeouts'))['total']
     # Home team total errors
     home_stats.total_errors = home_stats.aggregate(
         total=Sum('errors'))['total']
@@ -195,6 +201,8 @@ def mlb_matchup(request):
     # Away team total loss
     away_stats.total_loss = away_stats.aggregate(
         total=Sum('loss_home') + Sum('loss_away'))['total']
+    # Away team games played
+    away_stats.games_played = away_stats.total_wins + away_stats.total_loss
     # Away team avg runs/game
     away_stats.avg_runs = away_stats.aggregate(total=Avg('runs'))['total']
     # Away team avg runs allowed/game
@@ -226,6 +234,10 @@ def mlb_matchup(request):
         total=Sum('home_runs_against'))['total']
     # Away team offensive strikeouts
     away_stats.total_k = away_stats.aggregate(total=Sum('strikeouts'))['total']
+    # Away team defensive strikeouts
+    away_opponent = MLBGame.objects.filter(opponent=current.away_team)
+    away_stats.total_def_k = away_opponent.aggregate(
+        total=Sum('strikeouts'))['total']
     # Away team total errors
     away_stats.total_errors = away_stats.aggregate(
         total=Sum('errors'))['total']
