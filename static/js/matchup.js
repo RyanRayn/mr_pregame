@@ -118,3 +118,77 @@
             }
         },
     });
+
+    /* Stat Bar Chart */
+    var ctx = document.getElementById('statChart').getContext('2d');
+    var home_runs = home.reverse();
+    var away_runs = away.reverse();
+    var statChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Wins', 'Runs', 'Hits', 'HR', 'SO'],
+            datasets: [
+                {
+                label: home_team,
+                data: home_runs,
+                lineTension: 0.3,
+                backgroundColor: [
+                    '#C1E6FF'
+                ],
+                borderColor: [
+                    '#C1E6FF'
+                ],
+                borderWidth: 3
+                },
+                {
+                label: away_team,
+                data: away_runs,
+                reverse: true,
+                lineTension: 0.3,
+                backgroundColor: [
+                    '#FF7C1F'
+                ],
+                borderColor: [
+                    '#FF7C1F'
+                ],
+                borderWidth: 3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRation: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white',
+                        font: {
+                            size: 15,
+                            family: 'Oswald, sans-serif'
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: false,
+                },
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid:{
+                        display: false,
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid: {
+                        display: false,
+                    }
+                },
+            }
+        },
+    });

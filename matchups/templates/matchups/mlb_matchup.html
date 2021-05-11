@@ -18,21 +18,44 @@
                         {% include 'mlb_includes/mlb_info_box.html' %}
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                    <div id="pitchers" class="mb-4">
+                <div class="col-12 col-md-6">
+                    <div id="pitchers" class="">
                         {% include 'mlb_includes/mlb_pitchers.html' %}
                     </div>
-                    <div id="runs-chart" class="d-none position-relative">
-                        {% include 'mlb_includes/mlb_runs.html' %}
-                    </div> 
-                    <div id="stat-box">
+                    <div id="stat-box" class="d-none d-lg-block">
                         {% include 'mlb_includes/mlb_stat_box.html' %}
-                    </div>
+                    </div> 
                 </div>
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="d-none d-lg-block col-lg-3">
                     <div id="twitter_accordion">
                         {% include 'mlb_includes/twitter.html' %}
                     </div>
+                </div>
+            </div>
+            <div class="d-none d-lg-block">
+                <div id="charts" class="position-relative">
+                    {% include 'mlb_includes/mlb_charts.html' %}
+                </div> 
+            </div>
+            <div class="row d-lg-none">   
+                <div id="mobile_stat_box" class="col-12 d-flex justify-content-center mb-4">
+                    {% include 'mlb_includes/mlb_stat_mobile.html' %}
+                </div>
+            </div>
+            <div class="row d-lg-none">    
+                <div id="twitter-box-header" class="col-12 d-flex flex-column align-items-center mb-4">
+                    <h2 class="orange opacity-90 mb-0">
+                        Team News
+                    </h2>
+                    <small class="white opacity-90">
+                        <i class="fab fa-twitter-square light-blue opacity-90 mr-2"></i>
+                        Brought to you by Twitter
+                    </small>
+                </div>
+            </div>
+            <div class="row d-lg-none">   
+                <div id="mobile_twitter" class="col-12 d-flex justify-content-center mb-2">
+                    {% include 'mlb_includes/mobile_twitter.html' %}
                 </div>
             </div>
         </div>    
@@ -48,14 +71,22 @@
             '{% endfor %}'
             
         var home_team = '{{ home_stats.nickname }}'
-
+        var home_runs = '{{ home_stats.runs_ten }}'
+        var home_wins = '{{ home_stats.wins_ten }}'
+        var home_hr = '{{ home_stats.hr_ten }}'
+        var home_hits = '{{ home_stats.hits_ten }}'
+        var home_k = '{{ home_stats.k_ten }}'
         var away = [];
             '{% for away in away_stats.away_ten %}'
                 away.push(parseInt('{{ away.runs }}'))
             '{% endfor %}' 
 
         var away_team = '{{ away_stats.nickname }}'
-        
+        var away_runs = '{{ away_stats.runs_ten }}'
+        var away_wins = '{{ away_stats.wins_ten }}'
+        var away_hr = '{{ away_stats.hr_ten }}'
+        var away_hits = '{{ away_stats.hits_ten }}'
+        var away_k = '{{ away_stats.k_ten }}'
         var labels = [];
             '{% for games in away_stats.away_ten %}'
                 labels.push(parseInt('{{ forloop.counter }}'))

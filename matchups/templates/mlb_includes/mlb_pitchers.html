@@ -1,12 +1,11 @@
 
-        <h2 class="text-center orange my-4">Probable Starters</h2>
+        <h2 class="text-center orange my-2">Probable Starters</h2>
         <div class="row white opacity-90 pt-2">
 <!-- Away Starter -->            
             <div id="awayStarter" class="col-lg-5">
                 {% if not current.away_starter %}
                     <h5 class="text-center">
                         <p class="d-inline white opacity-90">
-                            {{ current.away_starter }}
                             TBD
                         </p>
 
@@ -27,7 +26,7 @@
                             - {{ away_stats.nickname }}
                         </span>
                     </h5>
-                    <table class="d-flex justify-content-center text-center white opacity-90 mb-2">
+                    <table class="d-flex justify-content-center text-center white opacity-90 mb-1">
                         <tbody> 
                             <tr scope="row">    
                                 <td>
@@ -99,14 +98,14 @@
                             </tr>   
                         </tbody>          
                     </table> 
-                    <p class="d-inline light-blue d-flex justify-content-center mb-0">
-                        {{ away_stats.nickname}} Bullpen Last 10 Games: &nbsp;
-                    </p>
-                    <p class="white opacity-90 text-center mb-0">
-                        {{ away_stats.away_bullpen_ten }} <small>IP</small>
-                        and {{ away_stats.away_bullpen_era|floatformat:2 }} <small>ERA</small>
-                    </p> 
-                {% endif %}           
+                {% endif %}     
+                <p class="d-inline light-blue d-flex justify-content-center mb-0">
+                    {{ away_stats.nickname}} Bullpen Last 10: &nbsp;
+                </p>
+                <p class="white opacity-90 text-center mb-0">
+                    {{ away_stats.away_bullpen_ten }} <small>IP</small>
+                    and {{ away_stats.away_bullpen_era|floatformat:2 }} <small>ERA</small>
+                </p>   
             </div>
 <!-- VS -->               
             <div class="col-lg-2 d-flex align-items-center">
@@ -121,7 +120,6 @@
                         <p class="d-inline white opacity-90">
                         TBD
                         </p>
-
                         <span class="light-blue">
                             - {{ home_stats.nickname }}
                         </span>
@@ -138,7 +136,7 @@
                             - {{ home_stats.nickname }}
                         </span>
                     </h5> 
-                    <table class="d-flex justify-content-center text-center white opacity-90 mb-2">
+                    <table class="d-flex justify-content-center text-center white opacity-90 mb-1">
                         <tbody> 
                             <tr scope="row">
                                 <td>
@@ -210,13 +208,13 @@
                             </tr>  
                         </tbody>      
                     </table>
-                    <p class="d-inline light-blue d-flex justify-content-center mb-0">
-                        {{ home_stats.nickname}} Bullpen Last 10 Games: &nbsp;
-                    </p>
-                    <p class="white opacity-90 text-center">
-                        {{ home_stats.home_bullpen_ten }} <small>IP</small>
-                        and {{ home_stats.home_bullpen_era|floatformat:2 }} <small>ERA</small>
-                    </p>   
-                {% endif %}   
+                {% endif %}    
+                <p class="d-inline light-blue d-flex justify-content-center mb-0">
+                    {{ home_stats.nickname}} Bullpen Last 10: &nbsp;
+                </p>
+                <p class="white opacity-90 text-center">
+                    {{ home_stats.home_bullpen_ten }} <small>IP</small>
+                    and {{ home_stats.home_bullpen_era|floatformat:2 }} <small>ERA</small>
+                </p>  
             </div>         
         </div>

@@ -147,6 +147,9 @@ def mlb_matchup(request):
     # Home team total errors
     home_stats.total_errors = home_stats.aggregate(
         total=Sum('errors'))['total']
+
+    # HOME LAST TEN GAME STATS
+
     # Home team stats last ten games
     home_stats.home_ten = home_stats.order_by('-id')[:10]
     # Home team bullpen innings pitched last ten games
@@ -162,6 +165,26 @@ def mlb_matchup(request):
         total=Sum('bullpen_runs'))['total']
     bullpen_innings = bullpen_outs / 3
     home_stats.home_bullpen_era = (bullpen_runs / bullpen_innings) * 9
+    # Home team total runs last ten games
+    home_stats.runs_ten = home_stats.home_ten.aggregate(
+        total=Sum('runs'))['total']
+    # Home team total wins last ten games
+    home_home_wins = home_stats.home_ten.aggregate(
+        total=Sum('win_home'))['total']
+    home_away_wins = home_stats.home_ten.aggregate(
+        total=Sum('win_away'))['total']
+    home_stats.wins_ten = home_home_wins + home_away_wins
+    # Home team total home runs last ten games
+    home_stats.hr_ten = home_stats.home_ten.aggregate(
+        total=Sum('home_runs'))['total']
+    # Home team total hits last ten
+    home_stats.hits_ten = home_stats.home_ten.aggregate(
+        total=Sum('hits'))['total']
+    # Home team total strikeouts last ten
+    home_stats.k_ten = home_stats.home_ten.aggregate(
+        total=Sum('strikeouts'))['total']
+
+    # HOME PROBABLE STARTER
 
     # Home Probable Starter stats from db
     probable_home = StartingPitcher.objects.filter(
@@ -241,6 +264,9 @@ def mlb_matchup(request):
     # Away team total errors
     away_stats.total_errors = away_stats.aggregate(
         total=Sum('errors'))['total']
+
+    # AWAY LAST TEN GAME STATS
+
     # Away team stats last ten games
     away_stats.away_ten = away_stats.order_by('-id')[:10]
     # Away team bullpen innings pitched last ten games
@@ -256,6 +282,26 @@ def mlb_matchup(request):
         total=Sum('bullpen_runs'))['total']
     bullpen_innings = bullpen_outs / 3
     away_stats.away_bullpen_era = (bullpen_runs / bullpen_innings) * 9
+    # Away team total runs last ten games
+    away_stats.runs_ten = away_stats.away_ten.aggregate(
+        total=Sum('runs'))['total']
+    # Away team total wins last ten games
+    away_home_wins = away_stats.away_ten.aggregate(
+        total=Sum('win_home'))['total']
+    away_away_wins = away_stats.away_ten.aggregate(
+        total=Sum('win_away'))['total']
+    away_stats.wins_ten = away_home_wins + away_away_wins
+    # Away team total home runs last ten games
+    away_stats.hr_ten = away_stats.away_ten.aggregate(
+        total=Sum('home_runs'))['total']
+    # Away team total hits last ten
+    away_stats.hits_ten = away_stats.away_ten.aggregate(
+        total=Sum('hits'))['total']
+    # Away team total strikeouts last ten
+    away_stats.k_ten = away_stats.away_ten.aggregate(
+        total=Sum('strikeouts'))['total']
+
+    # AWAY PROBABLE STARTER
 
     # Away Probable Starter stats from db
     probable_away = StartingPitcher.objects.filter(
