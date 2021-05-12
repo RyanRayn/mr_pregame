@@ -3,6 +3,7 @@ from .models import BasketballTeamStats, MLBGame, MLBGameLine
 from .models import StartingPitcher, TeamName, Season
 import datetime
 
+
 class BasketballGame(forms.ModelForm):
 
     class Meta:
@@ -112,10 +113,12 @@ class EditGameLine(forms.ModelForm):
                   'home_starter_record', 'home_starter_era',
                   'home_starter_k', 'pick_type', 'pick',
                   'away_starter_ip', 'away_starter_hand',
-                  'home_starter_ip', 'home_starter_hand']
+                  'home_starter_ip', 'home_starter_hand',
+                  'away_starter_whip', 'home_starter_whip']
 
     away_starter = forms.CharField(label='Away Starter', required=False)
     away_starter_era = forms.DecimalField(label='ERA', required=False)
+    away_starter_whip = forms.DecimalField(label='WHIP', required=False)
     away_starter_k = forms.IntegerField(label="K's", required=False)
     away_starter_ip = forms.DecimalField(label="IP", required=False)
     away_starter_record = forms.CharField(label='Record', required=False)
@@ -124,6 +127,7 @@ class EditGameLine(forms.ModelForm):
     home_starter = forms.CharField(label='Home Starter', required=False)
     home_starter_ip = forms.DecimalField(label="IP", required=False)
     home_starter_era = forms.DecimalField(label='ERA', required=False)
+    home_starter_whip = forms.DecimalField(label='WHIP', required=False)
     home_starter_k = forms.IntegerField(label="K's", required=False)
     home_starter_hand = forms.CharField(
         label='Hand', initial='RHP', required=False)

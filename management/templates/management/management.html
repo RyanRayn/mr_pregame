@@ -12,23 +12,12 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
                     <div class="">
-                        <a class="white" href="{% url 'add_basketball' %}">Add Basketball</a>
+                        <a class="btn nav-login orange-background white opacity-90" href="{% url 'add_baseball_away' %}">Add Baseball Game Stats</a>
                     </div>
-                    <div class="">
-                        <a class="white" href="{% url 'add_baseball_away' %}">Add Baseball</a>
-                    </div>
-                    <div class="">
-                        <a class="white" href="{% url 'add_pitcher_away' %}">Add Pitcher</a>
-                    </div>
-                    <div class="">
-                        <form method="GET" action="{% url 'final_scores' %}">
-                            {% csrf_token %}
-                            <input type="hidden" id="league2" name="leagueName" value="MLB">
-                            <input type="hidden" id="tomorrow2" name="gameDate" value="{{ today }}">
-                            <button type="submit" class="btn white">Get Scores</button>
-                        </form>
+                    <div class="my-2">
+                        <a class="btn nav-login orange-background white opacity-90" href="{% url 'add_pitcher_away' %}">Add Starting Pitcher Stats</a>
                     </div>
                 </div>
                 <div class="col-md-6">

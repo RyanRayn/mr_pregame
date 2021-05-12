@@ -30,33 +30,39 @@
                         <tbody> 
                             <tr scope="row">    
                                 <td>
-                                    <p class="mb-0"><small>W/L</small></p>
+                                    <p class="mb-0 light-blue"><small>W/L</small></p>
                                     <p>
                                         {{ current.away_starter_record }}
                                     </p>
                                 </td>
                                 <td>
-                                    <p class="mb-0"><small>IP</small></p>
+                                    <p class="mb-0 light-blue"><small>IP</small></p>
                                     <p>
                                         {{ current.away_starter_ip }} 
                                     </p>
                                 </td>
                                 <td>  
-                                    <p class="mb-0"><small>K</small></p> 
+                                    <p class="mb-0 light-blue"><small>K</small></p> 
                                     <p>
                                         {{ current.away_starter_k }}
                                     </p> 
                                 </td>
                                 <td>
-                                    <p class="mb-0"><small>ERA</small></p>
+                                    <p class="mb-0 light-blue"><small>ERA</small></p>
                                     <p>
                                         {{ current.away_starter_era }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 light-blue"><small>WHIP</small></p>
+                                    <p>
+                                        {{ current.away_starter_whip }}
                                     </p>
                                 </td>     
                             </tr>
                             <tr scope="row">    
                                 <td>
-                                    <p class="mb-0"><small>Hits<br>Per 9</small></p>
+                                    <p class="mb-0 light-blue"><small>Hits<br>Per 9</small></p>
                                     <p>
                                         {% if probable_away.hits %}
                                             {{ probable_away.hits|floatformat:2 }}
@@ -66,7 +72,7 @@
                                     </p>
                                 </td>
                                 <td class="px-2">
-                                    <p class="mb-0"><small>Walks<br>Per 9</small></p>
+                                    <p class="mb-0 light-blue"><small>Walks<br>Per 9</small></p>
                                     <p>
                                         {% if probable_away.walks %}
                                             {{ probable_away.walks|floatformat:2 }}
@@ -76,7 +82,7 @@
                                     </p>
                                 </td>
                                 <td class="pr-2">   
-                                    <p class="mb-0"><small>Total<br>HR</small></p>
+                                    <p class="mb-0 light-blue"><small>Total<br>HR</small></p>
                                     <p>
                                         {% if probable_away.hr %}
                                             {{ probable_away.hr }}
@@ -86,7 +92,7 @@
                                     </p> 
                                 </td>
                                 <td>
-                                    <p class="mb-0"><small>ERA<br>First 5 IP</small></p>
+                                    <p class="mb-0 light-blue"><small>ERA<br>First 5 IP</small></p>
                                     <p>
                                         {% if probable_away.run_five %}
                                             {{ probable_away.run_five|floatformat:2 }}
@@ -140,33 +146,39 @@
                         <tbody> 
                             <tr scope="row">
                                 <td>
-                                    <p class="mb-0"><small>W/L</small></p>
+                                    <p class="mb-0 light-blue"><small>W/L</small></p>
                                     <p>
                                         {{ current.home_starter_record }}
                                     </p>
                                 </td>
                                 <td>
-                                    <p class="mb-0"><small>IP</small></p>
+                                    <p class="mb-0 light-blue"><small>IP</small></p>
                                     <p>
                                         {{ current.home_starter_ip }} 
                                     </p>
                                 </td>
                                 <td>   
-                                    <p class="mb-0"><small>K</small></p>
+                                    <p class="mb-0 light-blue"><small>K</small></p>
                                     <p>
                                         {{ current.home_starter_k }}
                                     </p> 
                                 </td> 
                                 <td>
-                                    <p class="mb-0"><small>ERA</small></p>
+                                    <p class="mb-0 light-blue"><small>ERA</small></p>
                                     <p>
                                         {{ current.home_starter_era }}
                                     </p>
-                                </td>    
+                                </td> 
+                                <td>
+                                    <p class="mb-0 light-blue"><small>WHIP</small></p>
+                                    <p>
+                                        {{ current.home_starter_whip }}
+                                    </p>
+                                </td>        
                             </tr>  
                             <tr scope="row">
                                 <td>
-                                    <p class="mb-0"><small>Hits<br>Per 9</small></p>
+                                    <p class="mb-0 light-blue"><small>Hits<br>Per 9</small></p>
                                     <p>
                                         {% if probable_home.hits %}
                                             {{ probable_home.hits|floatformat:2 }}
@@ -176,7 +188,7 @@
                                     </p>
                                 </td>
                                 <td class="px-2">
-                                    <p class="mb-0"><small>Walks<br>Per 9</small></p>
+                                    <p class="mb-0 light-blue"><small>Walks<br>Per 9</small></p>
                                     <p>
                                         {% if probable_home.walks %}
                                             {{ probable_home.walks|floatformat:2 }}
@@ -186,7 +198,7 @@
                                     </p>
                                 </td>
                                 <td class="pr-2">   
-                                    <p class="mb-0"><small>Total<br>HR</small></p>
+                                    <p class="mb-0 light-blue"><small>Total<br>HR</small></p>
                                     <p>
                                         {% if probable_home.hr %}
                                             {{ probable_home.hr }}
@@ -196,7 +208,7 @@
                                     </p> 
                                 </td> 
                                 <td>
-                                    <p class="mb-0"><small>ERA<br>First 5 IP</small></p>
+                                    <p class="mb-0 light-blue"><small>ERA<br>First 5 IP</small></p>
                                     <p>
                                         {% if probable_home.run_five %}
                                             {{ probable_home.run_five|floatformat:2 }}

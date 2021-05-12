@@ -1,5 +1,4 @@
 from django.db import models
-import datetime
 
 
 class League(models.Model):
@@ -226,7 +225,11 @@ class MLBGameLine(models.Model):
     home_starter = models.CharField(max_length=100, blank=True)
     away_starter_era = models.DecimalField(
         max_digits=4, decimal_places=2, default=0.00)
+    away_starter_whip = models.DecimalField(
+        max_digits=4, decimal_places=2, default=0.00)
     home_starter_era = models.DecimalField(
+        max_digits=4, decimal_places=2, default=0.00)
+    home_starter_whip = models.DecimalField(
         max_digits=4, decimal_places=2, default=0.00)
     away_starter_record = models.CharField(max_length=6, blank=True)
     home_starter_record = models.CharField(max_length=6, blank=True)
