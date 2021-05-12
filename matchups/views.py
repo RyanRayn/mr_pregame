@@ -57,8 +57,8 @@ def mlb_matchup(request):
         new_tz = pytz.timezone("US/Eastern")
         weather_date = weather['dt_txt']
         weatherDatetime = datetime.datetime.strptime(
-                                                 weather_date,
-                                                 '%Y-%m-%d %H:%M:%S')
+            weather_date,
+            '%Y-%m-%d %H:%M:%S')
         localized_time = current_tz.localize(weatherDatetime)
         gameDayWeather = localized_time.astimezone(new_tz)
         weather['gameDate'] = gameDayWeather.strftime("%B %d, %Y")
@@ -174,6 +174,12 @@ def mlb_matchup(request):
     home_away_wins = home_stats.home_ten.aggregate(
         total=Sum('win_away'))['total']
     home_stats.wins_ten = home_home_wins + home_away_wins
+    # Home team total loss last ten games
+    home_home_loss = home_stats.home_ten.aggregate(
+        total=Sum('loss_home'))['total']
+    home_away_loss = home_stats.home_ten.aggregate(
+        total=Sum('loss_away'))['total']
+    home_stats.loss_ten = home_home_loss + home_away_loss
     # Home team total home runs last ten games
     home_stats.hr_ten = home_stats.home_ten.aggregate(
         total=Sum('home_runs'))['total']
@@ -291,6 +297,12 @@ def mlb_matchup(request):
     away_away_wins = away_stats.away_ten.aggregate(
         total=Sum('win_away'))['total']
     away_stats.wins_ten = away_home_wins + away_away_wins
+    # Away team total loss last ten games
+    away_home_loss = away_stats.away_ten.aggregate(
+        total=Sum('loss_home'))['total']
+    away_away_loss = away_stats.away_ten.aggregate(
+        total=Sum('loss_away'))['total']
+    away_stats.loss_ten = away_home_loss + away_away_loss
     # Away team total home runs last ten games
     away_stats.hr_ten = away_stats.away_ten.aggregate(
         total=Sum('home_runs'))['total']

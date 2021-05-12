@@ -48,11 +48,11 @@
                 label: home_team,
                 data: home_runs,
                 lineTension: 0.3,
-                backgroundColor: [
-                    '#C1E6FF'
-                ],
                 borderColor: [
-                    '#C1E6FF'
+                    '#c1e6ff7a'
+                ],
+                backgroundColor: [
+                    '#c1e6ff7a'
                 ],
                 borderWidth: 3
                 },
@@ -61,10 +61,10 @@
                 data: away_runs,
                 reverse: true,
                 lineTension: 0.3,
-                backgroundColor: [
+                borderColor: [
                     '#FF7C1F'
                 ],
-                borderColor: [
+                backgroundColor: [
                     '#FF7C1F'
                 ],
                 borderWidth: 3
@@ -130,13 +130,19 @@
                 label: home_team,
                 data: hStats,
                 backgroundColor: [
-                    '#C1E6FF'
+                    '#c1e6ff7a'
+                ],
+                borderColor: [
+                    '#c1e6ff7a'
                 ],
                 },
                 {
                 label: away_team,
                 data: aStats,
                 backgroundColor: [
+                    '#FF7C1F'
+                ],
+                borderColor: [
                     '#FF7C1F'
                 ],
                 }
@@ -158,6 +164,11 @@
                 tooltip: {
                     enabled: true,
                 },
+            },
+            elements: {
+                bar: {
+                    borderRadius: 8,
+                }
             },
             scales: {
                 y: {

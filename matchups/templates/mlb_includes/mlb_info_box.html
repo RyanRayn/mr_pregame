@@ -44,7 +44,8 @@
             <h4 class="text-center mb-0">{{ current.away_team }}</h4>
             <p class="mt-0">
                 <small>Record: {{ away_stats.total_wins }}-{{ away_stats.total_loss }}</small>&nbsp;
-                <small>Away: {{ away_stats.wins_away }}-{{ away_stats.loss_away }}</small>
+                <small>Away: {{ away_stats.wins_away }}-{{ away_stats.loss_away }}</small>&nbsp;
+                <small>Last Ten: {{ away_stats.wins_ten }}-{{ away_stats.loss_ten }}</small>
             </p>
             <p class="light-blue text-center mb-2">
                 {% if current.away_spread == 0.0 %}
@@ -86,7 +87,8 @@
             <h4 class="text-center mb-0">{{ current.home_team }}</h4>
             <p class="mt-0">
                 <small>Record: {{ home_stats.total_wins }}-{{ home_stats.total_loss }}</small>&nbsp;
-                <small>Home: {{ home_stats.wins_home }}-{{ home_stats.loss_home }}</small>
+                <small>Home: {{ home_stats.wins_home }}-{{ home_stats.loss_home }}</small>&nbsp;
+                <small>Last Ten: {{ home_stats.wins_ten }}-{{ home_stats.loss_ten }}</small>
             </p>
             <p class="light-blue text-center mb-3">
                 {% if current.away_spread == 0.0 %}
