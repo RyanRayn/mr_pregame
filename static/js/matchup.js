@@ -121,37 +121,24 @@
 
     /* Stat Bar Chart */
     var ctx = document.getElementById('statChart').getContext('2d');
-    var home_runs = home.reverse();
-    var away_runs = away.reverse();
     var statChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Wins', 'Runs', 'Hits', 'HR', 'SO'],
+            labels: ['Wins', 'HR', 'Runs', 'Hits', 'SO'],
             datasets: [
                 {
                 label: home_team,
-                data: home_runs,
-                lineTension: 0.3,
+                data: hStats,
                 backgroundColor: [
                     '#C1E6FF'
                 ],
-                borderColor: [
-                    '#C1E6FF'
-                ],
-                borderWidth: 3
                 },
                 {
                 label: away_team,
-                data: away_runs,
-                reverse: true,
-                lineTension: 0.3,
+                data: aStats,
                 backgroundColor: [
                     '#FF7C1F'
                 ],
-                borderColor: [
-                    '#FF7C1F'
-                ],
-                borderWidth: 3
                 }
             ]
         },
@@ -169,7 +156,7 @@
                     }
                 },
                 tooltip: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             scales: {

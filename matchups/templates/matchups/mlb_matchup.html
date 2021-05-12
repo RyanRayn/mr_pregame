@@ -68,25 +68,20 @@
         var home = [];
             '{% for home in home_stats.home_ten %}'
                 home.push(parseInt('{{ home.runs }}'))
-            '{% endfor %}'
-            
+            '{% endfor %}'    
         var home_team = '{{ home_stats.nickname }}'
-        var home_runs = '{{ home_stats.runs_ten }}'
-        var home_wins = '{{ home_stats.wins_ten }}'
-        var home_hr = '{{ home_stats.hr_ten }}'
-        var home_hits = '{{ home_stats.hits_ten }}'
-        var home_k = '{{ home_stats.k_ten }}'
+        var hStats = [];
+                hStats.push('{{ home_stats.wins_ten }}', '{{ home_stats.hr_ten}}', '{{ home_stats.runs_ten }}', 
+                '{{ home_stats.hits_ten }}', '{{ home_stats.k_ten }}')    
         var away = [];
             '{% for away in away_stats.away_ten %}'
                 away.push(parseInt('{{ away.runs }}'))
             '{% endfor %}' 
-
         var away_team = '{{ away_stats.nickname }}'
-        var away_runs = '{{ away_stats.runs_ten }}'
-        var away_wins = '{{ away_stats.wins_ten }}'
-        var away_hr = '{{ away_stats.hr_ten }}'
-        var away_hits = '{{ away_stats.hits_ten }}'
-        var away_k = '{{ away_stats.k_ten }}'
+        var aStats = [];
+                aStats.push('{{ away_stats.wins_ten }}', '{{ away_stats.hr_ten}}', '{{ away_stats.runs_ten }}', 
+                '{{ away_stats.hits_ten }}', '{{ away_stats.k_ten }}')  
+
         var labels = [];
             '{% for games in away_stats.away_ten %}'
                 labels.push(parseInt('{{ forloop.counter }}'))
