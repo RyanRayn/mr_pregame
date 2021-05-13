@@ -17,6 +17,10 @@ class League(models.Model):
 
 
 class TeamName(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Teams'
+
     name = models.CharField(max_length=100, null=False, blank=False)
     abbreviation = models.CharField(max_length=10, null=False, blank=False)
     twitter_id = models.CharField(max_length=100, default=name)
@@ -36,6 +40,10 @@ class Season(models.Model):
 
 
 class BasketballTeamStats(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Basketball team stats'
+
     name = models.ForeignKey(
         'TeamName', null=False, blank=False, on_delete=models.CASCADE)
     season = models.ForeignKey(
@@ -223,6 +231,8 @@ class MLBGameLine(models.Model):
     pick_type = models.CharField(max_length=100, blank=True)
     away_starter = models.CharField(max_length=100, blank=True)
     home_starter = models.CharField(max_length=100, blank=True)
+    away_starts = models.IntegerField(default=0)
+    home_starts = models.IntegerField(default=0)
     away_starter_era = models.DecimalField(
         max_digits=4, decimal_places=2, default=0.00)
     away_starter_whip = models.DecimalField(

@@ -74,3 +74,30 @@
             </ul>
         </div>
     </div>   
+
+    {% block postloadjs %}
+    <script>
+        /* Toggle plus/minus icon in navbar */
+        $('.navbar-toggler').click(function() { 
+            $(this).find('i').toggleClass('fa-plus-circle fa-minus-circle'); 
+        });
+    </script>   
+    <script>
+        /* Shows and hides league menu in navbar */
+        $("#games").mouseover(function(){
+            $("#league-menu").toggleClass('no-show');
+        });
+        $("#home").mouseenter(function(){
+            $("#league-menu").addClass('no-show');
+        });
+        $("#profile").mouseenter(function(){
+            $("#league-menu").addClass('no-show');
+        });
+        $("#admin").mouseenter(function(){
+            $("#league-menu").addClass('no-show');
+        });
+        $("#league-menu").mouseleave(function(){
+            $("#league-menu").toggleClass('no-show');
+        });
+    </script>  
+    {% endblock %}

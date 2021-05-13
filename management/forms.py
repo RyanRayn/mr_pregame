@@ -114,9 +114,11 @@ class EditGameLine(forms.ModelForm):
                   'home_starter_k', 'pick_type', 'pick',
                   'away_starter_ip', 'away_starter_hand',
                   'home_starter_ip', 'home_starter_hand',
-                  'away_starter_whip', 'home_starter_whip']
+                  'away_starter_whip', 'home_starter_whip',
+                  'away_starts', 'home_starts']
 
     away_starter = forms.CharField(label='Away Starter', required=False)
+    away_starts = forms.IntegerField(label='Starts', required=False)
     away_starter_era = forms.DecimalField(label='ERA', required=False)
     away_starter_whip = forms.DecimalField(label='WHIP', required=False)
     away_starter_k = forms.IntegerField(label="K's", required=False)
@@ -125,6 +127,7 @@ class EditGameLine(forms.ModelForm):
     away_starter_hand = forms.CharField(
         label='Hand', initial='RHP', required=False)
     home_starter = forms.CharField(label='Home Starter', required=False)
+    home_starts = forms.IntegerField(label='Starts', required=False)
     home_starter_ip = forms.DecimalField(label="IP", required=False)
     home_starter_era = forms.DecimalField(label='ERA', required=False)
     home_starter_whip = forms.DecimalField(label='WHIP', required=False)

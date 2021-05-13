@@ -104,6 +104,27 @@ img {
     color:greenyellow;
 }
 
+/*---------- Toasts ----------*/
+.message-container{
+    position:fixed;
+    top:72px;
+    right:15px;
+    z-index: 99999999999;
+}
+
+.toast{
+    background-color:rgb(19, 35, 58);
+
+}
+
+.toast-header{
+    background-color:rgb(19, 35, 58);
+}
+
+.toast-img{
+    width:15%;
+}
+
 /*---------------------------------------- base.html ----------------------------------------*/
 
 /*---------- Navigation ----------*/
@@ -566,12 +587,6 @@ img {
 
 .btn-link:hover{
     color:#C1E6FF;
-}
-
-.orange-box{
-    background-color:#ff7c1fb7;
-    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
-    border-radius:20px;
 }
 
 .team-website:hover{

@@ -38,6 +38,24 @@
             {% include 'includes/navigation.html' %}                  
         </header>
         <hr class="rounded orange-background mx-auto mt-0 mb-4">
+        {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    {% with message.level as level %}
+                        {% if level == 40 %}
+                            {% include 'includes/toasts/toast_error.html' %}
+                        {% elif level == 30 %}    
+                            {% include 'includes/toasts/toast_warning.html' %}
+                        {% elif level == 25 %}
+                            {% include 'includes/toasts/toast_success.html' %}
+                        {% else %}
+                            {% include 'includes/toasts/toast_info.html' %} 
+                        {% endif %}       
+                    {% endwith %}
+                {% endfor %}    
+            </div>
+        {% endif %}
+
         {% block content %}
         {% endblock %}
 
@@ -48,33 +66,12 @@
             {% include 'includes/footer.html' %}
         </footer>    
     </div>
-    {% block postloadjs %}
-    <script>
-        /* Toggle plus/minus icon in navbar */
-        $('.navbar-toggler').click(function() { 
-            $(this).find('i').toggleClass('fa-plus-circle fa-minus-circle'); 
-        });
-    </script>   
-    <script>
-        /* Shows and hides league menu in navbar */
-        $("#games").mouseover(function(){
-            $("#league-menu").toggleClass('no-show');
-        });
-        $("#home").mouseenter(function(){
-            $("#league-menu").addClass('no-show');
-        });
-        $("#profile").mouseenter(function(){
-            $("#league-menu").addClass('no-show');
-        });
-        $("#admin").mouseenter(function(){
-            $("#league-menu").addClass('no-show');
-        });
-        $("#league-menu").mouseleave(function(){
-            $("#league-menu").toggleClass('no-show');
-        });
-    </script>  
+
+    {% block postloadjs %} 
+    <script type="text/javascript">
+        $('.toast').toast('show');
+    </script>
     {% endblock %}
 
-    
   </body>
 </html>
