@@ -1,8 +1,29 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+import stripe
+stripe.api_key = "sk_test_51IAx7LGR0C1KVmJTsnSfPNo41yuS6ONlambSagIy0aXDm4JKucmCNGwfkvGPQ53qXj1eLDeMyuASgRCPzjYzyQik00BCpEQJCZ"
+
+MEMBERSHIP_CHOICES = (
+    ('Free', 'Free'),
+    ('Paid', 'Paid'),
+)
+
+
+class Membership(models.Model):
+    """ Offered memberships """
+
+    membership_type = models.CharField(
+        choices=MEMBERSHIP_CHOICES, default='Free', max_length=30)
+    price = models.IntegerField(default=30)
+    stripe_plan_id = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.membership_type
 
 
 class UserProfile(models.Model):
@@ -12,6 +33,11 @@ class UserProfile(models.Model):
     """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+    stripe_customer_id = models.CharField(max_length=40)
+    membership_type = models.ForeignKey(
+        Membership, on_delete=models.SET_NULL, null=True)
+    stripe_subscription_id = models.CharField(max_length=40)
     phone_number = models.CharField(max_length=20, blank=True)
     country = CountryField(blank_label='Country *', null=True, blank=True)
     postcode = models.CharField(max_length=20, blank=True)
@@ -28,6 +54,15 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """ Create or update user profile """
 
     if created:
-        UserProfile.objects.create(user=instance)
-    # Existing users just save the profile
-    instance.userprofile.save()
+        UserProfile.objects.get_or_create(user=instance)
+
+    user_membership, created = UserProfile.objects.get_or_create(user=instance)
+
+    if (user_membership.stripe_customer_id is None or
+            user_membership.stripe_customer_id == ''):
+        new_customer_id = stripe.Customer.create(email=instance.email)
+        user_membership.stripe_customer_id = new_customer_id['id']
+        user_membership.save()
+
+
+post_save.connect(create_or_update_user_profile, sender=User)

@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'games',
     'management',
     'matchups',
-    'checkout',
     'profiles',
 ]
 
@@ -179,7 +178,7 @@ if 'USE_AWS' in os.environ:
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
         'CacheControl': 'max-age=94608000',
     }
-    
+
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'mrpregame'
     AWS_S3_REGION_NAME = 'us-east-1'
@@ -206,5 +205,7 @@ TWITTER_SECRET_KEY = os.getenv('TWITTER_SECRET_KEY', '')
 TWITTER_API_KEY = os.getenv('TWITTER_API_KEY', '')
 TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN', '')
 TWITTER_SECRET_ACCESS_TOKEN = os.getenv('TWITTER_SECRET_ACCESS_TOKEN', '')
+
+# Stripe Keys
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
