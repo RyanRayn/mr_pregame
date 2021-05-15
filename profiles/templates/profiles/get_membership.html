@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/get_membership.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="content">
+    <div class="container-fluid">
+        <div class="row mx-3 mt-lg-3">
+            <div class="col-12 col-md-6 mb-4">
+
+
+
+
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="orange font-700 text-center">Payment Info</h1>
+                    </div>
+                </div>
+                <form class="signup light-blue" id="membership_form" method="post" action="{% url 'get_membership' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 col-md-6 my-2">
+                            {{ form.full_name|as_crispy_field }}
+                        </div>    
+                        <div class="col-12 col-md-6 my-2">    
+                            {{ form.email|as_crispy_field }}
+                        </div>    
+                        <div class="col-12 col-md-6 my-2">
+                            {{ form.phone_number|as_crispy_field }}
+                        </div>    
+                        <div class="col-12 col-md-6 my-2">
+                            {{ form.street_address1|as_crispy_field }}
+                        </div>    
+                        <div class="col-12 col-md-6 my-2">
+                            {{ form.street_address2|as_crispy_field }}
+                        </div>    
+                        <div class="col-12 col-md-6 my-2">
+                            {{ form.town_or_city|as_crispy_field }}
+                        </div>    
+                        <div class="col-12 col-md-6 my-2">
+                            {{ form.postcode|as_crispy_field }}
+                        </div>    
+                        <div class="col-12 col-md-6 my-2">
+                            {{ form.country|as_crispy_field }}
+                        </div>
+                        <div class="col-12 mt-2">
+                            <!-- Strip Card Element -->
+                            <div id="card-element" class=""></div>
+                            <!-- Display Form Errors -->
+                            <div id="card-errors" class="orange" role="alert"></div> 
+                        </div>    
+                        <div class="col-12 d-flex justify-content-center">
+                            <button class="btn white orange-background signin-button my-3" type="submit">Submit Details</button>
+                        </div>   
+                    </div>
+                </form>    
+            </div>  
+        </div> 
+        <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="">
+                    <a href="{% url 'home' %}" class="btn allauth-btn light-blue">Back Home</a>
+                </div>        
+            </div>
+        </div>           
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ stripe_secret_key|json_script:"id_stripe_secret_key" }}
+    <script src="{% static 'profiles/js/stripe_elements.js' %}"></script>
+{% endblock %}    

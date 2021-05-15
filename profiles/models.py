@@ -33,6 +33,8 @@ class UserProfile(models.Model):
     """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
     active = models.BooleanField(default=True)
     stripe_customer_id = models.CharField(max_length=40)
     membership_type = models.ForeignKey(
