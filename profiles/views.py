@@ -1,5 +1,6 @@
 from django.conf import settings
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404)
 from django.contrib import messages
 from .models import UserProfile, Membership
 from .forms import SignupForm
@@ -22,29 +23,32 @@ def get_membership(request):
     stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    profile = get_object_or_404(UserProfile, user=request.user)
+    user_profile = get_object_or_404(UserProfile, user=request.user)
     membership = Membership.objects.get(membership_type='Paid')
 
     if request.method == "POST":
+
         try:
             token = request.POST['stripeToken']
 
             stripe.Customer.modify(
-                profile.stripe_customer_id, source=token)
+                user_profile.stripe_customer_id, source=token)
 
             subscription = stripe.Subscription.create(
-                customer=profile.stripe_customer_id,
+                customer=user_profile.stripe_customer_id,
                 items=[
                     {
                         'price': membership.stripe_plan_id,
                     }
                 ],
             )
-
+            # Save profile info from form to session
+            request.session['user'] = request.POST
             return redirect(reverse('update_membership',
                             kwargs={
-                                    'subscription_id': subscription.id,
-                                    }))
+                                'subscription_id': subscription.id,
+                                }))
+
         except stripe.error.CardError:
             messages.info(request, "Your card has been declined.")
 
@@ -52,7 +56,7 @@ def get_membership(request):
 
     template = "profiles/get_membership.html"
     context = {
-        'profile': profile,
+        'user_profile': user_profile,
         'form': form,
         'membership': membership,
         'stripe_public_key': stripe_public_key,
@@ -63,15 +67,26 @@ def get_membership(request):
 
 
 def update_membership(request, subscription_id):
-    profile = get_object_or_404(UserProfile, user=request.user)
-    cust_id = profile.stripe_customer_id
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    cust_id = user_profile.stripe_customer_id
     paid_membership = Membership.objects.get(membership_type='Paid')
+
+    # Get member info saved to session and update their profile
+    user = request.session.get('user')
 
     UserProfile.objects.update_or_create(
                 stripe_customer_id=cust_id, defaults={
                     'membership_type': paid_membership,
                     'stripe_subscription_id': subscription_id,
-                    'active': True
+                    'active': True,
+                    'full_name': user['full_name'],
+                    'email': user['email'],
+                    'phone_number': user['phone_number'],
+                    'street_address1': user['street_address1'],
+                    'street_address2': user['street_address2'],
+                    'town_or_city': user['town_or_city'],
+                    'postcode': user['postcode'],
+                    'country': user['country']
                 }
             )
     messages.info(request, "Welcome to the team! Time to get paid.")
