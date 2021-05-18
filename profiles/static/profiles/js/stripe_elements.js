@@ -49,13 +49,21 @@ card.addEventListener('change', function (event) {
 // Create a token or display an error when the form is submitted.
 var form = document.getElementById('membership_form');
 form.addEventListener('submit', function(event) {
-  event.preventDefault();
+    event.preventDefault();
+    card.update({'disabled': true});
+    $('#submit-button').attr('disabled', true);
+    $('#membership_form').fadeToggle(100);
+    $('#loading').fadeToggle(100);
 
   stripe.createToken(card).then(function(result) {
     if (result.error) {
       // Inform the customer that there was an error.
       var errorElement = document.getElementById('card-errors');
       errorElement.textContent = result.error.message;
+      $('#membership_form').fadeToggle(100);
+      $('#loading').fadeToggle(100);
+      card.update({ 'disabled': false});
+      $('#submit-button').attr('disabled', false);
     } else {
       // Send the token to your server.
       stripeTokenHandler(result.token);
@@ -71,7 +79,6 @@ function stripeTokenHandler(token) {
     hiddenInput.setAttribute('name', 'stripeToken');
     hiddenInput.setAttribute('value', token.id);
     form.appendChild(hiddenInput);
-    
     // Submit the form
     form.submit();
     }
