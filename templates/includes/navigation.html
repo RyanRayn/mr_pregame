@@ -27,8 +27,9 @@
             <img class="nav-img" src="/media/money_bag2.png" alt="">
             </a>
             <a class="d-none d-md-block mrpregame opacity-90 text-nowrap" href="{% url 'home' %}">MR. PREGAME</a>
-            <div class="nav-item mr-4 ml-auto">    
-                <a class="btn nav-login white light-blue-background text-nowrap" href="{% url 'account_login' %}">Sign in</a>
+            <div class="nav-item mr-4 ml-auto"> 
+                <p class="light-blue opacity-90 d-inline pr-2">Already a member?</p>   
+                <a class="btn nav-login white light-blue-background text-nowrap d-inline" href="{% url 'account_login' %}">Sign in</a>
             </div>
         {% endif %}        
     </nav>

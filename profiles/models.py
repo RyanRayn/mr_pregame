@@ -38,7 +38,7 @@ class UserProfile(models.Model):
     active = models.BooleanField(default=True)
     stripe_customer_id = models.CharField(max_length=40)
     membership_type = models.ForeignKey(
-        Membership, on_delete=models.SET_NULL, null=True)
+        Membership, on_delete=models.SET_NULL, default='Free', null=True)
     stripe_subscription_id = models.CharField(max_length=40)
     phone_number = models.CharField(max_length=20, blank=True)
     country = CountryField(blank_label='Country *', null=True, blank=True)

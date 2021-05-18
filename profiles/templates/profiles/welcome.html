@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h1 class="orange opacity-90 text-center">Welcome To The Team!</h1>
+                </div>
+            </div>
+
+            <div class="row mx-3">
+                <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                    <h3 class="white opacity-90">
+                        As a part of the team you now have access to all Mr. Pregame's research, inside information and premium picks. Guaranteed picks, marked with the moneybag logo, will be listed daily in your profile and on each individual game matchup page. <br><br>Good Luck!!!
+                    </h3>
+                    <div class="my-3">
+                        <a class="btn nav-login orange-background white opacity-90" href="{% url 'profile' %}">My Profile</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mx-3 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid img-shadow img-resize w-75" src="/media/admin.png" alt="responsive image">
+                    </div>    
+                </div>    
+            </div>                                                  
+       </div>
+    </div>
+{% endblock %}

@@ -89,5 +89,10 @@ def update_membership(request, subscription_id):
                     'country': user['country']
                 }
             )
-    messages.info(request, "Welcome to the team! Time to get paid.")
-    return redirect('/profile')
+
+    template = "profiles/welcome.html"
+    context = {
+        'user_profile': user_profile,
+    }
+
+    return render(request, template, context)

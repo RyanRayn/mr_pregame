@@ -3,7 +3,18 @@
 
 {% block content %}
 <div id="content">
-
-    
+    <div class="container-fluid">
+        {% if profile.stripe_subscription_id %}
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div id="profile-info" class="orange-box">
+                        <h4 class="white opacity-90 text-center">
+                            {{ profile.user }}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        {% endif %}    
+    </div>
 </div>
 {% endblock %}
