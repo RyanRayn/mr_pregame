@@ -66,12 +66,26 @@
         <hr class="rounded orange-background mx-auto my-4">
         <footer class="page-footer">
             {% include 'includes/footer.html' %}
-        </footer>    
+        </footer>
+        <!-- Spinner overlay for games page api call -->
+        <div id="games-loading">
+            <h1 class="text-light loading-spinner">
+                <span class="icon">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </span>
+            </h1>
+        </div>                   
     </div>
 
     {% block postloadjs %} 
     <script type="text/javascript">
         $('.toast').toast('show');
+    </script>
+    <!-- Spinner Overlay -->
+    <script type="text/javascript">
+        $("#mlb-button").click(function(){
+            $("#games-loading").fadeToggle(100);
+        });
     </script>
     {% endblock %}
 

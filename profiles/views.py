@@ -1,24 +1,39 @@
 from django.conf import settings
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404)
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import UserProfile, Membership
+from management.models import MLBGameLine
 from .forms import SignupForm
+import datetime
+import pytz
 import stripe
 
 
+@login_required
 def profile(request):
     """ Display the user's profile """
     profile = get_object_or_404(UserProfile, user=request.user)
 
+    # Date format to get todays games from Gameline model
+    todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
+    date_LA = todays_date.strftime('%B %-d, %Y')
+
+    # Get all objects in MLBGameLine model
+    all_games = MLBGameLine.objects.all()
+
     template = "profiles/profile.html"
     context = {
         'profile': profile,
+        'all_games': all_games,
+        'date_LA': date_LA,
     }
 
     return render(request, template, context)
 
 
+@login_required
 def get_membership(request):
     stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY

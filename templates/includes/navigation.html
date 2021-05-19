@@ -40,7 +40,7 @@
                     <form action="{% url 'games' %}" method="GET">
                         {% csrf_token %}
                         <input type="hidden" id="MLB" name="leagueName" value="MLB">
-                        <button class="btn day-form-btn light-blue opacity-90" type="submit">
+                        <button id="mlb-button" class="btn day-form-btn light-blue opacity-90" type="submit">
                             MLB
                         </button>
                     </form>

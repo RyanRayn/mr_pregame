@@ -14,6 +14,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row mx-3">
+                {% for game in all_games %}
+                    {% if game.gamedate|date == date_LA and game.pick %}
+                        <div class="col-12 col-md-3">
+                            <div class="darkblue-box">
+                                <h3 class="white">{{ game.summary }}</h3>
+                            </div>    
+                        </div>    
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% endif %}    
     </div>
 </div>
