@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 import stripe
-stripe.api_key = "sk_test_51IAx7LGR0C1KVmJTsnSfPNo41yuS6ONlambSagIy0aXDm4JKucmCNGwfkvGPQ53qXj1eLDeMyuASgRCPzjYzyQik00BCpEQJCZ"
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 MEMBERSHIP_CHOICES = (
     ('Free', 'Free'),

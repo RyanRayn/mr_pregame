@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %} 
 
 {% block content %}
 <div id="content">
@@ -8,18 +9,69 @@
             <div class="row">
                 <div class="col-12 col-md-3">
                     <div id="profile-info" class="orange-box">
-                        <h4 class="white opacity-90 text-center">
-                            {{ profile.user }}
-                        </h4>
+                       
                     </div>
                 </div>
             </div>
             <div class="row mx-3">
                 {% for game in all_games %}
                     {% if game.gamedate|date == date_LA and game.pick %}
-                        <div class="col-12 col-md-3">
-                            <div class="darkblue-box">
-                                <h3 class="white">{{ game.summary }}</h3>
+                        <div class="col-12 col-md-3 mb-2">
+                            <div class="darkblue-box d-flex flex-column align-items-center white opacity-90 p-2">
+                                <h4 class="">{{ game.away_team }}</h4>
+                                <h5>VS</h5>
+                                <h4 class="">{{ game.home_team }}</h4>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn nav-login white opacity-90 orange-background mt-3" data-toggle="modal" data-target="#gamePickModal{{ forloop.counter }}">
+                                    Premium Pick
+                                </button>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="gamePickModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="gamePickModalTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content darkblue-box p-2">
+                                        <div class="row">       
+                                            <div class="col-12">
+                                                <h3 class="game-summary white opacity-90 text-center font-800 mb-0">
+                                                    {{ game.summary }}
+                                                </h3>
+                                                <p class="white opacity-90 my-1 text-center">
+                                                    {{ game.venue }} - {{ game.city }}, {{ game.state }}
+                                                </p>
+                                                {% if game.status != 'scheduled' %}
+                                                    <p class="orange opacity-90 mb-0 mt-1 text-center">
+                                                        <i class="fad fa-clock orange pr-2"></i>
+                                                        {{ game.status|upper }}
+                                                        {% if game.current_inning and game.status != 'final' %}
+                                                            - {{ game.current_inning|ordinal }} inning
+                                                        {% endif %} 
+                                                    </p>
+                                                {% else %}
+                                                    <p class="white opacity-90 mb-0 text-center">
+                                                        <i class="fad fa-calendar-alt orange pr-2"></i>
+                                                        {{ game.gamedate|date }} 
+                                                        <i class="fad fa-clock orange pl-4 pr-2"></i>
+                                                        {{ game.gamedate|time }} 
+                                                        <small>ET</small>
+                                                    </p>
+                                                {% endif %}    
+                                              
+                                            </div>    
+                                        </div>    
+                                        <hr class="rounded orange-background mx-auto my-0">
+                                        <div class="modal-body white opacity-90">
+                                        {{ game.pick }}
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center border-0">
+                                            <button type="button" class="btn white opacity-90 orange-background nav-login mr-2" data-dismiss="modal">
+                                                Matchup
+                                            </button>
+                                            <button type="button" class="btn white opacity-90 light-blue-background nav-login" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>    
                         </div>    
                     {% endif %}
