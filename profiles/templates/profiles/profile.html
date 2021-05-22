@@ -5,6 +5,28 @@
 {% block content %}
 <div id="content">
     <div class="container-fluid">
+        <!-- Only render if user has paid subscription -->
+        {% if not profile.stripe_subscription_id %}
+        <div class="row m-3">
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center mb-3">
+                <div id="join-now-text" class="d-flex flex-column">
+                    <h1 class="white opacity-90 mb-2">Subscripe for access!</h1>
+                    <ul>
+                        <li class="light-blue opacity-90 mb-2">$30/monthly</li>
+                        <li class="light-blue opacity-90 mb-2">$1 refund for all incorrect guaranteed picks</li>
+                        <li class="light-blue opacity-90 mb-2">Premium and Guaranteed Picks</li>
+                        <li class="light-blue opacity-90 mb-2">Custom Bet Tracking <small>(Coming Soon)</small></li>
+                    </ul>
+                </div>
+                <div class="">
+                    <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Suscribe</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                <img class="join-now-img" src="/media/money_bag3.png" alt="">
+            </div>
+        </div>
+        {% endif %}
         {% if profile.stripe_subscription_id %}
             <div class="row">
                 <div class="col-12 col-md-3">
@@ -14,17 +36,32 @@
                 </div>
             </div>
             <div class="row mx-3">
+                <!-- Get all of todays games that have a pick -->
                 {% for game in all_games %}
                     {% if game.gamedate|date == date_LA and game.pick %}
-                        <div class="col-12 col-md-3 mb-2">
-                            <div class="darkblue-box d-flex flex-column align-items-center white opacity-90 p-2">
+                        <div class="col-12 col-md-3 mb-3">
+                            <div class="lightblue-box d-flex flex-column align-items-center white opacity-90 pb-3">
+                                <div class="pick-box d-flex flex-column align-items-center w-100 p-2">
+                                {% if game.pick_type == 'Guaranteed' %}    
+                                <img class="guaranteed-img" src="/media/moneypile.png" alt="">
+                                {% endif %}    
+                                <small class="light-blue">
+                                    {{ game.gamedate|time }}ET
+                                </small> 
                                 <h4 class="">{{ game.away_team }}</h4>
-                                <h5>VS</h5>
+                                <h5 class=""><i class="fad fa-at orange"></i></h5>
                                 <h4 class="">{{ game.home_team }}</h4>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn nav-login white opacity-90 orange-background mt-3" data-toggle="modal" data-target="#gamePickModal{{ forloop.counter }}">
+                                 <!-- Button trigger modal -->
+                                 <button type="button" class="btn nav-login orange-background white opacity-90 mt-3" data-toggle="modal" data-target="#gamePickModal{{ forloop.counter }}">
+                                    {% if game.pick_type == 'Guaranteed' %}
+                                    Guaranteed
+                                    {% elif game.pick_type == 'Premium Pick' %}
                                     Premium Pick
+                                    {% else %}
+                                    My Best Guess
+                                    {% endif %}
                                 </button>
+                                </div>
                             </div>
                             <!-- Modal -->
                             <div class="modal fade" id="gamePickModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="gamePickModalTitle" aria-hidden="true">
@@ -60,12 +97,22 @@
                                         </div>    
                                         <hr class="rounded orange-background mx-auto my-0">
                                         <div class="modal-body white opacity-90">
-                                        {{ game.pick }}
+                                        {{ game.pick|linebreaks }}
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center border-0">
-                                            <button type="button" class="btn white opacity-90 orange-background nav-login mr-2" data-dismiss="modal">
-                                                Matchup
-                                            </button>
+                                            <!-- Send Matchup Game Data to Template -->                    
+                                            <form action="{% url 'mlb_matchup' %}" method="GET">
+                                                {% csrf_token %}
+                                                <input type="hidden" id="gameId{{ forloop.counter }}" 
+                                                            name="gameId" value="{{ game.gameID }}">
+                                                <input type="hidden" id="city{{ forloop.counter }}"
+                                                            name="city" value="{{ game.city }}">
+                                                <input type="hidden" id="league{{ forloop.counter }}"
+                                                            name="league" value="{{ game.league }}">        
+                                                <button class="btn matchup-btn orange-background white opacity-90" type="submit">
+                                                    Matchup
+                                                </button>
+                                            </form> 
                                             <button type="button" class="btn white opacity-90 light-blue-background nav-login" data-dismiss="modal">
                                                 Close
                                             </button>

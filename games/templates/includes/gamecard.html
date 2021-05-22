@@ -30,8 +30,10 @@
                                     </p>
                                 {% else %}
                                     <p class="white opacity-90 mb-0 text-center">
-                                        <i class="fad fa-calendar-alt orange pr-2"></i>{{ game.gamedate|date }} 
-                                        <i class="fad fa-clock orange pl-4 pr-2"></i>{{ game.gamedate|time }} 
+                                        <i class="fad fa-calendar-alt orange pr-2"></i>
+                                        {{ game.gamedate|date }} 
+                                        <i class="fad fa-clock orange pl-4 pr-2"></i>
+                                        {{ game.gamedate|time }} 
                                         <small>ET</small>
                                     </p>
                                 {% endif %}    

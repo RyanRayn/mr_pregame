@@ -622,11 +622,34 @@ img {
     margin:0;
     height:100%;
 }
+
+.get-membership-img{
+    width:50%;
+}
 /*---------- Profiles ----------*/
-.orange-box{
-    background-color:#ff7c1f9f;
+.pick-box{
+    background-color:rgb(13, 29, 53);
     box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
     border-radius:20px;
+    position:relative;
+}
+
+.guaranteed-img{
+    width:50px;
+    position:absolute;
+    left:5px;
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.join-now-img{
+    width:30%;
+}
+
+#join-now-text h3{
+    font-size:20px;
 }
 
 /*---------- Media Queries ----------*/
@@ -648,6 +671,10 @@ img {
     }
 
     .mr-hitter{
+        width:60%;
+    }
+
+    .get-membership-img{
         width:60%;
     }
 }
@@ -692,6 +719,14 @@ img {
 
     .mr-hitter{
         width:80%;
+    }
+
+    .join-now-img{
+        width:40%;
+    }
+
+    .get-membership-img{
+        width:70%;
     }
 }
 
@@ -815,6 +850,10 @@ img {
     .nav-login:hover{
         box-shadow:none;
         transform:none;
+    }
+
+    .join-now-img{
+        width:50%;
     }
 }
 

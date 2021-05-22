@@ -1,21 +1,61 @@
 <div class="row">
-    <div class="col-6">     
-        <div id="run_container" class="run-chart">
-            <h2 class="orange opacity-90 text-center mb-0">Run Trend</h2>
-            <p class="white opacity-90 text-center">Runs/Game Last 10</p>
-            <div>
-                <canvas id="runChart" class="darkblue-box"></canvas>
-            </div>    
+    <div class="col-6"> 
+        <div id="chartCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div id="run_container" class="run-chart">
+                        <h2 class="orange opacity-90 text-center mb-0">
+                            <i class="fas fa-chevron-left orange opacity-90 pr-5" href="#chartCarousel" role="button" data-slide="prev" aria-hidden="true"><span class="sr-only">Previous</span></i>
+                            Run Trend
+                            <i class="fas fa-chevron-right orange opacity-90 pl-5" href="#chartCarousel" role="button" data-slide="next" aria-hidden="true"><span class="sr-only">Next</span></i>
+                        </h2>
+                        <p class="white opacity-90 text-center">Runs/Game Last 10</p>
+                        <div>
+                            <canvas id="runChart" class="darkblue-box"></canvas>
+                        </div>    
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div id="stat_container" class="run-chart">
+                        <h2 class="orange opacity-90 text-center mb-0">
+                            <i class="fas fa-chevron-left orange opacity-90 pr-5" href="#chartCarousel" role="button" data-slide="prev" aria-hidden="true"><span class="sr-only">Previous</span></i>
+                            Last 10
+                            <i class="fas fa-chevron-right orange opacity-90 pl-5" href="#chartCarousel" role="button" data-slide="next" aria-hidden="true"><span class="sr-only">Next</span></i>
+                        </h2>
+                        <p class="white opacity-90 text-center">Stat Comparison</p>
+                        <div>
+                            <canvas id="statChart" class="darkblue-box"></canvas>
+                        </div>    
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-6">    
-        <div id="stat_container" class="run-chart">
-            <h2 class="orange opacity-90 text-center mb-0">Last 10</h2>
-            <p class="white opacity-90 text-center">Stat Comparison</p>
-            <div>
-                <canvas id="statChart" class="darkblue-box"></canvas>
-            </div>    
-        </div>
+    <div class="col-6">
+        <h2 class="orange opacity-90 text-center mt-2 mb-0">
+            Game Pick
+        </h2>
+        {% if profile.stripe_subscription_id %}
+            {% for game in all_games %}
+                {% if gameID == game.gameID%}
+                    <p class="light-blue opacity-90 text-center mb-0">{{ game.pick_type}}</p>
+                    <div class="overflow-auto white opacity-90 p-3">
+                        {{ game.pick|linebreaks }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+                <div class="d-flex flex-column align-items-center mt-5">
+                    <h4 class="white opacity-90"> Subscribe For Access!</h4>
+                    <ul>
+                        <li class="light-blue opacity-90 mb-2">$30/monthly</li>
+                        <li class="light-blue opacity-90 mb-2">$1 refund for all incorrect guaranteed picks</li>
+                        <li class="light-blue opacity-90 mb-2">Premium and Guaranteed Picks</li>
+                        <li class="light-blue opacity-90 mb-2">Custom Bet Tracking <small>(Coming Soon)</small></li>
+                    </ul>
+                    <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Subscribe</a>
+                </div>   
+        {% endif %}    
     </div>
 </div>
 

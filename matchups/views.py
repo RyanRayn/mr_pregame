@@ -350,6 +350,7 @@ def mlb_matchup(request):
         'home_stats': home_stats,
         'probable_home': probable_home,
         'probable_away': probable_away,
+        'gameID': gameID,
     }
 
     return render(request, 'matchups/mlb_matchup.html', context)
