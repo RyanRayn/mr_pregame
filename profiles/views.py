@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import UserProfile, Membership
 from management.models import MLBGameLine
-from .forms import SignupForm
+from .forms import SignupForm, EditProfileInfo
 import datetime
 import pytz
 import stripe
@@ -23,11 +23,24 @@ def profile(request):
     # Get all objects in MLBGameLine model
     all_games = MLBGameLine.objects.all()
 
+    if request.method == "POST":
+        form = EditProfileInfo(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated profile!')
+            return redirect(reverse('profile'))
+        else:
+            messages.error(request,
+                           "Failed to update profile.")
+    else:
+        form = EditProfileInfo(instance=profile)
+
     template = "profiles/profile.html"
     context = {
         'profile': profile,
         'all_games': all_games,
         'date_LA': date_LA,
+        'form': form,
     }
 
     return render(request, template, context)
@@ -40,7 +53,6 @@ def get_membership(request):
 
     user_profile = get_object_or_404(UserProfile, user=request.user)
     membership = Membership.objects.get(membership_type='Paid')
-
     if request.method == "POST":
 
         try:
@@ -74,13 +86,12 @@ def get_membership(request):
         'user_profile': user_profile,
         'form': form,
         'membership': membership,
-        'stripe_public_key': stripe_public_key,
-        'stripe_secret_key': stripe_secret_key,
     }
 
     return render(request, template, context)
 
 
+@login_required
 def update_membership(request, subscription_id):
     user_profile = get_object_or_404(UserProfile, user=request.user)
     cust_id = user_profile.stripe_customer_id
@@ -111,3 +122,24 @@ def update_membership(request, subscription_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def cancel_subscription(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+
+    if request.user.is_authenticated:
+        sub_id = user_profile.stripe_subscription_id
+        stripe_secret_key = settings.STRIPE_SECRET_KEY
+
+        try:
+            stripe.Subscription.delete(sub_id)
+        except Exception as e:
+            return messages.info({'error': (e.args[0])})
+
+    context = {
+        'user_profile': user_profile,
+    }
+
+    return render(request, template, context)
+

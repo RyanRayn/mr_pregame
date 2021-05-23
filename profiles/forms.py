@@ -30,3 +30,16 @@ class SignupForm(forms.ModelForm):
             self.fields['full_name'].widget.attrs['autofocus'] = True
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].label = False
+
+
+class EditProfileInfo(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        widgets = {
+            'user': forms.HiddenInput(),
+        }
+
+        fields = ('user', 'phone_number', 'street_address1',
+                  'street_address2', 'town_or_city',
+                  'postcode')

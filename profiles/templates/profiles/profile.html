@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-{% load humanize %} 
+{% load humanize %}
+{% load crispy_forms_tags %}
+
 
 {% block content %}
 <div id="content">
@@ -28,12 +30,72 @@
         </div>
         {% endif %}
         {% if profile.stripe_subscription_id %}
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <div id="profile-info" class="orange-box">
-                       
+            <!-- Button Trigger for Profile Info MOdal -->
+            <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-end align-items-start">
+                    <button type="button" class="logout btn light-blue opacity-90" data-toggle="modal" data-target="#profileInfo">
+                        Profile Info <i class="fad fa-cogs"></i>
+                    </button>
+                </div> 
+                <!-- Profile Info Modal --> 
+                <div class="modal fade" id="profileInfo" tabindex="-1" role="dialog" aria-labelledby="profileInfo" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content darkblue-box p-2">
+                            <div class="modal-body white opacity-90">
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn logout white opacity-90" data-dismiss="modal">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h1 class="orange font-700 text-center">Payment Info</h1>
+                                    </div>
+                                </div>
+                                <form class="light-blue" id="editProfileInfo" method="POST" action="{% url 'profile' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 pt-4 my-2">
+                                            <h3>{{ profile.full_name }}</h3>
+                                        </div>    
+                                        <div class="col-12 col-md-6 my-2">
+                                            {{ form.phone_number|as_crispy_field }}
+                                        </div>    
+                                        <div class="col-12 col-md-6 my-2">
+                                            {{ form.street_address1|as_crispy_field }}
+                                        </div>    
+                                        <div class="col-12 col-md-6 my-2">
+                                            {{ form.street_address2|as_crispy_field }}
+                                        </div>    
+                                        <div class="col-12 col-md-6 my-2">
+                                            {{ form.town_or_city|as_crispy_field }}
+                                        </div>    
+                                        <div class="col-12 col-md-6 my-2">
+                                            {{ form.postcode|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12">    
+                                            {{ form.user|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-center">
+                                            <button class="btn white orange-background signin-button mt-3" type="submit">Update</button>
+                                        </div>   
+                                    </div>
+                                </form>          
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center pt-0 border-0">
+                                <a class="btn profile-btn orange opacity-90" href="{% url 'cancel_subscription' %}">
+                                    Cancel Subscription
+                                </a>
+                                <a class="btn profile-btn white opacity-90" href="{% url 'account_email' %}">
+                                    Change Email
+                                </a>     
+                                <a class="btn profile-btn white opacity-90" href="{% url 'account_change_password' %}">
+                                    Change Password
+                                </a>    
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div>  
             </div>
             <div class="row mx-3">
                 <!-- Get all of todays games that have a pick -->
@@ -63,8 +125,8 @@
                                 </button>
                                 </div>
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="gamePickModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="gamePickModalTitle" aria-hidden="true">
+                            <!-- Game Pick Modal -->
+                            <div class="modal fade" id="gamePickModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="gamePickModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content darkblue-box p-2">
                                         <div class="row">       

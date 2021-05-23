@@ -5,7 +5,7 @@ import datetime
 import pytz
 import tweepy
 from management.models import MLBGameLine, MLBGame, TeamName, StartingPitcher
-from django.db.models import Avg, Count, Min, Sum
+from django.db.models import Avg, Sum
 
 
 def mlb_matchup(request):
