@@ -46,6 +46,8 @@ card.addEventListener('change', function (event) {
     }
 });
 
+// NEW SUBSCRIPTION
+
 // Create a token or display an error when the form is submitted.
 var form = document.getElementById('membership_form');
 form.addEventListener('submit', function(event) {
