@@ -1,6 +1,6 @@
 from django.conf import settings
-from django.shortcuts import (
-    render, redirect, reverse, get_object_or_404)
+from django.shortcuts import HttpResponseRedirect, HttpResponse, render
+from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import UserProfile, Membership
@@ -72,9 +72,9 @@ def get_membership(request):
             # Save profile info from form to session
             request.session['user'] = request.POST
             return redirect(reverse('update_membership',
-                            kwargs={
-                                'subscription_id': subscription.id,
-                                }))
+                                    kwargs={
+                                        'subscription_id': subscription.id,
+                                    }))
 
         except stripe.error.CardError:
             messages.info(request, "Your card has been declined.")
@@ -86,6 +86,8 @@ def get_membership(request):
         'user_profile': user_profile,
         'form': form,
         'membership': membership,
+        'stripe_public_key': stripe_public_key,
+        'stripe_secret_key': stripe_secret_key,
     }
 
     return render(request, template, context)
@@ -101,20 +103,20 @@ def update_membership(request, subscription_id):
     user = request.session.get('user')
 
     UserProfile.objects.update_or_create(
-                stripe_customer_id=cust_id, defaults={
-                    'membership_type': paid_membership,
-                    'stripe_subscription_id': subscription_id,
-                    'active': True,
-                    'full_name': user['full_name'],
-                    'email': user['email'],
-                    'phone_number': user['phone_number'],
-                    'street_address1': user['street_address1'],
-                    'street_address2': user['street_address2'],
-                    'town_or_city': user['town_or_city'],
-                    'postcode': user['postcode'],
-                    'country': user['country']
-                }
-            )
+        stripe_customer_id=cust_id, defaults={
+            'membership_type': paid_membership,
+            'stripe_subscription_id': subscription_id,
+            'active': True,
+            'full_name': user['full_name'],
+            'email': user['email'],
+            'phone_number': user['phone_number'],
+            'street_address1': user['street_address1'],
+            'street_address2': user['street_address2'],
+            'town_or_city': user['town_or_city'],
+            'postcode': user['postcode'],
+            'country': user['country']
+        }
+    )
 
     template = "profiles/welcome.html"
     context = {
@@ -128,18 +130,40 @@ def update_membership(request, subscription_id):
 def cancel_subscription(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
 
-    if request.user.is_authenticated:
-        sub_id = user_profile.stripe_subscription_id
-        stripe_secret_key = settings.STRIPE_SECRET_KEY
-
-        try:
-            stripe.Subscription.delete(sub_id)
-        except Exception as e:
-            return messages.info({'error': (e.args[0])})
+    template = "profiles/cancel_subscription.html"
 
     context = {
         'user_profile': user_profile,
     }
 
     return render(request, template, context)
+
+
+@login_required
+def cancel(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    free_membership = Membership.objects.get(membership_type='Free')
+
+    if request.user.is_authenticated:
+        sub_id = user_profile.stripe_subscription_id
+        stripe_secret_key = settings.STRIPE_SECRET_KEY
+
+        try:
+            stripe.Subscription.delete(sub_id)
+            messages.success(request, 'Your suscription successfully deleted')
+            UserProfile.objects.update_or_create(
+                stripe_subscription_id=sub_id, defaults={
+                    'membership_type': free_membership,
+                    'stripe_subscription_id': '',
+                    'active': False
+                }
+            )
+
+        except Exception as e:
+            messages.error(request, (
+                "There has been an error deleting your subscription,"
+                "please try again"))
+            return HttpResponse(content=e, status=400)
+
+    return redirect(reverse('profile'))
 

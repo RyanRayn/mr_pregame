@@ -652,6 +652,10 @@ img {
     font-size:20px;
 }
 
+.profile-btn:hover{
+    color:white;
+}
+
 /*---------- Media Queries ----------*/
 
 @media (max-width: 1200px) {

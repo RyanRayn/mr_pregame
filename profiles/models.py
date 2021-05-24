@@ -35,11 +35,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=False)
     stripe_customer_id = models.CharField(max_length=40)
     membership_type = models.ForeignKey(
         Membership, on_delete=models.SET_NULL, null=True)
-    stripe_subscription_id = models.CharField(max_length=40)
+    stripe_subscription_id = models.CharField(max_length=40, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     country = CountryField(blank_label='Country *', null=True, blank=True)
     postcode = models.CharField(max_length=20, blank=True)

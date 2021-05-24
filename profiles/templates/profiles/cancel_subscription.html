@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <h1 class="white opacity-90">Are sure you want to cancel?</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <a class="btn profile-btn light-blue opacity-90 pt-4" href="{% url 'profile' %}">
+                        No, take me back to my profile!
+                    </a>     
+                    <a class="btn white orange-background signin-button mt-3" href="{% url 'cancel' %}">Cancel</a>
+                </div> 
+            </div>                       
+       </div>
+    </div>
+{% endblock %}

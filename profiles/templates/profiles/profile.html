@@ -12,7 +12,7 @@
         <div class="row m-3">
             <div class="col-12 col-md-6 d-flex flex-column align-items-center mb-3">
                 <div id="join-now-text" class="d-flex flex-column">
-                    <h1 class="white opacity-90 mb-2">Subscripe for access!</h1>
+                    <h1 class="white opacity-90 mb-2">Subscribe for access!</h1>
                     <ul>
                         <li class="light-blue opacity-90 mb-2">$30/monthly</li>
                         <li class="light-blue opacity-90 mb-2">$1 refund for all incorrect guaranteed picks</li>
@@ -21,7 +21,7 @@
                     </ul>
                 </div>
                 <div class="">
-                    <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Suscribe</a>
+                    <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Subscribe</a>
                 </div>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
@@ -55,8 +55,9 @@
                                 <form class="light-blue" id="editProfileInfo" method="POST" action="{% url 'profile' %}">
                                     {% csrf_token %}
                                     <div class="row">
-                                        <div class="col-12 col-md-6 pt-4 my-2">
-                                            <h3>{{ profile.full_name }}</h3>
+                                        <div class="col-12 col-md-6 my-2">
+                                            <p class="mb-0">Name</p>
+                                            <h3 class="white opacity-90">{{ profile.full_name }}</h3>
                                         </div>    
                                         <div class="col-12 col-md-6 my-2">
                                             {{ form.phone_number|as_crispy_field }}
