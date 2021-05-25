@@ -1,19 +1,100 @@
 
 <div class="container-fluid px-0">
-    <div class="row px-0 mx-0">
-        <div class="col-12 col-md-6 flex-column home-callout-margin px-0"> 
-            <h1 class="d-flex justify-content-center home-callout font-700 white">
-                Welcome Back,<br>{{ request.user.username }}!
-            </h1>
-        </div> 
-        <div class="col-12 col-md-6 home-callout-img px-0">
-            <img src="https://mrpregame.s3.amazonaws.com/media/ipaddesk.png" class="img-fluid callout-img-shadow" alt="Responsive image">
-        </div>
-    </div>
     {% for profile in profiles %}
-        {% if profile.user == request.user %} 
+        {% if profile.user == request.user %}
+            <div class="row px-0 mx-0">
+                <div class="col-12 col-md-6 d-flex flex-column align-items-center home-callout-margin px-0"> 
+                    <h1 class="home-callout font-700 white">
+                        Welcome Back, <span class="d-inline d-md-none">{{ request.user.username }}!</span>
+                    </h1>
+                    <h1 class="d-none d-md-block home-callout font-700 white">
+                        {{ request.user.username }}!
+                    </h1>
+                </div> 
+                <div class="col-12 col-md-6 home-callout-img px-0">
+                    <img src="https://mrpregame.s3.amazonaws.com/media/ipaddesk.png" class="img-fluid callout-img-shadow" alt="Responsive image">
+                </div>
+            </div>
+
+<!-- If authenticated and paid subscription -->            
+            {% if profile.stripe_subscription_id %}
+                {% for game in all_games %}
+                    {% if game.gamedate|date == date_LA and game.pick_type == 'Guaranteed' %}
+<!-- Social Media Tool Bar -->                    
+                    <div class="row pick-social-row white-background mr-0">
+                        <div class="d-none d-md-flex col-md-6 d-flex justify-content-center align-items-center">
+                            <a href="{% url 'get_membership' %}">
+                                <h2 class="social-banner dark-blue">Get Social!</h2>
+                            </a>
+                        </div>
+                        <div class="col-4 col-md-2 d-flex justify-content-center light-blue-background twitter-border py-2">
+                            <a target="_blank" href="https://twitter.com/MrPregame">
+                            <i class="twitter-icon fab fa-twitter white" aria-hidden="true"></i>
+                            <span class="sr-only">Twitter</span>
+                            </a>
+                        </div>
+                        <div class="col-4 col-md-2 d-flex justify-content-center orange-background py-2">
+                            <a target="_blank" href="https://www.instagram.com/misterpregame/">
+                            <i class="fab fa-instagram white" aria-hidden="true"></i>
+                            <span class="sr-only">Instagram</span>
+                            </a>
+                        </div>
+                        <div class="col-4 col-md-2 d-flex justify-content-center blue-background py-2">
+                            <a target="_blank" href="https://www.facebook.com/">
+                            <i class="fab fa-facebook-f white" aria-hidden="true"></i>
+                            <span class="sr-only">Facebook</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="pick-container pb-lg-5">
+<!-- SM/MD Screens -->   
+                        <div class="row d-md-none p-2 no-gutters mx-0">
+                            <div class="col-12 darkblue-box d-flex flex-column align-items-center mt-4 p-2">
+                                <h1 class="orange opacity-90">Guaranteed Pick:</h1>   
+                                <h2 class="white opacity-90">{{ game.away_team }}</h2>
+                                <h3 class="white opacity-90">VS</h3>
+                                <h2 class="white opacity-90">{{ game.home_team }}</h2>
+                                <form action="{% url 'mlb_matchup' %}" method="GET">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="gameId{{ forloop.counter }}" 
+                                                name="gameId" value="{{ game.gameID }}">
+                                    <input type="hidden" id="city{{ forloop.counter }}"
+                                                name="city" value="{{ game.city }}">
+                                    <input type="hidden" id="league{{ forloop.counter }}"
+                                                name="league" value="{{ game.league }}">        
+                                    <button class="btn matchup-btn orange-background white opacity-90 my-2" type="submit">
+                                        Matchup
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+<!-- LG Screens -->
+                        <div class="row d-none d-md-flex p-5 mockup-row dark-blue-background mb-2">
+                            <div class="col-12 d-flex flex-column align-items-center">
+                                <h1 class="orange opacity-90">Guaranteed Pick of the Day:</h1>   
+                                <h2 class="white opacity-90 my-2">{{ game.summary }}</h2>
+                                <form action="{% url 'mlb_matchup' %}" method="GET">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="gameId{{ forloop.counter }}" 
+                                                name="gameId" value="{{ game.gameID }}">
+                                    <input type="hidden" id="city{{ forloop.counter }}"
+                                                name="city" value="{{ game.city }}">
+                                    <input type="hidden" id="league{{ forloop.counter }}"
+                                                name="league" value="{{ game.league }}">        
+                                    <button class="btn matchup-btn orange-background white opacity-90 mt-2" type="submit">
+                                        Matchup
+                                    </button>
+                                </form>
+                            </div>
+                        </div>    
+                    </div>    
+                    {% endif %}
+                {% endfor %}    
+            {% endif %}
+
+<!-- If authenticated but no paid subscription -->
             {% if not profile.stripe_subscription_id %}   
-                <!-- Social Media ToolBar -->            
+<!-- Social Media ToolBar -->            
                 <div class="row social-row white-background mr-0">
                     <div class="d-none d-md-flex col-md-6 d-flex justify-content-center align-items-center">
                         <a href="{% url 'get_membership' %}"><h2 class="social-banner dark-blue">Subscribe Today!</h2></a>
@@ -38,7 +119,7 @@
                     </div>
                 </div>
                 <div class="info-container pb-lg-5">
-                    <!-- SM/MD Screens -->
+<!-- SM/MD Screens -->
                     <div class="row d-flex d-lg-none p-5 pb-3 no-gutters mx-0">
                         <div class="col-12 col-sm-6 flex-column pl-sm-4 mb-3">
                             <h4 class="orange font-700 text-center">$30/Month</h4>
@@ -56,10 +137,10 @@
                             </p>
                         </div>
                     </div>
-                    <!-- LG Screens -->               
+<!-- LG Screens -->               
                     <div class="row d-none d-lg-flex p-5 mockup-row dark-blue-background mb-2">
                         <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
-                            <div class="home-img-row"><img src="/media/mockups.png" class="img-fluid img-resimg-shadow" alt="Responsive image"></div>
+                            <div class="home-img-row"><img src="https://mrpregame.s3.amazonaws.com/media/mockups.png" class="img-fluid img-resimg-shadow" alt="Responsive image"></div>
                         </div>
                         <div class="col-12 col-sm-6 flex-column d-flex align-items-center justify-content-center px-5">
                             <h2 class="orange font-700">$30/Month</h2>
@@ -82,7 +163,7 @@
                             </p>
                         </div>
                         <div class="d-none d-sm-flex col-6 justify-content-center align-items-center">
-                            <div class="home-img-row p-2"><img src="/media/moneypile.png" class="img-fluid img-resimg-shadow" alt="Responsive image"></div>
+                            <div class="home-img-row p-2"><img src="https://mrpregame.s3.amazonaws.com/media/moneypile.png" class="img-fluid img-resimg-shadow" alt="Responsive image"></div>
                         </div>
                     </div>   
                 </div>

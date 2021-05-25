@@ -25,19 +25,19 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-                <img class="join-now-img" src="/media/money_bag3.png" alt="">
+                <img class="join-now-img" src="https://mrpregame.s3.amazonaws.com/media/money_bag3.png" alt="">
             </div>
         </div>
         {% endif %}
         {% if profile.stripe_subscription_id %}
-            <!-- Button Trigger for Profile Info MOdal -->
+<!-- Button Trigger for Profile Info MOdal -->
             <div class="row mb-3">
                 <div class="col-12 d-flex justify-content-end align-items-start">
                     <button type="button" class="logout btn light-blue opacity-90" data-toggle="modal" data-target="#profileInfo">
                         Profile Info <i class="fad fa-cogs"></i>
                     </button>
                 </div> 
-                <!-- Profile Info Modal --> 
+<!-- Edit Profile Info Modal --> 
                 <div class="modal fade" id="profileInfo" tabindex="-1" role="dialog" aria-labelledby="profileInfo" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content darkblue-box p-2">
@@ -99,14 +99,14 @@
                 </div>  
             </div>
             <div class="row mx-3">
-                <!-- Get all of todays games that have a pick -->
+<!-- Get all of todays games that have a pick -->
                 {% for game in all_games %}
                     {% if game.gamedate|date == date_LA and game.pick %}
                         <div class="col-12 col-md-3 mb-3">
                             <div class="lightblue-box d-flex flex-column align-items-center white opacity-90 pb-3">
                                 <div class="pick-box d-flex flex-column align-items-center w-100 p-2">
                                 {% if game.pick_type == 'Guaranteed' %}    
-                                <img class="guaranteed-img" src="/media/moneypile.png" alt="">
+                                <img class="guaranteed-img" src="https://mrpregame.s3.amazonaws.com/media/moneypile.png" alt="">
                                 {% endif %}    
                                 <small class="light-blue">
                                     {{ game.gamedate|time }}ET
@@ -114,7 +114,7 @@
                                 <h4 class="">{{ game.away_team }}</h4>
                                 <h5 class=""><i class="fad fa-at orange"></i></h5>
                                 <h4 class="">{{ game.home_team }}</h4>
-                                 <!-- Button trigger modal -->
+<!-- Button trigger modal -->
                                  <button type="button" class="btn nav-login orange-background white opacity-90 mt-3" data-toggle="modal" data-target="#gamePickModal{{ forloop.counter }}">
                                     {% if game.pick_type == 'Guaranteed' %}
                                     Guaranteed
@@ -126,7 +126,7 @@
                                 </button>
                                 </div>
                             </div>
-                            <!-- Game Pick Modal -->
+<!-- Game Pick Modal -->
                             <div class="modal fade" id="gamePickModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="gamePickModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content darkblue-box p-2">
@@ -163,7 +163,7 @@
                                         {{ game.pick|linebreaks }}
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center border-0">
-                                            <!-- Send Matchup Game Data to Template -->                    
+                                        <!-- Send Matchup Game Data to Template -->                    
                                             <form action="{% url 'mlb_matchup' %}" method="GET">
                                                 {% csrf_token %}
                                                 <input type="hidden" id="gameId{{ forloop.counter }}" 

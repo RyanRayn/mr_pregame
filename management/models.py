@@ -22,7 +22,7 @@ class TeamName(models.Model):
         verbose_name_plural = 'Teams'
 
     name = models.CharField(max_length=100, null=False, blank=False)
-    abbreviation = models.CharField(max_length=10, null=False, blank=False)
+    abbreviation = models.CharField(max_length=100, null=False, blank=False)
     twitter_id = models.CharField(max_length=100, default=name)
     league = models.ForeignKey(
         'League', null=False, blank=False, on_delete=models.CASCADE)
@@ -207,7 +207,7 @@ class MLBGameLine(models.Model):
     summary = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     away_abbr = models.CharField(max_length=10)
-    home_team = models.CharField(max_length=100)
+    home_team = models.CharField(max_length=99)
     home_abbr = models.CharField(max_length=10)
     venue = models.CharField(max_length=100)
     city = models.CharField(max_length=100)

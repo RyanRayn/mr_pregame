@@ -398,7 +398,8 @@ img {
     border-radius:50px 0 0 50px;
 }
 
-.social-row{
+.social-row,
+.pick-social-row{
     margin-left:80px;
     border-radius:50px 0 0 0;
 }
@@ -437,7 +438,8 @@ img {
     transition:all 1.0s;
 }
 
-.info-container{
+.info-container,
+.pick-container{
     margin-left:80px;
     border:3px solid white;
     border-top:none;
@@ -797,12 +799,14 @@ img {
     }
 
     .margin-80,
+    .pick-social-row,
     .social-row{
         margin-left:0px;
         margin-right:0px;
     }
 
     .social-row,
+    .pick-social-row,
     .twitter-border{
         border-radius:0;
     }
@@ -821,6 +825,15 @@ img {
     .fa-key,
     .fa-paper-plane{
         font-size:10rem;
+    }
+
+    .pick-container{
+        margin-left:0;
+        border:none;
+        border-top:none;
+        border-right:none;
+        border-radius:0;
+        background-color:rgb(13, 29, 53);
     }
 }
 
