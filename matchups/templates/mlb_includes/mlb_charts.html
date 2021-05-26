@@ -38,10 +38,17 @@
         {% if profile.stripe_subscription_id %}
             {% for game in all_games %}
                 {% if gameID == game.gameID%}
-                    <p class="light-blue opacity-90 text-center mb-0">{{ game.pick_type}}</p>
-                    <div class="overflow-auto white opacity-90 p-3">
-                        {{ game.pick|linebreaks }}
-                    </div>
+                    {% if game.pick %}
+                        <p class="light-blue opacity-90 text-center mb-0">{{ game.pick_type}}</p>
+                        <div class="overflow-auto white opacity-90 p-3">
+                            {{ game.pick|linebreaks }}
+                        </div>
+                    {% else %}
+                        <div class="d-flex flex-column align-items-center">
+                            <h3 class="white opacity-90 mt-2">Sorry, no pick for this game.</h3>
+                            <img src="https://mrpregame.s3.amazonaws.com/media/desk_bored.png" class="img-fluid w-50 callout-img-shadow">
+                        </div>    
+                    {% endif %}    
                 {% endif %}
             {% endfor %}
         {% else %}

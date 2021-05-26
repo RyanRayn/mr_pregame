@@ -1,15 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import requests
 from django.conf import settings
 import datetime
 import pytz
 import tweepy
 from management.models import MLBGameLine, MLBGame, TeamName, StartingPitcher
+from profiles.models import UserProfile
 from django.db.models import Avg, Sum
 
 
 def mlb_matchup(request):
     """ a view to show MLB game matchups """
+    profile = get_object_or_404(UserProfile, user=request.user)
+
     # Get the date for the SportspageFeeds API params
     todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
     yesterdays_date = todays_date + datetime.timedelta(days=-1)
@@ -351,6 +354,7 @@ def mlb_matchup(request):
         'probable_home': probable_home,
         'probable_away': probable_away,
         'gameID': gameID,
+        'profile': profile,
     }
 
     return render(request, 'matchups/mlb_matchup.html', context)

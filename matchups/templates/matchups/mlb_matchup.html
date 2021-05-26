@@ -42,22 +42,41 @@
                     {% include 'mlb_includes/mlb_stat_mobile.html' %}
                 </div>
             </div>
-            <div class="row d-lg-none">    
-                <div id="twitter-box-header" class="col-12 d-flex flex-column align-items-center mb-4">
-                    <h2 class="orange opacity-90 mb-0">
-                        Team News
+            <div class="row d-lg-none">
+                <div class="col-12">
+                    <h2 class="orange opacity-90 text-center mt-2 mb-0">
+                        Game Pick
                     </h2>
-                    <small class="white opacity-90">
-                        <i class="fab fa-twitter-square light-blue opacity-90 mr-2"></i>
-                        Brought to you by Twitter
-                    </small>
+                    {% if profile.stripe_subscription_id %}
+                        {% for game in all_games %}
+                            {% if gameID == game.gameID%}
+                                {% if game.pick %}
+                                    <p class="light-blue opacity-90 text-center mb-0">{{ game.pick_type}}</p>
+                                    <div class="overflow-auto white opacity-90 p-3">
+                                        {{ game.pick|linebreaks }}
+                                    </div>
+                                {% else %}
+                                    <div class="d-flex flex-column align-items-center">
+                                        <h3 class="white opacity-90 mt-2">Sorry, no pick for this game.</h3>
+                                        <img src="https://mrpregame.s3.amazonaws.com/media/desk_bored.png" class="img-fluid w-50 callout-img-shadow">
+                                    </div>    
+                                {% endif %}    
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                            <div class="d-flex flex-column align-items-center mt-5">
+                                <h4 class="white opacity-90"> Subscribe For Access!</h4>
+                                <ul>
+                                    <li class="light-blue opacity-90 mb-2">$30/monthly</li>
+                                    <li class="light-blue opacity-90 mb-2">$1 refund for all incorrect guaranteed picks</li>
+                                    <li class="light-blue opacity-90 mb-2">Premium and Guaranteed Picks</li>
+                                    <li class="light-blue opacity-90 mb-2">Custom Bet Tracking <small>(Coming Soon)</small></li>
+                                </ul>
+                                <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Subscribe</a>
+                            </div>   
+                    {% endif %}    
                 </div>
-            </div>
-            <div class="row d-lg-none">   
-                <div id="mobile_twitter" class="col-12 d-flex justify-content-center mb-2">
-                    {% include 'mlb_includes/mobile_twitter.html' %}
-                </div>
-            </div>
+            </div>    
         </div>    
     </div>      
 {% endblock %}
