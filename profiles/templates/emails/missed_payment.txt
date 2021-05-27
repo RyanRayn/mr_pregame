@@ -1,0 +1,9 @@
+Hello, {{ profile.full_name }}!
+
+This email is to notify you that you have missed your last payment. 
+
+Your subscription has been put on hold and will be restored once payment is made. If you have any questions please feel free to contact me at {{ contact_email }}.
+
+Sincerely,
+
+Mr. Pregame
