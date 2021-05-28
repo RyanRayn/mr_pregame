@@ -31,6 +31,12 @@ class StripeWH_Handler:
         profile = UserProfile.objects.filter(stripe_customer_id=intent.customer)
         cust_email = intent.customer_email
 
+        UserProfile.objects.update_or_create(
+        stripe_customer_id=intent.customer, defaults={
+            'active': False,
+            }
+        )
+
         subject = render_to_string(
             'profiles/emails/missed_payment_subject.txt',
             {'profile': profile})
