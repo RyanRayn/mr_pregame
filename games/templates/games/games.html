@@ -18,11 +18,27 @@
             {% include 'includes/no_games.html' %}<!-- Template To Show There Are No Games On That Day -->
             
         {% endif %}    
-        </div>    
-    </div>      
+        </div> 
+        <!-- Spinner overlay for games page api call -->
+        <div id="games-loading">
+            <h1 class="text-light loading-spinner">
+                <span class="icon">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </span>
+            </h1>
+        </div>                      
+    </div>
+        
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
+    <!-- Spinner Overlay -->
+    <script type="text/javascript"> 
+        $("form").submit(function(){
+            $("#games-loading").fadeToggle(100);
+        });
+    </script>
+
 {% endblock %}
                             
