@@ -88,6 +88,108 @@ Base all the required features and data that needed to be shown for users, I dec
 
 * The Profile page (paid subscribers only) displays all the game picks for that given day. Profile page also has a link to edit profile information, email, passwords and cancel subscriptions. Coming soon, paid users will also have bet tracking available which will be displayed in the profile.
 
-* The Games page lists all the games for that day based on what league they picked, MLB, NCAA Basketball, NBA or NFL. The data pulled via API displays teams, times, locations, game lines as well as a button to go to the Matchup Page.
+* The Games page is linked to an API call. From the home page when you hover on 'Games' a dropdown appears with all the leagues available,  MLB, NCAA Basketball, NBA or NFL. Once the user selects the league, data is pulled via API to display teams, times, locations, game lines as well as a button to go to the Matchup Page.
 
 * The Matchup Page has all the data and stats for the teams involved in the game chosen. As well as game picks and a carousel that cycles through all the other games of that day.
+
+**Wireframes**
+* Wireframes were created using Balsamiq Wireframes and can be found [HERE.](https://github.com/RyanRayn/mr_pregame/blob/master/media/mr_pregame_wireframes.png)
+
+**Color Scheme**
+* I wanted to have a darker website so it is easier on the eyes while studying all the numbers and data so the primary background color is rgb(13, 29, 53). An opacity of 90% was also placed on all bright colors to tone them down a bit.
+
+* The main colors used throughout the site are:
+<p align="center"><img src="media/MrPregameColors.png" width="400"></p>
+
+**Fonts**
+
+* The two fonts used on Mr. Pregame are Oswald and Montserrat with sans-serif as a backup.
+
+***
+
+## **Information Architecture**
+
+With all the different sports and teams there are several different models for data.
+
+**Profiles App** 
+
+The Profiles app models are primarily used for Stripe and subscription functionality.
+
+*UserProfile*
+
+In addition to Django's user model, a custom model was created as well, UserProfile, to store profile information.
+
+* user : One to One relationship with Django's User
+* full_name : Users full name for billing
+* email : User email for billing
+* active : Boolean field to keep track of active paid sub.
+* stripe_customer_id : ID code Stripe assigns to each user
+* membership_type : Paid or Free
+* stripe_subscription_id : Id is assigned by Stripe when a paid subscription is created for the user
+* phone_number : Phone for billing
+* country : Address for billing
+* postcode : Address for billing
+* town_or_city : Address for billing
+* street_address1 : Address for billing
+* street_address2 : Address for billing
+
+*Memberships*
+
+Membership model is created as a part of the Stripe subscription plans.
+
+* membership_type : Paid or Free
+* price : 0 or $30/month
+* stripe_plan_id : Id code to select membership on Stripe platform
+
+**Management App**
+
+The management app is the heart of Mr. Pregame. All of the teams, leagues and games data is stored here.
+
+*League*
+
+* Contains the four different leagues on offer which are foreign keys to the teams in the TeamName model.
+
+*TeamName*
+
+* name : Full name of each team
+* abbreviation : Abbreviation of team names
+* twitter_id : Each teams unique twitter id to be called on for the twitter API
+* league : Foreign key
+
+*Season*
+
+A code created for each season to store data under.
+
+* name : Name of season
+* teams : Many to many field to the TeamName model
+
+*BasketballTeamStats*
+
+With 24 fields, this model is where game stats are stored from each individual game. This model contains two foreign keys...
+
+* name : Foreign Key TeamName
+* season : Foreign Key Season
+
+*MLBGame*
+
+Another big model that stores all the data from each individual Major League Baseball Game. This model also contains two foreign keys.
+
+* name : Foreign Key TeamName
+* season : Foreign Key Season
+
+*StartingPitcher*
+
+This model keeps track of all the starting pitching stats for each game. Contains two foreign keys.
+
+* teams : Foreign Key TeamName
+* season : Foreign Key Season
+
+*MLBGameLine*
+
+This model holds the betting info for each game that is collected from a sports betting API. This model also holds all of the game picks done by 'Mr. Pregame.
+
+***
+
+## **Features and Apps**
+
+Mr. Pregame is a Django project comprised of five individual apps which contain multiple features.
