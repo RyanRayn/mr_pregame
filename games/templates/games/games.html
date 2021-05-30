@@ -34,7 +34,7 @@
 {% block postloadjs %}
     {{ block.super }}
     <!-- Spinner Overlay -->
-    <script type="text/javascript"> 
+    <script> 
         $("form").submit(function(){
             $("#matchup-loading").fadeToggle(100);
         });

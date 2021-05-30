@@ -18,7 +18,22 @@ To test the payment transaction prodess please use:
 * Expiration date: 04/24
 * CVC: 242
 * ZIP: 42424
+
+
 ***
+
+
+- [**Mr. Pregame**](#--mr-pregame--)
+  * [**Introduction**](#--introduction--)
+  * [**User Experience (UX)**](#--user-experience--ux---)
+  * [**Information Architecture**](#--information-architecture--)
+  * [**Features and Apps**](#--features-and-apps--)
+  * [**Technologies Used**](#--technologies-used--)
+  * [**Testing**](#--testing--)
+  * [**Deployment**](#--deployment--)
+  * [**Credits**](#--credits--)
+
+*** 
 
 ## **User Experience (UX)**
 
@@ -363,4 +378,94 @@ I implemented a number of defensive design features throughout my code to protec
 
 **HTML**
 
-* Empty Heading Icons
+* I used the W3C Markup Validation Website to validate my HTML. All errors but one were fixed. The remaining error was due to a placeholder on the country field in a Django form. The error was due to the field being a select field. This code was implemented from the Boutique Ado Project. Aside from that error, there were several 'empty heading' warnings because of the spinner icon being put inside an H5 element, also from the Boutique Ado tutorials.
+
+**Javascript and JQuery**
+
+* I used JSHint to test all my Javascript functions. There were a few errors for missed semicolons which were fixed. Copying the code into JSHint.com also showed errors for some functions that used Django Template Variables in the markup.
+
+**Python**
+* I invoked the linter manually by typing 'python3 -m flake8' in the terminal which printed out all the errors that needed to be fixed. Most of the errors were from lines being too long and a couple indention errors that were fixed. The only errors that were left were ones from the migrations files and there was an Error for the Stripe Secret Key being imported but never used. After speaking with my mentor I learned it is common practice to just leave it as it was as the Secret Key was needed in the view. I also ran all my code through PEP8Online.
+
+**Responsiveness**
+* I used Google Developer Tools to test the responsiveness of my site. I also used a variety of phones and tablets.
+
+**Known Bugs and Issues To Be Addressed**
+* While viewing the page source in Chrome I noticed some pages has a lot of extra white space inbetween lines of code. I researched this issue and couldn't come up with any answers. I brought the issue up with my mentor and he though it was very strange but wont cause any harm and it is ok to leave it.
+
+* Due to the amount of data being transferred via API's, the games and matchup pages load slowly. To address this issue I plan on using Scheduler on Heroku for some Cron jobs. This way I can have the data pulled on a set schedule behind the scenes instead of everytime the pages load.
+
+***
+
+## **Deployment**
+
+**Deploying to Heroku**
+
+* Create a requirements.txt file
+    * Enter pip freeze > requirements.txt in the terminal
+* Create a Procfile
+    * Enter pip3 install gunicorn
+    * Create a Procfile in the root directory
+    * Add web: gunicorn ob_covers.wsgi:application to the file
+    * Add, commit and push your code to GitHub
+* Create a new app on Heroku
+    * Sign in to the Heroku dashboard a create a new app by clicking "Create new app" in the "New" dropdown box
+    * Choose a relevant and unique app name and choose the region closest to you
+* Add Postgres to Heroku
+    * Go to the "Resources" tab and provision a new Heroku Postgres using the free plan
+* Set Heroku config variables:
+    * DATABASE_URL (your Postgres database URL)
+    * SECRET_KEY (your secret key)
+    * STRIPE_PUBLIC_KEY (your Stripe public key)
+    * STRIPE_SECRET_KEY (your Stripe secret key)
+    * STRIPE_WH_KEY (your Stripe webhook key)
+    * USE_AWS (set to True)
+* Set up a new database in settings.py
+    * Enter pip3 install dj_database_url and pip3 install pyscopg2 in the terminal and then freeze your requirements again
+    * In settings.py add import dj_database_url at the top
+    * In settings.py temporarily comment out DATABASES
+    * Add the following code with your Postgres database URL (DO NOT commit/push your code to GitHub while your Postgres URL is visible in your settings)
+
+        DATABASES = {
+            'default': dj_database_url.parse("your Postrgres database URL")
+        }
+
+    * Migrate your models to the Postgres database by entering python3 manage.py makemigrations and python3 manage.py migrate into the terminal
+    * Load the data fixtures by entering python3 manage.py loaddata ranges, python3 manage.py loaddata colours, python3 manage.py loaddata styles and python3 manage.py loaddata products into the terminal
+    * Create a superuser with admin rights by entering python3 manage.py createsuperuser into the terminal with an email, username and password
+    * Correct the settings.py file by uncommenting the DATABASES and removing the code with your Postgres URL.
+    * In settings.py add the hostname of the Heroku app to 
+    
+        ALLOWED_HOSTS = ['localhost']
+
+    * Add, commit and push your code to GitHub
+* Set up automatic deployment to Heroku
+    * In Heroku navigate to "Deploy" > "Deployment Method" > "Connect to GitHub"
+    * Search for your repo and select it
+    * Navigate to "Automatic Deployment" > "Enable Automatic Deploys"
+    * Test that it is working by pushing your code and checking the Heroku app URL
+
+**Setting Up AWS** 
+
+* Set up an AWS account
+* Create an AWS S3 Bucket, a Bucket Policy, a Group, an Access Policy and a User using the instructions outlined here
+* Connect Django to S3 using the instructions outlined here
+* Add the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY to your Heroku config variables
+
+## **Credits**
+
+* A large portion of this code was based off of or inspired by the *Code Institute* Boutique Ado project. 
+
+* I relied heavily on *Stack Overflow* for help with different hurdles.
+
+* For all API's used on this project, Stripe, Twitter, Sportspage Feeds, Open Weather Map, Sportsipy, I focussed on using all the development tools they had on offer.
+
+**Acknowledgements**
+
+I'd like to thank...
+
+* My mentor, Aaron Sinnott for all the help and encouragement he offered.
+
+* Code Institute tutor support for helping me understand things better and sometimes teaching me tricks that were outside of the coursework.
+
+* And above all else, my wife and kids for sacrificing all their weekends and any quality time with me for the past year while I have been working on this course.

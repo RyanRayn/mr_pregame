@@ -87,27 +87,27 @@
     <script>
         var home = [];
             '{% for home in home_stats.home_ten %}'
-                home.push(parseInt('{{ home.runs }}'))
+                home.push(parseInt('{{ home.runs }}'));
             '{% endfor %}'    
         var home_team = '{{ home_stats.nickname }}'
         var hStats = [];
                 hStats.push('{{ home_stats.wins_ten }}', '{{ home_stats.hr_ten}}', '{{ home_stats.runs_ten }}', 
-                '{{ home_stats.hits_ten }}', '{{ home_stats.k_ten }}')    
+                '{{ home_stats.hits_ten }}', '{{ home_stats.k_ten }}');    
         var away = [];
             '{% for away in away_stats.away_ten %}'
-                away.push(parseInt('{{ away.runs }}'))
+                away.push(parseInt('{{ away.runs }}'));
             '{% endfor %}' 
         var away_team = '{{ away_stats.nickname }}'
         var aStats = [];
                 aStats.push('{{ away_stats.wins_ten }}', '{{ away_stats.hr_ten}}', '{{ away_stats.runs_ten }}', 
-                '{{ away_stats.hits_ten }}', '{{ away_stats.k_ten }}')  
+                '{{ away_stats.hits_ten }}', '{{ away_stats.k_ten }}');  
 
         var labels = [];
             '{% for games in away_stats.away_ten %}'
-                labels.push(parseInt('{{ forloop.counter }}'))
+                labels.push(parseInt('{{ forloop.counter }}'));
             '{% endfor %}'
     </script>
-    <script type="text/javascript" src="{% static 'js/matchup.js' %}"></script>
+    <script src="{% static 'js/matchup.js' %}"></script>
   
 {% endblock %}
                             

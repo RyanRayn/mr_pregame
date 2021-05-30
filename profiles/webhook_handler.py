@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from .models import UserProfile
 
+
 class StripeWH_Handler:
     """ Handle Stripe Webhooks """
 
@@ -28,14 +29,15 @@ class StripeWH_Handler:
         """ Handle invoice.payment_failed webhook from Stripe """
 
         intent = event.data.object
-        profile = UserProfile.objects.filter(stripe_customer_id=intent.customer)
+        profile = UserProfile.objects.filter(
+                                             stripe_customer_id=intent.customer
+                                             )
         cust_email = intent.customer_email
 
         UserProfile.objects.update_or_create(
-        stripe_customer_id=intent.customer, defaults={
-            'active': False,
-            }
-        )
+                                            stripe_customer_id=intent.customer,
+                                            defaults={'active': False}
+                                            )
 
         subject = render_to_string(
             'profiles/emails/missed_payment_subject.txt',
@@ -43,7 +45,7 @@ class StripeWH_Handler:
         body = render_to_string(
             'profiles/emails/missed_payment.txt',
             {'profile': profile, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-            
+
         send_mail(
             subject,
             body,

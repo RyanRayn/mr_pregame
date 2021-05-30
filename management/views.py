@@ -6,8 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import AwayBaseballGames, HomeBaseballGames
 from .forms import Pitcher, EditGameLine
 import datetime
-from sportsipy.mlb.teams import Teams as MLBTeams
-from .models import MLBGame, MLBGameLine, StartingPitcher
+from .models import MLBGame, MLBGameLine
 import pytz
 
 
@@ -22,7 +21,7 @@ def management(request):
     }
 
     return render(request, 'management/management.html',
-                context)              
+                  context)
 
 
 @login_required
@@ -37,7 +36,7 @@ def add_basketball(request):
 
     }
 
-    return render(request, template, context)   
+    return render(request, template, context)
 
 
 @login_required
@@ -372,7 +371,7 @@ def edit_gamelines(request, game_id):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only Admin can do that.')
         return redirect(reverse('home'))
-        
+
     game = get_object_or_404(MLBGameLine, pk=game_id)
 
     if request.method == 'POST':

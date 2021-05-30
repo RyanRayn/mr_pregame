@@ -15,8 +15,6 @@ def mlb_matchup(request):
 
     # Get the date for the SportspageFeeds API params
     todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
-    yesterdays_date = todays_date + datetime.timedelta(days=-1)
-    yesterday = yesterdays_date.strftime('%Y-%m-%d')
 
     # Date format for carousel "if statement"
     date_LA = todays_date.strftime('%B %-d, %Y')

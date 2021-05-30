@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, Membership
+from .models import UserProfile
 
 
 class SignupForm(forms.ModelForm):
