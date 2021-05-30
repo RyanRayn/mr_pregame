@@ -75,12 +75,10 @@
                                 <h2 class="white opacity-90 my-2">{{ game.summary }}</h2>
                                 <form action="{% url 'mlb_matchup' %}" method="GET">
                                     {% csrf_token %}
-                                    <input type="hidden" id="gameId{{ forloop.counter }}" 
-                                                name="gameId" value="{{ game.gameID }}">
-                                    <input type="hidden" id="city{{ forloop.counter }}"
-                                                name="city" value="{{ game.city }}">
-                                    <input type="hidden" id="league{{ forloop.counter }}"
-                                                name="league" value="{{ game.league }}">        
+                                    <input type="hidden" name="gameId" 
+                                    value="{{ game.gameID }}">
+                                    <input type="hidden" name="city" value="{{ game.city }}">
+                                    <input type="hidden" name="league" value="{{ game.league }}">        
                                     <button class="btn matchup-btn orange-background white opacity-90 mt-2" type="submit">
                                         Matchup
                                     </button>

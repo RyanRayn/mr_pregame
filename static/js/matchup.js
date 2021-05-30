@@ -6,7 +6,7 @@
         /* Always Make One Accordion Card Stay Open*/
         $('.btn-link').on('click', function() {
             if (!$(this).hasClass('collapsed')) {
-                $($('.btn-link').not(this).data('target')).collapse('show')
+                $($('.btn-link').not(this).data('target')).collapse('show');
             }
         });
 

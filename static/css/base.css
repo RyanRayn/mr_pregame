@@ -219,7 +219,6 @@ img {
 .league:hover,
 .league a:hover{
     color:#C1E6FF;
-    background-color:none;
     z-index: 2;
     -webkit-transition: all 200ms ease-in;
     -webkit-transform: scale(1.5);
@@ -606,7 +605,9 @@ img {
 }
 
 /*---------- get_membership checkout ----------*/
-#loading, #games-loading{
+#loading, 
+#games-loading,
+#matchup-loading{
     display:none;
     position:fixed;
     top:0;

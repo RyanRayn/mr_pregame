@@ -273,4 +273,94 @@ I implemented a number of defensive design features throughout my code to protec
 
 * Designed custom 404 and 500 error pages which allows the user with an easy route back to a non-problematic page via the navbar in the event of an error.
 
-* I used to @login_required decorator to restrict 
+* I used to code in management views to restrict anyone who isn't a superuser from accessing those pages. Instead they will be redirected back to the homepage with an error message displayed via toasts.
+
+**Features Left To Implement**
+
+* Bet tracking: One of the most important features to be on the site is the ability to keep records of bets made in the users profile.
+
+* Cron job: Do to the amount of data being pulled from API's several pages load slowly. My plan is to add Cron jobs to have the data pulled in the background on a schedule instead of as the page is loading.
+
+* Getting Social: Allow users to log in via social media and share bets made or other data.
+
+* Blog: Implement a blog page that contains insights and articles.
+
+***
+## **Technologies Used**
+
+**Languages and Frameworks**
+
+* HTML: 
+    * The language used to create the content and structure of my project.
+
+* CSS: 
+    * The language used to style the HTML5 elements to create the aesthetic of my site.
+
+* [jQuery 3.5.1:](https://code.jquery.com/)
+    * jQuery was use multiple time throughout this project.
+
+* [JavaScript 4.5.2:](https://getbootstrap.com/docs/4.0/getting-started/javascript/) 
+    * JavaScript was used multiple times, most notably with the Stripe Payments and ChartJS.
+
+* [Python:](https://www.python.org/) The language used to write the logic that controls my site.
+
+* [Bootstrap 4.5.0:](https://getbootstrap.com/) 
+    * Bootstrap was used to assist with the responsiveness and styling of the website.
+
+* [Django:](https://www.djangoproject.com/) A high-level Python web framework used to control my site.
+
+* [Heroku:](https://www.heroku.com) I used Heroku to deploy my project and make it viewable to others.
+
+* [SQLite:](https://www.sqlite.org/index.html) The default database used in Django development.
+
+* [PostgreSQL:](https://www.postgresql.org/) The production database used through Heroku.
+
+* [AWS S3:](https://aws.amazon.com/) I used AWS for hosting media and static files on the Cloud.
+
+* [GitHub:](https://github.com/) I used GitHub to store my source code and repository.
+
+* [Git:](https://git-scm.com/)
+    * Git was used for version control by utilizing the Gitpod terminal to commit to Git and push to Github.
+
+**Additional Tools Used**
+
+* [Google Fonts:](https://fonts.google.com/) 
+    * Google fonts were used to import the "Montserrat" and "Oswald" fonts into the style.css file which is used on all pages throughout the project.
+
+* [Font Awesome:](https://fontawesome.com/)
+    * Font Awesome was used on all pages throughout the website to add icons for UX purposes.    
+
+* [Balsamiq:](https://balsamiq.com/)
+    * Balsamiq was used to create the wireframes during the design process.
+
+* [Stripe:](https://stripe.com/)
+    * I used Stripe to manage the subscriptions and payment transactions.
+
+* [Twitter:](https://developer.twitter.com/en/docs)
+    * I used the Twitter API to display feeds from sport teams on matchup pages.
+
+* [Tweepy:](https://www.tweepy.org/)
+    * I used the Tweepy Python library to help with accessing the Twitter API.
+
+* [Open Weather Map:](https://openweathermap.org/api)
+    * Open Weather Map API was used to display current and furture weather conditions for games played outdoors.
+
+* [Sportsipy:](https://sportsipy.readthedocs.io/en/stable/)
+    * The Sportsipy API was used to pull sports data for the site.
+
+* [Sportspage Feeds:](https://sportspagefeeds.com/documentation)
+    * Sportspage feeds API is used to load current game betting lines and data.
+
+* [Chart.JS:](https://www.chartjs.org/)
+    * I used this to create the two charts on the MLB matchup page.
+
+***
+## **Testing**
+
+**CSS**
+
+* I used the W3C CSS Validation Service to validate my CSS. No errors were found.
+
+**HTML**
+
+* Empty Heading Icons

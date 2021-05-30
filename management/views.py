@@ -14,24 +14,30 @@ import pytz
 @login_required
 def management(request):
     """ View to return site management page """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
 
     context = {
     }
 
     return render(request, 'management/management.html',
-                  context)
+                context)              
 
 
 @login_required
 def add_basketball(request):
     """ Add a basketball game to database """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
 
     template = 'management/add_basketball.html'
     context = {
 
     }
 
-    return render(request, template, context)
+    return render(request, template, context)   
 
 
 @login_required
@@ -65,6 +71,10 @@ def add_baseball_away(request):
 @login_required
 def add_baseball_home(request):
     """ Add a baseball stats to database """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
+
     game = MLBGame.objects.last()
 
     opponent = game.name
@@ -103,10 +113,6 @@ def add_baseball_home(request):
         'errors': errors,
     }
 
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only Admin can do that.')
-        return redirect(reverse('home'))
-
     if request.method == "POST":
         form = HomeBaseballGames(request.POST)
         if form.is_valid():
@@ -131,6 +137,10 @@ def add_baseball_home(request):
 @login_required
 def add_pitcher_away(request):
     """ Add a baseball stats to database """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
+
     game = MLBGame.objects.last()
 
     runs_first_five = game.runs_allowed_first_five
@@ -138,10 +148,6 @@ def add_pitcher_away(request):
     initial = {
         'runs_first_five': runs_first_five,
     }
-
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only Admin can do that.')
-        return redirect(reverse('home'))
 
     if request.method == "POST":
         form = Pitcher(request.POST)
@@ -167,6 +173,10 @@ def add_pitcher_away(request):
 @login_required
 def add_pitcher_home(request):
     """ Add a baseball stats to database """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
+
     game = MLBGame.objects.last()
 
     runs_first_five = game.runs_allowed_first_five
@@ -174,10 +184,6 @@ def add_pitcher_home(request):
     initial = {
         'runs_first_five': runs_first_five,
     }
-
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only Admin can do that.')
-        return redirect(reverse('home'))
 
     if request.method == "POST":
         form = Pitcher(request.POST)
@@ -203,7 +209,6 @@ def add_pitcher_home(request):
 @login_required
 def final_scores(request):
     """ View to submit gamelines and info from the SportspageFeeds API """
-
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only Admin can do that.')
         return redirect(reverse('home'))
@@ -364,6 +369,10 @@ def final_scores(request):
 @login_required
 def edit_gamelines(request, game_id):
     """ Edit gameline info in database """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only Admin can do that.')
+        return redirect(reverse('home'))
+        
     game = get_object_or_404(MLBGameLine, pk=game_id)
 
     if request.method == 'POST':

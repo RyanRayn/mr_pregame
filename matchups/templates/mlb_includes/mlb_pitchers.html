@@ -5,9 +5,9 @@
             <div id="awayStarter" class="col-lg-5">
                 {% if not current.away_starter %}
                     <h5 class="text-center">
-                        <p class="d-inline white opacity-90">
+                        <span class="d-inline white opacity-90">
                             TBD
-                        </p>
+                        </span>
 
                         <span class="light-blue">
                             - {{ away_stats.nickname }}
@@ -15,12 +15,12 @@
                     </h5>
                 {% else %}
                     <h5 class="text-center">
-                        <p class="d-inline white opacity-90">
+                        <span class="d-inline white opacity-90">
                             {{ current.away_starter }}
                             <small class="text-muted pitching-font">
                             {{ current.away_starter_hand }}
                             </small>
-                        </p>
+                        </span>
 
                         <span class="light-blue">
                             - {{ away_stats.nickname }}
@@ -28,7 +28,7 @@
                     </h5>
                     <table class="d-flex justify-content-center text-center white opacity-90 mb-1">
                         <tbody> 
-                            <tr scope="row">    
+                            <tr>    
                                 <td>
                                     <p class="mb-0 light-blue"><small>W/L</small></p>
                                     <p>
@@ -60,7 +60,7 @@
                                     </p>
                                 </td>
                             </tr>
-                            <tr scope="row">
+                            <tr>
                                 <td class="pr-2">
                                     <p class="mb-0 light-blue"><br><small>WHIP</small></p>
                                     <p>
@@ -129,28 +129,28 @@
             <div id="homeStarter" class="col-lg-5"> 
                 {% if not current.home_starter %}
                     <h5 class="text-center">
-                        <p class="d-inline white opacity-90">
+                        <span class="d-inline white opacity-90">
                         TBD
-                        </p>
+                        </span>
                         <span class="light-blue">
                             - {{ home_stats.nickname }}
                         </span>
                     </h5>
                 {% else %}     
                     <h5 class="text-center">
-                        <p class="d-inline white opacity-90">
+                        <span class="d-inline white opacity-90">
                             {{ current.home_starter }}
                             <small class="text-muted">
                             {{ current.home_starter_hand }}
                             </small>
-                        </p>
+                        </span>
                         <span class="light-blue">
                             - {{ home_stats.nickname }}
                         </span>
                     </h5> 
                     <table class="d-flex justify-content-center text-center white opacity-90 mb-1">
                         <tbody> 
-                            <tr scope="row">
+                            <tr>
                                 <td>
                                     <p class="mb-0 light-blue"><small>W/L</small></p>
                                     <p>
@@ -182,7 +182,7 @@
                                     </p>
                                 </td>        
                             </tr>  
-                            <tr scope="row">
+                            <tr>
                                 <td class="pr-2">
                                     <p class="mb-0 light-blue"><br><small>WHIP</small></p>
                                     <p>
