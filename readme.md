@@ -192,4 +192,85 @@ This model holds the betting info for each game that is collected from a sports 
 
 ## **Features and Apps**
 
-Mr. Pregame is a Django project comprised of five individual apps which contain multiple features.
+*Registration and User Accounts*
+
+* For the subscription model used, the site must allow users to create an account they can log in and out of. This is achieved by using the Django AllAuth plug-in which provides users with secure log in and registration functionality.
+
+* After registering, the Django AllAuth confirms registration details through email confirmation which provides users with the ability to recover lost or forgotten passwords.
+
+*Subscription and Billing*
+
+* Subscriptions are created and billing managed by using the Stripe Payments API.
+
+* Billing is made easy by allowing payments to be securely debited from credit cards on a monthly basis.
+
+* Using Stripe webhooks, subscriptions are automatically frozen and an email is sent out to the user if there is a missed payment.
+
+* In the profile app users can easily cancel their paid subscription with the click of a button.
+
+<p align="center"><img src="media/cancel.png" width="400"></p>
+
+As a whole, Mr. Pregame is comprised of five Django apps containing multiple features.
+
+*Home*
+
+* The home app contains multiple calls to action. For unauthorized users there are several buttons encouraging them to register as well as a social media toolbar directly in the center of the page and in the footer.
+
+<p align="center"><img src="media/home.png" width="400"></p>
+<p align="center"><img src="media/home2.png" width="400"></p>
+
+* For paid subscribers, after logging in they are greeted with a personalized welcome containing their user name and the guaranteed pick of the day.
+
+<p align="center"><img src="media/homesub.png" width="400"></p>
+
+*Games*
+
+* When hovered over the 'Games' link in the navbar, a dropdown appears containing the four leagues on offer (currently only MLB is functional due to the other leagues not in season). Once the user selects a league they are directed to the Games page that contains all the games for that date.
+
+<p align="center"><img src="media/gamesnav.png" width="400"></p>
+
+* The gamecards on the Games page contain all the betting information for that game as well as a button that leads them to the matchup page which breaks down all the stat comparisons for the two teams. For admin there is also a link on top of each gamecard that allows them to edit any game line information.
+
+<p align="center"><img src="media/gamecards.png" width="400"></p>
+
+*Matchup*
+
+* The matchup app is where all the magic happens. Linked from the gamecards on the games page or the game picks in paid subscribers profiles, the matchup page displays all the data for the two teams playing in the chosen game.
+
+* Each matchup has season stats, player stats, betting info, game picks and gameday weather via Open Weather Map API. Using the Twitter API, team news that comes direct from each teams Twitter feeds is also displayed. 
+
+<p align="center"><img src="media/matchup1.png" width="400"></p>
+
+* Using Javascript each statistical advantage is highlighted in green in the team stats section and the trend charts were made using ChartJS.
+
+<p align="center"><img src="media/matchup2.png" width="400"></p>
+
+*Profile*
+
+* Currently the profile app is home to all the gameday picks and personal billing information as well as links the cancel subscriptions, change email or passwords.
+
+<p align="center"><img src="media/profile1.png" width="400"></p>
+
+<p align="center"><img src="media/profile2.png" width="400"></p>
+
+<p align="center"><img src="media/profile3.png" width="400"></p>
+
+* A new feature coming soon that will aso be displayed in the profile app is the ability to track bets and keep track of wins and losses.
+
+*Management*
+
+* Management app is for admin users only. Using Django forms, this is where they can edit or create game and team data.
+
+<p align="center"><img src="media/admin1.png" width="400"></p>
+
+<p align="center"><img src="media/admin2.png" width="400"></p>
+
+<p align="center"><img src="media/admin3.png" width="400"></p>
+
+**Defensive Design Features**
+
+I implemented a number of defensive design features throughout my code to protect the site against malicious use.
+
+* Designed custom 404 and 500 error pages which allows the user with an easy route back to a non-problematic page via the navbar in the event of an error.
+
+* I used to @login_required decorator to restrict 

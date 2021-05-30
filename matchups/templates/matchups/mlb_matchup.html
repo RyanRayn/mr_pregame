@@ -83,6 +83,7 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    <!-- Chart.JS for charts on matchup page -->
     <script>
         var home = [];
             '{% for home in home_stats.home_ten %}'
