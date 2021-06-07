@@ -632,7 +632,7 @@ img {
 /*---------- Profiles ----------*/
 .pick-box{
     background-color:rgb(13, 29, 53);
-    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
+    box-shadow: 0 0 10px rgb(11, 25, 46);
     border-radius:20px;
     position:relative;
 }
@@ -657,6 +657,23 @@ img {
 
 .profile-btn:hover{
     color:white;
+}
+
+.pick-btn{
+    border-radius:50px;
+    font-size:18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transition:all 0.3s ease 0s;
+    outline:none;
+}
+
+.pick-btn:hover{
+    color:white;
+    background-color:#FF7C1F;
+    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.507);
+    transform:translateY(-7px)
 }
 
 /*---------- Error Templates ----------*/

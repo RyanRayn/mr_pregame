@@ -30,7 +30,7 @@
         </div>
         {% endif %}
         {% if profile.stripe_subscription_id %}
-<!-- Button Trigger for Profile Info MOdal -->
+<!-- Button Trigger for Profile Info Modal -->
             <div class="row mb-3">
                 <div class="col-12 d-flex justify-content-end align-items-start">
                     <button type="button" class="logout btn light-blue opacity-90" data-toggle="modal" data-target="#profileInfo">
@@ -98,33 +98,116 @@
                     </div>
                 </div>  
             </div>
+            <div class="row text-center my-2">
+                <div class="col-12">
+                    <h1 class="orange opacity-90">Today's Picks</h1>
+                </div>
+            </div>
             <div class="row mx-3">
 <!-- Get all of todays games that have a pick -->
                 {% for game in all_games %}
                     {% if game.gamedate|date == date_LA and game.pick %}
-                        <div class="col-12 col-md-3 mb-3">
-                            <div class="lightblue-box d-flex flex-column align-items-center white opacity-90 pb-3">
+                        <div class="col-12 col-md-4 col-lg-3 mb-3">
+                            <div class="lightblue-box d-flex flex-column align-items-center white opacity-90 pb-1">
                                 <div class="pick-box d-flex flex-column align-items-center w-100 p-2">
-                                {% if game.pick_type == 'Guaranteed' %}    
-                                <img class="guaranteed-img" src="https://mrpregame.s3.amazonaws.com/media/moneypile.png" alt="">
-                                {% endif %}    
-                                <small class="light-blue">
-                                    {{ game.gamedate|time }}ET
-                                </small> 
-                                <h4 class="">{{ game.away_team }}</h4>
-                                <h5 class=""><i class="fad fa-at orange"></i></h5>
-                                <h4 class="">{{ game.home_team }}</h4>
+                                    {% if game.pick_type == 'Guaranteed' %}    
+                                        <img class="guaranteed-img m-1" src="https://mrpregame.s3.amazonaws.com/media/moneypile.png" alt="">
+                                    {% endif %}    
+                                    <small class="light-blue">
+                                        {{ game.gamedate|time }}ET
+                                    </small> 
+                                    <h4 class="">{{ game.away_team }}</h4>
+                                    <h5 class="">
+                                        <i class="fad fa-horizontal-rule orange mr-2"></i>
+                                        <i class="fad fa-at orange"></i>
+                                        <i class="fad fa-horizontal-rule orange ml-2"></i>
+                                    </h5>
+                                    <h4 class="">{{ game.home_team }}</h4>
 <!-- Button trigger modal -->
-                                 <button type="button" class="btn nav-login orange-background white opacity-90 mt-3" data-toggle="modal" data-target="#gamePickModal{{ forloop.counter }}">
-                                    {% if game.pick_type == 'Guaranteed' %}
-                                    Guaranteed
-                                    {% elif game.pick_type == 'Premium Pick' %}
-                                    Premium Pick
-                                    {% else %}
-                                    My Best Guess
-                                    {% endif %}
-                                </button>
+                                    <button type="button" class="btn pick-btn orange-background white opacity-90 my-2" data-toggle="modal" data-target="#gamePickModal{{ forloop.counter }}">
+                                        {% if game.pick_type == 'Guaranteed' %}
+                                            Guaranteed
+                                        {% elif game.pick_type == 'Premium Pick' %}
+                                            Premium Pick
+                                        {% else %}
+                                            My Best Guess
+                                        {% endif %}
+                                    </button>
                                 </div>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 text-right mb-0">
+                                                    <strong>{{ game.away_abbr }}:</strong>
+                                                </p>
+                                            </td>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 mb-0"> 
+                                                    {% if game.away_spread > 0 %} 
+                                                        +{{ game.away_spread }} 
+                                                    {% else %} 
+                                                        {{ game.away_spread }} 
+                                                    {% endif %}
+                                                </p>
+                                            </td>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 mb-0">
+                                                    {% if game.away_odds > 0 %} 
+                                                        +{{ game.away_odds }} 
+                                                    {% else %} 
+                                                        {{ game.away_odds }} 
+                                                    {% endif %}
+                                                </p>
+                                            </td>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 mb-0">
+                                                    <strong>ML:</strong> 
+                                                    {% if game.away_moneyline > 0 %} 
+                                                        +{{ game.away_moneyline }} 
+                                                    {% else %} 
+                                                        {{ game.away_moneyline }} 
+                                                    {% endif %}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 text-right mb-0">
+                                                    <strong>{{ game.home_abbr }}:</strong>
+                                                </p>
+                                            </td>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 mb-0">
+                                                    {% if game.home_spread > 0 %} 
+                                                        +{{ game.home_spread }} 
+                                                    {% else %} 
+                                                        {{ game.home_spread }} 
+                                                    {% endif %}
+                                                </p>
+                                            </td>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 mb-0">
+                                                    {% if game.home_odds > 0 %} 
+                                                        +{{ game.home_odds }} 
+                                                    {% else %} 
+                                                        {{ game.home_odds}} 
+                                                    {% endif %}
+                                                </p>
+                                            </td>
+                                            <td class="px-1">
+                                                <p class="white opacity-90 mb-0">
+                                                    <strong>ML:</strong> 
+                                                    {% if game.home_moneyline > 0 %} 
+                                                        +{{ game.home_moneyline }} 
+                                                    {% else %} 
+                                                        {{ game.home_moneyline }} 
+                                                    {% endif %}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 <!-- Game Pick Modal -->
                             <div class="modal fade" id="gamePickModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-hidden="true"
