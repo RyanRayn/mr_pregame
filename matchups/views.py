@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 import requests
 from django.conf import settings
 import datetime
@@ -166,9 +167,17 @@ def mlb_matchup(request):
         total=Sum('bullpen_runs'))['total']
     bullpen_innings = bullpen_outs / 3
     home_stats.home_bullpen_era = (bullpen_runs / bullpen_innings) * 9
-    # Home team total runs last ten games
-    home_stats.runs_ten = home_stats.home_ten.aggregate(
-        total=Sum('runs'))['total']
+    # Home team avg runs/game last ten games
+    home_stats.avg_runs_ten = home_stats.home_ten.aggregate(total=Avg('runs'))['total']
+    # Home team avg runs allowed/game last ten games
+    home_stats.avg_runs_allowed_ten = home_stats.home_ten.aggregate(
+        total=Avg('runs_allowed'))['total']
+    # Home team avg runs first 5 innings last ten games
+    home_stats.avg_runs_five_ten = home_stats.home_ten.aggregate(
+        total=Avg('runs_first_five'))['total']
+    # Home team avg runs allowed first 5 last ten games
+    home_stats.avg_runs_allowed_five_ten = home_stats.home_ten.aggregate(
+        total=Avg('runs_allowed_first_five'))['total']        
     # Home team total wins last ten games
     home_home_wins = home_stats.home_ten.aggregate(
         total=Sum('win_home'))['total']
@@ -184,12 +193,26 @@ def mlb_matchup(request):
     # Home team total home runs last ten games
     home_stats.hr_ten = home_stats.home_ten.aggregate(
         total=Sum('home_runs'))['total']
-    # Home team total hits last ten
+    # Home team avg hits/game, at bats, BA last ten games
     home_stats.hits_ten = home_stats.home_ten.aggregate(
         total=Sum('hits'))['total']
+    home_stats.last_ten_at_bats = home_stats.home_ten.aggregate(
+        total=Sum('at_bats'))['total']
+    home_stats.ba_ten = home_stats.hits_ten / home_stats.last_ten_at_bats
+    # Home team opponent total hits, at bats, BA last ten games
+    home_stats.opponent_hits_ten = home_stats.home_ten.aggregate(
+        total=Sum('hits_allowed'))['total']
+    home_stats.opponent_last_ten_at_bats = home_stats.home_ten.aggregate(
+        total=Sum('opponent_at_bats'))['total']
+    home_stats.opponent_ba_ten = (
+        home_stats.opponent_hits_ten / home_stats.opponent_last_ten_at_bats)
     # Home team total strikeouts last ten
     home_stats.k_ten = home_stats.home_ten.aggregate(
         total=Sum('strikeouts'))['total']
+    # Home team total errors last ten
+    home_stats.total_errors_ten = home_stats.home_ten.aggregate(
+        total=Sum('errors'))['total']
+
 
     # HOME PROBABLE STARTER
 
@@ -289,9 +312,17 @@ def mlb_matchup(request):
         total=Sum('bullpen_runs'))['total']
     bullpen_innings = bullpen_outs / 3
     away_stats.away_bullpen_era = (bullpen_runs / bullpen_innings) * 9
-    # Away team total runs last ten games
-    away_stats.runs_ten = away_stats.away_ten.aggregate(
-        total=Sum('runs'))['total']
+    # Away team avg runs/game last ten games
+    away_stats.avg_runs_ten = away_stats.away_ten.aggregate(total=Avg('runs'))['total']
+    # Away team avg runs allowed/game last ten games
+    away_stats.avg_runs_allowed_ten = away_stats.away_ten.aggregate(
+        total=Avg('runs_allowed'))['total']
+    # Away team avg runs first 5 innings last ten games
+    away_stats.avg_runs_five_ten = away_stats.away_ten.aggregate(
+        total=Avg('runs_first_five'))['total']
+    # Away team avg runs allowed first 5 last ten games
+    away_stats.avg_runs_allowed_five_ten = away_stats.away_ten.aggregate(
+        total=Avg('runs_allowed_first_five'))['total']           
     # Away team total wins last ten games
     away_home_wins = away_stats.away_ten.aggregate(
         total=Sum('win_home'))['total']
@@ -307,12 +338,26 @@ def mlb_matchup(request):
     # Away team total home runs last ten games
     away_stats.hr_ten = away_stats.away_ten.aggregate(
         total=Sum('home_runs'))['total']
-    # Away team total hits last ten
+    # Away team avg hits/game, at bats, BA last ten games
     away_stats.hits_ten = away_stats.away_ten.aggregate(
         total=Sum('hits'))['total']
+    away_stats.last_ten_at_bats = away_stats.away_ten.aggregate(
+        total=Sum('at_bats'))['total']
+    away_stats.ba_ten = away_stats.hits_ten / away_stats.last_ten_at_bats
+    # Away team opponent total hits, at bats, BA last ten games
+    away_stats.opponent_hits_ten = away_stats.away_ten.aggregate(
+        total=Sum('hits_allowed'))['total']
+    away_stats.opponent_last_ten_at_bats = away_stats.away_ten.aggregate(
+        total=Sum('opponent_at_bats'))['total']
+    away_stats.opponent_ba_ten = (
+        away_stats.opponent_hits_ten / away_stats.opponent_last_ten_at_bats)
     # Away team total strikeouts last ten
     away_stats.k_ten = away_stats.away_ten.aggregate(
         total=Sum('strikeouts'))['total']
+    # Away team total errors last ten
+    away_stats.total_errors_ten = away_stats.away_ten.aggregate(
+        total=Sum('errors'))['total']
+
 
     # AWAY PROBABLE STARTER
 
@@ -342,11 +387,11 @@ def mlb_matchup(request):
         'all_games': all_games,
         'date_LA': date_LA,
         'league': league,
-        'current': current,
-        'home_tweets': home_tweets,
-        'away_tweets': away_tweets,
-        'home_user': home_user,
-        'away_user': away_user,
+        'current': current, #MLBGameline
+        'home_tweets': home_tweets, #Twitter
+        'away_tweets': away_tweets, #Twitter
+        'home_user': home_user, #Twitter
+        'away_user': away_user, #Twitter
         'away_stats': away_stats,
         'home_stats': home_stats,
         'probable_home': probable_home,

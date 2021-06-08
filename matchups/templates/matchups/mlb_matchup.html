@@ -2,8 +2,6 @@
 {% load static %}
 
 {% block extra_js %}
-    <!--Chart js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js" integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg==" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block content %}
@@ -32,81 +30,26 @@
                     </div>
                 </div>
             </div>
-            <div class="d-none d-lg-block">
-                <div id="charts" class="position-relative">
-                    {% include 'mlb_includes/mlb_charts.html' %}
+            <div class="row">
+                <div id="last_ten" class="col-12 col-md-6">
+                    {% include 'mlb_includes/mlb_last_ten.html' %}
                 </div> 
+                <div id="game_picks" class="col-12 col-md-6">
+                    {% include 'mlb_includes/mlb_picks.html' %}
+                </div>
             </div>
             <div class="row d-lg-none">   
                 <div id="mobile_stat_box" class="col-12 d-flex justify-content-center mb-4">
                     {% include 'mlb_includes/mlb_stat_mobile.html' %}
                 </div>
             </div>
-            <div class="row d-lg-none">
-                <div class="col-12">
-                    <h2 class="orange opacity-90 text-center mt-2 mb-0">
-                        Game Pick
-                    </h2>
-                    {% if profile.stripe_subscription_id %}
-                        {% for game in all_games %}
-                            {% if gameID == game.gameID%}
-                                {% if game.pick %}
-                                    <p class="light-blue opacity-90 text-center mb-0">{{ game.pick_type}}</p>
-                                    <div class="overflow-auto white opacity-90 p-3">
-                                        {{ game.pick|linebreaks }}
-                                    </div>
-                                {% else %}
-                                    <div class="d-flex flex-column align-items-center">
-                                        <h3 class="white opacity-90 mt-2">Sorry, no pick for this game.</h3>
-                                        <img src="https://mrpregame.s3.amazonaws.com/media/desk_bored.png" class="img-fluid w-50 callout-img-shadow">
-                                    </div>    
-                                {% endif %}    
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                            <div class="d-flex flex-column align-items-center mt-5">
-                                <h4 class="white opacity-90"> Subscribe For Access!</h4>
-                                <ul>
-                                    <li class="light-blue opacity-90 mb-2">$30/monthly</li>
-                                    <li class="light-blue opacity-90 mb-2">$1 refund for all incorrect guaranteed picks</li>
-                                    <li class="light-blue opacity-90 mb-2">Premium and Guaranteed Picks</li>
-                                    <li class="light-blue opacity-90 mb-2">Custom Bet Tracking <small>(Coming Soon)</small></li>
-                                </ul>
-                                <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Subscribe</a>
-                            </div>   
-                    {% endif %}    
-                </div>
-            </div>    
         </div>    
     </div>      
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
-    <!-- Chart.JS for charts on matchup page -->
-    <script>
-        var home = [];
-            '{% for home in home_stats.home_ten %}'
-                home.push(parseInt('{{ home.runs }}'));
-            '{% endfor %}'    
-        var home_team = '{{ home_stats.nickname }}'
-        var hStats = [];
-                hStats.push('{{ home_stats.wins_ten }}', '{{ home_stats.hr_ten}}', '{{ home_stats.runs_ten }}', 
-                '{{ home_stats.hits_ten }}', '{{ home_stats.k_ten }}');    
-        var away = [];
-            '{% for away in away_stats.away_ten %}'
-                away.push(parseInt('{{ away.runs }}'));
-            '{% endfor %}' 
-        var away_team = '{{ away_stats.nickname }}'
-        var aStats = [];
-                aStats.push('{{ away_stats.wins_ten }}', '{{ away_stats.hr_ten}}', '{{ away_stats.runs_ten }}', 
-                '{{ away_stats.hits_ten }}', '{{ away_stats.k_ten }}');  
-
-        var labels = [];
-            '{% for games in away_stats.away_ten %}'
-                labels.push(parseInt('{{ forloop.counter }}'));
-            '{% endfor %}'
-    </script>
+    
     <script src="{% static 'js/matchup.js' %}"></script>
   
 {% endblock %}

@@ -1,11 +1,13 @@
 import requests
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import datetime
 import pytz
 from management.models import MLBGameLine
 
 
+@login_required
 def games(request):
     """ View to return games page """
     # Get the date for the SportspageFeeds API params
