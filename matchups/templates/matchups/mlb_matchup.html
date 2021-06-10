@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block extra_js %}
 {% endblock %}
 
@@ -17,8 +16,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div id="pitchers" class="">
-                        {% include 'mlb_includes/mlb_pitchers.html' %}
+                    <div id="game_picks" class="mb-4 text-center">
+                        {% include 'mlb_includes/mlb_picks.html' %}
                     </div>
                     <div id="stat-box" class="d-none d-lg-block">
                         {% include 'mlb_includes/mlb_stat_box.html' %}
@@ -31,12 +30,9 @@
                 </div>
             </div>
             <div class="row">
-                <div id="last_ten" class="col-12 col-md-6">
-                    {% include 'mlb_includes/mlb_last_ten.html' %}
+                <div id="probable_starters" class="col-12">
+                    {% include 'mlb_includes/mlb_pitchers.html' %}
                 </div> 
-                <div id="game_picks" class="col-12 col-md-6">
-                    {% include 'mlb_includes/mlb_picks.html' %}
-                </div>
             </div>
             <div class="row d-lg-none">   
                 <div id="mobile_stat_box" class="col-12 d-flex justify-content-center mb-4">

@@ -1,13 +1,64 @@
-<h2 class="orange opacity-90 text-center mt-2 mb-0">
-    Game Pick
-</h2>
+{% load humanize %}
+
+
 {% if profile.stripe_subscription_id %}
     {% for game in all_games %}
         {% if gameID == game.gameID%}
             {% if game.pick %}
-                <p class="light-blue opacity-90 text-center mb-0">{{ game.pick_type}}</p>
-                <div class="overflow-auto white opacity-90 p-3">
-                    {{ game.pick|linebreaks }}
+<!-- Button trigger modal -->
+                <button type="button" class="btn pick-btn orange-background white opacity-90 my-2" data-toggle="modal" data-target="#pickModal">
+                    {% if game.pick_type == 'Guaranteed' %}
+                        Guaranteed
+                    {% elif game.pick_type == 'Premium Pick' %}
+                        Premium Pick
+                    {% else %}
+                        My Best Guess
+                    {% endif %}
+                </button>
+<!-- Game Pick Modal -->
+                <div class="modal fade" id="pickModal" tabindex="-1" role="dialog" aria-hidden="true"
+                aria-labelledby="gamePickModal{{ forloop.counter }}" >
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content darkblue-box p-2">
+                            <div class="row">       
+                                <div class="col-12">
+                                    <h3 class="game-summary white opacity-90 text-center font-800 mb-0">
+                                        {{ game.summary }}
+                                    </h3>
+                                    <p class="white opacity-90 my-1 text-center">
+                                        {{ game.venue }} - {{ game.city }}, {{ game.state }}
+                                    </p>
+                                    {% if game.status != 'scheduled' %}
+                                        <p class="orange opacity-90 mb-0 mt-1 text-center">
+                                            <i class="fad fa-clock orange pr-2"></i>
+                                            {{ game.status|upper }}
+                                            {% if game.current_inning and game.status != 'final' %}
+                                                - {{ game.current_inning|ordinal }} inning
+                                            {% endif %} 
+                                        </p>
+                                    {% else %}
+                                        <p class="white opacity-90 mb-0 text-center">
+                                            <i class="fad fa-calendar-alt orange pr-2"></i>
+                                            {{ game.gamedate|date }} 
+                                            <i class="fad fa-clock orange pl-4 pr-2"></i>
+                                            {{ game.gamedate|time }} 
+                                            <small>ET</small>
+                                        </p>
+                                    {% endif %}    
+                                  
+                                </div>    
+                            </div>    
+                            <hr class="rounded orange-background mx-auto my-0">
+                            <div class="modal-body white opacity-90">
+                            {{ game.pick|linebreaks }}
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center border-0"> 
+                                <button type="button" class="btn white opacity-90 light-blue-background nav-login" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% else %}
                 <div class="d-flex flex-column align-items-center">
