@@ -16,12 +16,12 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div id="game_picks" class="mb-4 text-center">
+                    <div id="probable_starters">
+                        {% include 'mlb_includes/mlb_pitchers.html' %}
+                    </div> 
+                    <div id="game_picks">
                         {% include 'mlb_includes/mlb_picks.html' %}
                     </div>
-                    <div id="stat-box" class="d-none d-lg-block">
-                        {% include 'mlb_includes/mlb_stat_box.html' %}
-                    </div> 
                 </div>
                 <div class="d-none d-lg-block col-lg-3">
                     <div id="twitter_accordion">
@@ -29,13 +29,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div id="probable_starters" class="col-12">
-                    {% include 'mlb_includes/mlb_pitchers.html' %}
+            <div class="row mx-2">
+                <div id="stat-box" class="d-none d-lg-block">
+                    {% include 'mlb_includes/mlb_stat_box.html' %}
                 </div> 
             </div>
-            <div class="row d-lg-none">   
-                <div id="mobile_stat_box" class="col-12 d-flex justify-content-center mb-4">
+            <div class="row d-lg-none mx-2">   
+                <div id="mobile_stat_box" class="col-12 mb-4">
                     {% include 'mlb_includes/mlb_stat_mobile.html' %}
                 </div>
             </div>

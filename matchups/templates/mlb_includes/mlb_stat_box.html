@@ -1,189 +1,169 @@
-<div id="stat-container">
-    <div class="row mb-3">
+<div id="stat-container" class="">
+    <div class="row mx-1 mb-3">
         <div class="col-12">
-            <h2 class="orange opacity-90 text-center mb-0">Team Stats</h2>
+            <h2 class="orange opacity-90 text-center">Team Stats</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 col-md-5 d-flex justify-content-center">
+    <div class="row mx-1 ">
+        <div class="col-6">
+            <h3 class="light-blue opacity-90 text-center">Season</h3>
+        </div>
+        <div class="col-6 last-ten-top pt-2">
+            <h3 class="dark-blue opacity-90 text-center">Last 10</h3>
+        </div>
+    </div>
+    <div class="row mx-1">
+        <div class="col-3 d-flex justify-content-center pb-3">
             <table class="stat-table light-blue opacity-90 text-center text-nowrap">
-                <thead>
-                    <tr>
-                        <th scope="col">{{ away_stats.nickname }}</th>
-                        <th scope="col"></th>
-                        <th scope="col">{{ home_stats.nickname }}</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <th class="px-4">Games Played</th>
-                        <td></td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ away_stats.nickname }}</th>
+                            <th scope="col"></th>
+                            <th scope="col">{{ home_stats.nickname }}</th>
+                        </tr>
+                    </thead>    
                     <tr>
                         <td class="white opacity-90">{{ away_stats.games_played }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
+                        <th class="px-4"><small>Games Played</small></th>
                         <td class="white opacity-90">{{ home_stats.games_played }}</td>
-                    </tr>
-                    <tr>
-                        <td class="white opacity-90">{{ away_stats.wins_ten }}</td>
-                        <th class="orange opacity-90"><small>Wins Last 10</small></th>
-                        <td class="white opacity-90">{{ home_stats.wins_ten }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">Avg Runs/9</th>
-                        <td></td>
                     </tr>
                     <tr class="higher">
                         <td class="white opacity-90">{{ away_stats.avg_runs|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
+                        <th class=""><small>Avg Runs/9</small></th>
                         <td class="white opacity-90">{{ home_stats.avg_runs|floatformat:2 }}</td>
-                    </tr>
-                    <tr class="higher">
-                        <td class="white opacity-90">{{ away_stats.avg_runs_ten|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
-                        <td class="white opacity-90">{{ home_stats.avg_runs_ten|floatformat:2 }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">Runs Allowed/9</th>
-                        <td></td>
                     </tr> 
                     <tr class="lower">
                         <td class="green">{{ away_stats.avg_runs_allowed|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
+                        <th class=""><small>Runs Allowed/9</small></th>
                         <td class="green">{{ home_stats.avg_runs_allowed|floatformat:2 }}</td>
                     </tr>
-                    <tr class="lower">
-                        <td class="green">{{ away_stats.avg_runs_allowed_ten|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
-                        <td class="green">{{ home_stats.avg_runs_allowed_ten|floatformat:2 }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">Team BA</th>
-                        <td></td>
-                    </tr>   
                     <tr class="higher">
                         <td class="white opacity-90">{{ away_stats.ba|floatformat:3|slice:"1:" }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
+                        <th class=""><small>Team BA</small></th>
                         <td class="white opacity-90">{{ home_stats.ba|floatformat:3|slice:"1:" }}</td>
-                    </tr>
-                    <tr class="higher">
-                        <td class="white opacity-90">{{ away_stats.ba_ten|floatformat:3|slice:"1:" }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
-                        <td class="white opacity-90">{{ home_stats.ba_ten|floatformat:3|slice:"1:" }}</td>
-                    </tr>
-                    
-                    
-
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">BA Allowed</th>
-                        <td></td>
                     </tr>
                     <tr class="lower">
                         <td class="green">{{ away_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
+                        <th class=""><small>BA Allowed</small></th>
                         <td class="green">{{ home_stats.opponent_ba|floatformat:3|slice:"1:" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3 d-flex justify-content-center pb-3">
+            <table class="stat-table light-blue opacity-90 text-center text-nowrap">
+                <tbody>
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ away_stats.nickname }}</th>
+                            <th scope="col"></th>
+                            <th scope="col">{{ home_stats.nickname }}</th>
+                        </tr>
+                    </thead>    
+                    <tr class="lower">
+                        <td class="green">{{ away_stats.total_errors }}</td>
+                        <th class=""><small>Errors</small></th>
+                        <td class="green">{{ home_stats.total_errors }}</td>
+                    </tr>
+                    <tr class="lower">
+                        <td class="green">{{ away_stats.total_k }}</td>
+                        <th class=""><small>Strikeouts</small></th>
+                        <td class="green">{{ home_stats.total_k }}</td>
+                    </tr>  
+                    <tr class="higher">
+                        <td class="white opacity-90">{{ away_stats.total_hr }}</td>
+                        <th class=""><small>Home Runs</small></th>
+                        <td class="white opacity-90">{{ home_stats.total_hr }}</td>
+                    </tr>
+                    <tr class="higher">
+                        <td class="white opacity-90">{{ away_stats.avg_runs_five|floatformat:2 }}</td>
+                        <th class=""><small>Avg Runs/5</small></th>
+                        <td class="white opacity-90">{{ home_stats.avg_runs_five|floatformat:2 }}</td>
+                    </tr>   
+                    <tr class="lower">
+                        <td class="green">{{ away_stats.avg_runs_allowed_five|floatformat:2 }}</td>
+                        <th class="px-4"><small>Runs Allowed/5</small></th>
+                        <td class="green">{{ home_stats.avg_runs_allowed_five|floatformat:2 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3 last-ten-bottom-left d-flex justify-content-center pb-3">
+            <table class="stat-table light-blue opacity-90 text-center text-nowrap">
+                <tbody>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="dark-blue">{{ away_stats.nickname }}</th>
+                            <th scope="col"></th>
+                            <th scope="col" class="dark-blue">{{ home_stats.nickname }}</th>
+                        </tr>
+                    </thead>    
+                    <tr class="higher">
+                        <td class="white opacity-90">{{ away_stats.wins_ten }}</td>
+                        <th class="dark-blue"><small>Wins</small></th>
+                        <td class="white opacity-90">{{ home_stats.wins_ten }}</td>
+                    </tr>
+                    <tr class="higher">
+                        <td class="white opacity-90">{{ away_stats.avg_runs_ten|floatformat:2 }}</td>
+                        <th class="dark-blue"><small>Avg Runs/9</small></th>
+                        <td class="white opacity-90">{{ home_stats.avg_runs_ten|floatformat:2 }}</td>
+                    </tr>     
+                    <tr class="lower">
+                        <td class="green">{{ away_stats.avg_runs_allowed_ten|floatformat:2 }}</td>
+                        <th class="dark-blue px-4"><small>Runs Allowed/9</small></th>
+                        <td class="green">{{ home_stats.avg_runs_allowed_ten|floatformat:2 }}</td>
+                    </tr>
+                    <tr class="higher">
+                        <td class="white opacity-90">{{ away_stats.ba_ten|floatformat:3|slice:"1:" }}</td>
+                        <th class="dark-blue"><small>Team BA</small></th>
+                        <td class="white opacity-90">{{ home_stats.ba_ten|floatformat:3|slice:"1:" }}</td>
                     </tr>
                     <tr class="lower">
                         <td class="green">{{ away_stats.opponent_ba_ten|floatformat:3|slice:"1:" }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
+                        <th class="dark-blue"><small>BA Allowed</small></th>
                         <td class="green">{{ home_stats.opponent_ba_ten|floatformat:3|slice:"1:" }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-12 col-md-2"></div>
-        <div class="col-12 col-md-5 d-flex justify-content-center">
+        <div class="col-3 last-ten-bottom-right d-flex justify-content-center pb-3">
             <table class="stat-table light-blue opacity-90 text-center text-nowrap">
-                <thead>
-                    <tr>
-                        <th scope="col">{{ away_stats.nickname }}</th>
-                        <th scope="col"></th>
-                        <th scope="col">{{ home_stats.nickname }}</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <th class="px-4">Strikeouts</th>
-                        <td></td>
-                    </tr>  
-                    <tr class="lower">
-                        <td class="green">{{ away_stats.total_k }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
-                        <td class="green">{{ home_stats.total_k }}</td>
-                    </tr>  
-                    <tr class="lower">
-                        <td class="green">{{ away_stats.k_ten }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
-                        <td class="green">{{ home_stats.k_ten }}</td>
-                    </tr>  
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">Errors</th>
-                        <td></td>
-                    </tr>
-                    <tr class="lower">
-                        <td class="green">{{ away_stats.total_errors }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
-                        <td class="green">{{ home_stats.total_errors }}</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="dark-blue">{{ away_stats.nickname }}</th>
+                            <th scope="col"></th>
+                            <th scope="col" class="dark-blue">{{ home_stats.nickname }}</th>
+                        </tr>
+                    </thead>    
                     <tr class="lower">
                         <td class="green">{{ away_stats.total_errors_ten }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
+                        <th class="dark-blue"><small>Errors</small></th>
                         <td class="green">{{ home_stats.total_errors_ten }}</td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">Avg Runs/5</th>
-                        <td></td>
-                    </tr>   
-                    <tr class="higher">
-                        <td class="white opacity-90">{{ away_stats.avg_runs_five|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
-                        <td class="white opacity-90">{{ home_stats.avg_runs_five|floatformat:2 }}</td>
-                    </tr>   
-                    <tr class="higher">
-                        <td class="white opacity-90">{{ away_stats.avg_runs_five_ten|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
-                        <td class="white opacity-90">{{ home_stats.avg_runs_five_ten|floatformat:2 }}</td>
-                    </tr>   
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">Runs Allowed/5</th>
-                        <td></td>
-                    </tr>
                     <tr class="lower">
-                        <td class="green">{{ away_stats.avg_runs_allowed_five|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
-                        <td class="green">{{ home_stats.avg_runs_allowed_five|floatformat:2 }}</td>
-                    </tr>
-                    <tr class="lower">
-                        <td class="green">{{ away_stats.avg_runs_allowed_five_ten|floatformat:2 }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
-                        <td class="green">{{ home_stats.avg_runs_allowed_five_ten|floatformat:2 }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <th class="pt-2">Home Runs</th>
-                        <td></td>
-                    </tr>
-                    <tr class="higher">
-                        <td class="white opacity-90">{{ away_stats.total_hr }}</td>
-                        <th class="orange opacity-90"><small>Season</small></th>
-                        <td class="white opacity-90">{{ home_stats.total_hr }}</td>
-                    </tr>
+                        <td class="green">{{ away_stats.k_ten }}</td>
+                        <th class="dark-blue"><small>Strikeouts</small></th>
+                        <td class="green">{{ home_stats.k_ten }}</td>
+                    </tr>  
                     <tr class="higher">
                         <td class="white opacity-90">{{ away_stats.hr_ten }}</td>
-                        <th class="orange opacity-90"><small>Last 10</small></th>
+                        <th class="dark-blue"><small>Home Runs</small></th>
                         <td class="white opacity-90">{{ home_stats.hr_ten }}</td>
+                    </tr>
+                    <tr class="higher">
+                        <td class="white opacity-90">{{ away_stats.avg_runs_five_ten|floatformat:2 }}</td>
+                        <th class="dark-blue"><small>Avg Runs/5</small></th>
+                        <td class="white opacity-90">{{ home_stats.avg_runs_five_ten|floatformat:2 }}</td>
                     </tr>   
+                    <tr class="lower">
+                        <td class="green">{{ away_stats.avg_runs_allowed_five_ten|floatformat:2 }}</td>
+                        <th class="dark-blue px-4"><small>Runs Allowed/5</small></th>
+                        <td class="green">{{ home_stats.avg_runs_allowed_five_ten|floatformat:2 }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-    </div>        
+    </div>         
 </div>

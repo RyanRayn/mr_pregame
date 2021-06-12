@@ -598,6 +598,32 @@ img {
     font-weight:normal;
 }
 
+.last-ten-top{
+    background-color:#ff7c1fad;
+    border-radius:20px 20px 0px 0px;
+}
+
+.last-ten-bottom-left{
+    background-color:#ff7c1fad;
+    border-radius:0px 0px 0px 20px;
+}
+
+.last-ten-bottom-right{
+    background-color:#ff7c1fad;
+    border-radius:0px 0px 20px 0px;
+}
+
+.mobile-stat-top{
+    background-color:#ff7c1fad;
+    border-radius:20px 20px 0px 0px;
+}
+
+.mobile-stat-bottom{
+    background-color:#ff7c1fad;
+    border-radius:0px 0px 20px 20px;
+}
+
+
 /*---------- get_membership checkout ----------*/
 #loading, 
 #games-loading,
