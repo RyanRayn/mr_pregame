@@ -6,15 +6,32 @@
         {% if gameID == game.gameID%}
             {% if game.pick %}
 <!-- Button trigger modal -->
-                <button type="button" class="btn pick-btn orange-background white opacity-90 my-2" data-toggle="modal" data-target="#pickModal">
-                    {% if game.pick_type == 'Guaranteed' %}
-                        Guaranteed
-                    {% elif game.pick_type == 'Premium Pick' %}
-                        Premium Pick
-                    {% else %}
-                        My Best Guess
-                    {% endif %}
-                </button>
+                <div class="row my-5">
+                    <div class="d-none d-sm-flex col-sm-6 col-lg-4 justify-content-center align-items-center">
+                        {% if game.pick_type == 'Guaranteed' %}
+                            <img src="https://mrpregame.s3.amazonaws.com/media/money_bag3.png" class="img-fluid w-50 callout-img-shadow">
+                        {% elif game.pick_type == 'Premium Pick' %}
+                            <img src="https://mrpregame.s3.amazonaws.com/media/money_bag3.png" class="img-fluid w-50 callout-img-shadow">
+                        {% else %}
+                            <img src="https://mrpregame.s3.amazonaws.com/media/error_page.png" class="img-fluid w-50 callout-img-shadow">
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-8 d-flex flex-column justify-content-center align-items-center p-1">
+                        <h3 class="white opacity-90 mt-2">
+                            {% if game.pick_type == 'Guaranteed' %}
+                                Take this <span class="light-blue opacity-90">Guaranteed Pick</span> straight to the bank!
+                            {% elif game.pick_type == 'Premium Pick' %}
+                                I'm feeling pretty good about this Premium Pick!
+                            {% else %}
+                                Here is my best guess...
+                            {% endif %}
+                        </h3>
+                        <button type="button" class="btn pick-btn orange-background white opacity-90 my-2" data-toggle="modal" data-target="#pickModal">
+                            Click for Pick
+                        </button>
+                    </div>  
+                </div>    
+                
 <!-- Game Pick Modal -->
                 <div class="modal fade" id="pickModal" tabindex="-1" role="dialog" aria-hidden="true"
                 aria-labelledby="gamePickModal{{ forloop.counter }}" >
@@ -61,22 +78,33 @@
                     </div>
                 </div>
             {% else %}
-                <div class="d-flex flex-column align-items-center">
-                    <h3 class="white opacity-90 mt-2">Sorry, no pick for this game.</h3>
-                    <img src="https://mrpregame.s3.amazonaws.com/media/desk_bored.png" class="img-fluid w-50 callout-img-shadow">
+                <div class="row my-5">
+                    <div class="d-none d-sm-flex col-sm-6 col-lg-4 justify-content-center align-items-center">
+                        <img src="https://mrpregame.s3.amazonaws.com/media/desk_bored.png" class="img-fluid w-75 callout-img-shadow">
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-8 d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="white opacity-90 mt-2">Sorry, no pick for this game.</h3>
+                        <hr class="rounded light-blue-background mx-auto my-1">
+                        <p class="orange opacity-90 m-0">Check out all of today's picks in your <a class="orange opacity-90 profile-link" href="{% url 'profile' %}">profile!</a></p>
+                    </div>  
                 </div>    
             {% endif %}    
         {% endif %}
     {% endfor %}
 {% else %}
-        <div class="d-flex flex-column align-items-center mt-5">
-            <h4 class="white opacity-90"> Subscribe For Access!</h4>
-            <ul>
-                <li class="light-blue opacity-90 mb-2">$30/monthly</li>
-                <li class="light-blue opacity-90 mb-2">$1 refund for all incorrect guaranteed picks</li>
-                <li class="light-blue opacity-90 mb-2">Premium and Guaranteed Picks</li>
-                <li class="light-blue opacity-90 mb-2">Custom Bet Tracking <small>(Coming Soon)</small></li>
-            </ul>
-            <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Subscribe</a>
-        </div>   
+        <div class="row my-5">
+            <div class="d-none d-sm-flex col-sm-6 col-lg-6 justify-content-center align-items-center">
+                <img src="https://mrpregame.s3.amazonaws.com/media/admin.png" class="img-fluid w-75 callout-img-shadow">
+            </div>
+            <div class="col-12 col-sm-6 col-lg-6 d-flex flex-column justify-content-center align-items-center">
+                <h4 class="white opacity-90"> Subscribe For Access!</h4>
+                <ul>
+                    <li class="light-blue opacity-90 mb-2">$30/monthly</li>
+                    <li class="light-blue opacity-90 mb-2">$1 refund for all incorrect guaranteed picks</li>
+                    <li class="light-blue opacity-90 mb-2">Premium and Guaranteed Picks</li>
+                    <li class="light-blue opacity-90 mb-2">Custom Bet Tracking <small>(Coming Soon)</small></li>
+                </ul>
+                <a class="btn nav-login orange-background white opacity-90 mt-3" href="{% url 'get_membership' %}">Subscribe</a>
+            </div>  
+        </div>      
 {% endif %}    

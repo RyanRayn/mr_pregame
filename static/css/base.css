@@ -482,7 +482,7 @@ img {
 /*----------------------------- Games/games.html -------------------------------*/
 
 .gamecard{
-    background-color:rgb(15, 33, 61);
+    background-image: linear-gradient(to right bottom, #0d1d35, #0f1e36, #102038, #122139, #13233a);
     box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
     border-radius:20px;
 }
@@ -552,7 +552,7 @@ img {
 }
 
 .darkblue-box{
-    background-color:rgb(19, 35, 58);
+    background-image: linear-gradient(to right bottom, #0d1d35, #0f1e36, #102038, #122139, #13233a);
     box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
     border-radius:20px;
 }
@@ -623,6 +623,11 @@ img {
     border-radius:0px 0px 20px 20px;
 }
 
+.profile-link:hover{
+    color:white;
+}
+
+
 
 /*---------- get_membership checkout ----------*/
 #loading, 
@@ -651,7 +656,7 @@ img {
 }
 /*---------- Profiles ----------*/
 .pick-box{
-    background-color:rgb(13, 29, 53);
+    background-image: linear-gradient(to right bottom, #0d1d35, #0f1e36, #102038, #122139, #13233a);
     box-shadow: 0 0 10px rgb(11, 25, 46);
     border-radius:20px;
     position:relative;
