@@ -1,15 +1,18 @@
 import requests
-from django.shortcuts import render
+from django.shortcuts import render,  get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import datetime
 import pytz
 from management.models import MLBGameLine
+from profiles.models import UserProfile
 
 
 @login_required
 def games(request):
     """ View to return games page """
+    profile = get_object_or_404(UserProfile, user=request.user)
+
     # Get the date for the SportspageFeeds API params
     todays_date = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
     today = todays_date.strftime('%Y-%m-%d')
@@ -179,6 +182,7 @@ def games(request):
         'league': league,
         'all_games': all_games,
         'date_LA': date_LA,
+        'profile': profile,
     }
 
     return render(request, 'games/games.html', context)

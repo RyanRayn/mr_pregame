@@ -43,8 +43,8 @@
                         <div class="modal-content darkblue-box p-2">
                             <div class="modal-body white opacity-90">
                                 <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn logout white opacity-90" data-dismiss="modal">
-                                        <i class="fas fa-times"></i>
+                                    <button type="button" class="btn logout orange opacity-90" data-dismiss="modal">
+                                        <i class="fad fa-times-circle"></i>
                                     </button>
                                 </div>
                                 <div class="row">
@@ -214,11 +214,18 @@
                             aria-labelledby="gamePickModal{{ forloop.counter }}" >
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content darkblue-box p-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button type="button" class="btn white opacity-90 float-right py-0" data-dismiss="modal">
+                                                    <h5 class="mb-0"><i class="fad fa-times-circle orange mb-0"></i></h5>
+                                                </button>
+                                            </div>
+                                        </div>
                                         <div class="row">       
                                             <div class="col-12">
-                                                <h3 class="game-summary white opacity-90 text-center font-800 mb-0">
+                                                <h5 class="game-summary white opacity-90 text-center font-800 mb-0">
                                                     {{ game.summary }}
-                                                </h3>
+                                                </h5>
                                                 <p class="white opacity-90 my-1 text-center">
                                                     {{ game.venue }} - {{ game.city }}, {{ game.state }}
                                                 </p>
@@ -260,9 +267,6 @@
                                                     Matchup
                                                 </button>
                                             </form> 
-                                            <button type="button" class="btn white opacity-90 light-blue-background nav-login" data-dismiss="modal">
-                                                Close
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -10,6 +10,7 @@ from profiles.models import UserProfile
 from django.db.models import Avg, Sum
 
 
+@login_required
 def mlb_matchup(request):
     """ a view to show MLB game matchups """
     profile = get_object_or_404(UserProfile, user=request.user)
