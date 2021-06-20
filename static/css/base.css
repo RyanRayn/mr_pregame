@@ -557,6 +557,12 @@ img {
     border-radius:20px;
 }
 
+.orange-box{
+    background-color:#ff7c1fad;
+    box-shadow: 0 0 10px rgba(8, 19, 34, 0.726);
+    border-radius:20px;
+}
+
 .carousel-view-button:hover{
     background-color:#c1e6ff7a;
     color:white;
@@ -568,7 +574,7 @@ img {
 }
 
 .matchup-box-height{
-    height:375px;
+    height:400px;
 }
 
 #home_twitter_card{
@@ -611,16 +617,6 @@ img {
 .last-ten-bottom-right{
     background-color:#ff7c1fad;
     border-radius:0px 0px 20px 0px;
-}
-
-.mobile-stat-top{
-    background-color:#ff7c1fad;
-    border-radius:20px 20px 0px 0px;
-}
-
-.mobile-stat-bottom{
-    background-color:#ff7c1fad;
-    border-radius:0px 0px 20px 20px;
 }
 
 .profile-link:hover{

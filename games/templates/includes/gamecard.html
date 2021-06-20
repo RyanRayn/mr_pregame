@@ -2,7 +2,7 @@
     <div class="row px-2">
         {% for game in all_games %}
             {% if game.gamedate|date == date_LA %} 
-                <div class="col-12 col-lg-6 mb-4">                
+                <div class="col-12 col-sm-6 col-xxl-4 mb-4">                
                     <div class="gamecard p-2">
 <!-- Edit Game Line Button -->
                         {% if request.user.is_superuser %}
@@ -17,9 +17,12 @@
 <!-- Teams/Location/Time -->
                         <div class="row">       
                             <div class="col-12">
-                                <h3 class="game-summary white opacity-90 text-center font-800 mb-0">
+                                <h4 class="d-lg-none game-summary white opacity-90 text-center font-800 mb-0">
+                                    {{ game.away_abbr }} @ {{ game.home_abbr }}
+                                </h4>
+                                <h4 class="d-none d-lg-block game-summary white opacity-90 text-center font-800 mb-0">
                                     {{ game.summary }}
-                                </h3>
+                                </h4>
                                 {% if game.status != 'scheduled' %}
                                     <p class="orange opacity-90 mb-0 mt-1 text-center">
                                         <i class="fad fa-clock orange pr-2"></i>
@@ -147,13 +150,7 @@
                                     {% if game.pick %}
 <!-- Button Trigger Picks Modal -->
                                         <button type="button" class="btn matchup-btn orange-background white opacity-90 mb-2 ml-2" data-toggle="modal" data-target="#gamesPickModal{{ forloop.counter }}">
-                                            {% if game.pick_type == 'Guaranteed' %}
-                                                Guaranteed Pick
-                                            {% elif game.pick_type == 'Premium Pick' %}
-                                                Premium Pick
-                                            {% else %}
-                                                My Best Guess
-                                            {% endif %}
+                                          Pick
                                         </button>
 <!-- Game Pick Modal -->
                                         <div class="modal fade" id="gamesPickModal{{ forloop.counter }}" tabindex="-1role="dialog" aria-hidden="true"

@@ -6,7 +6,7 @@
         {% if gameID == game.gameID%}
             {% if game.pick %}
 <!-- Button trigger modal -->
-                <div class="row my-5">
+                <div class="d-none d-sm-flex row my-5">
                     <div class="d-none d-sm-flex col-sm-6 col-lg-4 justify-content-center align-items-center">
                         {% if game.pick_type == 'Guaranteed' %}
                             <img src="https://mrpregame.s3.amazonaws.com/media/money_bag3.png" class="img-fluid w-50 callout-img-shadow">
@@ -17,7 +17,7 @@
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-8 d-flex flex-column justify-content-center align-items-center p-1">
-                        <h3 class="white opacity-90 mt-2">
+                        <h3 class="white opacity-90 mt-2 p-3">
                             {% if game.pick_type == 'Guaranteed' %}
                                 Take this <span class="light-blue opacity-90">Guaranteed Pick</span> straight to the bank!
                             {% elif game.pick_type == 'Premium Pick' %}
@@ -30,6 +30,13 @@
                             Click for Pick
                         </button>
                     </div>  
+                </div>
+                <div class="d-sm-none row my-5">
+                    <div class="col-12 col-sm-6 col-lg-8 d-flex flex-column justify-content-center align-items-center p-1">
+                        <button type="button" class="btn pick-btn orange-background white opacity-90 my-2" data-toggle="modal" data-target="#pickModal">
+                            Click for Pick
+                        </button>
+                    </div> 
                 </div>    
                 
 <!-- Game Pick Modal -->

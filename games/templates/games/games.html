@@ -7,7 +7,9 @@
         {% if games %}<!-- If There Aren't Any Games Render No Games Message --> 
             <div class="row mb-4">
                 <div class="col-12 d-flex justify-content-center">
-                    <h1 class="orange">Today's Games</h1>
+                    {% if league == 'MLB' %}
+                        <h1 class="orange">MLB Today</h1>
+                    {% endif %}    
                 </div>
             </div>
              
