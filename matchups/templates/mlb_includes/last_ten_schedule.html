@@ -1,0 +1,35 @@
+<div id="last_ten_games">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="orange opacity-90 text-center">Last Ten Games Played</h2>
+        </div>
+    </div>
+    <div class="row mx-1">
+        <div class="col-6">
+            <h3 class="light-blue opacity-90 text-center">{{ current.away_team }}</h3>
+        </div>
+        <div class="col-6">
+            <h3 class="light-blue opacity-90 text-center">{{ current.home_team }}</h3>
+        </div>
+    </div>
+    <div class="row mx-1">
+        <div class="col-12 col-sm-6">
+            <table class="stat-table white opacity-90 text-center text-nowrap">
+                <tbody>
+                    {% for schedule in away_stats.away_ten %}
+                        <tr>
+                            <td class="white opacity-90">{{ schedule.name }}</td>
+                            <td class="white opacity-90 px-3">{{ schedule.runs }}</td>
+                            <td class="white opacity-90 px-3">vs</td>
+                            <td class="white opacity-90">{{ schedule.opponent }}</td>
+                            <td class="white opacity-90 px-3">{{ schedule.runs_allowed }}</td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>           
+        </div>
+        <div class="col-12 col-sm-6">
+            
+        </div>
+    </div>
+</div>
